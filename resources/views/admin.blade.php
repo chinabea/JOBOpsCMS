@@ -7,14 +7,27 @@
 </head>
 <body>
     <h1>Admin Successfully login!!</h1>
-    
-    <table class="table">
-        <thead class="table-light">
-            ...
-        </thead>
-        <tbody>
-            ...
-        </tbody>
-    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

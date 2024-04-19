@@ -2,36 +2,62 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Program;
-use App\Models\Department;
 
 class UserController extends Controller
 {
-    public function store(Request $request): RedirectResponse
-    {   
-        // Concatenate the provided email with a specific domain
-        $email = $request->input('email') . '@cspc.edu.ph';
-    
-        // Check if a user with the same email already exists
-        $existingUser = User::where('email', $email)->first();
-    
-        if ($existingUser) {
-            // Handle the case where the email already exists
-            // You can return an error message or redirect back with a message
-            return redirect()->back()->with('error', 'Email address is already assigned.');
+    public function index()
+    {
+        try {
+            // Fetch all records from the model and pass them to the view
+            $users = User::orderBy('created_at', 'ASC')->get();
+            return redirect()->route('users', compact('users'));
+
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-    
-        // If the email doesn't already exist, proceed to create a new user
-        $input = $request->all();
-        $input['email'] = $email;
-        User::create($input);
-    
-        // Redirect to the specified URL with a success message
-        return redirect('admin/users')->with('checked', 'User Added');
     }
-    
+
+    public function edit($id)
+    {
+        try {
+            // Retrieve and show the specific item for editing
+            $users = User::findOrFail($id);
+            return view('users.edit', compact('users'));
+        } catch (Exception $e) {
+            // Handle the exception here, you can log it or return an error response
+            return $e->getMessage();
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            // Validate and update the item with the provided ID
+            $users = User::findOrFail($id);
+            // Update the item properties using the request data
+            $users->update($request->all());
+
+            // Redirect to the index or show view, or perform other actions
+            return redirect()->route('users')->with('success', 'User Successfully Updated!');
+        } catch (Exception $e) {
+            // Handle the exception here, you can log it or return an error response
+            return $e->getMessage();
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            // Delete the item with the provided ID
+            $users = User::findOrFail($id);
+            $users->delete();
+
+            // Redirect to the index or perform other actions
+            return redirect()->route('users')->with('success', 'User Successfully Deleted!');
+        } catch (Exception $e) {
+            // Handle the exception here, you can log it or return an error response
+            return $e->getMessage();
+        }
+    }
 }
