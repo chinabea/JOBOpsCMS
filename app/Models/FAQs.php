@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class FAQs extends Model
 {
     use HasFactory;
+
+    public $primaryKey = 'id';
+
+    public $fillable = ['question', 'answer'];
+    
 }
