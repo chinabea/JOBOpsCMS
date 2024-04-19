@@ -10,11 +10,11 @@
         </tr>
     </thead>
     <tbody>
-        @if($records->count() > 0)
-        @foreach($records as $user)
+        @if($users->count() > 0)
+        @foreach($users as $user)
         <tr>
             <td class="align-middle">{{ $loop->iteration }}</td>
-            <td class="align-middle">{{ $user->name }}</td>
+            <td class="align-middle">{{ $user->first_name }} {{ $user->last_name }}</td>
             <td class="align-middle">{{ $user->email }}</td>
             <td class="align-middle">
                 @if ($user->role == 1)
@@ -31,16 +31,12 @@
             </td>
             <td class="align-middle">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <!-- <a href="{{ route('users.show', $user->id) }}" type="button"
-                        class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i>
-                    </a> -->
-                    <a href="{{ route('users.edit', $user->id) }}" type="button"
+                    <a href="{{ route('user.edit', $user->id) }}" type="button"
                         class="btn btn-warning">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-edit">Edit</i>
                     </a>
-                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('users.destroy', $user->id) }}')">
-                        <i class="fas fa-trash"></i>
+                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
+                        <i class="fas fa-trash">Delete</i>
                     </button>
                     </div>
                 <div class="btn-group align-middle" role="group" aria-label="Basic example">
@@ -60,3 +56,18 @@
         </tr>
     </tfoot>
 </table>
+
+<script>
+    
+function confirmDelete(url) {
+    if (confirm('Are you sure you want to delete this record?')) {
+    // Create a hidden form and submit it programmatically
+    var form = document.createElement('form');
+    form.action = url;
+    form.method = 'POST';
+    form.innerHTML = '@csrf @method("delete")';
+    document.body.appendChild(form);
+    form.submit();
+    }
+}
+</script>
