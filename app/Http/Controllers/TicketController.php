@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\TicketCreatedNotification;
+use App\Notifications\TicketAssignedNotification;
 use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
     public function store(Request $request)
     {
         try {
@@ -60,6 +62,9 @@ class TicketController extends Controller
             if ($userWithLeastTickets) {
                 $ticket->assigned_to = $userWithLeastTickets->id;
                 $ticket->save();
+
+                // Notify the user
+                $userWithLeastTickets->notify(new TicketAssignedNotification($ticket, $user));
             }
 
             // Redirect to the index or show view, or perform other actions
