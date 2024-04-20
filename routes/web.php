@@ -43,3 +43,5 @@ Route::post('/store/faq', [FaqsController::class, 'store'])->name('store.faq');
 Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
 Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
+
+Route::post('/assign-ticket', [TicketController::class, 'assignTicket'])->name('assignTicket');

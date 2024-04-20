@@ -34,19 +34,55 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
     public function store(Request $request)
     {
         try {
-            Ticket::create($request->all());
+            $ticketData = $request->all();
+            
+            // Create the ticket
+            $ticket = Ticket::create($ticketData);
+
+            // Find all users with role 2
+            $usersWithRole2 = User::where('role', 2)->get();
+
+            // Find the user with role 2 who has the least assigned tickets
+            $userWithLeastTickets = null;
+            $minTicketCount = PHP_INT_MAX;
+            foreach ($usersWithRole2 as $user) {
+                $ticketCount = $user->tickets()->count();
+                if ($ticketCount < $minTicketCount) {
+                    $userWithLeastTickets = $user;
+                    $minTicketCount = $ticketCount;
+                }
+            }
+
+            // Assign the ticket to the user with the least assigned tickets
+            if ($userWithLeastTickets) {
+                $ticket->assigned_to = $userWithLeastTickets->id;
+                $ticket->save();
+            }
 
             // Redirect to the index or show view, or perform other actions
-            return redirect()->route('admin')->with('success', 'Users Successfully Added!');
+            return redirect()->route('admin')->with('success', 'Ticket Successfully Created!');
         } catch (Exception $e) {
             // Handle the exception here, you can log it or return an error response
-            return $e->getMessage();
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         Ticket::create($request->all());
+
+    //         // Redirect to the index or show view, or perform other actions
+    //         return redirect()->route('admin')->with('success', 'Users Successfully Added!');
+    //     } catch (Exception $e) {
+    //         // Handle the exception here, you can log it or return an error response
+    //         return $e->getMessage();
+    //     }
+    // }
 
     // public function show($id)
     // {
@@ -95,5 +131,19 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
 
+    }
+
+    public function assignTicket(Request $request)
+    {
+        $task = Task::find($request->input('task_id'));
+
+        if (!$task) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+
+        $taskAssignmentService = new TaskAssignmentService();
+        $user = $taskAssignmentService->assignTaskToUser($task);
+
+        return response()->json(['user_id' => $user->id]);
     }
 }
