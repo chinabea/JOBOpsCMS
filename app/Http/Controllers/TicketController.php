@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\TicketCreatedNotification;
+use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
@@ -21,7 +23,11 @@ class TicketController extends Controller
     public function create()
     {
         try {
+            $user = auth()->user();
             $ticket = Ticket::all();
+
+            $user = User::find($user);
+            Notification::send($user, new TicketCreatedNotification($user, $ticket));
 
             return view('ticket.create', compact('ticket'));
         } catch (Exception $e) {
