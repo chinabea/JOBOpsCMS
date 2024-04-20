@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,9 @@ Route::get('/admin', function () {
 Route::get('/staff', function () {
     return view('staff');
 })->name('staff');
+
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
+Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
