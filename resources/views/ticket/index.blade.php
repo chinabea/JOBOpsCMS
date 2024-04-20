@@ -1,4 +1,14 @@
 
+<form action="{{ route('generate.tickets.report') }}" method="post">
+    @csrf
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date">
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date">
+    <button type="submit">Export</button>
+</form>
+
+                        <!-- ------------------------------------------------------------------------ -->
 <table id="example1" class="table table-bordered table-hover text-center">
     <thead>
         <tr>
@@ -37,9 +47,9 @@
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>Unit</th>
+            <th>Request</th>
+            <th>Description</th>
             <th>Action(s)</th>
         </tr>
     </tfoot>

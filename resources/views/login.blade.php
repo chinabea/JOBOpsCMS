@@ -31,12 +31,6 @@
                         </div>
 
                         <div class="remember-forgot">
-                            @if (Route::has('password.request'))
-                                <a class="" href="{{ route('password.request') }}">
-                                     <!-- {{ __('Forgot Your Password?') }}  -->
-                                    <p class="text-center text-primary my-2">Forgot Your Password?</p>
-                                </a>
-                            @endif
                         </div>
 
                         @if ($errors->any())

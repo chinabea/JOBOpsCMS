@@ -2,9 +2,12 @@
 
 return [
     // 'providers' => [
-    //     // Other service providers...
-    //     Laravel\Socialite\SocialiteServiceProvider::class,
+    //     Barryvdh\DomPDF\ServiceProvider::class,
     // ],
+
+    'aliases' => [
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+    ],
     
 
     /*
