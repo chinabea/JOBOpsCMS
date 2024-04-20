@@ -1,4 +1,7 @@
 
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 
 @if (Auth::check())
         @foreach (Auth::user()->unreadNotifications as $notification)
