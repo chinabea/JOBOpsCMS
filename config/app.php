@@ -7,6 +7,8 @@ return [
 
     'aliases' => [
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Auth' => Illuminate\Support\Facades\Auth::class,
+        'Route' => Illuminate\Support\Facades\Route::class,
     ],
     
 
