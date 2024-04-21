@@ -9,16 +9,20 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
-    return view('login');
+    return view('welcome');
 });
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+
+// Route::get('/admin', [DashboardController::class, 'countAll'])->name('admin.home');
 Route::get('/admin', function () {
     return view('admin');
-})->name('admin');
+})->name('admin.home');
 
 Route::get('/staff', function () {
     return view('staff');
@@ -26,6 +30,7 @@ Route::get('/staff', function () {
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
+Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');

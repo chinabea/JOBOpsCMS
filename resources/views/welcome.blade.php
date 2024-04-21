@@ -1,4 +1,5 @@
-
+@extends('layouts.guest-template')
+@section('content')
 
 <section id="hero" class="hero d-flex align-items-center">
     <div class="container">
@@ -8,8 +9,7 @@
                 <div class="form-items">
                     <h3>Sign in to your Account</h3>
                     <p>Fill in the data below.</p>
-                    <form method="POST" 
-                    >
+                    <form method="POST" action="">
                         @csrf
 
                         <div class="col-md-12">
@@ -31,12 +31,6 @@
                         </div>
 
                         <div class="remember-forgot">
-                            @if (Route::has('password.request'))
-                                <a class="" href="{{ route('password.request') }}">
-                                     <!-- {{ __('Forgot Your Password?') }}  -->
-                                    <p class="text-center text-primary my-2">Forgot Your Password?</p>
-                                </a>
-                            @endif
                         </div>
 
                         @if ($errors->any())
@@ -77,3 +71,5 @@
       </div>
     </div>
   </section>
+  
+@endsection
