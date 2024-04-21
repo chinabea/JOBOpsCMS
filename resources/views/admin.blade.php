@@ -1,23 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MICT JOBOps | Admin</title>
-    <link rel="icon" type="image/png" href="{{ asset('img/MICT-Logo.png') }}">
-</head>
-<body>
-    <h1>Admin Successfully login!!</h1>
-          @if(auth()->check())
-          <a href="{{ route('notifications') }}">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a><br>
-          @endif
-    
-    <a href="users">users</a> <br>
-    <a href="tickets">Tickets</a> <br>
-    <a href="{{ route('create.ticket') }}">Create ticket</a> <br>
+@extends('layouts.template')
+
+@section('content')
+
+<div class="content-wrapper">
+    <section class="content-header">
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>150</h3>
+
+                        <p>New Orders</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Bounce Rate</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>User Registrations</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>65</h3>
+
+                        <p>Unique Visitors</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            <!-- ./col -->
+            </div>
+            
+
     <a href="{{ route('faqs') }}">FAQs</a> <br>
     <a href="{{ route('create.faq') }}">Create FAQs</a> <br>
+        </div>
+    </section>
+</div>
 
+@if(session('success'))
+<script>
+    toastr.success('{{ session('success') }}');
+</script>
+@elseif(session('delete'))
+<script>
+    toastr.delete('{{ session('delete') }}');
+</script>
+@elseif(session('message'))
+<script>
+    toastr.message('{{ session('message') }}');
+</script>
+@elseif(session('error'))
+<script>
+    toastr.error('{{ session('error') }}');
+</script>
+@endif
 
-</body>
-</html>
+@endsection
