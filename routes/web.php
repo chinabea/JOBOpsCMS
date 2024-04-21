@@ -25,8 +25,8 @@ Route::get('/admin', function () {
 })->name('admin.home');
 
 Route::get('/staff', function () {
-    return view('staff');
-})->name('staff');
+    return view('staff.home');
+})->name('staff.home');
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
@@ -54,3 +54,4 @@ Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('de
 
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
+Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
