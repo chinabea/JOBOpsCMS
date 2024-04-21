@@ -33,7 +33,7 @@ class TicketAssignedNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -44,9 +44,17 @@ class TicketAssignedNotification extends Notification
         return [
             'ticket_id' => $this->ticket,
             'message' => 'A new ticket has been assigned.',
-            'icon' => 'fas fa-file-alt mr-2',
+            'icon' => 'fas fa-file-alt',
             'action_url' => url('/tickets/' . $this->ticket),
         ];
+    }
+    public function toMail($notifiable)
+    {
+            return (new MailMessage)       
+            ->view('emails.assignedTicket', [
+                'user' => $this->user,
+                'ticket' => $this->ticket
+            ]);
     }
 
     /**

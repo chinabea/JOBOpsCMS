@@ -56,19 +56,11 @@ class TicketCreatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    // ->subject('New Ticket Created')
-                    // ->greeting('Hello ' . $this->user->first_name . '!')
-                    // ->line('A new ticket has been created on your account. Ticket ID: ' . $this->ticket->id)
-                    // ->line('Ticket Title: ' . $this->ticket->title)
-                    // ->action('View Ticket', url("/tickets/{$this->ticket->id}"))
-                    // ->line('Thank you for using our application!');
-
-                    
-        ->view('emails.ticketCreation', [
-            'user' => $this->user,
-            'ticket' => $this->ticket
-        ]);
+            return (new MailMessage)       
+            ->view('emails.ticketCreation', [
+                'user' => $this->user,
+                'ticket' => $this->ticket
+            ]);
     }
 
     /**

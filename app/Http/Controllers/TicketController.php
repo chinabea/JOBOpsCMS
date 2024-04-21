@@ -40,11 +40,10 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
     public function store(Request $request)
     {
         try {
-            $user = auth()->user();
+            $authUser = auth()->user(); // Renaming variable to avoid confusion
             $ticketData = $request->all();
     
             // Create the ticket
@@ -68,17 +67,21 @@ class TicketController extends Controller
             if ($userWithLeastTickets) {
                 $ticket->assigned_to = $userWithLeastTickets->id;
                 $ticket->save();
+            
+                // Notify only the assigned user
+                $userWithLeastTickets->notify(new TicketAssignedNotification($ticket, $userWithLeastTickets));
     
-                // Notify the authenticated user
-                $user->notify(new TicketCreatedNotification($user, $ticket));
-    
-                // Notify the user assigned to the ticket
-                $userWithLeastTickets->notify(new TicketAssignedNotification($userWithLeastTickets, $ticket));
+                // Notify the authenticated user if they are not the assigned user
+                if ($authUser->id !== $userWithLeastTickets->id) {
+                    $authUser->notify(new TicketCreatedNotification($authUser, $ticket));
+                }
     
                 // Notify all admin users
                 $admins = User::where('role', 1)->get();
                 foreach ($admins as $admin) {
-                    $admin->notify(new TicketCreatedNotification($admin, $ticket));
+                    if ($admin->id !== $authUser->id) {
+                        $admin->notify(new TicketCreatedNotification($admin, $ticket));
+                    }
                 }
             }
     
@@ -88,6 +91,7 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+    
 
     // public function store(Request $request)
     // {
