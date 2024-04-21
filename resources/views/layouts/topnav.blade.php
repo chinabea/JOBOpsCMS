@@ -4,7 +4,6 @@
       <li class="nav-item ">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
     </ul>
 
     <ul class="navbar-nav ml-auto">
@@ -41,7 +40,11 @@
         <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
           <div class="media">
           <span class="mr-3 icon-circle bg-info d-flex justify-content-center align-items-center">
-              <i class="{{ $notification->data['icon'] }}"></i> 
+                @if (isset($notification->data['icon']))
+                    <i class="{{ $notification->data['icon'] }}"></i>
+                @else
+                    <i class="fas fa-info-circle"></i> 
+                @endif
           </span>
             <div class="media-body">
               <p class="text-sm text-bold"><i class="fas fa-clock"></i> {{ $notification->created_at->diffForHumans() }}</p>

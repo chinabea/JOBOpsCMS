@@ -55,7 +55,7 @@
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
                         <i class="nav-icon fas fa-adjust"></i>
-                        <p>Toggle Theme</p>
+                        <p>Theme</p>
                     </a>
                 </li>
     </div>
@@ -105,7 +105,7 @@
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
                         <i class="nav-icon fas fa-adjust"></i>
-                        <p>Toggle Theme</p>
+                        <p>Theme</p>
                     </a>
                 </li>
     </div>
@@ -165,7 +165,7 @@
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
                         <i class="nav-icon fas fa-adjust"></i>
-                        <p>Toggle Theme</p>
+                        <p>Theme</p>
                     </a>
                 </li>
     </div>
@@ -195,7 +195,7 @@
             <li class="nav-item">
                 <a id="theme-toggle" class="nav-link">
                     <i class="nav-icon fas fa-adjust"></i>
-                    <p>Toggle Theme</p>
+                    <p>Theme</p>
                 </a>
             </li>
         </ul>
