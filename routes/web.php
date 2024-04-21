@@ -55,3 +55,5 @@ Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('de
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
+Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
+

@@ -28,7 +28,6 @@
                                 <a href="{{ route('create.ticket') }}" class="btn bg-navy color-palette btn-sm float-right">
                                     <i class="fas fa-plus"></i> Add Ticket
                                 </a>
-
                                     <br><br>
                                     <form action="{{ route('generate.tickets.report') }}" method="post">
                                         @csrf

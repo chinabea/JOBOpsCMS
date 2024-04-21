@@ -7,6 +7,16 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+    public function store(Request $request)
+    {
+        $user = User::create($request->all());
+
+        // Send notification
+        $user->notify(new TicketCreatedNotification());
+
+        return back()->with('success', 'User registered successfully and notified by email!');
+    }
+
     public function markAllAsRead()
     {
         try {

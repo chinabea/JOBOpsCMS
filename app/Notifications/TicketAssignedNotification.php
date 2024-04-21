@@ -20,7 +20,7 @@ class TicketAssignedNotification extends Notification
      * Create a new notification instance.
      */
 
-    public function __construct(Ticket $ticket, User $user)
+    public function __construct($ticket, $user)
     {
         $this->ticket = $ticket;
         $this->user = $user;
