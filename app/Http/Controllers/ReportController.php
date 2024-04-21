@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    // public function index()
+    // {
+    //     $tickets = Ticket::all();  // You already have this based on your debug info.
+    //     $user = auth()->user();    // Ensuring $user is defined by getting the currently authenticated user.
+    
+    //     return view('ticket.index', compact('tickets', 'user'));
+    // }
+    
 
     public function ticketsReport(Request $request)
     {
@@ -67,4 +75,33 @@ class ReportController extends Controller
         
     }
 
+    // public function userTicketsReport(Request $request, $userId)
+    // {
+    //     // Validate incoming request data
+    //     $request->validate([
+    //         'start_date' => 'required|date',
+    //         'end_date' => 'required|date|after_or_equal:start_date'
+    //     ]);
+    
+    //     $start_date = $request->input('start_date');
+    //     $end_date = $request->input('end_date');
+    
+    //     // Parse dates using Carbon for better handling
+    //     $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+    //     $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+    
+    //     // Find user or fail
+    //     $user = User::findOrFail($userId);
+    
+    //     // Get tickets for user within the specified date range
+    //     $tickets = Ticket::where('user_id', $userId)
+    //                      ->whereBetween('created_at', [$formattedStartDate, $formattedEndDate])
+    //                      ->get();
+    
+    //     // Generate PDF
+    //     $pdf = PDF::loadView('reports.user-tickets-report', compact('user', 'tickets'));
+    
+    //     // Stream the PDF back as response
+    //     return $pdf->stream("user-tickets-report-{$userId}-{$formattedStartDate->toDateString()}-{$formattedEndDate->toDateString()}.pdf");
+    // }
 }

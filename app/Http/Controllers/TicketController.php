@@ -27,8 +27,13 @@ class TicketController extends Controller
             $user = auth()->user();
             $ticket = Ticket::all();
 
-            $user = User::find($user);
-            Notification::send($user, new TicketCreatedNotification($user, $ticket));
+            // $user = User::find($user);
+            // Notification::send($user, new TicketCreatedNotification($user, $ticket));
+
+            // Check if $user is not null and is an instance of User model
+            // if ($user instanceof User) {
+            //     $user->notify(new TicketCreatedNotification($user, $ticket));
+            // }
 
             return view('ticket.create', compact('ticket'));
         } catch (Exception $e) {
@@ -39,14 +44,15 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         try {
+            $user = auth()->user();
             $ticketData = $request->all();
-            
+    
             // Create the ticket
             $ticket = Ticket::create($ticketData);
-
+    
             // Find all users with role 2
             $usersWithRole2 = User::where('role', 2)->get();
-
+    
             // Find the user with role 2 who has the least assigned tickets
             $userWithLeastTickets = null;
             $minTicketCount = PHP_INT_MAX;
@@ -57,24 +63,31 @@ class TicketController extends Controller
                     $minTicketCount = $ticketCount;
                 }
             }
-
+    
             // Assign the ticket to the user with the least assigned tickets
             if ($userWithLeastTickets) {
                 $ticket->assigned_to = $userWithLeastTickets->id;
                 $ticket->save();
-
-                // Notify the user
-                $userWithLeastTickets->notify(new TicketAssignedNotification($ticket, $user));
+    
+                // Notify the authenticated user
+                $user->notify(new TicketCreatedNotification($user, $ticket));
+    
+                // Notify the user assigned to the ticket
+                $userWithLeastTickets->notify(new TicketAssignedNotification($userWithLeastTickets, $ticket));
+    
+                // Notify all admin users
+                $admins = User::where('role', 1)->get();
+                foreach ($admins as $admin) {
+                    $admin->notify(new TicketCreatedNotification($admin, $ticket));
+                }
             }
-
-            // Redirect to the index or show view, or perform other actions
+    
             return redirect()->route('admin.home')->with('success', 'Ticket Successfully Created!');
         } catch (Exception $e) {
-            // Handle the exception here, you can log it or return an error response
+            // Log the exception or handle it as required
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
 
     // public function store(Request $request)
     // {
