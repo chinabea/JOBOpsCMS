@@ -29,11 +29,17 @@ class LoginController extends Controller
                 Auth::login($is_user, true); // Login the user and "remember" the session
                 // Check user role and redirect accordingly
                 if ($is_user->role == '1') {
-                    return redirect()->route('admin');
+                    return redirect()->route('admin.home');
                 }
             } else {
-                return redirect()->route('staff');
+                return redirect()->route('staff.home');
             }
+    }
+    
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        return redirect('/');  // Redirect to home page or wherever you like
     }
 
     

@@ -7,6 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+    public function markAllAsRead()
+    {
+        try {
+            Auth::user()->unreadNotifications->markAsRead();
+            return redirect()->back()->with('success', 'All notifications have been marked as read.');
+        } catch (\Exception $e) {
+            // Handle the exception, e.g., log the error or provide an error message
+            return redirect()->back()->with('error', 'An error occurred while marking notifications as read.');
+        }
+    }
+    
     public function index()
     {
         try {
