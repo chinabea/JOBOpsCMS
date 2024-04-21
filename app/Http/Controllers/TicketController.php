@@ -68,7 +68,7 @@ class TicketController extends Controller
             }
 
             // Redirect to the index or show view, or perform other actions
-            return redirect()->route('admin')->with('success', 'Ticket Successfully Created!');
+            return redirect()->route('admin.home')->with('success', 'Ticket Successfully Created!');
         } catch (Exception $e) {
             // Handle the exception here, you can log it or return an error response
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());

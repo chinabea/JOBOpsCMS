@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\FAQs;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\PDF;
@@ -45,6 +46,24 @@ class ReportController extends Controller
         $formattedEndDate = Carbon::parse($end_date)->endOfDay();
         
         return $pdf->stream('users-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+        
+    }
+
+    public function faqsReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $faqs = FAQs::whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.faqs-report', compact('faqs'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('faqs-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
         
     }
 
