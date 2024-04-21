@@ -4,16 +4,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">
-                      <i class="fas fa-search fa-sm"></i>
-                  </button>
-              </div>
-          </div>
-      </form> -->
+      
     </ul>
 
     <ul class="navbar-nav ml-auto">
@@ -98,29 +89,18 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @if(Auth::user()->role == 4)
-                      Reviewer, {{ Auth::user()->name }} 
-                      <!-- - {{ Auth::user()->email }} -->
-                    @elseif(Auth::user()->role == 3) 
-                       Researcher, {{ Auth::user()->name }} 
-                       <!-- - {{ Auth::user()->email }} -->
-                    @elseif(Auth::user()->role == 2)
-                        Staff, {{ Auth::user()->name }} 
-                        <!-- - {{ Auth::user()->email }} -->
-                    @elseif(Auth::user()->role == 1)
-                        Director, {{ Auth::user()->name }} 
-                        <!-- - {{ Auth::user()->email }} -->
+                    @if(Auth::user()->role == 1)
+                        Admin, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} 
+                    @elseif(Auth::user()->role == 2) 
+                        MICT Staff, {{ Auth::user()->name }} 
+                    @elseif(Auth::user()->role == 3)
+                       Staff, {{ Auth::user()->name }} 
                     @else
-                        {{ Auth::user()->name }} 
-                        <!-- - {{ Auth::user()->email }} -->
+                        Guest,{{ Auth::user()->name }} 
                     @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <!-- <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
-                </a> -->
-                <!-- <div class="dropdown-divider"></div> -->
+              
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout

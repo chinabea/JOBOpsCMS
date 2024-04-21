@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JOBOps CMS</title>
+  <title>JOBOPS CMS</title>
 
 <link rel="icon" type="image/png" href="{{ asset('dist/img/MICT-logo.png') }}">
 
@@ -67,11 +67,8 @@
 @php
     $theme = false;
 @endphp
-{{-- <body class="hold-transition sidebar-mini dark-mode layout-fixed layout-navbar-fixed layout-footer-fixed"> --}}
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-{{-- <body class="hold-transition sidebar-mini {{ $theme ? 'dark-mode' : '' }} layout-fixed layout-navbar-fixed layout-footer-fixed"> --}}
-
-
+    
     <div class="wrapper">
         @include('layouts.topnav')
 

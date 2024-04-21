@@ -7,9 +7,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.home') }}" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOps CMS Logo"
+        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOPS CMS Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">JOBOps CMS</span>
+        <span class="brand-text font-weight-light">JOBOPS CMS</span>
     </a>
     <div class="sidebar">
 
@@ -43,8 +43,14 @@
                         <p>Tickets</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('faqs') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'faqs' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>FAQs</p>
+                    </a>
                 </li>
-                <li class="nav-header">TRANSPARENCY</li>
+                </li>
                 <li class="nav-header">SETTINGS</li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
@@ -60,9 +66,9 @@
 @elseif($role === 2)
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('staff.home') }}" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOps CMS Logo"
+        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOPS CMS Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">JOBOps CMS</span>
+        <span class="brand-text font-weight-light">JOBOPS CMS</span>
     </a>
     <div class="sidebar">
 
@@ -95,21 +101,6 @@
                         <p>Tickets</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('submission-details.reviews.for-reviews') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'submission-details.reviews.for-reviews' ? 'active' : '' }}">
-                        <i class="fas fa-edit nav-icon"></i>
-                        <p>For Review Summary</p>
-                    </a>
-                </li>
-                <li class="nav-header">TRANSPARENCY</li>
-                <li class="nav-item">
-                    <a href="{{ route('access-requests') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'access-requests' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-key"></i>
-                        <p>Access Request</p>
-                    </a>
-                </li>
                 <li class="nav-header">SETTINGS</li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
@@ -126,9 +117,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('researcher.home') }}" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOps CMS Logo"
+        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOPS CMS Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">JOBOps CMS</span>
+        <span class="brand-text font-weight-light">JOBOPS CMS</span>
     </a>
     <div class="sidebar">
         <nav class="mt-2">
@@ -168,7 +159,6 @@
                         <p>Draft</p>
                     </a>
                 </li>
-                <li class="nav-header">TRANSPARENCY</li>
                 <li class="nav-item">
                 </li>
                 <li class="nav-header">SETTINGS</li>
@@ -186,9 +176,9 @@
 <!-- FOR REVIEWER -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('reviewer.home') }}" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOps CMS Logo"
+        <img src="{{ asset('dist/img/MICT-logo.png') }}" alt="JOBOPS CMS Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">JOBOps CMS</span>
+        <span class="brand-text font-weight-light">JOBOPS CMS</span>
     </a>
     <div class="sidebar">
       <nav class="mt-2">
@@ -201,7 +191,6 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-header">TRANSPARENCY</li>
             <li class="nav-header">SETTINGS</li>
             <li class="nav-item">
                 <a id="theme-toggle" class="nav-link">
