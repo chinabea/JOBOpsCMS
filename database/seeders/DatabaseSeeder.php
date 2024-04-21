@@ -38,20 +38,20 @@ class DatabaseSeeder extends Seeder
                 'email' => 'jesmataya@my.cspc.edu.ph',
                 'role' => 2,
             ],
-            [
-                'user_id' => '3',
-                'first_name' => 'John Carlo',
-                'last_name' => 'Dacara',
-                'email' => 'johdacara@my.cspc.edu.ph',
-                'role' => 2,
-            ],
-            [
-                'user_id' => '4',
-                'first_name' => 'Mark Louis',
-                'last_name' => 'Odavar',
-                'email' => 'mlodavar@my.cspc.edu.ph',
-                'role' => 1,
-            ],
+            // [
+            //     'user_id' => '3',
+            //     'first_name' => 'John Carlo',
+            //     'last_name' => 'Dacara',
+            //     'email' => 'johdacara@my.cspc.edu.ph',
+            //     'role' => 2,
+            // ],
+            // [
+            //     'user_id' => '4',
+            //     'first_name' => 'Mark Louis',
+            //     'last_name' => 'Odavar',
+            //     'email' => 'mlodavar@my.cspc.edu.ph',
+            //     'role' => 1,
+            // ],
         ];
 
         foreach ($users as $userData) {
@@ -59,24 +59,24 @@ class DatabaseSeeder extends Seeder
         }
 
         
-        $tickets = [
-            [
-                'unit' => 'MIS',
-                'request' => 'Damage Printer',
-                'description' => 'Printer Damage Damage Damage Printer Printer',
-                'user_id' => 2,
-            ],
-            [
-                'unit' => 'MIT',
-                'request' => 'aircon',
-                'description' => 'Damage Damage Printer Printer',
-                'user_id' => 2,
-            ],
-        ];
+        // $tickets = [
+        //     [
+        //         'unit' => 'MIS',
+        //         'request' => 'Damage Printer',
+        //         'description' => 'Printer Damage Damage Damage Printer Printer',
+        //         'user_id' => 2,
+        //     ],
+        //     [
+        //         'unit' => 'MIT',
+        //         'request' => 'aircon',
+        //         'description' => 'Damage Damage Printer Printer',
+        //         'user_id' => 2,
+        //     ],
+        // ];
 
-        foreach ($tickets as $ticketData) {
-            Ticket::create($ticketData);
-        }
+        // foreach ($tickets as $ticketData) {
+        //     Ticket::create($ticketData);
+        // }
 
 
 
