@@ -11,13 +11,45 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title my-1"><i class="fa fa-users"></i> Users</h3>
-                            <button type="button" class="btn bg-navy color-palette float-right btn-sm" data-toggle="modal" data-target="#usersPdf" data-backdrop="static" data-keyboard="false"> 
-                                <i class="fas fa-file-pdf"></i> Export to PDF</button>
-                        </div>
+                            <div class="card-header border-0">
+                                <h3 class="card-title"><b>Users</b></h3>
+                                <div class="card-tools">
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-tool btn-sm">
+                                        <i class="fas fa-bars"></i>
+                                    </a>
+                                </div>
+                                    <br><br>
+                                    <form action="{{ route('generate.users.report') }}" method="post">
+                                        @csrf
+                                        <div class="row align-items-center">
+                                                <div class="form-group row">
+                                                    <div class="col-md-6">
+                                                        <label for="start_date">Start Date:</label>
+                                                        <input type="date" class="form-control" name="start_date" id="start_date">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="end_date">To:</label>
+                                                        <input type="date" class="form-control" name="end_date" id="end_date">
+                                                    </div>
+                                                </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Actions</label>
+                                                    <div>
+                                                        <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i> </button>
+                                                        <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                            </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover text-center">
+                            <!-- <div class="card-body table-responsive p-0"> -->
+                            <table id="example1" class="table table-bordered table-hover text-center table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -63,7 +95,7 @@
                                         @endif
                                     </tbody>
 
-                                <tfoot>
+                                <!-- <tfoot>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
@@ -71,8 +103,9 @@
                                         <th>Role</th>
                                         <th>Action(s)</th>
                                     </tr>
-                                </tfoot>
+                                </tfoot> -->
                             </table>
+                        <!-- </div> -->
                         </div>
                     </div>
                 </div>
@@ -80,6 +113,12 @@
         </div>
     </section>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#example1').DataTable();
+});
+</script>
 
 @if(session('success'))
 <script>
