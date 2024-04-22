@@ -40,11 +40,12 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+    
     public function store(Request $request)
     {
         try {
             $request->validate([
-                'file_upload' => 'nullable|file|max:2048', // for example, max 2MB
+                'file_upload' => 'nullable|file|max:2048',
             ]);
             
             $authUser = auth()->user(); // Renaming variable to avoid confusion

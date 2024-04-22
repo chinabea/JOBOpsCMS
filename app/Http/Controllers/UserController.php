@@ -6,6 +6,27 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
+    // Method to approve a user
+    public function approve($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_approved = true;
+        $user->save();
+
+        return redirect()->route('users')->with('success', 'User has been approved.');
+    }
+
+    // Method to disapprove a user
+    public function disapprove($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_approved = false;
+        $user->save();
+
+        return redirect()->route('users')->with('success', 'User approval has been revoked.');
+    }
+
     public function index()
     {
         try {
@@ -24,7 +45,11 @@ class UserController extends Controller
         try {
             // Retrieve and show the specific item for editing
             $user = User::findOrFail($id);
-            return view('user.edit', compact('user'));
+        
+            // Here, we define the roles. In a real application, consider retrieving these from a config or database.
+            $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff']; 
+            
+            return view('user.user-profile', compact('user', 'roles'));
         } catch (Exception $e) {
             // Handle the exception here, you can log it or return an error response
             return $e->getMessage();

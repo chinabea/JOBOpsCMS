@@ -48,7 +48,6 @@
                                     </form>
                             </div>
                         <div class="card-body">
-                            <!-- <div class="card-body table-responsive p-0"> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -56,6 +55,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Permission</th>
                                         <th>Action(s)</th>
                                     </tr>
                                 </thead>
@@ -68,40 +68,39 @@
                                             <td class="align-middle">{{ $user->email }}</td>
                                             <td class="align-middle">
                                                 @if ($user->role == 1)
-                                                Admin
+                                                    Admin
                                                 @elseif ($user->role == 2)
-                                                MICT Staff
+                                                    MICT Staff
                                                 @elseif ($user->role == 3)
-                                                Staff
+                                                    Staff
                                                 @else
-                                                Guest
+                                                    Guest
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!$user->is_approved)
+                                                    <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info">Approve</a>
+                                                @else
+                                                    <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger">Disapprove</a>
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                    <a href="{{ route('user.edit', $user->id) }}" type="button"
-                                                        class="btn  btn-sm btn-warning">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
+                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-user"></i> View Profile
+                                                </a>
+                                                <a href="{{ route('user.edit', $user->id) }}" type="button"
+                                                    class="btn  btn-sm btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                         @endforeach
                                         @endif
                                     </tbody>
-
-                                <!-- <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Action(s)</th>
-                                    </tr>
-                                </tfoot> -->
                             </table>
-                        <!-- </div> -->
                         </div>
                     </div>
                 </div>
