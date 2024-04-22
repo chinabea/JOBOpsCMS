@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('service_location');
             $table->string('unit');
             $table->string('request');
+            $table->enum('priority_level', ['High', 'Mid', 'Low']);
             $table->string('description');
             $table->unsignedBigInteger('assigned_to')->nullable();
             $table->string('file_path')->nullable();

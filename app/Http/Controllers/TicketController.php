@@ -27,15 +27,14 @@ class TicketController extends Controller
             $user = auth()->user();
             $ticket = Ticket::all();
 
-            // $user = User::find($user);
-            // Notification::send($user, new TicketCreatedNotification($user, $ticket));
+            // Define priorities directly in the controller as an associative array
+            $priorities = [
+                'High' => 'High',
+                'Mid' => 'Mid',
+                'Low' => 'Low'
+            ];
 
-            // Check if $user is not null and is an instance of User model
-            // if ($user instanceof User) {
-            //     $user->notify(new TicketCreatedNotification($user, $ticket));
-            // }
-
-            return view('ticket.create', compact('ticket'));
+            return view('ticket.create', compact('ticket', 'priorities'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -46,6 +45,7 @@ class TicketController extends Controller
         try {
             $request->validate([
                 'file_upload' => 'nullable|file|max:2048',
+                // 'assigned_to' => 'required|exists:users,id', 
             ]);
             
             $authUser = auth()->user(); // Renaming variable to avoid confusion
@@ -64,8 +64,8 @@ class TicketController extends Controller
                 // Save filePath to your ticket model if needed
                 $ticket->file_path = $filePath;
                 $ticket->save();
-            }
-    
+            } 
+
             // Find all users with role 2
             $usersWithRole2 = User::where('role', 2)->get();
     

@@ -30,11 +30,12 @@ class DatabaseSeeder extends Seeder
                 'role' => 1,
                 'is_approved' => true,
             ],
-            // [
-                // 'user_id' => '2',
-                // 'email' => 'jesmataya@my.cspc.edu.ph',
-                // 'role' => 2,
-            // ],
+            [
+                'name' => 'JESSICA MATAYA',
+                'email' => 'jesmataya@my.cspc.edu.ph',
+                'role' => 2,
+                'is_approved' => true,
+            ],
             // [
             //     'user_id' => '3',
             //     'email' => 'johdacara@my.cspc.edu.ph',
