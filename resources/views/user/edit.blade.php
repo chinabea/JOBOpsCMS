@@ -23,7 +23,7 @@
                                 @csrf
                                 @method('PUT')
                                 <label for="inputText">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->first_name }} {{ $user->last_name }}" disabled>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" disabled>
                                     <br>
                                     <label for="inputText">Email</label>
                                     <input type="text" class="form-control"  id="email" name="email" value="{{ $user->email }}" disabled>
