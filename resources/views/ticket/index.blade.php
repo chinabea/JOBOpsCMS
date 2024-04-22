@@ -17,16 +17,10 @@
                             <div class="card-header border-0">
                                 <h3 class="card-title"><b>Tickets</b></h3>
                                 <div class="card-tools">
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fas fa-bars"></i>
-                                    </a>
-                                </div>
                                 <a href="{{ route('create.ticket') }}" class="btn bg-navy color-palette btn-sm float-right">
                                     <i class="fas fa-plus"></i> Add Ticket
                                 </a>
+                                </div>
                                     <br><br>
                                     <form action="{{ route('generate.tickets.report') }}" method="post">
                                         @csrf
@@ -63,6 +57,7 @@
                                         <th>Unit</th>
                                         <th>Request</th>
                                         <th>Assigned to</th>
+                                        <th>Priotrity</th>
                                         <th>Status</th>
                                         <th>Action(s)</th>
                                     </tr>
@@ -72,12 +67,14 @@
                                     @foreach($tickets as $ticket)
                                     <tr>
                                         <td class="align-middle">{{ $loop->iteration }}</td>
-                                        <td class="align-middle">{{ $ticket->user->first_name }} {{ $ticket->user->last_name }}</td>
+                                        <td class="align-middle">{{ $ticket->user->name }}</td>
                                         <td class="align-middle">{{ $ticket->service_location }}</td>
                                         <td class="align-middle">{{ $ticket->unit }}</td>
                                         <td class="align-middle">{{ $ticket->request }}</td>
-                                        <td class="align-middle">{{ $ticket->assignedUser->first_name }} {{ $ticket->assignedUser->last_name }}</td>
-                                        <td class="align-middle">Status</td>
+                                        <td class="align-middle">{{ $ticket->assignedUser->name }}</td>
+                                        <td class="align-middle">{{ $ticket->priority_level }}</td>
+                                        <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
+                                        
                                         <td class="align-middle">
                                             <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
                                                 class="btn btn-sm btn-warning">
