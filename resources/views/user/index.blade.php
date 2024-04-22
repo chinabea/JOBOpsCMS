@@ -78,7 +78,6 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <a href="{{ route('user.edit', $user->id) }}" type="button"
                                                         class="btn  btn-sm btn-warning">
                                                         <i class="fas fa-edit"></i>
@@ -86,9 +85,6 @@
                                                     <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
-                                                    </div>
-                                                <div class="btn-group align-middle" role="group" aria-label="Basic example">
-                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
