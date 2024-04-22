@@ -25,7 +25,7 @@ Route::get('/admin', function () {
 })->name('admin.home');
 
 Route::get('/staff', function () {
-    return view('staff.home');
+    return view('staff');
 })->name('staff.home');
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
