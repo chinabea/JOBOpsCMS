@@ -12,21 +12,37 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+    })->name('welcome');
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
-// Route::get('/admin', [DashboardController::class, 'countAll'])->name('admin.home');
 Route::get('/admin', function () {
-    return view('admin');
+    return view('dashboard');
 })->name('admin.home');
 
-Route::get('/staff', function () {
-    return view('staff');
-})->name('staff.home');
+Route::prefix('staff')->middleware(['auth', 'approved'])->group(function () {
+    Route::get('/staff', function () {
+        return view('dashboard');
+    })->name('staff.home');
+    
+});
+
+// to re-arrange later
+Route::get('/not-approved', function () {
+    return view('user.not-approved'); 
+})->name('not-approved');
+
+// Route::get('/user-profile', function () {
+//     return view('user.user-profile'); 
+// })->name('user-profile');
+
+// Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
+    Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
+// });
+
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
