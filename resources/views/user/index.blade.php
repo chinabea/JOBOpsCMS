@@ -49,7 +49,7 @@
                             </div>
                         <div class="card-body">
                             <!-- <div class="card-body table-responsive p-0"> -->
-                            <table id="example1" class="table table-bordered table-hover text-center table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -80,10 +80,10 @@
                                             <td class="align-middle">
                                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                     <a href="{{ route('user.edit', $user->id) }}" type="button"
-                                                        class="btn btn-warning">
+                                                        class="btn  btn-sm btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <button class="btn btn-danger" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
+                                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                     </div>

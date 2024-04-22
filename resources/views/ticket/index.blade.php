@@ -55,7 +55,7 @@
                                     </form>
                             </div>
                             <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover text-center table-striped">
+                            <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -76,10 +76,10 @@
                                         <td class="align-middle">
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
-                                                    class="btn btn-warning">
+                                                    class="btn btn-sm btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
+                                                <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                                 </div>
