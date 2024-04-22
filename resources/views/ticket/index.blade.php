@@ -12,8 +12,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                
+                    
                         <div class="card">
                             <div class="card-header border-0">
                                 <h3 class="card-title"><b>Tickets</b></h3>
@@ -59,9 +58,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Request by</th>
+                                        <th>Location</th>
                                         <th>Unit</th>
                                         <th>Request</th>
-                                        <th>Description</th>
+                                        <th>Assigned to</th>
+                                        <th>Status</th>
                                         <th>Action(s)</th>
                                     </tr>
                                 </thead>
@@ -70,21 +72,20 @@
                                     @foreach($tickets as $ticket)
                                     <tr>
                                         <td class="align-middle">{{ $loop->iteration }}</td>
+                                        <td class="align-middle">{{ $ticket->user->first_name }} {{ $ticket->user->last_name }}</td>
+                                        <td class="align-middle">{{ $ticket->service_location }}</td>
                                         <td class="align-middle">{{ $ticket->unit }}</td>
                                         <td class="align-middle">{{ $ticket->request }}</td>
-                                        <td class="align-middle">{{ $ticket->description }}</td>
+                                        <td class="align-middle">{{ $ticket->assignedUser->first_name }} {{ $ticket->assignedUser->last_name }}</td>
+                                        <td class="align-middle">Status</td>
                                         <td class="align-middle">
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
-                                                    class="btn btn-sm btn-warning">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                                </div>
-                                            <div class="btn-group align-middle" role="group" aria-label="Basic example">
-                                            </div>
+                                            <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -94,7 +95,6 @@
                             </div>
                         </div>
                     </div>
-                        
                 </div>
             </div>
         </div>

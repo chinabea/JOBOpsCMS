@@ -43,11 +43,27 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->validate([
+                'file_upload' => 'nullable|file|max:2048', // for example, max 2MB
+            ]);
+            
             $authUser = auth()->user(); // Renaming variable to avoid confusion
-            $ticketData = $request->all();
+            // $ticketData = $request->all();
+            $ticketData = $request->except('file_upload'); 
     
             // Create the ticket
             $ticket = Ticket::create($ticketData);
+
+            // Handle file upload
+            if ($request->hasFile('file_upload')) {
+                $file = $request->file('file_upload');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                // Save the file to the default storage disk (usually 'public')
+                $filePath = $file->storeAs('uploads', $filename, 'public');
+                // Save filePath to your ticket model if needed
+                $ticket->file_path = $filePath;
+                $ticket->save();
+            }
     
             // Find all users with role 2
             $usersWithRole2 = User::where('role', 2)->get();
@@ -85,7 +101,7 @@ class TicketController extends Controller
                 }
             }
     
-            return redirect()->route('admin.home')->with('success', 'Ticket Successfully Created!');
+            return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
         } catch (Exception $e) {
             // Log the exception or handle it as required
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
