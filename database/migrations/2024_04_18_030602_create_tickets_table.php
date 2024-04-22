@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('unit');
             $table->string('request');
             $table->enum('priority_level', ['High', 'Mid', 'Low']);
+            $table->date('deadline');
             $table->string('description');
             $table->unsignedBigInteger('assigned_to')->nullable();
             $table->string('file_path')->nullable();
-            $table->enum('status', ['pending', 'done'])->default('pending');
+            $table->enum('status', ['Pending', 'Done'])->default('Pending');
             $table->timestamps();
 
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');

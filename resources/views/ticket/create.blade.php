@@ -48,7 +48,10 @@
                                         <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
-
+                            </div>
+                            <div class="form-group">
+                                <label for="">Deadline</label>
+                                <input type="date" class="form-control"name="deadline" id="deadline" required></input>
                             </div>
                             <div class="form-group">
                                 <label for="">Description</label>
