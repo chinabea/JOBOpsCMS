@@ -21,6 +21,8 @@ class LoginController extends Controller
     {
         // Attempt to retrieve the user information from Google
         $googleUser = Socialite::driver('google')->user();
+
+        session(['profilePictureUrl' => $googleUser->getAvatar()]);
         
         // Attempt to find the user in the local database by email
         $localUser = User::where('email', $googleUser->getEmail())->first();
