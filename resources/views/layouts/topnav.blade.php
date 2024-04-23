@@ -93,7 +93,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user()->role == 1)
-                        Admin, {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} 
+                        Admin, {{ Auth::user()->name }} 
                     @elseif(Auth::user()->role == 2) 
                         MICT Staff, {{ Auth::user()->name }} 
                     @elseif(Auth::user()->role == 3)
