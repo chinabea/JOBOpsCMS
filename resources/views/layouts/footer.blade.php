@@ -1,6 +1,11 @@
-<footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <!-- Developed by: <b>China Bea</b> -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
     </div>
-    <strong>Copyright © 2023.</strong> All rights reserved.
-  </footer>
