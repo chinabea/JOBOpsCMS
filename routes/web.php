@@ -43,7 +43,6 @@ Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group
 
 });
 
-
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');

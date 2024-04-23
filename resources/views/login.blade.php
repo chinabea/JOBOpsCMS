@@ -1,73 +1,53 @@
-
-
-<section id="hero" class="hero d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-        <div class="form-holder">
-            <div class="form-content">
-                <div class="form-items">
-                    <h3>Sign in to your Account</h3>
-                    <p>Fill in the data below.</p>
-                    <form method="POST" 
-                    >
-                        @csrf
-
-                        <div class="col-md-12">
-                            <input class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus type="email" required id="email">
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-12">
-                            <input class="form-control" id="password" type="password" class="@error('password') is-invalid @enderror" placeholder="Password" name="password" required autocomplete="current-password">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="remember-forgot">
-                        </div>
-
-                        @if ($errors->any())
-                        <div class="alert alert-danger mt-3">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        
-                      <div class="potentialidplist row p-0">
-                          <div class="potentialidp col-sm-12 col-md">
-                            <div class="mx-auto">
-                              <button id="submit" type="submit" class="btn btn-info w-100 my-2 text-center">
-                                <i class="fas fa-arrow-right"></i>Login</button>
-                            </div>
-                          </div>
-                      </div>
-                    </form>
-                    <hr class="white">
-
-                    <h6 class="text-center text-white m-t-1">Log in using your account on:</h6>
-                    <div class="potentialidplist row p-0">
-                        <div class="potentialidp col-sm-12 col-md">
-                            <a href="{{ url('login/google') }}" title="Google Mail" class="btn btn-danger m-t-1 w-100 d-flex align-items-center">
-                                <div class="mx-auto">
-                                    <img src="https://accounts.google.com/favicon.ico" alt="" width="25" class="mr-2">
-                                    <span>Google Mail</span>
-                                </div>
-                            </a>
-                        </div>
+<div class="right_col" role="main">
+ 
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>
+                    Plain Page <small>Page subtile </small>
+                </h3>
+            </div>
+ 
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Go!</button>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
+        <div class="clearfix"></div>
+ 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Page title <small>Page subtile </small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a></li>
+                                    <li><a href="#">Settings 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <!-- content starts here -->
+ 
+                        <!-- content ends here -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</div>
