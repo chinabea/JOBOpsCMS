@@ -10,38 +10,38 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
+
+
 Route::get('/', function () {
     return view('welcome');
-    })->name('welcome');
+})->name('welcome');
+
+Route::get('/not-approved', function () {
+    return view('user.not-approved'); 
+})->name('not-approved');
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/admin', function () {
-    return view('dashboard');
-})->name('admin.home');
+Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
 
-Route::prefix('staff')->middleware(['auth', 'approved'])->group(function () {
-    Route::get('/staff', function () {
+    Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('staff.home');
-    
+
 });
 
-// to re-arrange later
-Route::get('/not-approved', function () {
-    return view('user.not-approved'); 
-})->name('not-approved');
+Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group(function () {
 
-// Route::get('/user-profile', function () {
-//     return view('user.user-profile'); 
-// })->name('user-profile');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('admin.home');
 
-// Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
-// });
+
+});
 
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
