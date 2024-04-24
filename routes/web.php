@@ -6,11 +6,9 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,4 +69,8 @@ Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
 Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
+
+Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
+Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
+Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
 
