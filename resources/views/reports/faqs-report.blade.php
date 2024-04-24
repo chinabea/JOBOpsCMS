@@ -19,12 +19,10 @@
     <p style="font-size: 13pt; font-weight: bold; font-family: 'Calibri', sans-serif; margin-bottom: 1;">MICT</p>
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
-
-    <div class="text-center">
-        <br><header>FAQs</header>
-    </div>
-    
-        <table id="example1" class="table table-bordered table-hover text-center">
+        <div class="text-center">
+            <br><header>FAQs</header>
+        </div>
+        <table>
             <thead>
                 <tr>
                     <th>#</th>
@@ -36,9 +34,9 @@
                 @if($faqs->count() > 0)
                 @foreach($faqs as $faq)
                 <tr>
-                    <td class="align-middle">{{ $loop->iteration }}</td>
-                    <td class="align-middle">{{ $faq->question }}</td>
-                    <td class="align-middle">{{ $faq->answer }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $faq->question }}</td>
+                    <td>{{ $faq->answer }}</td>
                 </tr>
                 @endforeach
                 @endif

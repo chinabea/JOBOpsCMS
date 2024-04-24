@@ -19,44 +19,39 @@
     <p style="font-size: 13pt; font-weight: bold; font-family: 'Calibri', sans-serif; margin-bottom: 1;">MICT</p>
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
-
-    <div class="text-center">
-        <br><header>TICKETS</header>
-    </div>
-    
-    <table id="example1" class="table table-bordered table-hover text-center">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Unit</th>
-                <th>Request</th>
-                <th>Description</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($tickets as $ticket)
+            <header>STATUS: OPEN TICKETS</header>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Unit</th>
+                        <th>Request</th>
+                        <th>Assigned to</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if($tickets->count() > 0)
+                    @foreach($tickets as $ticket)
+                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $ticket->user->name }}</td>
+                        <td>{{ $ticket->service_location }}</td>
                         <td>{{ $ticket->unit }}</td>
                         <td>{{ $ticket->request }}</td>
-                        <td>{{ $ticket->description }}</td>
+                        <td>{{ $ticket->assignedUser->name }}</td>
+                        <td>{{ $ticket->priority_level }}</td>
                         <td>{{ $ticket->status }}</td>
-                        <td>{{ $ticket->created_at->toFormattedDateString() }}</td>
                     </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>#</th>
-                <th>Unit</th>
-                <th>Request</th>
-                <th>Description</th>
-                <th>Created At</th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
-
-</body>
+                    @endif
+                    @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>

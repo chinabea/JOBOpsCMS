@@ -12,14 +12,40 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    // public function index()
-    // {
-    //     $tickets = Ticket::all();  // You already have this based on your debug info.
-    //     $user = auth()->user();    // Ensuring $user is defined by getting the currently authenticated user.
-    
-    //     return view('ticket.index', compact('tickets', 'user'));
-    // }
-    
+
+    public function inProgressTicketsReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('status', 'In Progress')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.in-progress-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('in-progress-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
+
+    public function openTicketsReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('status', 'Open')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.open-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('open-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
 
     public function ticketsReport(Request $request)
     {
