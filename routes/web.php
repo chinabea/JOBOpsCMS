@@ -7,6 +7,7 @@ use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\TimeLogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,7 @@ Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('staff.home');
+    })->name('mict-staff.home');
 
 });
 
@@ -39,16 +40,16 @@ Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
 
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
 });
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
-
-Route::get('/users', [UserController::class, 'index'])->name('users');
-Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 Route::get('/create/ticket', [TicketController::class, 'create'])->name('create.ticket');
@@ -68,9 +69,26 @@ Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('de
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
-Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
+Route::post('/open-report', [ReportController::class, 'openTicketsReport'])->name('open-status.report');
+// Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
 
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
 Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
+
+// Route only for Admin and MICT Staff 
+Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/time-logs/start', [TimeLogController::class, 'start']);
+    Route::post('/time-logs/end/{id}', [TimeLogController::class, 'end']);
+});
+
+
+
+
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
 
