@@ -52,6 +52,7 @@
                 <tbody>
                     @if($tickets->count() > 0)
                     @foreach($tickets as $ticket)
+                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
                         <td class="align-middle">{{ $ticket->user->name }}</td>
@@ -72,6 +73,7 @@
                             </button>
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                     @endif
                 </tbody>
