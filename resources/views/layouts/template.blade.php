@@ -8,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('production/images/MICT-Logo.png') }}" type="image/ico" />
 
-    <title>JOBOPS CMS</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>JOBOPS</title>
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -26,6 +33,8 @@
     <link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="{{ asset('vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css') }}" rel="stylesheet"/>
     <!-- Bootstrap -->
     <link href="{{ asset('cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css') }}">
     <link href="{{ asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
@@ -36,6 +45,7 @@
     <link href="{{ asset('custom.css') }}" rel="stylesheet">
 
   </head>
+
 
   <body class="nav-md">
     <div class="container body">
@@ -109,23 +119,24 @@
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('build/js/custom.min.js') }}"></script>
 
-@if(session('success'))
-<script>
-    toastr.success('{{ session('success') }}');
-</script>
-@elseif(session('delete'))
-<script>
-    toastr.delete('{{ session('delete') }}');
-</script>
-@elseif(session('message'))
-<script>
-    toastr.message('{{ session('message') }}');
-</script>
-@elseif(session('error'))
-<script>
-    toastr.error('{{ session('error') }}');
-</script>
-@endif
+    <!-- jQuery custom content scroller -->
+    <script src="{{ asset('vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+
+    
+    <script>
+        function confirmDelete(url) {
+            if (confirm('Delete?')) {
+                // Create a hidden form and submit it programmatically
+                var form = document.createElement('form');
+                form.action = url;
+                form.method = 'POST';
+                form.innerHTML = '@csrf @method("delete")';
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
+    
 
   </body>
 </html>

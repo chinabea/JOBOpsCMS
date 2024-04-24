@@ -47,63 +47,57 @@
                 <li role="presentation" class="nav-item dropdown open">
                   <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-bell-o"></i>
-                    <span class="badge bg-green">6</span>
+                    <!-- <span class="badge bg-green">6</span> -->
+                    @if(auth()->check())
+                        <span class="badge bg-green">{{ auth()->user()->unreadNotifications->count() }}</span>
+                    @endif
                   </a>
                   <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="{{ asset('production/images/img.jpg') }}" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="{{ asset('production/images/img.jpg') }}" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="{{ asset('production/images/img.jpg') }}" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="dropdown-item">
-                        <span class="image"><img src="{{ asset('production/images/img.jpg') }}" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
+
+                  
+        @if (Auth::check())
+        @foreach (Auth::user()->unreadNotifications as $notification)
+        <li class="nav-item">
+          <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
+            <span class="image"><img src="{{ $profilePictureUrl }}" alt="Profile Image" /></span>
+            <span>
+              <span>China Bea</span>
+              <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
+            </span>
+            <span class="message">
+              {{ $notification->data['message'] }}
+            </span>
+          </a>
+        </li>
+        @endforeach
+        @foreach (Auth::user()->readNotifications as $notification)
+        <li class="nav-item">
+          <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
+            <span class="image"><img src="{{ $profilePictureUrl }}" alt="Profile Image" /></span>
+            <span>
+              <span>China Bea</span>
+              <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
+            </span>
+            <span class="message">
+              {{ $notification->data['message'] }}
+            </span>
+          </a>
+        </li>
+        @endforeach
+        @endif
+        
+
                     <li class="nav-item">
                       <div class="text-center">
-                        <a class="dropdown-item">
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
+                       
+      <form method="POST" action="{{ route('mark-all-as-read') }}">
+        @csrf
+        @method('POST')
+                        <button type="submit" class="dropdown-item">
+                          <strong>Mark All as Read</strong>
+                          <!-- <i class="fa fa-angle-right"></i> -->
+                        </button>
+      </form>
                       </div>
                     </li>
                   </ul>
