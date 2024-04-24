@@ -31,7 +31,6 @@
                 </tr>
             </thead>
             <tbody>
-                @if($faqs->count() > 0)
                 @foreach($faqs as $faq)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -39,7 +38,6 @@
                     <td>{{ $faq->answer }}</td>
                 </tr>
                 @endforeach
-                @endif
             </tbody>
         </table>
     </div>
