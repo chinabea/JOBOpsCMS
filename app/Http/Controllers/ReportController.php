@@ -13,6 +13,23 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
+    public function closedReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('status', 'Closed')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.closed-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('closed-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
+
     public function inProgressReport(Request $request)
     {
         $start_date = $request->input('start_date');

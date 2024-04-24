@@ -73,6 +73,7 @@ Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->n
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
 Route::post('/open-report', [ReportController::class, 'openReport'])->name('open-status.report');
 Route::post('/in-progress-report', [ReportController::class, 'inProgressReport'])->name('in-progress-status.report');
+Route::post('/closed-report', [ReportController::class, 'closedReport'])->name('closed-status.report');
 
 
 
