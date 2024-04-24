@@ -2,7 +2,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            © 2024 by ChinaBea. All rights reserved.
           </div>
           <div class="clearfix"></div>
         </footer>
