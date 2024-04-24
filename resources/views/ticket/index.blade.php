@@ -34,8 +34,32 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
-            <table id="datatable" class="table table-bordered table-hover text-center table-striped table-sm">
+          <div class="x_content"> 
+          <form action="{{ route('generate.tickets.report') }}" method="post">
+              @csrf
+              <div class="row justify-content-center">
+                  <div class="form-group row">
+                      <div class="col-md-6">
+                          <label for="start_date">Start Date:</label>
+                          <input type="date" class="form-control" name="start_date" id="start_date">
+                      </div>
+                      <div class="col-md-6">
+                          <label for="end_date">End Date:</label>
+                          <input type="date" class="form-control" name="end_date" id="end_date">
+                      </div>
+                  </div>
+              <div class="col-lg-4">
+                  <div class="form-group">
+                      <label>Actions</label>
+                      <div>
+                          <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-refresh"></i> </button>
+                          <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </form>
+            <table id="datatable-responsive" class="table table-bordered table-hover text-center table-striped table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -46,12 +70,15 @@
                         <th>Assigned to</th>
                         <th>Priority</th>
                         <th>Status</th>
+                        @if(auth()->user()->role == 1)
                         <th>Action(s)</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     @if($tickets->count() > 0)
                     @foreach($tickets as $ticket)
+                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $ticket->user->name }}</td>
@@ -60,14 +87,18 @@
                         <td>{{ $ticket->request }}</td>
                         <td>{{ $ticket->assignedUser->name }}</td>
                         <td>{{ $ticket->priority_level }}</td>
-                        <td>@if ($ticket->status === 'Open')
-                            <span class="badge badge-primary">Open</span>
-                          @elseif ($ticket->status === 'In Progress')
-                            <span class="badge badge-info">In Progress</span>
-                          @elseif ($ticket->status === 'Closed')
-                            <span class="badge badge-warning">Closed</span>
-                          @endif
+                        <td>
+                          <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST">
+                              @csrf
+                              @method('PATCH')
+                              <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
+                                  <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
+                                  <option value="In Progress" @if ($ticket->status == 'In Progress') selected @endif>In Progress</option>
+                                  <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
+                              </select>
+                          </form>
                         </td>
+                        @if(auth()->user()->role == 1)
                         <td>
                             <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
                                 class="btn btn-sm btn-warning">
@@ -77,8 +108,10 @@
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
-                    </tr>
-                    @endforeach
+                        @endif
+                      </tr>
+                      @endif
+                      @endforeach
                     @endif
                 </tbody>
             </table>
