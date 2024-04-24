@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('role')->nullable();
             $table->string('email')->unique();
             $table->boolean('is_approved')->default(false); 
-            $table->string('avatar_url')->nullable();
             // $table->timestamp('email_verified_at')->nullable();
             // $table->string('password');
             $table->rememberToken();
