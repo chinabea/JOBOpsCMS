@@ -20,42 +20,39 @@
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
 
-    <div class="text-center">
-        <br><header>TICKETS</header>
-    </div>
-    
-    <table id="example1" class="table table-bordered table-hover text-center">
-        <thead>
-            <tr>
-                <th class="align-middle">#</th>
-                <th class="align-middle">Unit</th>
-                <th class="align-middle">Request</th>
-                <th class="align-middle">Description</th>
-                <th class="align-middle">Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($tickets as $ticket)
+        <br><header>TICKETS</header><br>
+            <table>
+                <thead>
                     <tr>
-                        <td class="align-middle">{{ $loop->iteration }}</td>
-                        <td class="align-middle">{{ $ticket->unit }}</td>
-                        <td class="align-middle">{{ $ticket->request }}</td>
-                        <td class="align-middle">{{ $ticket->description }}</td>
-                        <td class="align-middle">{{ $ticket->created_at->format('F j, Y') }}</td>
+                        <th>#</th>
+                        <th>Request by</th>
+                        <th>Location</th>
+                        <th>Unit</th>
+                        <th>Request</th>
+                        <th>Assigned to</th>
+                        <th>Priority</th>
+                        <th>Status</th>
                     </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th class="align-middle">#</th>
-                <th class="align-middle">Unit</th>
-                <th class="align-middle">Request</th>
-                <th class="align-middle">Description</th>
-                <th class="align-middle">Created At</th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
-
-</body>
+                </thead>
+                <tbody>
+                    @if($tickets->count() > 0)
+                    @foreach($tickets as $ticket)
+                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $ticket->user->name }}</td>
+                        <td>{{ $ticket->service_location }}</td>
+                        <td>{{ $ticket->unit }}</td>
+                        <td>{{ $ticket->request }}</td>
+                        <td>{{ $ticket->assignedUser->name }}</td>
+                        <td>{{ $ticket->priority_level }}</td>
+                        <td>{{ $ticket->status }}</td>
+                    </tr>
+                      @endif
+                      @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>

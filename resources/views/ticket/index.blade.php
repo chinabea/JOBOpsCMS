@@ -76,7 +76,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($tickets->count() > 0)
                     @foreach($tickets as $ticket)
                     @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
@@ -87,6 +86,7 @@
                         <td>{{ $ticket->request }}</td>
                         <td>{{ $ticket->assignedUser->name }}</td>
                         <td>{{ $ticket->priority_level }}</td>
+                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
                         <td>
                           <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST">
                               @csrf
@@ -98,6 +98,9 @@
                               </select>
                           </form>
                         </td>
+                        @else
+                        <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
+                        @endif
                         @if(auth()->user()->role == 1)
                         <td>
                             <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
@@ -112,7 +115,6 @@
                       </tr>
                       @endif
                       @endforeach
-                    @endif
                 </tbody>
             </table>
           </div>

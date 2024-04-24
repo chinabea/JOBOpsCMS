@@ -67,44 +67,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                                @if($users->count() > 0)
-                                @foreach($users as $user)
-                                <tr>
-                                    <td class="align-middle">{{ $loop->iteration }}</td>
-                                    <td class="align-middle">{{ $user->name }}</td>
-                                    <td class="align-middle">{{ $user->email }}</td>
-                                    <td class="align-middle">
-                                        @if ($user->role == 1)
-                                            Admin
-                                        @elseif ($user->role == 2)
-                                            MICT Staff
-                                        @elseif ($user->role == 3)
-                                            Staff
-                                        @else
-                                            Guest
-                                        @endif
-                                    </td>
-                                    <!-- <td>
-                                        @if (!$user->is_approved)
-                                            <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info">Approve</a>
-                                        @else
-                                            <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger">Disapprove</a>
-                                        @endif
-                                    </td> -->
-                                    <td class="align-middle">
-                                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary">
-                                            <i class="fa fa-user"></i> View Profile
-                                        </a>
-                                        <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                        
+                            @foreach($users as $user)
+                            <tr>
+                                <td class="align-middle">{{ $loop->iteration }}</td>
+                                <td class="align-middle">{{ $user->name }}</td>
+                                <td class="align-middle">{{ $user->email }}</td>
+                                <td class="align-middle">
+                                    @if ($user->role == 1)
+                                        Admin
+                                    @elseif ($user->role == 2)
+                                        MICT Staff
+                                    @elseif ($user->role == 3)
+                                        Staff
+                                    @else
+                                        Guest
+                                    @endif
+                                </td>
+                                <!-- <td>
+                                    @if (!$user->is_approved)
+                                        <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info">Approve</a>
+                                    @else
+                                        <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger">Disapprove</a>
+                                    @endif
+                                </td> -->
+                                <td class="align-middle">
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-user"></i> View Profile
+                                    </a>
+                                    <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('user.destroy', $user->id) }}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
