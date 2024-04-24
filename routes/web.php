@@ -75,24 +75,17 @@ Route::post('/open-report', [ReportController::class, 'openReport'])->name('open
 Route::post('/in-progress-report', [ReportController::class, 'inProgressReport'])->name('in-progress-status.report');
 Route::post('/closed-report', [ReportController::class, 'closedReport'])->name('closed-status.report');
 
-
-
-
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
 Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
 
-// Route only for Admin and MICT Staff 
+// Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/time-logs/start', [TimeLogController::class, 'start']);
     Route::post('/time-logs/end/{id}', [TimeLogController::class, 'end']);
 });
-
-
-
-
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

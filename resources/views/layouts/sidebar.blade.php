@@ -19,16 +19,16 @@
         </div>
         <div class="profile_info">
             @if(Auth::user()->role == 1)
-                <span>Admin,</span>
+                <span>Admin</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 2) 
-                <span>MICT Staff,</span>
+                <span>MICT Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 3)
-                <span>Staff,</span>
+                <span>Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @else
-                <span>Guest,</span>
+                <span>Guest</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @endif
         </div>
@@ -87,16 +87,16 @@
         </div>
         <div class="profile_info">
             @if(Auth::user()->role == 1)
-                <span>Admin,</span>
+                <span>Admin</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 2) 
-                <span>MICT Staff,</span>
+                <span>MICT Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 3)
-                <span>Staff,</span>
+                <span>Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @else
-                <span>Guest,</span>
+                <span>Guest</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @endif
         </div>
@@ -154,16 +154,16 @@
         </div>
         <div class="profile_info">
             @if(Auth::user()->role == 1)
-                <span>Admin,</span>
+                <span>Admin</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 2) 
-                <span>MICT Staff,</span>
+                <span>MICT Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @elseif(Auth::user()->role == 3)
-                <span>Staff,</span>
+                <span>Staff</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @else
-                <span>Guest,</span>
+                <span>Guest</span>
                 <h2>{{ Auth::user()->name }}</h2> 
             @endif
         </div>
