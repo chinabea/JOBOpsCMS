@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
-    public function inProgressTicketsReport(Request $request)
+    public function inProgressReport(Request $request)
     {
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
@@ -30,7 +30,7 @@ class ReportController extends Controller
         return $pdf->stream('in-progress-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
     }
 
-    public function openTicketsReport(Request $request)
+    public function openReport(Request $request)
     {
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');

@@ -66,11 +66,16 @@ Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
 Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
 
+// Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
-Route::post('/open-report', [ReportController::class, 'openTicketsReport'])->name('open-status.report');
-// Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
+Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
+Route::post('/open-report', [ReportController::class, 'openReport'])->name('open-status.report');
+Route::post('/in-progress-report', [ReportController::class, 'inProgressReport'])->name('in-progress-status.report');
+
+
+
 
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
