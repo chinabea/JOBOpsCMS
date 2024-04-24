@@ -70,11 +70,12 @@
                         <th>Assigned to</th>
                         <th>Priority</th>
                         <th>Status</th>
+                        @if(auth()->user()->role == 1)
                         <th>Action(s)</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
-                    @if($tickets->count() > 0)
                     @foreach($tickets as $ticket)
                     @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
@@ -85,9 +86,23 @@
                         <td class="align-middle">{{ $ticket->request }}</td>
                         <td class="align-middle">{{ $ticket->assignedUser->name }}</td>
                         <td class="align-middle">{{ $ticket->priority_level }}</td>
+                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
+                        <td>
+                          <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST">
+                              @csrf
+                              @method('PATCH')
+                              <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
+                                  <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
+                                  <option value="In Progress" @if ($ticket->status == 'In Progress') selected @endif>In Progress</option>
+                                  <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
+                              </select>
+                          </form>
+                        </td>
+                        @else
                         <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
-                        
-                        <td class="align-middle">
+                        @endif
+                        @if(auth()->user()->role == 1)
+                        <td>
                             <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
                                 class="btn btn-sm btn-warning">
                                 <i class="fa fa-edit"></i>
@@ -96,10 +111,10 @@
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
+                        @endif
                     </tr>
                     @endif
                     @endforeach
-                    @endif
                 </tbody>
             </table>
           </div>
