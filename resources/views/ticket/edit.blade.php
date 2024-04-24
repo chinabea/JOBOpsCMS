@@ -1,21 +1,39 @@
 
+
 @extends('layouts.template')
 
 @section('content')
+<div class="right_col" role="main" style="min-height: 606.8px;">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Ticket</h3>
+              </div>
 
-<div class="content-wrapper">
-    <section class="content-header">
-    </section>
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <section class="content">
-        <div class="container-fluid">
+            <div class="clearfix"></div>
+
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title my-1"> Edit FAQs</h3>
-                        </div>
-                        <div class="card-body">
+              <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Request a Ticket</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
                         <form action="{{ route('edit.ticket', $ticket->id) }}" method="post">
                             @csrf
                             @method('PUT')
@@ -35,30 +53,11 @@
                                 <span>Submit</span>
                             </button>
                         </form>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-</div>
-
-@if(session('success'))
-<script>
-    toastr.success('{{ session('success') }}');
-</script>
-@elseif(session('delete'))
-<script>
-    toastr.delete('{{ session('delete') }}');
-</script>
-@elseif(session('message'))
-<script>
-    toastr.message('{{ session('message') }}');
-</script>
-@elseif(session('error'))
-<script>
-    toastr.error('{{ session('error') }}');
-</script>
-@endif
 
 @endsection
