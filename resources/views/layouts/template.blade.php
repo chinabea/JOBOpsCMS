@@ -97,8 +97,6 @@
     <script src="{{ asset('vendors/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     
-    <!-- ------------------------------------------------------------------------------------------------ -->
-
     <!-- Datatables -->
     <script src="{{ asset('vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
@@ -118,25 +116,25 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('build/js/custom.min.js') }}"></script>
-
     <!-- jQuery custom content scroller -->
     <script src="{{ asset('vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-
     
+    <script src="{{ asset('custom.js') }}"></script>
     <script>
-        function confirmDelete(url) {
-            if (confirm('Delete?')) {
-                // Create a hidden form and submit it programmatically
-                var form = document.createElement('form');
-                form.action = url;
-                form.method = 'POST';
-                form.innerHTML = '@csrf @method("delete")';
-                document.body.appendChild(form);
-                form.submit();
-            }
+      
+    // deleting item 
+    function confirmDelete(url) {
+        if (confirm('Delete?')) {
+            // Create a hidden form and submit it programmatically
+            var form = document.createElement('form');
+            form.action = url;
+            form.method = 'POST';
+            form.innerHTML = '@csrf @method("delete")';
+            document.body.appendChild(form);
+            form.submit();
         }
+    }
     </script>
-    
 
   </body>
 </html>
