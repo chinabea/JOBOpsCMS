@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('assigned_to')->nullable();
             $table->string('file_path')->nullable();
-            $table->enum('status', ['Pending', 'Done'])->default('Pending');
+            $table->enum('status', ['Open','In Progress', 'Closed'])->default('Open');
             $table->timestamps();
 
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
