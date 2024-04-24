@@ -108,30 +108,6 @@ class TicketController extends Controller
         }
     }
     
-
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         Ticket::create($request->all());
-
-    //         // Redirect to the index or show view, or perform other actions
-    //         return redirect()->route('admin')->with('success', 'Users Successfully Added!');
-    //     } catch (Exception $e) {
-    //         // Handle the exception here, you can log it or return an error response
-    //         return $e->getMessage();
-    //     }
-    // }
-
-    // public function show($id)
-    // {
-    //     try {
-    //         $task = Task::findOrFail($id);
-    //         return view('tasks.show', compact('task'));
-    //     } catch (Exception $e) {
-    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-    //     }
-    // }
-
     public function edit($id)
     {
         try {
@@ -184,4 +160,19 @@ class TicketController extends Controller
 
         return response()->json(['user_id' => $user->id]);
     }
+    
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:Open,In Progress,Closed'
+        ]);
+
+        $ticket = Ticket::findOrFail($id);
+        $ticket->status = $request->status;
+        $ticket->save();
+
+        return redirect()->route('tickets')->with('success', 'Ticket status updated successfully.');
+    }
+
+
 }

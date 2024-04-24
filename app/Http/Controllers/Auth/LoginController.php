@@ -44,7 +44,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.home');
             } else {
                 // Default redirection for regular approved users
-                return redirect()->route('staff.home');
+                return redirect()->route('mict-staff.home');
             }
         } else {
             // If the user does not exist, create a new user in the database
