@@ -50,5 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class, 'assigned_to');
     }
+    
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
 
 }

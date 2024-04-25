@@ -50,6 +50,7 @@
             </ul>
             </li>
             <li><a href="{{ route('faqs') }}"><i class="fa fa-question-circle"></i> F.A.Q </a></li>
+            <li><a href="{{ route('activity-log') }}"><i class="fa fa-folder-open"></i> Activity Logs </a></li>
         </ul>
     </div>
     </div>

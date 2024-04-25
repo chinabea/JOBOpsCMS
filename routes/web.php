@@ -7,7 +7,8 @@ use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\TimeLogController;
+use App\Http\Controllers\ActivityLogController;
+use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,7 @@ Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 Route::get('/create/ticket', [TicketController::class, 'create'])->name('create.ticket');
 Route::post('/store/ticket', [TicketController::class, 'store'])->name('store.ticket');
+Route::get('/show/ticket/{id}', [TicketController::class, 'show'])->name('ticket.show');
 Route::get('/edit-ticket/{id}', [TicketController::class, 'edit'])->name('edit.ticket');
 Route::put('/edit-ticket/{id}', [TicketController::class, 'update'])->name('update.ticket');
 Route::delete('/delete-ticket/{id}', [TicketController::class, 'destroy'])->name('destroy.ticket');
@@ -82,10 +84,7 @@ Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.
 // Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 
-Route::middleware(['auth'])->group(function () {
-    Route::post('/time-logs/start', [TimeLogController::class, 'start']);
-    Route::post('/time-logs/end/{id}', [TimeLogController::class, 'end']);
-});
+Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

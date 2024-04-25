@@ -6,6 +6,7 @@ use App\Notifications\TicketCreatedNotification;
 use App\Notifications\TicketAssignedNotification;
 use App\Models\User;
 use App\Models\Ticket;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -100,11 +101,27 @@ class TicketController extends Controller
                     }
                 }
             }
+
+            // Log activity
+            ActivityLogger::log('Created', $ticket, 'Ticket created');
     
             return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
         } catch (Exception $e) {
             // Log the exception or handle it as required
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            // Retrieve and show the specific item using the provided ID
+            $ticket = Ticket::findOrFail($id);
+
+            return view('ticket.show', compact('ticket'));
+        } catch (Exception $e) {
+            // Handle the exception, you can log it for debugging or display an error message to the user.
+            return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
         }
     }
     
@@ -124,9 +141,12 @@ class TicketController extends Controller
         try {
             $ticket = Ticket::findOrFail($id);
             $ticket->update($request->all());
+
+            // Log activity
+            ActivityLogger::log('Updated', $ticket, 'Ticket updated');
             
             return redirect()->route('tickets')->with('success', 'Ticket Successfully Updated!');
-            // return redirect()->back()->with('success', 'Task Successfully Updated!');
+
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -138,7 +158,8 @@ class TicketController extends Controller
             $ticket = Ticket::findOrFail($id);
             $ticket->delete(); 
             
-            // return redirect()->route('tickets')->with('success', 'Ticket Successfully Deleted!');
+            // Log activity
+            ActivityLogger::log('Deleted', $ticket, 'Ticket Deleted');
             
             return redirect()->back()->with('success', 'Task deleted successfully.');
         } catch (Exception $e) {
