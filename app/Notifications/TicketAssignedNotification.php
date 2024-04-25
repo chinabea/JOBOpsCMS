@@ -45,7 +45,7 @@ class TicketAssignedNotification extends Notification
             'ticket_id' => $this->ticket,
             'message' => 'A new ticket has been assigned.',
             'icon' => 'fas fa-file-alt',
-            'action_url' => url('/tickets/' . $this->ticket),
+            'action_url' => url("/show/ticket/{$this->ticket->id}"),
         ];
     }
     public function toMail($notifiable)

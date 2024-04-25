@@ -45,7 +45,9 @@ class TicketCreatedNotification extends Notification
             'user_id' => $this->user->id,
             'message' => 'A new ticket has been created.',
             'icon' => 'fas fa-file-alt', 
-            'action_url' => url("/tickets/{$this->ticket->id}"),
+            'action_url' => url("/show/ticket/{$this->ticket->id}"),
+
+            
 
             
         ];

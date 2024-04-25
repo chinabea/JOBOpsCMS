@@ -7,6 +7,19 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
+    public function index()
+    {
+        try {
+            $unreadNotifications = auth()->user()->unreadNotifications;
+            $readNotifications = auth()->user()->readNotifications;
+
+            return view('notifications', compact('unreadNotifications', 'readNotifications'));
+        } catch (\Exception $e) {
+            // Handle the exception, such as logging or returning an error response
+            return view('error')->with('message', 'An error occurred while fetching notifications.');
+        }
+    }
+
     public function store(Request $request)
     {
         $user = User::create($request->all());
@@ -28,18 +41,6 @@ class NotificationController extends Controller
         }
     }
     
-    public function index()
-    {
-        try {
-            $unreadNotifications = auth()->user()->unreadNotifications;
-            $readNotifications = auth()->user()->readNotifications;
-
-            return view('notifications', compact('unreadNotifications', 'readNotifications'));
-        } catch (\Exception $e) {
-            // Handle the exception, such as logging or returning an error response
-            return view('error')->with('message', 'An error occurred while fetching notifications.');
-        }
-    }
 
     public function markAsRead($notification)
     {
