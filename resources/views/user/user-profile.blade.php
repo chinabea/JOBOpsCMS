@@ -1,26 +1,61 @@
 @extends('layouts.template')
 
 @section('content')
+<div class="right_col" role="main" style="min-height: 606.8px;">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Users</h3>
+      </div>
 
-<div class="content-wrapper">
-    <section class="content-header">
-    </section>
+      <div class="title_right">
+        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>List of Users</h2>
+            <ul class="nav navbar-right panel_toolbox">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            
+
+
+
+
+
+
+
+
+
+          
+          <div class="row">
                 <div class="col-md-3">
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ $profilePictureUrl }}" alt="User profile picture">
                             </div>
                             <h3 class="profile-username text-center">{{ $user->name }}</h3>
                             <p class="text-muted text-center">Software Engineer</p>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Followers</b> <a class="float-right">1,322</a>
+                                    <b>Phone Number</b> <a class="float-right">09684648490</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Following</b> <a class="float-right">543</a>
@@ -97,8 +132,24 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection
