@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,6 +14,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->is_approved = true;
         $user->save();
+    
+        // Log activity
+        ActivityLogger::log('Approved', $user, 'User approved');
 
         return redirect()->route('users')->with('success', 'User has been approved.');
     }
@@ -23,6 +27,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->is_approved = false;
         $user->save();
+    
+        // Log activity
+        ActivityLogger::log('Disapproved', $user, 'User disapproved');
 
         return redirect()->route('users')->with('success', 'User approval has been revoked.');
     }
@@ -63,6 +70,9 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             // Update the item properties using the request data
             $user->update($request->all());
+    
+            // Log activity
+            ActivityLogger::log('Updated', $user, 'User updated');
 
             // Redirect to the index or show view, or perform other actions
             return redirect()->route('users')->with('success', 'User Successfully Updated!');
@@ -78,6 +88,9 @@ class UserController extends Controller
             // Delete the item with the provided ID
             $user = User::findOrFail($id);
             $user->delete();
+    
+            // Log activity
+            ActivityLogger::log('Deleted', $user, 'User deleted');
 
             // Redirect to the index or perform other actions
             return redirect()->route('users')->with('success', 'User Successfully Deleted!');

@@ -26,5 +26,5 @@ class ActivityLog extends Model
     {
         return $this->morphTo(null, 'model_type', 'model_id');
     }
-
+    
 }

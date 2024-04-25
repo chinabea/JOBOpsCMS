@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivityLogger
 {
+
     public static function log($action, $model, $description = null)
     {
-        ActivityLog::create([
+        $log = new ActivityLog([
             'user_id' => Auth::id(),
             'action' => $action,
             'model_type' => get_class($model),
             'model_id' => $model->id,
             'description' => $description,
         ]);
+        $log->save();
     }
 }
