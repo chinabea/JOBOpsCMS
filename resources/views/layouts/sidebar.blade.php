@@ -43,6 +43,7 @@
             <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
             <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
+                <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
                 <li><a href="{{ route('tickets') }}">All Tickets</a></li>
                 <li><a href="{{ route('status.open') }}">Open</a></li>
                 <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
@@ -111,6 +112,7 @@
             </li>
             <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
+                <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
                 <li><a href="{{ route('tickets') }}">Assigned Tickets</a></li>
                 <li><a href="{{ route('status.open') }}">Open</a></li>
                 <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
@@ -178,6 +180,7 @@
             </li>
             <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
+                <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
                 <li><a href="{{ route('tickets') }}">My Tickets</a></li>
                 <li><a href="{{ route('status.open') }}">Open</a></li>
                 <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
