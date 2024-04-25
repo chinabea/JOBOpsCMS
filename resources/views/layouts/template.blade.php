@@ -44,6 +44,11 @@
     <link href="{{ asset('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('custom.css') }}" rel="stylesheet">
 
+    <!-- PNotify -->
+    <link href="{{ asset('vendors/pnotify/dist/pnotify.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/pnotify/dist/pnotify.buttons.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/pnotify/dist/pnotify.nonblock.css') }}" rel="stylesheet">
+    
   </head>
 
 
@@ -120,8 +125,13 @@
     <script src="{{ asset('vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     
     <script src="{{ asset('custom.js') }}"></script>
+    
+    <!-- PNotify -->
+    <script src="{{ asset('vendors/pnotify/dist/pnotify.js') }}"></script>
+    <script src="{{ asset('vendors/pnotify/dist/pnotify.buttons.js') }}"></script>
+    <script src="{{ asset('vendors/pnotify/dist/pnotify.nonblock.js') }}"></script>
+
     <script>
-      
     // deleting item 
     function confirmDelete(url) {
         if (confirm('Delete?')) {
@@ -135,6 +145,28 @@
         }
     }
     </script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('success'))
+                new PNotify({
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                });
+            @endif
+
+            @if (session('error'))
+                new PNotify({
+                    title: 'Error',
+                    text: '{{ session('error') }}',
+                    type: 'error',
+                    styling: 'bootstrap3'
+                });
+            @endif
+        });
+    </script>
+
 
   </body>
 </html>
