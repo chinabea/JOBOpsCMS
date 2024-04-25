@@ -51,6 +51,7 @@ Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 Route::post('/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
 
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 Route::get('/create/ticket', [TicketController::class, 'create'])->name('create.ticket');
@@ -64,6 +65,7 @@ Route::post('/assign-ticket', [TicketController::class, 'assignTicket'])->name('
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/create/faq', [FaqsController::class, 'create'])->name('create.faq');
 Route::post('/store/faq', [FaqsController::class, 'store'])->name('store.faq');
+Route::get('/faqs/show/{id}', [FaqsController::class, 'show'])->name('faq.show');
 Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
 Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
