@@ -1,134 +1,84 @@
-
-
 @extends('layouts.template')
 
 @section('content')
-
-<div class="content-wrapper">
-    <section class="content-header">
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-
-                
-                        <div class="card">
-                            <div class="card-header border-0">
-                                <h3 class="card-title"><b>FAQs</b></h3>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fas fa-bars"></i>
-                                    </a>
-                                </div>
-                                <a href="{{ route('create.faq') }}" class="btn bg-navy color-palette btn-sm float-right">
-                                    <i class="fas fa-plus"></i> Add FAQs
-                                </a>
-                                    <br><br>
-                                <form action="{{ route('generate.faqs.report') }}" method="post">
-                                    @csrf
-                                    <div class="row align-items-center">
-                                            <div class="form-group row">
-                                                <div class="col-md-6">
-                                                    <label for="start_date">Start Date:</label>
-                                                    <input type="date" class="form-control" name="start_date" id="start_date">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="end_date">To:</label>
-                                                    <input type="date" class="form-control" name="end_date" id="end_date">
-                                                </div>
-                                            </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Actions</label>
-                                                <div>
-                                                    <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-sync"></i> </button>
-                                                    <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Questions</th>
-                                            <th>Answers</th>
-                                            <th>Action(s)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if($faqs->count() > 0)
-                                        @foreach($faqs as $faq)
-                                        <tr>
-                                            <td class="align-middle">{{ $loop->iteration }}</td>
-                                            <td class="align-middle">{{ $faq->question }}</td>
-                                            <td class="align-middle">{{ $faq->answer }}</td>
-                                            <td class="align-middle">
-                                                <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
-                                                    <a href="{{ route('update.faq', $faq->id) }}" type="button"
-                                                        class="btn btn-sm btn-warning">Edit
-                                                    </a>
-                                                    <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.faq', $faq->id) }}')">
-                                                        Delete
-                                                    </button>
-                                                    </div>
-                                                <!-- <div class="btn-group align-middle" role="group" aria-label="Basic example"> -->
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                        @endif
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Questions</th>
-                                            <th>Answers</th>
-                                            <th>Action(s)</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                        
+<div class="right_col" role="main" style="min-height: 606.8px;">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>FAQs</h3>
+        </div>
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>FAQs</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <a href="{{ route('create.faq') }}" class="btn btn-round btn-success">
+                        <i class="fa fa-plus-square"></i> Add FAQ
+                    </a>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            <div class="col-md-6 col-sm-6  ">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Daily active users <small>Sessions</small></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <ul class="list-unstyled timeline">
+                    @foreach($faqs as $faq)
+                    <li>
+                      <div class="block">
+                        <div class="tags">
+                          <a href="" class="tag">
+                            <span>Entertainment</span>
+                          </a>
+                        </div>
+                        <div class="block_content">
+                          <h2 class="title">
+                                          <a>{{ $faq->question }}</a>
+                                      </h2>
+                          <div class="byline">
+                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                          </div>
+                          <p class="excerpt">{{ $faq->answer }}</a></p>
+                          <a href="{{ route('update.faq', $faq->id) }}" type="button"
+                                class="btn btn-sm btn-warning">Edit
+                            </a>
+                            <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.faq', $faq->id) }}')">
+                                Delete
+                            </button>
+                        </div>
+                      </div>
+                    </li>
+                    @endforeach
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+                <div class="col-md-6 col-sm-6 my-9">
+                    <br><br><br>
+                    <!-- <div class="x_panel"> -->
+                        <img src="{{ asset('production/images/faq-img.png') }}"  style="width: 550px; height: auto;" alt="">
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-<script>
-$(document).ready(function() {
-    $('#example1').DataTable();
-});
-</script>
-
-@if(session('success'))
-<script>
-    toastr.success('{{ session('success') }}');
-</script>
-@elseif(session('delete'))
-<script>
-    toastr.delete('{{ session('delete') }}');
-</script>
-@elseif(session('message'))
-<script>
-    toastr.message('{{ session('message') }}');
-</script>
-@elseif(session('error'))
-<script>
-    toastr.error('{{ session('error') }}');
-</script>
-@endif
-
 @endsection

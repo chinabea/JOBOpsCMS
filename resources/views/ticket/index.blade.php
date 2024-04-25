@@ -63,15 +63,15 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Request by</th>
-                        <th>Location</th>
-                        <th>Unit</th>
-                        <th>Request</th>
-                        <th>Assigned to</th>
-                        <th>Priority</th>
-                        <th>Status</th>
+                        <th><i class="fa fa-user"></i> Request by</th>
+                        <th><i class="fa fa-location-arrow"></i> Location</th>
+                        <th><i class="fa fa-university"></i> Unit</th>
+                        <th><i class="fa fa-wrench"></i> Request</th>
+                        <th><i class="fa fa-users"></i> Assigned to</th>
+                        <th><i class="fa fa-flag"></i> Priority Level</th>
+                        <th><i class="fa fa-tasks"></i> Status</th>
                         @if(auth()->user()->role == 1)
-                        <th>Action(s)</th>
+                        <th><i class="fa fa-pencil-square-o"></i> Action(s)</th>
                         @endif
                     </tr>
                 </thead>
@@ -85,7 +85,15 @@
                         <td>{{ $ticket->unit }}</td>
                         <td>{{ $ticket->request }}</td>
                         <td>{{ $ticket->assignedUser->name }}</td>
-                        <td>{{ $ticket->priority_level }}</td>
+                        <td>
+                          @if ($ticket->priority_level === 'High')
+                          <span class="badge badge-danger">High</span>
+                          @elseif ($ticket->priority_level === 'Mid')
+                          <span class="badge badge-warning">Mid</span>
+                          @elseif ($ticket->priority_level === 'Low')
+                          <span class="badge badge-secondary">Low</span>
+                          @endif
+                        </td>
                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
                         <td>
                           <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST">

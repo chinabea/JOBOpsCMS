@@ -60,10 +60,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Action(s)</th>
+                        <th><i class="fa fa-info-circle"></i> Name</th>
+                        <th><i class="fa fa-envelope"></i> Email</th>
+                        <th><i class="fa fa-sitemap"></i> Role</th>
+                        <th><i class="fa fa-pencil-square-o"></i> Action(s)</th>
                     </tr>
                 </thead>
                 <tbody>
