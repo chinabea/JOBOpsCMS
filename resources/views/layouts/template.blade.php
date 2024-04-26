@@ -43,12 +43,11 @@
     <link href="{{ asset('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('custom.css') }}" rel="stylesheet">
-
     <!-- PNotify -->
     <link href="{{ asset('vendors/pnotify/dist/pnotify.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/pnotify/dist/pnotify.buttons.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/pnotify/dist/pnotify.nonblock.css') }}" rel="stylesheet">
-    
+
   </head>
 
 
@@ -130,6 +129,10 @@
     <script src="{{ asset('vendors/pnotify/dist/pnotify.js') }}"></script>
     <script src="{{ asset('vendors/pnotify/dist/pnotify.buttons.js') }}"></script>
     <script src="{{ asset('vendors/pnotify/dist/pnotify.nonblock.js') }}"></script>
+
+    <!-- morris.js -->
+    <script src="{{ asset('vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('vendors/morris.js/morris.min.js') }}"></script>
 
     <script>
     // deleting item 
