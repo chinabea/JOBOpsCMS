@@ -47,6 +47,23 @@ class UserController extends Controller
         }
     }
 
+    // public function edit($id)
+    // {
+    //     $user = User::find($id); // Fetch the user by id
+    
+    //     // Define expertise options
+    //     $expertiseOptions = ['Software Development', 'Project Management', 'Graphic Design', 'Data Analysis'];
+    //             $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff']; 
+    
+    //     // Ensure to pass the expertiseOptions to the view along with other data
+    //     return view('user.user-profile', [
+    //         'user' => $user,
+    //         'expertiseOptions' => $expertiseOptions,
+    //          'roles' => $roles
+    //     ]);
+    // }
+    
+
     public function edit($id)
     {
         try {
