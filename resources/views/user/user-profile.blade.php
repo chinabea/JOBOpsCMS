@@ -43,6 +43,10 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  
+                  <form class="form-horizontal" action="{{ route('user.edit', $user->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3  profile_left">
                       <div class="profile_img">
@@ -51,23 +55,17 @@
                           <img class="profile-user-img img-fluid img-circle" src="{{ $profilePictureUrl }}" alt="Avatar" title="Change the avatar"  style="width: 150px; height: 150px;">
                         </div>
                       </div>
-                      <h3>Samuel Doe</h3>
+                      <h3>{{ $user->name }}</h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+                        <li><i class="fa fa-phone"></i> {{ $user->phone_number }} 
                         </li>
-
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
-                        </li>
-
-                        <li class="m-top-xs">
-                          <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+                          <i class="fa fa-briefcase user-profile-icon"></i> {{ $user->expertise }}
                         </li>
                       </ul>
-
-                      <a class="btn btn-success text-white"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                    
+                      <!-- <a type="submit" class="btn btn-success text-white"><i class="fa fa-edit m-right-xs"></i>Update Profile</a> -->
                       <br />
 
                       <!-- start skills -->
@@ -124,7 +122,7 @@
                           </li>
                           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projects Worked on</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Edit Profile</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
@@ -165,7 +163,7 @@
                                 </div>
                               </li>
                               <li>
-                                <img src="{{ $profilePictureUrl }}" class="avatar" alt="Avatar">
+                                <img src="images/img.jpg" class="avatar" alt="Avatar">
                                 <div class="message_date">
                                   <h3 class="date text-info">24</h3>
                                   <p class="month">May</p>
@@ -265,8 +263,69 @@
 
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                              photo booth letterpress, commodo enim craft beer mlkshk </p>
+                            <form class="form-horizontal" action="{{ route('user.edit', $user->id) }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="" name="" value="{{ $user->email }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputExperience" class="col-sm-2 col-form-label">Role</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="role" required>
+                                            @if(array_key_exists($user->role, $roles) && $user->role)
+                                                <option value="{{ $user->role }}" selected>{{ $roles[$user->role] }}</option>
+                                            @else
+                                                <option value="" selected disabled>No role assigned - please select a role</option>
+                                            @endif
+                                            @foreach ($roles as $key => $role)
+                                                @if ($key != $user->role)
+                                                    <option value="{{ $key }}">{{ $role }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Job Position</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->job_position }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Expertise</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->expertise }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Phone Number</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->phone_number }}">
+                                    </div>
+                                </div>
+                              
+                                
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10"> 
+                                          @if (!$user->is_approved)
+                                              <a href="{{ route('users.approve', $user->id) }}" class="btn btn-info">Approve</a>
+                                          @else
+                                              <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-danger">Disapprove</a>
+                                          @endif
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
                           </div>
                         </div>
                       </div>
@@ -277,4 +336,6 @@
             </div>
           </div>
         </div>
+        
+        </form>
 @endsection
