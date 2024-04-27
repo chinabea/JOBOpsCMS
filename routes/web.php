@@ -8,6 +8,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\DashboardController;
 use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +29,25 @@ Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group
 
     Route::get('/dashboard', function () {
         return view('dashboard');
+    })->name('staff.home');
+
+});
+
+Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
     })->name('mict-staff.home');
 
 });
 
 Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('admin.home');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('admin.home');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.home');
 
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
