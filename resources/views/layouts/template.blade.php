@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>JOBOPS</title>
+
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -47,6 +48,20 @@
     <link href="{{ asset('vendors/pnotify/dist/pnotify.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/pnotify/dist/pnotify.buttons.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/pnotify/dist/pnotify.nonblock.css') }}" rel="stylesheet">
+
+	<!-- bootstrap-wysiwyg -->
+	<link href="{{ asset('vendors/google-code-prettify/bin/prettify.min.css') }}" rel="stylesheet">
+	<!-- Select2 -->
+	<link href="{{ asset('vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+	<!-- Switchery -->
+	<link href="{{ asset('vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
+	<!-- starrr -->
+	<link href="{{ asset('vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
+	<!-- bootstrap-daterangepicker -->
+	<link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+	<!-- Custom Theme Style -->
+	<link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
 
   </head>
 
@@ -133,6 +148,26 @@
     <!-- morris.js -->
     <script src="{{ asset('vendors/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('vendors/morris.js/morris.min.js') }}"></script>
+
+	<!-- bootstrap-wysiwyg -->
+	<script src="{{ asset('vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') }}"></script>
+	<script src="{{ asset('vendors/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
+	<script src="{{ asset('vendors/google-code-prettify/src/prettify.js') }}"></script>
+	<!-- jQuery Tags Input -->
+	<script src="{{ asset('vendors/jquery.tagsinput/src/jquery.tagsinput.js') }}"></script>
+	<!-- Switchery -->
+	<script src="{{ asset('vendors/switchery/dist/switchery.min.js') }}"></script>
+	<!-- Select2 -->
+	<script src="{{ asset('vendors/select2/dist/js/select2.full.min.js') }}"></script>
+	<!-- Parsley -->
+	<script src="{{ asset('vendors/parsleyjs/dist/parsley.min.js') }}"></script>
+	<!-- Autosize -->
+	<script src="{{ asset('vendors/autosize/dist/autosize.min.js') }}"></script>
+	<!-- jQuery autocomplete -->
+	<script src="{{ asset('vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
+	<!-- starrr -->
+	<script src="{{ asset('vendors/starrr/dist/starrr.js') }}"></script>
+    
 
     <script>
     // deleting item 
