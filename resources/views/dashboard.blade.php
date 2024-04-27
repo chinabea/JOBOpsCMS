@@ -5,54 +5,51 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
-          <div class="row" style="display: inline-block;" >
-        
 
+          <div class="row" style="display: inline-block;" >
           <div class="tile_count">
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+              <span class="count_top"><i class="fa fa-users"></i> Total Users</span>
               <div class="count">{{ $totalUsers }}</div>
-              <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Total Tickets</span>
+              <span class="count_top"><i class="fa fa-book"></i> Total Tickets</span>
               <div class="count">{{ $totalTickets }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Open Tickets</span>
+              <span class="count_top"><i class="fa fa-folder-open"></i> Open Tickets</span>
               <div class="count green">{{ $allOpen }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> In Progress</span>
+              <span class="count_top"><i class="fa fa-line-chart"></i> In Progress</span>
               <div class="count">{{ $allInProgress }}</div>
-              <!-- <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Closed Tickets</span>
+              <span class="count_top"><i class="fa fa-folder"></i> Closed Tickets</span>
               <div class="count">{{ $allClosed }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> High Priority</span>
+              <span class="count_top"><i class="fa fa-flag"></i> High Priority</span>
               <div class="count">{{ $allHigh }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Mid Priority</span>
+              <span class="count_top"><i class="fa fa-minus-square"></i> Mid Priority</span>
               <div class="count">{{ $allMid }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Low Priority</span>
+              <span class="count_top"><i class="fa fa-sort-amount-asc"></i> Low Priority</span>
               <div class="count">{{ $allLow }}</div>
-              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
         </div>
-
-
         
           <!-- /top tiles -->
 
@@ -62,15 +59,15 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <!-- <h3>Ticket Volume Overtime <small>Open Tickets</small></h3> -->
-    <h1>Ticket Statistics</h1>
+                    <h3>Ticket Volume Overtime</h3>
+    <!-- <h1>Ticket Statistics</h1> -->
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                       <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                       <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="col-md-9 col-sm-9 ">
@@ -86,50 +83,72 @@
 
                 </div>
                 <div class="col-md-3 col-sm-3  bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
+                      <div>
+                        <div class="x_title">
+                          <h2>For Approval</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled top_profiles scroll-view">
+                          <li class="media event">
+                            <a class="pull-left border-aero profile_thumb">
+                              <i class="fa fa-user aero"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">Ms. Mary Jane</a>
+                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                              <p> <small>12 Sales Today</small>
+                              </p>
+                            </div>
+                          </li>
+                          <li class="media event">
+                            <a class="pull-left border-green profile_thumb">
+                              <i class="fa fa-user green"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">Ms. Mary Jane</a>
+                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                              <p> <small>12 Sales Today</small>
+                              </p>
+                            </div>
+                          </li>
+                          <li class="media event">
+                            <a class="pull-left border-blue profile_thumb">
+                              <i class="fa fa-user blue"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">Ms. Mary Jane</a>
+                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                              <p> <small>12 Sales Today</small>
+                              </p>
+                            </div>
+                          </li>
+                          <li class="media event">
+                            <a class="pull-left border-aero profile_thumb">
+                              <i class="fa fa-user aero"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">Ms. Mary Jane</a>
+                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                              <p> <small>12 Sales Today</small>
+                              </p>
+                            </div>
+                          </li>
+                          <li class="media event">
+                            <a class="pull-left border-green profile_thumb">
+                              <i class="fa fa-user green"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">Ms. Mary Jane</a>
+                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                              <p> <small>12 Sales Today</small>
+                              </p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 
-                  <div class="col-md-12 col-sm-12 ">
-                    <div>
-                      <p>Facebook Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Twitter Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 ">
-                    <div>
-                      <p>Conventional Media</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Bill boards</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
+                    
                 <div class="clearfix"></div>
               </div>
             </div>

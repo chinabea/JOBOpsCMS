@@ -64,13 +64,13 @@
                             <label for="">Description</label>
                             <input class="form-control"name="description" id="description" required></input>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile" name="file_upload">
+                        <div class="form-group dropzone">
+                            <!-- <label for="exampleInputFile">File input</label> -->
+                            <div class="dropzone">
+                            <!-- <div class="custom-file"> 
+                                <input type="file" class="custom-file-input dropzone" id="exampleInputFile" name="file_upload">
                                 <label class="custom-file-label" for="exampleInputFile"></label>
-                            </div>
+                            </div> -->
                             </div>
                         </div>
                         </div>
