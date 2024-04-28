@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-folder-open"></i> Open Tickets</span>
-              <div class="count green">{{ $allOpen }}</div>
+              <div class="count">{{ $allOpen }}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
@@ -48,6 +48,16 @@
               <div class="count">{{ $allLow }}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-times"></i> Unassigned Tickets</span>
+              <div class="count">Un</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+              <span class="count_top"><i class="fa fa-check-square-o"></i> For Approval Users</span>
+              <div class="count">Ap</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
           </div>
         </div>
         
@@ -60,32 +70,16 @@
                 <div class="row x_title">
                   <div class="col-md-6">
                     <h3>Ticket Volume Overtime</h3>
-    <!-- <h1>Ticket Statistics</h1> -->
                   </div>
-                  <!-- <div class="col-md-6">
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                      <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                      <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                    </div>
-                  </div> -->
                 </div>
 
                 <div class="col-md-9 col-sm-9 ">
-                  <!-- <div id="chart_plot_01" class="demo-placeholder"></div> -->
-
-                  <!-- <div class="container"> -->
-    <!-- <h1>Ticket Statistics</h1> -->
-    <canvas id="ticketsChart" width="400" height="150"></canvas>
-<!-- </div> -->
-
-
-
-
+                  <canvas id="ticketsChart" width="400" height="150"></canvas>
                 </div>
-                <div class="col-md-3 col-sm-3  bg-white">
+                <div class="col-md-3 col-sm-3 bg-white">
                       <div>
                         <div class="x_title">
-                          <h2>For Approval</h2>
+                          <h2><i class="fa fa-users"></i> For Approval Users</h2>
                           <div class="clearfix"></div>
                         </div>
                         <ul class="list-unstyled top_profiles scroll-view">

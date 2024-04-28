@@ -10,7 +10,7 @@
     <div class="navbar nav_title sidebar-dark" style="border: 0;">
         <a href="{{ route('admin.home') }}" class="site_title">
         <img src="{{ asset('production/images/MICT-logo.png') }}" style="width: 50px; height: auto;">
-        <span>JOBOPS</span></a>
+        <span>JOB OPS</span></a>
     </div>
     <div class="clearfix"></div>
     <div class="profile clearfix">
@@ -45,9 +45,6 @@
                     <ul class="nav child_menu">
                         <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
                         <li><a href="{{ route('tickets') }}">All Tickets</a></li>
-                        <li><a href="{{ route('status.open') }}">Open</a></li>
-                        <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
-                        <li><a href="{{ route('status.closed') }}">Closed</a></li>
                     </ul>
                 </li>
             </ul>
@@ -100,7 +97,7 @@
     <div class="navbar nav_title sidebar-dark" style="border: 0;">
         <a href="{{ route('mict-staff.home') }}" class="site_title">
         <img src="{{ asset('production/images/MICT-logo.png') }}" style="width: 50px; height: auto;">
-        <span>JOBOPS</span></a>
+        <span>JOB OPS</span></a>
     </div>
     <div class="clearfix"></div>
     <div class="profile clearfix">
@@ -168,7 +165,7 @@
     <div class="navbar nav_title sidebar-dark" style="border: 0;">
         <a href="{{ route('staff.home') }}" class="site_title">
         <img src="{{ asset('production/images/MICT-logo.png') }}" style="width: 50px; height: auto;">
-        <span>JOBOPS</span></a>
+        <span>JOB OPS</span></a>
     </div>
     <div class="clearfix"></div>
     <div class="profile clearfix">
