@@ -57,9 +57,9 @@
             <ul class="nav side-menu">
                 <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="#">High</a></li>
-                        <li><a href="#">Mid</a></li>
-                        <li><a href="#">Low</a></li>
+                        <li><a href="{{ route('priority-level.high') }}">High</a></li>
+                        <li><a href="{{ route('priority-level.mid') }}">Mid</a></li>
+                        <li><a href="{{ route('priority-level.low') }}">Low</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa fa-tasks"></i> Statuses <span class="fa fa-chevron-down"></span></a>
