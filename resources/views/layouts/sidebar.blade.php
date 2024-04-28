@@ -40,7 +40,6 @@
             <ul class="nav side-menu">
                 <li><a href="{{ route('admin.home') }}"><i class="fa fa-home"></i> Dashboard </a>
                 </li>
-                <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
                 <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
@@ -52,6 +51,7 @@
         <div class="menu_section">
             <h3>ADMINISTRATION</h3>
             <ul class="nav side-menu">
+                <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
                 <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{{ route('priority-level.high') }}">High</a></li>
@@ -73,7 +73,7 @@
         </div>
     </div>
 </div>
-    <div class="sidebar-footer hidden-small">
+    <!-- <div class="sidebar-footer hidden-small">
         <a data-toggle="tooltip" data-placement="top" title="Settings">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
@@ -86,7 +86,7 @@
         <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
         </a>
-    </div>
+    </div> -->
 </div>
 </div>
     
