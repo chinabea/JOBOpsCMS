@@ -44,9 +44,6 @@
                     <div class="clearfix"></div>
                   </div>
                   
-                  <form class="form-horizontal" action="{{ route('user.edit', $user->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3  profile_left">
                       <div class="profile_img">
@@ -61,7 +58,7 @@
                         <li><i class="fa fa-phone"></i> {{ $user->phone_number }} 
                         </li>
                         <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> {{ $user->expertise }}
+                          <i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}
                         </li>
                       </ul>
                     
@@ -69,7 +66,7 @@
                       <br />
 
                       <!-- start skills -->
-                      <h4>Skills</h4>
+                      <h4>Expertise</h4>
                       <ul class="list-unstyled user_data">
                         <li>
                           <p>Web Applications</p>
@@ -298,19 +295,54 @@
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Job Position</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->job_position }}">
+                                        <input type="text" class="form-control" id="job_position" name="job_position" value="{{ $user->job_position }}">
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Expertise</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->expertise }}">
+                                        <input type="text" class="form-control" id="expertise" name="expertise" value="{{ $user->expertise }}">
                                     </div>
-                                </div>
+                                </div> -->
+                                
+    <div class="form-group row" id="expertise-area">
+        <label for="expertise" class="col-sm-2 col-form-label">Expertise</label>
+        <div class="col-sm-10">
+            <div id="dynamic-expertise">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button" onclick="addExpertise()">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+<script>
+function addExpertise() {
+    var container = document.getElementById('dynamic-expertise');
+    var input = document.createElement('div');
+    input.classList.add('input-group', 'mb-2');
+    input.innerHTML = `
+        <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
+        <div class="input-group-append">
+            <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
+        </div>`;
+    container.appendChild(input);
+}
+
+function removeExpertise(input) {
+    input.closest('.input-group').remove();
+}
+</script>
+
+
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Phone Number</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{ $user->phone_number }}">
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
                                     </div>
                                 </div>
                               
@@ -336,6 +368,4 @@
             </div>
           </div>
         </div>
-        
-        </form>
 @endsection

@@ -46,24 +46,7 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
-
-    // public function edit($id)
-    // {
-    //     $user = User::find($id); // Fetch the user by id
     
-    //     // Define expertise options
-    //     $expertiseOptions = ['Software Development', 'Project Management', 'Graphic Design', 'Data Analysis'];
-    //             $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff']; 
-    
-    //     // Ensure to pass the expertiseOptions to the view along with other data
-    //     return view('user.user-profile', [
-    //         'user' => $user,
-    //         'expertiseOptions' => $expertiseOptions,
-    //          'roles' => $roles
-    //     ]);
-    // }
-    
-
     public function edit($id)
     {
         try {
@@ -72,8 +55,11 @@ class UserController extends Controller
         
             // Here, we define the roles. In a real application, consider retrieving these from a config or database.
             $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff']; 
-            
-            return view('user.user-profile', compact('user', 'roles'));
+    
+            // Define the expertise options
+            $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
+        
+            return view('user.user-profile', compact('user', 'roles', 'expertiseOptions'));
         } catch (Exception $e) {
             // Handle the exception here, you can log it or return an error response
             return $e->getMessage();
@@ -83,10 +69,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            // Validate and update the item with the provided ID
             $user = User::findOrFail($id);
-            // Update the item properties using the request data
-            $user->update($request->all());
+            $user->expertise = implode(',', $request->expertise); // Convert array to comma-separated string, if storing as string
+            $user->save();
     
             // Log activity
             ActivityLogger::log('Updated', $user, 'User updated');

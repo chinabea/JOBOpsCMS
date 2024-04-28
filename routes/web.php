@@ -9,6 +9,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PriorityController;
 use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -89,10 +90,17 @@ Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->n
 Route::post('/open-report', [ReportController::class, 'openReport'])->name('open-status.report');
 Route::post('/in-progress-report', [ReportController::class, 'inProgressReport'])->name('in-progress-status.report');
 Route::post('/closed-report', [ReportController::class, 'closedReport'])->name('closed-status.report');
+Route::post('/high-report', [ReportController::class, 'highReport'])->name('high-priority.report');
+Route::post('/mid-report', [ReportController::class, 'midReport'])->name('mid-priority.report');
+Route::post('/low-report', [ReportController::class, 'lowReport'])->name('low-priority.report');
 
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
 Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
+
+Route::get('/priority-level/high', [PriorityController::class, 'high'])->name('priority-level.high');
+Route::get('/priority-level/mid', [PriorityController::class, 'mid'])->name('priority-level.mid');
+Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('priority-level.low');
 
 // Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');

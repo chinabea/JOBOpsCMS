@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('role')->nullable();
             $table->string('email')->unique();
             $table->string('phone_number', 11)->nullable();
-            // $table->string('job_position');
+            $table->string('job_position')->nullable();
             $table->string('expertise');
             $table->boolean('is_approved')->default(false); 
             $table->rememberToken();

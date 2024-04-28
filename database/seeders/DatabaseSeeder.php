@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 1,
                 'is_approved' => true,
                 'phone_number' => '09246794618',
-                // 'job_position' => 'Director',
+                'job_position' => 'Software Devs',
                 'expertise' => 'Software Developer',
             ],
             [
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 2,
                 'is_approved' => true,
                 'phone_number' => '09386390756',
-                // 'job_position' => 'Admin Aide 1',
+                'job_position' => 'Admin Aide 1',
                 'expertise' => 'Networking',
             ],
             [
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 3,
                 'is_approved' => true,
                 'phone_number' => '09326784565',
-                // 'job_position' => 'Admin Aide 1',
+                'job_position' => 'Admin Aide 1',
                 'expertise' => 'Technician',
                 
             ],
@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
                 'request'          => $faker->sentence,
                 'priority_level'   => $faker->randomElement($priorityLevels),
                 'deadline'         => $faker->date(),
-                'description'      => $faker->paragraph,
+                'description'      => $faker->paragraph($nbSentences = 1, $variableNbSentences = true), // Limiting to 3 sentences
                 'assigned_to'      => $faker->randomElement($users + [null]), // Random user or null
                 'file_path'        => $faker->randomElement([$faker->imageUrl(), null]), // Random image URL or null
                 'status'           => $faker->randomElement($statusOptions),
