@@ -36,24 +36,44 @@
     <br />
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
-        <h3>General</h3>
-        <ul class="nav side-menu">
-            <li><a href="{{ route('admin.home') }}"><i class="fa fa-home"></i> Dashboard </a>
-            </li>
-            <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
-            <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
-                <li><a href="{{ route('tickets') }}">All Tickets</a></li>
-                <li><a href="{{ route('status.open') }}">Open</a></li>
-                <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
-                <li><a href="{{ route('status.closed') }}">Closed</a></li>
+            <h3>General</h3>
+            <ul class="nav side-menu">
+                <li><a href="{{ route('admin.home') }}"><i class="fa fa-home"></i> Dashboard </a>
+                </li>
+                <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
+                <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
+                        <li><a href="{{ route('tickets') }}">All Tickets</a></li>
+                        <li><a href="{{ route('status.open') }}">Open</a></li>
+                        <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
+                        <li><a href="{{ route('status.closed') }}">Closed</a></li>
+                    </ul>
+                </li>
             </ul>
-            </li>
-            <li><a href="{{ route('faqs') }}"><i class="fa fa-question-circle"></i> F.A.Q </a></li>
-            <li><a href="{{ route('activity-log') }}"><i class="fa fa-folder-open"></i> Activity Logs </a></li>
-        </ul>
-    </div>
+        </div>
+        <div class="menu_section">
+            <h3>ADMINISTRATION</h3>
+            <ul class="nav side-menu">
+                <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="#">High</a></li>
+                        <li><a href="#">Mid</a></li>
+                        <li><a href="#">Low</a></li>
+                    </ul>
+                </li>
+                <li><a><i class="fa fa-tasks"></i> Statuses <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="{{ route('status.open') }}">Open</a></li>
+                        <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
+                        <li><a href="{{ route('status.closed') }}">Closed</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ route('activity-log') }}"><i class="fa fa-folder-open"></i> Activity Logs </a></li>
+                <li><a href="{{ route('faqs') }}"><i class="fa fa-question-circle"></i> F.A.Qs </a></li>
+                <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
     </div>
 </div>
     <div class="sidebar-footer hidden-small">
@@ -70,7 +90,7 @@
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
         </a>
     </div>
-    </div>
+</div>
 </div>
     
 @elseif($role === 2)
