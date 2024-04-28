@@ -20,11 +20,9 @@
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
 
-    <div class="text-center">
-        <br><header>USERS</header>
-    </div>
-    
-        <table id="example1" class="table table-bordered table-hover text-center">
+        <header class="text-center">USERS</header>
+        
+        <table>
             <thead>
                 <tr>
                     <th>#</th>
@@ -36,9 +34,9 @@
             <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td class="align-middle">{{ $loop->iteration }}</td>
-                            <td class="align-middle">{{ $user->name }}</td>
-                            <td class="align-middle">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>
                                 @if ($user->role == 1)
                                     Admin
                                 @elseif ($user->role == 2)
@@ -49,7 +47,7 @@
                                     Guest
                                 @endif
                             </td>
-                            <td class="align-middle">{{ $user->email }}</td>
+                            <td>{{ $user->email }}</td>
                             </td>
                         </tr>
                     @endforeach

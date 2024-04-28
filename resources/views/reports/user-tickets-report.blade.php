@@ -18,13 +18,10 @@
     </div>
     <p style="font-size: 13pt; font-weight: bold; font-family: 'Calibri', sans-serif; margin-bottom: 1;">MICT</p>
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
-
-
-    <div class="text-center">
-        <br><header>TICKETS</header>
-    </div>
     
-    <table id="example1" class="table table-bordered table-hover text-center">
+    <header class="text-center">TICKETS</header>
+    
+    <table>
         <thead>
             <tr>
                 <th>#</th>

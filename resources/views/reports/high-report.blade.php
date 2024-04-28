@@ -19,7 +19,7 @@
     <p style="font-size: 13pt; font-weight: bold; font-family: 'Calibri', sans-serif; margin-bottom: 1;">MICT</p>
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
-            <header>HGH PRIORITY LEVEL OF TICKETS</header>
+            <header class="text-center">HGH PRIORITY LEVEL OF TICKETS</header>
             <table>
                 <thead>
                     <tr>

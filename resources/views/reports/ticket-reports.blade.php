@@ -20,7 +20,7 @@
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
 
-        <br><header>TICKETS</header><br>
+            <header class="text-center">TICKETS</header><br>
             <table>
                 <thead>
                     <tr>

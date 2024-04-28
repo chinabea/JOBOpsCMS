@@ -19,9 +19,7 @@
     <p style="font-size: 13pt; font-weight: bold; font-family: 'Calibri', sans-serif; margin-bottom: 1;">MICT</p>
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
-        <div class="text-center">
-            <br><header>FAQs</header>
-        </div>
+        <header class="text-center">FAQs</header>
         <table>
             <thead>
                 <tr>
