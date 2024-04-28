@@ -118,33 +118,54 @@ class ReportController extends Controller
         
     }
 
-    // public function userTicketsReport(Request $request, $userId)
-    // {
-    //     // Validate incoming request data
-    //     $request->validate([
-    //         'start_date' => 'required|date',
-    //         'end_date' => 'required|date|after_or_equal:start_date'
-    //     ]);
-    
-    //     $start_date = $request->input('start_date');
-    //     $end_date = $request->input('end_date');
-    
-    //     // Parse dates using Carbon for better handling
-    //     $formattedStartDate = Carbon::parse($start_date)->startOfDay();
-    //     $formattedEndDate = Carbon::parse($end_date)->endOfDay();
-    
-    //     // Find user or fail
-    //     $user = User::findOrFail($userId);
-    
-    //     // Get tickets for user within the specified date range
-    //     $tickets = Ticket::where('user_id', $userId)
-    //                      ->whereBetween('created_at', [$formattedStartDate, $formattedEndDate])
-    //                      ->get();
-    
-    //     // Generate PDF
-    //     $pdf = PDF::loadView('reports.user-tickets-report', compact('user', 'tickets'));
-    
-    //     // Stream the PDF back as response
-    //     return $pdf->stream("user-tickets-report-{$userId}-{$formattedStartDate->toDateString()}-{$formattedEndDate->toDateString()}.pdf");
-    // }
+    public function highReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('priority_level', 'High')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.high-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('high-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
+
+    public function midReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('priority_level', 'Mid')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.mid-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('mid-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
+
+    public function lowReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+        // Adjust database query to filter records based on the date range
+        $tickets = Ticket::where('priority_level', 'Low')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.low-report', compact('tickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('low-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tickets</title>
-    <link rel="stylesheet" type="text/css" href="css\report.css" />
+    <link rel="stylesheet" type="text/css" href="report.css" />
 </head>
 <body>
 
@@ -34,7 +34,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($tickets->count() > 0)
                     @foreach($tickets as $ticket)
                     @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
@@ -49,7 +48,6 @@
                     </tr>
                     @endif
                     @endforeach
-                    @endif
                 </tbody>
             </table>
         </div>

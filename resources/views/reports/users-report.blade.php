@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tickets</title>
-    <link rel="stylesheet" type="text/css" href="css\report.css" />
+    <link rel="stylesheet" type="text/css" href="report.css" />
 </head>
 <body>
 
@@ -28,13 +28,12 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
+                    <th>Name</th>high-priority.report
                     <th>Role</th>
                     <th>Email</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($users->count() > 0)
                     @foreach ($users as $user)
                         <tr>
                             <td class="align-middle">{{ $loop->iteration }}</td>
@@ -54,7 +53,6 @@
                             </td>
                         </tr>
                     @endforeach
-                @endif
             </tbody>
         </table>
     </div>

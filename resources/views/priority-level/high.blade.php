@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <form action="{{ route('open-status.report') }}" method="post">
+            <form action="{{ route('high-priority.report') }}" method="post">
                 @csrf
                 <div class="row justify-content-center">
                     <div class="form-group row">
