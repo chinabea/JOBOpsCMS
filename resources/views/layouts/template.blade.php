@@ -59,10 +59,9 @@
 	<link href="{{ asset('vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
 	<!-- bootstrap-daterangepicker -->
 	<link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-	<!-- Custom Theme Style -->
-	<link href="{{ asset('build/css/custom.min.css') }}" rel="stylesheet">
     <!-- Dropzone.js -->
     <link href="{{ asset('vendors/dropzone/dist/min/dropzone.min.css') }}" rel="stylesheet">
+    
 
   </head>
 
@@ -171,6 +170,9 @@
     <!-- Dropzone.js -->
     <script src="{{ asset('vendors/dropzone/dist/min/dropzone.min.js') }}"></script>
     
+    <script src="{{ asset('vendors/validator/multifield.js') }}"></script>
+    <script src="{{ asset('vendors/validator/validator.js') }}"></script>
+
 
     <script>
     // deleting item 
@@ -208,5 +210,19 @@
         });
     </script>
     
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
   </body>
 </html>
