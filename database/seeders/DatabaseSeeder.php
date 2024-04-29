@@ -48,18 +48,33 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'John Carlo Dacara',
                 'email' => 'johdacara@my.cspc.edu.ph',
-                'role' => 3,
-                'is_approved' => true,
-                'phone_number' => '09326784565',
-                'job_position' => 'Admin Aide 1',
-                'expertise' => 'Technician',
+                'role' => null,
+                'is_approved' => false,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
                 
             ],
-            // [
-            //     'user_id' => '4',
-            //     'email' => 'mlodavar@my.cspc.edu.ph',
-            //     'role' => 1,
-            // ],
+            [
+                'name' => 'Mark Louis Odavar',
+                'email' => 'mlodavar@my.cspc.edu.ph',
+                'role' => null,
+                'is_approved' => false,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
+                
+            ],
+            [
+                'name' => 'Jessemri Tabayag',
+                'email' => 'jestabayag@my.cspc.edu.ph',
+                'role' => null,
+                'is_approved' => false,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
+                
+            ],
         ];
 
         foreach ($users as $userData) {
