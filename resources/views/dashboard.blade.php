@@ -83,17 +83,24 @@
                           <div class="clearfix"></div>
                         </div>
                         <ul class="list-unstyled top_profiles scroll-view">
+                          
+
+            @forelse ($unapprovedUsers as $user)
                           <li class="media event">
                             <a class="pull-left border-aero profile_thumb">
                               <i class="fa fa-user aero"></i>
                             </a>
                             <div class="media-body">
-                              <a class="title" href="#">Ms. Mary Jane</a>
+                <img src="{{ $user->avatar }}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
+                              <a class="title" href="#">{{ $user->name }}</a>
                               <p><strong>$2300. </strong> Agent Avarage Sales </p>
                               <p> <small>12 Sales Today</small>
                               </p>
                             </div>
                           </li>
+                          @empty 
+                          <li>unapproved users found.</li>
+            @endforelse
                           <li class="media event">
                             <a class="pull-left border-green profile_thumb">
                               <i class="fa fa-user green"></i>
