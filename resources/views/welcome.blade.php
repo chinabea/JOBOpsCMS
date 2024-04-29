@@ -1,118 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{ asset('production/images/MICT-Logo.png') }}" type="image/ico" />
+@extends('layouts.guest-template')
+@section('content')
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
 
-    <title>JobOps CMS </title>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <!-- <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2> -->
+          <h1 data-aos="fade-up">Job Operations Central Management System</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">Enhancing operations for efficiency and control <br /> at every level</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+                  <a href="{{ url('login/google') }}" title="Google Mail" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                      <div class="mx-auto">
+                          <img src="https://accounts.google.com/favicon.ico" alt="" width="20" class="mr-2">
+                          <span> Google Mail</span>
+                          <i class="bi bi-arrow-right"></i>
+                      </div>
+                  </a>
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
-
-  <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form>
-              <h1>Login Form</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Login using CSPC Account
-                  <!-- <a href="#signup" class="to_register"> Create Account </a> -->
-                </p>
-                
-                <!-- <h6 class="text-center text-white m-t-1">Log in using your account on:</h6> -->
-                <div class="potentialidplist row p-0">
-                    <div class="potentialidp col-sm-12 col-md">
-                        <a href="{{ url('login/google') }}" title="Google Mail" class="btn btn-danger m-t-1 w-100 d-flex align-items-center">
-                            <div class="mx-auto">
-                                <img src="https://accounts.google.com/favicon.ico" alt="" width="25" class="mr-2">
-                                <span>Google Mail</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1>
-                    <img src="{{ asset('production/images/MICT-logo.png') }}" style="width: 40px; height: auto;" alt="">
-                     JobOps CMS</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
+              <!-- <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get Started</span>
+                <i class="bi bi-arrow-right"></i>
+              </a> -->
+            </div>
+          </div>
         </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form>
-              <h1>Create Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="landing/assets/img/features.png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
-  </body>
-</html>
+
+  </section><!-- End Hero -->
+@endsection
