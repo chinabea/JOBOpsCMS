@@ -20,6 +20,11 @@ class DashboardController extends Controller
         $allHigh = Ticket::where('priority_level', 'High')->count();
         $allMid = Ticket::where('priority_level', 'Mid')->count();
         $allLow = Ticket::where('priority_level', 'Low')->count();
+        
+        // Retrieve users where 'created_at' is the same as 'updated_at' and 'is_approved' is false
+        $unapprovedUsers = User::whereColumn('created_at', 'updated_at')
+                               ->where('is_approved', false)
+                               ->get();
 
 
         // Monthly data
@@ -34,7 +39,7 @@ class DashboardController extends Controller
         ->get();
     
         return view('dashboard', compact('monthlyTicketsData', 'totalUsers','totalTickets', 'allOpen',
-        'allInProgress', 'allClosed','allHigh', 'allMid', 'allLow'));
+        'allInProgress', 'allClosed','allHigh', 'allMid', 'allLow', 'unapprovedUsers'));
     }
     
     // public function monthlyWeekly()
