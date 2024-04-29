@@ -64,24 +64,6 @@ class LoginController extends Controller
             return redirect()->route('not-approved')->with('info', 'Your account is awaiting approval.');
         }
     }
-    // public function handleGoogleCallback()
-    // {
-        
-    //         $user = Socialite::driver('google')->user();
-        
-    //         $is_user = User::where('email', $user->getEmail())->first();
-
-                
-    //         if ($is_user) {
-    //             Auth::login($is_user, true); // Login the user and "remember" the session
-    //             // Check user role and redirect accordingly
-    //             if ($is_user->role == '1') {
-    //                 return redirect()->route('admin.home');
-    //             }
-    //         } else {
-    //             return redirect()->route('staff.home');
-    //         }
-    // }
     
     public function logout(Request $request)
     {
