@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+
+    public function unassigned()
+    {
+        // Fetch tickets that have no users assigned
+        $unassignedTickets = Ticket::doesntHave('users')->get();
+        $userIds = User::where('role', 2)->where('is_approved', true)->get(); 
+
+        // Return the view with the unassigned tickets data
+        return view('ticket.unassigned', compact('unassignedTickets','userIds'));
+    }
     
     public function index()
     {
@@ -303,7 +313,8 @@ class TicketController extends Controller
         $ticket->users()->sync($userIds);
     
         // Redirect back with a success message
-        return redirect()->route('tickets')->with('success', 'Users assigned successfully!');
+        return redirect()->back()->with('success', 'Users assigned successfully!');
+
     }
     
 

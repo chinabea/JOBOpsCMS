@@ -52,6 +52,7 @@
             <h3>ADMINISTRATION</h3>
             <ul class="nav side-menu">
                 <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
+                <li><a href="{{ route('tickets.unassigned') }}"><i class="fa fa-times"></i> Unassigned Tickets </a></li>
                 <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{{ route('priority-level.high') }}">High</a></li>
