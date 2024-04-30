@@ -11,7 +11,7 @@ class PriorityController extends Controller
     public function high()
     {
         try {
-            $tickets = Ticket::where('priority_level', 'High')->get();
+            $tickets = Ticket::where('priority_level', 'High')->orderBy('created_at', 'desc')->get();
 
             return view('priority-level.high', compact('tickets'));
         } catch (Exception $e) {
@@ -21,7 +21,8 @@ class PriorityController extends Controller
     public function mid()
     {
         try {
-            $tickets = Ticket::where('priority_level', 'Mid')->get();
+            $tickets = Ticket::where('priority_level', 'Mid')->orderBy('created_at', 'desc')->get();
+            
 
             return view('priority-level.mid', compact('tickets'));
         } catch (Exception $e) {
@@ -31,7 +32,7 @@ class PriorityController extends Controller
     public function low()
     {
         try {
-            $tickets = Ticket::where('priority_level', 'Low')->get();
+            $tickets = Ticket::where('priority_level', 'Low')->orderBy('created_at', 'desc')->get();
 
             return view('priority-level.low', compact('tickets'));
         } catch (Exception $e) {

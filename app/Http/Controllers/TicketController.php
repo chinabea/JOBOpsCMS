@@ -14,7 +14,8 @@ class TicketController extends Controller
     public function index()
     {
         try {
-            $tickets = Ticket::all();
+            // $tickets = Ticket::all();
+            $tickets = Ticket::orderBy('created_at', 'desc')->get();
             return view('ticket.index', compact('tickets'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
