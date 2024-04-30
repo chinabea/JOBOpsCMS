@@ -11,7 +11,7 @@ class Ticket extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['service_location','unit', 'request', 'priority_level', 'description', 'user_id', 'is_approved', 'deadline', 'google_id', 'avatar'];
+    public $fillable = ['service_location','unit', 'request', 'priority_level', 'description', 'user_id', 'is_approved', 'deadline'];
     
     public function user()
     {
