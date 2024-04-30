@@ -97,6 +97,7 @@ Route::post('/closed-report', [ReportController::class, 'closedReport'])->name('
 Route::post('/high-report', [ReportController::class, 'highReport'])->name('high-priority.report');
 Route::post('/mid-report', [ReportController::class, 'midReport'])->name('mid-priority.report');
 Route::post('/low-report', [ReportController::class, 'lowReport'])->name('low-priority.report');
+Route::post('/unassigned/tickets', [ReportController::class, 'unassignedReport'])->name('unassigned.report');
 
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');

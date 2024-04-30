@@ -13,6 +13,23 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
 
+    public function unassignedReport(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
+
+        $unassignedTickets = Ticket::doesntHave('users')->whereBetween('created_at', [$start_date, $end_date])->get();
+
+        $pdf = PDF::loadView('reports.unassigned-report', compact('unassignedTickets'));
+
+        // Validate the date range
+        $formattedStartDate = Carbon::parse($start_date)->startOfDay();
+        $formattedEndDate = Carbon::parse($end_date)->endOfDay();
+        
+        return $pdf->stream('unassigned-report-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+    }
+
     public function closedReport(Request $request)
     {
         $start_date = $request->input('start_date');

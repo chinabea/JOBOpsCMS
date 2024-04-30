@@ -20,7 +20,7 @@
     <img id="pdfLogo" src="{{ public_path('dist/img/headerLine.jpg') }}" alt="logo"style="width: 100%; margin: 0;">
 
 
-            <header class="text-center">TICKETS</header><br>
+            <header class="text-center">UNASSIGNED TICKETS</header><br>
             <table>
                 <thead>
                     <tr>
@@ -29,13 +29,12 @@
                         <th>Location</th>
                         <th>Unit</th>
                         <th>Request</th>
-                        <th>Assigned to</th>
                         <th>Priority</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($tickets as $ticket)
+                    @foreach($unassignedTickets as $ticket)
                     @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td>{{ $loop->iteration }}</td>
@@ -43,11 +42,6 @@
                         <td>{{ $ticket->service_location }}</td>
                         <td>{{ $ticket->unit }}</td>
                         <td>{{ $ticket->request }}</td>
-                        <td>
-                            @foreach ($ticket->users as $assigned_user)
-                            {{ $assigned_user->name }}
-                            @endforeach
-                        </td>
                         <td>{{ $ticket->priority_level }}</td>
                         <td>{{ $ticket->status }}</td>
                     </tr>
