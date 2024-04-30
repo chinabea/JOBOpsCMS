@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
                 'priority_level'   => $faker->randomElement($priorityLevels),
                 'deadline'         => $faker->date(),
                 'description'      => $faker->paragraph($nbSentences = 1, $variableNbSentences = true), // Limiting to 3 sentences
-                'assigned_to'      => $faker->randomElement($users + [null]), // Random user or null
+                // 'assigned_to'      => $faker->randomElement($users + [null]), // Random user or null
                 'file_path'        => $faker->randomElement([$faker->imageUrl(), null]), // Random image URL or null
                 'status'           => $faker->randomElement($statusOptions),
                 'created_at'       => $randomTimestamp, // Random creation date within the last two years

@@ -16,6 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>JOB OPS</title>
+    <!-- Bootstrap Select CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+
 
     <!-- Bootstrap -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -172,6 +175,11 @@
     
     <script src="{{ asset('vendors/validator/multifield.js') }}"></script>
     <script src="{{ asset('vendors/validator/validator.js') }}"></script>
+
+    
+
+<!-- Bootstrap Select JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
 
     <script>

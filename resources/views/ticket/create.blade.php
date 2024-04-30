@@ -98,12 +98,23 @@
 									</div>
 								</div>
 							</div>
-							
 							<div class="field item form-group">
 								<label class="col-form-label col-md-3 col-sm-3  label-align">Deadline<span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6">
 									<input class="form-control" class='date' type="date" name="deadline" id="deadline" required='required'></div>
 							</div>
+						
+							<div class="form-group">
+								<label for="assigned_to">Assign to:</label>
+								
+								<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
+									@foreach ($users as $user)
+										<option value="{{ $user->id }}">{{ $user->name }}</option>
+									@endforeach
+								</select>
+							</div>
+
+
 							<div class="ln_solid"></div>
 							<div class="item form-group">
 								<div class="col-md-6 col-sm-6 offset-md-3">
@@ -124,5 +135,9 @@
 	</div>
 </div>
 <!-- /page content -->
+<script>
+$('.selectpicker').selectpicker();
+
+</script>
 
 @endsection
