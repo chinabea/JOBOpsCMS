@@ -22,10 +22,9 @@ class DashboardController extends Controller
         $allLow = Ticket::where('priority_level', 'Low')->count();
         
         // Retrieve users where 'created_at' is the same as 'updated_at' and 'is_approved' is false
-        $unapprovedUsers = User::whereColumn('created_at', 'updated_at')
-                               ->where('is_approved', false)
+        $unapprovedUsers = User::where('is_approved', false)
                                ->get();
-
+                            //    whereColumn('created_at', 'updated_at')
 
         // Monthly data
         $monthlyTicketsData = Ticket::select(

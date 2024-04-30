@@ -83,25 +83,37 @@
                           <div class="clearfix"></div>
                         </div>
                         <ul class="list-unstyled top_profiles scroll-view">
-                          
+            
+                        <style>
+                          .avatar-img {
+                              width: 50px;
+                              height: 50px;
+                              border-radius: 50%;
+                              padding: 5px; /* Adjust as needed */
+                          }
+                        </style>            
+                        @forelse ($unapprovedUsers as $user)
+                            <li class="media event d-flex align-items-center">
+                                @if($user->avatar)
+                                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
+                                @else
+                                    <a class="pull-left border-green profile_thumb">
+                                    <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
+                                    </a>
+                                    
+                                @endif
+                                <div class="media-body">
+                                    <a class="title" href="{{ route('user.edit', $user->id) }}" style="margin-left: 10px;">{{ $user->name }}</a>
+                                </div>
+                            </li>
+                        @empty
+                            <li>No unapproved users found.</li>
+                        @endforelse
 
-            @forelse ($unapprovedUsers as $user)
-                          <li class="media event">
-                            <a class="pull-left border-aero profile_thumb">
-                              <i class="fa fa-user aero"></i>
-                            </a>
-                            <div class="media-body">
-                <img src="{{ $user->avatar }}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
-                              <a class="title" href="#">{{ $user->name }}</a>
-                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                              <p> <small>12 Sales Today</small>
-                              </p>
-                            </div>
-                          </li>
-                          @empty 
-                          <li>unapproved users found.</li>
-            @endforelse
-                          <li class="media event">
+
+
+
+                          <!-- <li class="media event">
                             <a class="pull-left border-green profile_thumb">
                               <i class="fa fa-user green"></i>
                             </a>
@@ -111,8 +123,8 @@
                               <p> <small>12 Sales Today</small>
                               </p>
                             </div>
-                          </li>
-                          <li class="media event">
+                          </li> -->
+                          <!-- <li class="media event">
                             <a class="pull-left border-blue profile_thumb">
                               <i class="fa fa-user blue"></i>
                             </a>
@@ -122,8 +134,8 @@
                               <p> <small>12 Sales Today</small>
                               </p>
                             </div>
-                          </li>
-                          <li class="media event">
+                          </li> -->
+                          <!-- <li class="media event">
                             <a class="pull-left border-aero profile_thumb">
                               <i class="fa fa-user aero"></i>
                             </a>
@@ -133,8 +145,8 @@
                               <p> <small>12 Sales Today</small>
                               </p>
                             </div>
-                          </li>
-                          <li class="media event">
+                          </li> -->
+                          <!-- <li class="media event">
                             <a class="pull-left border-green profile_thumb">
                               <i class="fa fa-user green"></i>
                             </a>
@@ -144,7 +156,7 @@
                               <p> <small>12 Sales Today</small>
                               </p>
                             </div>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
