@@ -108,8 +108,10 @@
 								<label for="assigned_to">Assign to:</label>
 								
 								<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
-									@foreach ($users as $user)
-										<option value="{{ $user->id }}">{{ $user->name }}</option>
+									@foreach($userIds as $user)
+										<option class="text-black" value="{{ $user->id }}">
+											{{ $user->name }} - {{ $user->expertise ?? 'No Expertise' }} - {{ $user->tickets->count() }} Tickets
+										</option>
 									@endforeach
 								</select>
 							</div>
@@ -128,9 +130,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 
 	</div>
 </div>

@@ -31,7 +31,8 @@ class TicketController extends Controller
         try {
             $user = auth()->user();
             $tickets = Ticket::all();
-            $users = User::all(); 
+            // $users = User::all(); 
+            $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
 
             // Define priorities directly in the controller as an associative array
             $priorities = [
@@ -40,7 +41,7 @@ class TicketController extends Controller
                 'Low' => 'Low'
             ];
 
-            return view('ticket.create', compact('tickets', 'priorities', 'users'));
+            return view('ticket.create', compact('tickets', 'priorities', 'userIds'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
