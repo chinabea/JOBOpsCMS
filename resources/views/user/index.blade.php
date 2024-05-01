@@ -63,6 +63,7 @@
                         <th><i class="fa fa-info-circle"></i> Name</th>
                         <th><i class="fa fa-envelope"></i> Email</th>
                         <th><i class="fa fa-sitemap"></i> Role</th>
+                        <th><i class="fa fa-sitemap"></i> Approval</th>
                         <th><i class="fa fa-pencil-square-o"></i> Action(s)</th>
                     </tr>
                 </thead>
@@ -83,13 +84,21 @@
                                 Guest
                             @endif
                         </td>
-                        <!-- <td>
+                        <!-- <td class="align-middle">
+                          @if($user->is_approved == true)  
+                            approved
+                          @else
+                            disapproved
+                          @endif
+                        </td> -->
+
+                        <td>
                             @if (!$user->is_approved)
                                 <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info">Approve</a>
                             @else
                                 <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger">Disapprove</a>
                             @endif
-                        </td> -->
+                        </td>
                         <td class="align-middle">
                             <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-user"></i> View Profile
