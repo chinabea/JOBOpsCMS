@@ -6,7 +6,9 @@
   <title>Job Ops</title>
 
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}">
+  <!-- <link rel="icon" type="image/png" href="{{ asset('dist/img/systemAIRCoDeLogo.png') }}"> -->
+  
+  <link rel="icon" href="{{ asset('production/images/MICT-Logo.png') }}" type="image/ico" />
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
