@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'cache' => \App\Http\Middleware\DisablePageCaching::class,
             'approved' => \App\Http\Middleware\EnsureUserIsApproved::class,
             'admin' => \App\Http\Middleware\Admin::class,
+            'mict' => \App\Http\Middleware\Mict::class,
             'staff' => \App\Http\Middleware\Staff::class,
         ]);
         

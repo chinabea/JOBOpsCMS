@@ -27,27 +27,19 @@ Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallb
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('staff.home');
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('staff.home');
 
 });
 
-Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('mict-staff.home');
+Route::prefix('mict')->middleware(['auth', 'cache', 'approved','mict'])->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('mict.home');
 
 });
 
 Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group(function () {
-
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('admin.home');
-
+    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.home');
 
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');

@@ -44,8 +44,10 @@ class LoginController extends Controller
         // Further role-based redirection
         if ($localUser->role == '1') {
             return redirect()->route('admin.home');
+        } elseif ($localUser->role == '2') {
+            return redirect()->route('mict.home');
         } else {
-            return redirect()->route('mict-staff.home');
+            return redirect()->route('staff.home');
         }
     } else {
         // If the user does not exist, create a new user in the database

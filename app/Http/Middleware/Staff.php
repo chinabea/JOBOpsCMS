@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class Staff
 {
@@ -15,11 +16,16 @@ class Staff
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role == 'staff') {
-            return $next($request);
+        if(!Auth::check()){
+            return redirect('/login');
         }
-    
-        // return redirect('/')->with('error', 'Unauthorized access.');
-        return $next($request);
+
+        $user = Auth::user();
+        
+        if($user->role == 3){
+            return $next($request);
+        } else {
+            return redirect()->route('staff.home');
+        }
     }
 }
