@@ -85,21 +85,20 @@
                         <td>{{ $ticket->unit }}</td>
                         <td>{{ $ticket->request }}</td>
                         <td>
-                            
-                        <div class="dropdown">
-                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        View Users
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
-                                        @foreach ($ticket->users as $assigned_user)
-                                            <a class="dropdown-item">
-                                                <strong>{{ $assigned_user->name }}</strong><br>
-                                                <small>Expertise: {{ $assigned_user->expertise }}</small><br>
-                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
-                                            </a>
-                                        @endforeach
-                                    </div>
+                            <div class="dropdown">
+                                <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    View Users
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
+                                    @foreach ($ticket->users as $assigned_user)
+                                        <a class="dropdown-item">
+                                            <strong>{{ $assigned_user->name }}</strong><br>
+                                            <small>Expertise: {{ $assigned_user->expertise }}</small><br>
+                                            <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                                        </a>
+                                    @endforeach
                                 </div>
+                            </div>
                         </td>
                         <td>
                           @if ($ticket->priority_level === 'High')
