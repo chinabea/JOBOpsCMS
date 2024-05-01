@@ -108,14 +108,17 @@
                                             <!-- Form inside modal -->
                                             <form action="{{ route('tickets.updateUsers', $ticket->id) }}" method="POST">
                                               @csrf
-                                              <div class="form-group">
+                                              <div class="form-group text-left">
+                                                <label for="assigned_to">Assign to:</label>
                                                   <select class="selectpicker form-control" id="assigned_user_id{{ $ticket->id }}" name="assigned_user_id[]" data-live-search="true" multiple required>
-                                                      @foreach($userIds as $user)
-                                                          <option class="text-black" value="{{ $user->id }}">
-                                                              {{ $user->name }} - {{ $user->expertise ?? 'No Expertise' }} - {{ $user->tickets->count() }} Tickets
-                                                          </option>
-                                                      @endforeach
-                                                  </select>
+                                                        @foreach($userIds as $user)
+                                                            <option value="{{ $user->id }}" data-content="
+                                                                <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+                                                                <small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+                                                                <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                               </div>
                                         </div>
                                         <div class="modal-footer">

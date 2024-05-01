@@ -87,7 +87,7 @@
                         <td>
                             @if($ticket->users->isEmpty())
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}"  data-backdrop="static" data-keyboard="false">
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false">
                                 Assign User
                             </button>
 
@@ -107,11 +107,13 @@
                                               @csrf
                                               <div class="form-group">
                                                   <select class="selectpicker form-control" id="assigned_user_id{{ $ticket->id }}" name="assigned_user_id[]" data-live-search="true" multiple required>
-                                                      @foreach($userIds as $user)
-                                                          <option class="text-black" value="{{ $user->id }}">
-                                                              {{ $user->name }} - {{ $user->expertise ?? 'No Expertise' }} - {{ $user->tickets->count() }} Tickets
-                                                          </option>
-                                                      @endforeach
+                                                  @foreach($userIds as $user)
+                                                        <option value="{{ $user->id }}" data-content="
+                                                            <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+                                                            <small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+                                                            <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+                                                        </option>
+                                                    @endforeach
                                                   </select>
                                               </div>
                                         </div>
