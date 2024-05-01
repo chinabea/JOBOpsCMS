@@ -50,19 +50,18 @@
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-times"></i> Unassigned Tickets</span>
-              <div class="count">Un</div>
+              <div class="count">{{ $unassignedTickets }}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-check-square-o"></i> For Approval Users</span>
-              <div class="count">Ap</div>
+              <div class="count">{{ $forApproval }}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
         </div>
         
           <!-- /top tiles -->
-
           <div class="row">
             <div class="col-md-12 col-sm-12 ">
               <div class="dashboard_graph">

@@ -55,7 +55,9 @@ class TicketController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
-    }public function store(Request $request)
+    }
+    
+    public function store(Request $request)
     {
         // Validate the request data
         $request->validate([
