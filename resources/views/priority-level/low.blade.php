@@ -77,14 +77,71 @@
                 </thead>
                 <tbody>
                     @foreach($tickets as $ticket)
-                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                    @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
                         <td class="align-middle">{{ $ticket->user->name }}</td>
                         <td class="align-middle">{{ $ticket->service_location }}</td>
                         <td class="align-middle">{{ $ticket->unit }}</td>
                         <td class="align-middle">{{ $ticket->request }}</td>
-                        <td class="align-middle">{{ $ticket->assignedUser->name }}</td>
+                        <td>
+                            @if($ticket->users->isEmpty())
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false">
+                                Assign User
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="assignUserModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel{{ $ticket->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="assignUserModalLabel{{ $ticket->id }}">Assign User</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Form inside modal -->
+                                            <form action="{{ route('tickets.updateUsers', $ticket->id) }}" method="POST">
+                                              @csrf
+                                              <div class="form-group">
+                                                  <select class="selectpicker form-control" id="assigned_user_id{{ $ticket->id }}" name="assigned_user_id[]" data-live-search="true" multiple required>
+                                                  @foreach($userIds as $user)
+                                                        <option value="{{ $user->id }}" data-content="
+                                                            <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+                                                            <small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+                                                            <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+                                                        </option>
+                                                    @endforeach
+                                                  </select>
+                                              </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Assign</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                                <div class="dropdown">
+                                    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        View Users
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
+                                        @foreach ($ticket->users as $assigned_user)
+                                            <a class="dropdown-item">
+                                                <strong>{{ $assigned_user->name }}</strong><br>
+                                                <small>Expertise: {{ $assigned_user->expertise }}</small><br>
+                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        </td>
                         <td class="align-middle">{{ $ticket->priority_level }}</td>
                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
                         <td>

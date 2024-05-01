@@ -77,7 +77,7 @@
                 </thead>
                 <tbody>
                     @foreach($tickets as $ticket)
-                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                    @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $ticket->user->name }}</td>

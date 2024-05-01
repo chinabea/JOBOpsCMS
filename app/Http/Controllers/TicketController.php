@@ -11,6 +11,24 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+    
+
+    public function assignedToMe()
+    {
+        $userId = auth()->id();
+    
+        // Fetch tickets where the user is assigned
+        $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
+            $query->where('users.id', $userId);
+        })
+        ->with('user', 'users') // Load relationships
+        ->orderBy('created_at', 'desc')
+        ->get();
+    
+    
+        return view('ticket.assigned', compact('assignedTickets'));
+    }
+    
 
     public function unassigned()
     {
