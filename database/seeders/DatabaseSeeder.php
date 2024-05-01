@@ -48,8 +48,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'John Carlo Dacara',
                 'email' => 'johdacara@my.cspc.edu.ph',
-                'role' => null,
-                'is_approved' => false,
+                'role' => 2,
+                'is_approved' => true,
                 'phone_number' => null,
                 'job_position' => null,
                 'expertise' => null,
@@ -58,8 +58,8 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Mark Louis Odavar',
                 'email' => 'mlodavar@my.cspc.edu.ph',
-                'role' => null,
-                'is_approved' => false,
+                'role' => 2,
+                'is_approved' => true,
                 'phone_number' => null,
                 'job_position' => null,
                 'expertise' => null,
@@ -68,6 +68,26 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jestabayag@my.cspc.edu.ph',
+                'role' => null,
+                'is_approved' => false,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
+                
+            ],
+            [
+                'name' => 'Louie Molina',
+                'email' => 'loumolina@my.cspc.edu.ph',
+                'role' => null,
+                'is_approved' => false,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
+                
+            ],
+            [
+                'name' => 'Rica Theresa Adante',
+                'email' => 'ricadante@my.cspc.edu.ph',
                 'role' => null,
                 'is_approved' => false,
                 'phone_number' => null,
