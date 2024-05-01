@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Ticket;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -58,8 +60,36 @@ class UserController extends Controller
     
             // Define the expertise options
             $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
+            
+            // Convert the comma-separated string of expertise to an array
+            $user->expertise = explode(',', $user->expertise);
+            
+            $userId = auth()->id();
         
-            return view('user.user-profile', compact('user', 'roles', 'expertiseOptions'));
+            // Fetch tickets where the user is assigned
+            $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
+                $query->where('users.id', $userId);
+            })
+            ->with('user', 'users') // Load relationships
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+            // Example of existing expertise assuming it's stored as an array or collection
+            $existingExpertise = $user->expertise; // Ensure this is defined in your User model
+
+           
+            $userId = auth()->id(); // Ensures we're getting data for the logged-in user
+
+            $monthlyTicketsData = Ticket::select(DB::raw("YEAR(created_at) as year"), DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
+                ->where('user_id', $userId)
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'asc')
+                ->orderBy('month', 'asc')
+                ->get();
+
+                    
+            return view('user.user-profile', compact('user', 'roles', 'expertiseOptions', 'assignedTickets',
+             'existingExpertise','monthlyTicketsData'));
         } catch (Exception $e) {
             // Handle the exception here, you can log it or return an error response
             return $e->getMessage();

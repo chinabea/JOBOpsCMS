@@ -69,6 +69,8 @@ Route::delete('/delete-ticket/{id}', [TicketController::class, 'destroy'])->name
 Route::post('tickets/{ticket}/update-users', [TicketController::class, 'updateUsers'])->name('tickets.updateUsers');
 Route::get('/tickets/unassigned', [TicketController::class, 'unassigned'])->name('tickets.unassigned');
 Route::get('/tickets/assigned', [TicketController::class, 'assignedToMe'])->name('tickets.assigned');
+// Route::get('/user-tickets-chart', [TicketController::class, 'userTicketsChart'])->name('user.tickets.chart');
+
 
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');

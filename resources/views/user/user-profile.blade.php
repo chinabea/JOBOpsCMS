@@ -27,7 +27,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>User Report <small>Activity report</small></h2>
+                    <h2>User Report</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -49,7 +49,7 @@
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="profile-user-img img-fluid img-circle" src="{{ $profilePictureUrl }}" alt="Avatar" title="Change the avatar"  style="width: 150px; height: 150px;">
+                          <img class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar"  style="width: 150px; height: 150px;">
                         </div>
                       </div>
                       <h3>{{ $user->name }}</h3>
@@ -67,8 +67,20 @@
 
                       <!-- start skills -->
                       <h4>Expertise</h4>
+                      
+
                       <ul class="list-unstyled user_data">
-                        <li>
+                      @if(!empty($user->expertise))
+                          <ul>
+                              @foreach($user->expertise as $skill)
+                                  <li>{{ $skill }}</li>
+                              @endforeach
+                          </ul>
+                      @else
+                          <p>No expertise listed.</p>
+                      @endif
+                       
+                        <!-- <li>
                           <p>Web Applications</p>
                           <div class="progress progress_sm">
                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
@@ -91,7 +103,7 @@
                           <div class="progress progress_sm">
                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
                           </div>
-                        </li>
+                        </li> -->
                       </ul>
                       <!-- end of skills -->
 
@@ -100,33 +112,33 @@
 
                       <div class="profile_title">
                         <div class="col-md-6">
-                          <h2>User Activity Report</h2>
+                          <h2>Ticket Submissions per Month</h2>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                           <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                             <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                       <!-- start of user-activity-graph -->
-                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <div id="tickets_graph_bar" style="width:100%; height:280px;"></div>
                       <!-- end of user-activity-graph -->
 
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
-                          </li>
-                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Projects Worked on</a>
+                          <!-- <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
+                          </li> -->
+                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Tickets Worked on</a>
                           </li>
                           <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Edit Profile</a>
                           </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                          <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab">
+                          <!-- <div role="tabpanel" class="tab-pane active " id="tab_content1" aria-labelledby="home-tab"> -->
 
                             <!-- start recent activity -->
-                            <ul class="messages">
+                            <!-- <ul class="messages">
                               <li>
                                 <img src="images/img.jpg" class="avatar" alt="Avatar">
                                 <div class="message_date">
@@ -192,70 +204,60 @@
                                 </div>
                               </li>
 
-                            </ul>
+                            </ul> -->
                             <!-- end recent activity -->
 
-                          </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                          <!-- </div> -->
+                          <div role="tabpanel" class="tab-pane active" id="tab_content2" aria-labelledby="profile-tab">
 
                             <!-- start user projects -->
                             <table class="data table table-striped no-margin">
                               <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Client Company</th>
-                                  <th class="hidden-phone">Hours Spent</th>
-                                  <th>Contribution</th>
-                                </tr>
+                                  <tr>
+                                      <th>#</th>
+                                      <th> Request by</th>
+                                      <th> Location</th>
+                                      <th> Unit</th>
+                                      <th> Request</th>
+                                      <th> Assigned to</th>
+                                      <th> Priority</th>
+                                      <th> Status</th>
+                                  </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">18</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>New Partner Contracts Consultanci</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">13</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>Partners and Inverstors report</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">30</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">28</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+                                  @foreach($assignedTickets as $ticket)
+                                  @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                                  <tr>
+                                      <td>{{ $loop->iteration }}</td>
+                                      <td>{{ $ticket->user->name }}</td>
+                                      <td>{{ $ticket->service_location }}</td>
+                                      <td>{{ $ticket->unit }}</td>
+                                      <td>{{ $ticket->request }}</td>
+                                      <td>
+                                        @foreach ($ticket->users as $assigned_user)
+                                          {{ $assigned_user->name }}
+                                        @endforeach
+                                      </td>
+                                      <td>
+                                        @if ($ticket->priority_level === 'High')
+                                        <span class="badge badge-danger">High</span>
+                                        @elseif ($ticket->priority_level === 'Mid')
+                                        <span class="badge badge-warning">Mid</span>
+                                        @elseif ($ticket->priority_level === 'Low')
+                                        <span class="badge badge-secondary">Low</span>
+                                        @endif
+                                      </td>
+                                      @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
+                                      <td>{{ $ticket->status }}</td>
+                                      @else
+                                      <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
+                                      @endif
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                  </tbody>
+                                </table>
+  
                             <!-- end user projects -->
 
                           </div>
@@ -273,6 +275,13 @@
                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="" name="" value="{{ $user->email }}" disabled>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label for="inputEmail" class="col-sm-2 col-form-label">Phone Number</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -298,26 +307,30 @@
                                         <input type="text" class="form-control" id="job_position" name="job_position" value="{{ $user->job_position }}">
                                     </div>
                                 </div>
-                                <!-- <div class="form-group row">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Expertise</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="expertise" name="expertise" value="{{ $user->expertise }}">
-                                    </div>
-                                </div> -->
                                 
-    <div class="form-group row" id="expertise-area">
-        <label for="expertise" class="col-sm-2 col-form-label">Expertise</label>
-        <div class="col-sm-10">
-            <div id="dynamic-expertise">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
-                    <div class="input-group-append">
-                        <button class="btn btn-success" type="button" onclick="addExpertise()">+</button>
-                    </div>
+                                <div class="form-group row" id="expertise-area">
+    <label for="expertise" class="col-sm-2 col-form-label">Expertise</label>
+    <div class="col-sm-10">
+        <div id="dynamic-expertise">
+            <!-- Placeholder for existing expertise entries -->
+            @foreach($existingExpertise as $expertise)
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise" value="{{ $expertise }}">
+                <div class="input-group-append">
+                    <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
+                </div>
+            </div>
+            @endforeach
+            <!-- New expertise entry field -->
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" onclick="addExpertise()">+</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
    
 <script>
@@ -333,18 +346,14 @@ function addExpertise() {
     container.appendChild(input);
 }
 
-function removeExpertise(input) {
-    input.closest('.input-group').remove();
+function removeExpertise(button) {
+    var group = button.closest('.input-group');
+    group.parentNode.removeChild(group);
 }
+
 </script>
 
 
-                                <div class="form-group row">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Phone Number</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ $user->phone_number }}">
-                                    </div>
-                                </div>
                               
                                 
                                 <div class="form-group row">
@@ -368,4 +377,35 @@ function removeExpertise(input) {
             </div>
           </div>
         </div>
+
+
+        
+<script type="text/javascript" src="{{ asset('cdn/gstatic.com-charts-loader.js') }}"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Tickets'],
+            @foreach($monthlyTicketsData as $data)
+                ['{{ $data->year }}-{{ $data->month }}', {{ $data->count }}],
+            @endforeach
+        ]);
+
+        var options = {
+            // chart: {
+            //     title: 'Monthly Tickets',
+            //     subtitle: 'Ticket submissions per month',
+            // },
+            bars: 'vertical',
+            vAxis: {format: 'decimal'},
+            height: 280,
+            colors: ['#1b9e77', '#d95f02', '#7570b3']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('tickets_graph_bar'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>
 @endsection

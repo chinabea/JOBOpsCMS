@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    
+        
 
     public function assignedToMe()
     {
