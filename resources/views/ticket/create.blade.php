@@ -101,22 +101,23 @@
 							<div class="field item form-group">
 								<label class="col-form-label col-md-3 col-sm-3  label-align">Deadline<span class="required">*</span></label>
 								<div class="col-md-6 col-sm-6">
-									<input class="form-control" class='date' type="date" name="deadline" id="deadline" required='required'></div>
+									<input class="form-control" class='date' type="date" name="deadline" id="deadline" required='required'>
+								</div>
 							</div>
-						
-							<div class="form-group">
-								<label for="assigned_to">Assign to:</label>
-								
-								<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
-									@foreach($userIds as $user)
-										<option class="text-black" value="{{ $user->id }}">
-											{{ $user->name }} - {{ $user->expertise ?? 'No Expertise' }} - {{ $user->tickets->count() }} Tickets
-										</option>
-									@endforeach
-								</select>
+							<div class="field item form-group">
+								<label class="col-form-label col-md-3 col-sm-3  label-align">Assign to<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6">
+									<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
+										@foreach($userIds as $user)
+											<option value="{{ $user->id }}" data-content="
+												<span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+												<small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+												<small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+											</option>
+										@endforeach
+									</select>
+								</div>
 							</div>
-
-
 							<div class="ln_solid"></div>
 							<div class="item form-group">
 								<div class="col-md-6 col-sm-6 offset-md-3">
