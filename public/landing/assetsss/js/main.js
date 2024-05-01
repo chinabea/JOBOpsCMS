@@ -1,6 +1,6 @@
 /**
-* Template Name: Appland
-* Template URL: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/
+* Template Name: FlexStart
+* Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
 * Updated: Mar 17 2024 with Bootstrap v5.3.3
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
@@ -25,13 +25,10 @@
    * Easy event listener function
    */
   const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
+    if (all) {
+      select(el, all).forEach(e => e.addEventListener(type, listener))
+    } else {
+      select(el, all).addEventListener(type, listener)
     }
   }
 
@@ -68,6 +65,11 @@
   const scrollto = (el) => {
     let header = select('#header')
     let offset = header.offsetHeight
+
+    if (!header.classList.contains('header-scrolled')) {
+      offset -= 10
+    }
+
     let elementPos = select(el).offsetTop
     window.scrollTo({
       top: elementPos - offset,
@@ -156,12 +158,11 @@
   });
 
   /**
-   * Gallery Slider
+   * Clients Slider
    */
-  new Swiper('.gallery-slider', {
+  new Swiper('.clients-slider', {
     speed: 400,
     loop: true,
-    centeredSlides: true,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false
@@ -174,29 +175,74 @@
     },
     breakpoints: {
       320: {
-        slidesPerView: 1,
-        spaceBetween: 30
+        slidesPerView: 2,
+        spaceBetween: 40
+      },
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 60
       },
       640: {
-        slidesPerView: 3,
-        spaceBetween: 30
+        slidesPerView: 4,
+        spaceBetween: 80
       },
       992: {
-        slidesPerView: 5,
-        spaceBetween: 30
-      },
-      1200: {
-        slidesPerView: 7,
-        spaceBetween: 30
+        slidesPerView: 6,
+        spaceBetween: 120
       }
     }
   });
 
   /**
-   * Initiate gallery lightbox 
+   * Porfolio isotope and filter
    */
-  const galleryLightbox = GLightbox({
-    selector: '.gallery-lightbox'
+  window.addEventListener('load', () => {
+    let portfolioContainer = select('.portfolio-container');
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.portfolio-item',
+        layoutMode: 'fitRows'
+      });
+
+      let portfolioFilters = select('#portfolio-flters li', true);
+
+      on('click', '#portfolio-flters li', function(e) {
+        e.preventDefault();
+        portfolioFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
+
+        portfolioIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        aos_init();
+      }, true);
+    }
+
+  });
+
+  /**
+   * Initiate portfolio lightbox 
+   */
+  const portfolioLightbox = GLightbox({
+    selector: '.portfokio-lightbox'
+  });
+
+  /**
+   * Portfolio details slider
+   */
+  new Swiper('.portfolio-details-slider', {
+    speed: 400,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
   });
 
   /**
@@ -222,8 +268,7 @@
       },
 
       1200: {
-        slidesPerView: 2,
-        spaceBetween: 40
+        slidesPerView: 3,
       }
     }
   });
@@ -231,13 +276,21 @@
   /**
    * Animation on scroll
    */
-  window.addEventListener('load', () => {
+  function aos_init() {
     AOS.init({
       duration: 1000,
       easing: "ease-in-out",
       once: true,
       mirror: false
     });
+  }
+  window.addEventListener('load', () => {
+    aos_init();
   });
 
-})()
+  /**
+   * Initiate Pure Counter 
+   */
+  new PureCounter();
+
+})();
