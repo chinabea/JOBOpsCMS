@@ -115,133 +115,6 @@ class TicketController extends Controller
         // Redirect with success message
         return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
     }
-    
-
-    
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'file_upload' => 'nullable|file|max:2048',
-    //             // 'assigned_to' could be validated here if you decide to expose it in another form
-    //         ]);
-            
-    //         $authUser = auth()->user(); // Renaming variable to avoid confusion
-    //         $ticketData = $request->except('file_upload'); // Exclude the file_upload from the request data
-
-    //         // Find all users with role 2
-    //         $usersWithRole2 = User::where('role', 2)->get();
-
-    //         // Find the user with role 2 who has the least assigned tickets
-    //         $userWithLeastTickets = null;
-    //         $minTicketCount = PHP_INT_MAX;
-    //         foreach ($usersWithRole2 as $user) {
-    //             $ticketCount = $user->tickets()->count();
-    //             if ($ticketCount < $minTicketCount) {
-    //                 $userWithLeastTickets = $user;
-    //                 $minTicketCount = $ticketCount;
-    //             }
-    //         }
-
-    //         // If there is a user with the least tickets, assign the ticket to this user
-    //         if ($userWithLeastTickets) {
-    //             $ticketData['assigned_to'] = $userWithLeastTickets->id;
-    //         }
-
-    //         // Create the ticket
-    //         $ticket = Ticket::create($ticketData);
-
-    //         // Handle file upload
-    //         if ($request->hasFile('file_upload')) {
-    //             $file = $request->file('file_upload');
-    //             $filename = time() . '_' . $file->getClientOriginalName();
-    //             $filePath = $file->storeAs('uploads', $filename, 'public');
-    //             $ticket->file_path = $filePath;
-    //             $ticket->save();
-    //         } 
-
-    //         // Log activity
-    //         ActivityLogger::log('Created', $ticket, 'Ticket created');
-
-    //         return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
-    //     } catch (Exception $e) {
-    //         // Log the exception or handle it as required
-    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-    //     }
-    // }
-
-    
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'file_upload' => 'nullable|file|max:2048',
-    //             // 'assigned_to' => 'required|exists:users,id', 
-    //         ]);
-            
-    //         $authUser = auth()->user(); // Renaming variable to avoid confusion
-    //         // $ticketData = $request->all();
-    //         $ticketData = $request->except('file_upload'); 
-    
-    //         // Create the ticket
-    //         $ticket = Ticket::create($ticketData);
-
-    //         // Handle file upload
-    //         if ($request->hasFile('file_upload')) {
-    //             $file = $request->file('file_upload');
-    //             $filename = time() . '_' . $file->getClientOriginalName();
-    //             // Save the file to the default storage disk (usually 'public')
-    //             $filePath = $file->storeAs('uploads', $filename, 'public');
-    //             // Save filePath to your ticket model if needed
-    //             $ticket->file_path = $filePath;
-    //             $ticket->save();
-    //         } 
-
-    //         // Find all users with role 2
-    //         $usersWithRole2 = User::where('role', 2)->get();
-    
-    //         // Find the user with role 2 who has the least assigned tickets
-    //         $userWithLeastTickets = null;
-    //         $minTicketCount = PHP_INT_MAX;
-    //         foreach ($usersWithRole2 as $user) {
-    //             $ticketCount = $user->tickets()->count();
-    //             if ($ticketCount < $minTicketCount) {
-    //                 $userWithLeastTickets = $user;
-    //                 $minTicketCount = $ticketCount;
-    //             }
-    //         }
-    
-    //         // Assign the ticket to the user with the least assigned tickets
-    //         // if ($userWithLeastTickets) {
-    //         //     $ticket->assigned_to = $userWithLeastTickets->id;
-    //         //     $ticket->save();
-            
-    //         //     // Notify only the assigned user
-    //         //     $userWithLeastTickets->notify(new TicketAssignedNotification($ticket, $userWithLeastTickets));
-    
-    //         //     // Notify the authenticated user if they are not the assigned user
-    //         //     if ($authUser->id !== $userWithLeastTickets->id) {
-    //         //         $authUser->notify(new TicketCreatedNotification($authUser, $ticket));
-    //         //     }
-    
-    //         //     // Notify all admin users
-    //         //     $admins = User::where('role', 1)->get();
-    //         //     foreach ($admins as $admin) {
-    //         //         if ($admin->id !== $authUser->id) {
-    //         //             $admin->notify(new TicketCreatedNotification($admin, $ticket));
-    //         //         }
-    //         //     }
-    //         // }
-
-    //         // Log activity
-    //         ActivityLogger::log('Created', $ticket, 'Ticket created');
-    
-    //         return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
-    //     } catch (Exception $e) {
-    //         // Log the exception or handle it as required
-    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-    //     }
-    // }
 
     public function show($id)
     {
@@ -301,20 +174,6 @@ class TicketController extends Controller
 
     }
 
-    // public function assignTicket(Request $request)
-    // {
-    //     $task = Task::find($request->input('task_id'));
-
-    //     if (!$task) {
-    //         return response()->json(['error' => 'Task not found'], 404);
-    //     }
-
-    //     $taskAssignmentService = new TaskAssignmentService();
-    //     $user = $taskAssignmentService->assignTaskToUser($task);
-
-    //     return response()->json(['user_id' => $user->id]);
-    // }
-    
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
@@ -341,7 +200,5 @@ class TicketController extends Controller
 
     }
     
-
-
 
 }

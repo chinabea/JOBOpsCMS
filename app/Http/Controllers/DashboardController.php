@@ -54,32 +54,4 @@ class DashboardController extends Controller
         return view('dashboard', compact('monthlyTicketsData', 'totalUsers','totalTickets', 'allOpen',
         'allInProgress', 'allClosed','allHigh', 'allMid', 'allLow', 'unapprovedUsers', 'unassignedTickets', 'forApproval', 'assignedTickets'));
     }
-    
-    // public function monthlyWeekly()
-    // {
-    //     // Monthly data
-    //     $monthlyTicketsData = Ticket::select(
-    //         DB::raw('MONTH(created_at) as month'),
-    //         DB::raw('YEAR(created_at) as year'),
-    //         DB::raw('COUNT(*) as count')
-    //     )
-    //     ->groupBy('year', 'month')
-    //     ->orderBy('year', 'asc')
-    //     ->orderBy('month', 'asc')
-    //     ->get();
-    
-    //     // Weekly data
-    //     $weeklyTicketsData = Ticket::select(
-    //         DB::raw('YEAR(created_at) as year'),
-    //         DB::raw('WEEK(created_at) as week'),
-    //         DB::raw('COUNT(*) as count')
-    //     )
-    //     ->groupBy('year', 'week')
-    //     ->orderBy('year', 'asc')
-    //     ->orderBy('week', 'asc')
-    //     ->get();
-    
-    //     return view('dashboard', compact('monthlyTicketsData', 'weeklyTicketsData'));
-    // }
-    
 }
