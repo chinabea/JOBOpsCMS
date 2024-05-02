@@ -29,7 +29,17 @@ class DatabaseSeeder extends Seeder
         $users = [
             [
                 'name' => 'China Bea',
-                'email' => 'chibea@my.cspc.edu.ph',
+                'email' => 'chibea@my.cspc.edu.ph ',
+                'role' => 2,
+                'is_approved' => true,
+                'phone_number' => null,
+                'job_position' => null,
+                'expertise' => null,
+                
+            ],
+            [
+                'name' => 'Mark Louis Odavar',
+                'email' => 'mlodavar@my.cspc.edu.ph',
                 'role' => 1,
                 'is_approved' => true,
                 'phone_number' => '09246794618',
@@ -55,16 +65,16 @@ class DatabaseSeeder extends Seeder
                 'expertise' => null,
                 
             ],
-            [
-                'name' => 'Mark Louis Odavar',
-                'email' => 'mlodavar@my.cspc.edu.ph',
-                'role' => 2,
-                'is_approved' => true,
-                'phone_number' => null,
-                'job_position' => null,
-                'expertise' => null,
+            // [
+            //     'name' => 'Mark Louis Odavar',
+            //     'email' => 'mlodavar@my.cspc.edu.ph',
+            //     'role' => 2,
+            //     'is_approved' => true,
+            //     'phone_number' => null,
+            //     'job_position' => null,
+            //     'expertise' => null,
                 
-            ],
+            // ],
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jestabayag@my.cspc.edu.ph',
