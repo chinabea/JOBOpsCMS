@@ -34,7 +34,11 @@ class TicketController extends Controller
     {
         // Fetch tickets that have no users assigned
         $unassignedTickets = Ticket::doesntHave('users')->get();
-        $userIds = User::where('role', 2)->where('is_approved', true)->get(); 
+        // $userIds = User::where('role', 2)->where('is_approved', true)->get(); 
+        $userIds = User::whereIn('role', [1, 2])
+               ->where('is_approved', true)
+               ->get();
+
 
         // Return the view with the unassigned tickets data
         return view('ticket.unassigned', compact('unassignedTickets','userIds'));

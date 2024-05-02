@@ -62,31 +62,30 @@ class UserController extends Controller
             $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
             
             // Convert the comma-separated string of expertise to an array
-            $user->expertise = explode(',', $user->expertise);
+            $user->expertise = !empty($user->expertise) ? explode(',', $user->expertise) : [];
+
             
-            $userId = auth()->id();
         
             // Fetch tickets where the user is assigned
-            $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
-                $query->where('users.id', $userId);
+            $assignedTickets = Ticket::whereHas('users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
             })
-            ->with('user', 'users') // Load relationships
+            ->with(['user', 'users']) // Load relationships more properly
             ->orderBy('created_at', 'desc')
             ->get();
+            
         
             // Example of existing expertise assuming it's stored as an array or collection
             $existingExpertise = $user->expertise; // Ensure this is defined in your User model
 
-           
-            $userId = auth()->id(); // Ensures we're getting data for the logged-in user
-
             $monthlyTicketsData = Ticket::select(DB::raw("YEAR(created_at) as year"), DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
-                ->where('user_id', $userId)
-                ->groupBy('year', 'month')
-                ->orderBy('year', 'asc')
-                ->orderBy('month', 'asc')
-                ->get();
-
+            ->where('user_id', $user->id)
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+        
+        
                     
             return view('user.user-profile', compact('user', 'roles', 'expertiseOptions', 'assignedTickets',
              'existingExpertise','monthlyTicketsData'));

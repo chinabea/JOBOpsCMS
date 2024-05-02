@@ -54,9 +54,9 @@
                 <li><a href="{{ route('tickets.unassigned') }}"><i class="fa fa-times"></i> Unassigned Tickets </a></li>
                 @else 
                     <li><a href="{{ route('tickets.unassigned') }}"><i class="fa fa-times"></i> My Unassigned Tickets </a></li>
-                    <li><a href="{{ route('tickets.assigned') }}"><i class="fa fa-check-square-o"></i> Assigned Tickets </a></li>
                 
                 @endif
+                <li><a href="{{ route('tickets.assigned') }}"><i class="fa fa-check-square-o"></i> Assigned Tickets to Me </a></li>
                 <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="{{ route('priority-level.high') }}">High</a></li>

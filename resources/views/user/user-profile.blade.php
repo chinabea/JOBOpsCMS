@@ -64,22 +64,17 @@
               </ul>
               <br />
               <!-- start skills -->
-              @if(!empty($user->expertise) && is_array($user->expertise))
-    <h4>Expertise</h4>
-    <ul class="list-unstyled user_data">
-        @foreach($user->expertise as $skill)
-            <li>{{ $skill }}</li>
-        @endforeach
-    </ul>
-@else
-    <p>No expertise listed.</p>
-@endif
-
-
-
-
-              
-                
+              <h4>Expertise</h4>
+              <ul class="list-unstyled user_data">
+                @if(!empty($user->expertise) && is_array($user->expertise))
+                    @foreach($user->expertise as $skill)
+                        <li><i class="fa fa-asterisk"></i> {{ $skill }}</li>
+                    @endforeach 
+                @else
+                    <li><i class="fa fa-asterisk"></i> No expertise listed.</li>
+                @endif
+              </ul>
+            
                 <!-- <li>
                   <p>Web Applications</p>
                   <div class="progress progress_sm">
@@ -149,7 +144,6 @@
                       </thead>
                       <tbody>
                           @foreach($assignedTickets as $ticket)
-                          @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                           <tr>
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $ticket->user->name }}</td>
@@ -176,7 +170,6 @@
                               <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
                               @endif
                             </tr>
-                            @endif
                             @endforeach
                           </tbody>
                         </table>
