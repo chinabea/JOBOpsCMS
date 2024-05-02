@@ -35,7 +35,7 @@
             <div class="col-md-6 col-sm-6  ">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Daily active users <small>Sessions</small></h2>
+                  <h2>Frequently Ask Questions</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
