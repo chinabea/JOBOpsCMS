@@ -7,14 +7,18 @@
 </head>
 <body>
     <div style="padding: 10px;">
-        <h2>Hello, {{ $user->first_name }}!</h2>
-        <p>You have successfully requested a ticket,</p> <b>Request Title</b> <p>assigned to: Fullname
+        <h4>Hello, {{ $user->name }}</h4>
+        <p>You have successfully requested a ticket, {{ $ticket->request }} </p>
+            <!-- this should display the name of the assigned users -->
+            <!-- assigned to {{ $assignedNames }} </p> -->
         <p>Please click the button below to view your ticket.</p>
             
-        <a href="{{ $actionUrl }}" style="padding: 10px 20px; color: white; background-color: #007BFF; text-decoration: none;">View Ticket</a>
-       
+        
+        <a href="{{ url('/show/ticket/' . $ticket->id) }}" class="button">View Ticket</a>
+       <br><br>
         <p>Best Regards,</p>
         <p>MICT Support Team</p>
+        
     </div>
 </body>
 </html>

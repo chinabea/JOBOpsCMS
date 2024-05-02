@@ -72,7 +72,8 @@
 										<div class="item form-group">
 											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Assigned to</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->assignedUser->name }}">
+											<input id="middle-name" class="form-control" type="text" name="middle-name" value="@foreach($ticket->users as $assigned_user){{ $loop->first ? '' : ', ' }}{{ $assigned_user->name }}@endforeach">
+
 											</div>
 										</div>
 										<div class="item form-group">

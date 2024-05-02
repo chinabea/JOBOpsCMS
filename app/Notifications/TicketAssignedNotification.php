@@ -15,15 +15,17 @@ class TicketAssignedNotification extends Notification
 
     protected $user;
     protected $ticket;
+    protected $requestor;
 
     /**
      * Create a new notification instance.
      */
 
-    public function __construct($ticket, $user)
+    public function __construct($ticket, $user, $requestor)
     {
         $this->ticket = $ticket;
         $this->user = $user;
+        $this->requestor = $requestor;
     }
 
     /**
@@ -53,7 +55,9 @@ class TicketAssignedNotification extends Notification
             return (new MailMessage)       
             ->view('emails.assignedTicket', [
                 'user' => $this->user,
-                'ticket' => $this->ticket
+                'ticket' => $this->ticket,
+                'requestor' => $this->requestor,
+                'action_url' => url("/show/ticket/{$this->ticket->id}"),
             ]);
     }
 

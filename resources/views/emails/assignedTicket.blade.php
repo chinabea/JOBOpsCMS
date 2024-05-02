@@ -7,12 +7,12 @@
 </head>
 <body>
     <div style="padding: 10px;">
-        <h2>Hello, {{ $user->first_name }}!</h2>
-        <p>You are assigned to a requested ticket,</p> <b>Request Title</b> <p>from: Fullname
+        <h4>Hello, {{ $user->name }}</h4>
+        <p>You are assigned to a requested ticket, {{ $ticket->request }} from {{ $requestor->name }}</p>
         <p>Please click the button below to view the ticket.</p>
-            
-        <a href="{{ $actionUrl }}" style="padding: 10px 20px; color: white; background-color: #007BFF; text-decoration: none;">View Ticket</a>
-       
+        
+        <a href="{{ url('/show/ticket/' . $ticket->id) }}" class="button">View Ticket</a>
+        <br><br>
         <p>Best Regards,</p>
         <p>MICT Support Team</p>
     </div>

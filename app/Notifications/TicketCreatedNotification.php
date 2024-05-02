@@ -15,14 +15,20 @@ class TicketCreatedNotification extends Notification
 
     public $user;
     public $ticket;
+    protected $requestor;
+    protected $isSelf;
+    protected $assignedNames;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(User $user, Ticket $ticket)
+    public function __construct(User $user, Ticket $ticket, User $requestor, $assignedNames, $isSelf = false)
     {
         $this->user = $user;
         $this->ticket = $ticket;
+        $this->requestor = $requestor;
+        $this->isSelf = $isSelf;
+        $this->assignedNames = $assignedNames;
     }
 
     /**
@@ -61,7 +67,10 @@ class TicketCreatedNotification extends Notification
             return (new MailMessage)       
             ->view('emails.ticketCreation', [
                 'user' => $this->user,
-                'ticket' => $this->ticket
+                'ticket' => $this->ticket,
+                'requestor' => $this->requestor,
+                'assignedNames' => $this->assignedNames,
+                'action_url' => url("/show/ticket/{$this->ticket->id}"),
             ]);
     }
 
