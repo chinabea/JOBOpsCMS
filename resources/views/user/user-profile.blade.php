@@ -49,31 +49,36 @@
               <div class="profile_img">
                 <div id="crop-avatar">
                   <!-- Current avatar -->
-                  <img class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->avatar }}" alt="Avatar" title="Change the avatar"  style="width: 150px; height: 150px;">
+                  <img class="profile-user-img img-fluid" src="{{ $user->avatar }}" alt="Avatar" title="Change the avatar"  style="width: 230px; height: 230px;">
                 </div>
               </div>
               <h3>{{ $user->name }}</h3>
 
               <ul class="list-unstyled user_data">
-                <li><i class="fa fa-phone"></i> {{ $user->phone_number }} 
-                </li>
-                <li>
-                  <i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}
-                </li>
+                @if(!empty($user->phone_number))
+                    <li><i class="fa fa-phone"></i> {{ $user->phone_number }}</li>
+                @endif
+                @if(!empty($user->job_position))
+                  <li><i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}</li>
+                @endif
               </ul>
               <br />
               <!-- start skills -->
-              <h4>Expertise</h4>
-              <ul class="list-unstyled user_data">
-              @if(!empty($user->expertise))
-                  <ul>
-                      @foreach($user->expertise as $skill)
-                          <li>{{ $skill }}</li>
-                      @endforeach
-                  </ul>
-              @else
-                  <p>No expertise listed.</p>
-              @endif
+              @if(!empty($user->expertise) && is_array($user->expertise))
+    <h4>Expertise</h4>
+    <ul class="list-unstyled user_data">
+        @foreach($user->expertise as $skill)
+            <li>{{ $skill }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No expertise listed.</p>
+@endif
+
+
+
+
+              
                 
                 <!-- <li>
                   <p>Web Applications</p>
