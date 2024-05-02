@@ -23,6 +23,17 @@ class DashboardController extends Controller
         $unassignedTickets = Ticket::doesntHave('users')->count();
         $allLow = Ticket::where('priority_level', 'Low')->count();
         $forApproval = User::where('is_approved', false)->count();
+        // $forApproval = User::where('is_approved', false)->count();
+        
+        $userId = auth()->id();
+    
+        // Fetch tickets where the user is assigned
+        $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
+            $query->where('users.id', $userId);
+        })
+        ->with('user', 'users') // Load relationships
+        ->count();
+    
         
         // Retrieve users where 'created_at' is the same as 'updated_at' and 'is_approved' is false
         $unapprovedUsers = User::where('is_approved', false)
@@ -41,7 +52,7 @@ class DashboardController extends Controller
         ->get();
     
         return view('dashboard', compact('monthlyTicketsData', 'totalUsers','totalTickets', 'allOpen',
-        'allInProgress', 'allClosed','allHigh', 'allMid', 'allLow', 'unapprovedUsers', 'unassignedTickets', 'forApproval'));
+        'allInProgress', 'allClosed','allHigh', 'allMid', 'allLow', 'unapprovedUsers', 'unassignedTickets', 'forApproval', 'assignedTickets'));
     }
     
     // public function monthlyWeekly()
