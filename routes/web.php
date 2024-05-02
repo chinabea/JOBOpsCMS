@@ -41,10 +41,8 @@ Route::prefix('mict')->middleware(['auth', 'cache', 'approved','mict'])->group(f
 Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.home');
-
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
-
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
@@ -70,8 +68,6 @@ Route::post('tickets/{ticket}/update-users', [TicketController::class, 'updateUs
 Route::get('/tickets/unassigned', [TicketController::class, 'unassigned'])->name('tickets.unassigned');
 Route::get('/tickets/assigned', [TicketController::class, 'assignedToMe'])->name('tickets.assigned');
 // Route::get('/user-tickets-chart', [TicketController::class, 'userTicketsChart'])->name('user.tickets.chart');
-
-
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/create/faq', [FaqsController::class, 'create'])->name('create.faq');
@@ -104,7 +100,6 @@ Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('pri
 
 // Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
-
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
 Route::fallback(function () {

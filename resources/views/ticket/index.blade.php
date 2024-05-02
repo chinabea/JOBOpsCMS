@@ -7,17 +7,6 @@
       <div class="title_left">
         <h3>Tickets</h3>
       </div>
-
-      <!-- <div class="title_right">
-        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div>
-        </div>
-      </div> -->
     </div>
 
     <div class="clearfix"></div>
@@ -63,7 +52,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th><i class="fa fa-user"></i> Request by</th>
+                        <th><i class="fa fa-user"></i> Requestor</th>
                         <th><i class="fa fa-location-arrow"></i> Location</th>
                         <th><i class="fa fa-university"></i> Unit</th>
                         <th><i class="fa fa-wrench"></i> Request</th>
@@ -168,18 +157,28 @@
                         @endif
                         @if(auth()->user()->role == 1)
                         <td>
-                            <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
-                                class="btn btn-sm btn-warning">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
-                                <i class="fa fa-trash"></i>
-                            </button>
+                          <div class="item form-group">
+                            <div class="col-md-6 col-sm-6">
+                              <div class="btn-group">
+                                <a href="{{ route('ticket.show', $ticket->id) }}" type="button"
+                                      class="btn btn-sm btn-secondary">
+                                      <i class="fa fa-eye"></i>
+                                  </a>
+                                  <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
+                                      class="btn btn-sm btn-warning">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                                  <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
+                                      <i class="fa fa-trash"></i>
+                                  </button>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         @endif
                       </tr>
                       @endif
-                      @endforeach
+                    @endforeach
                 </tbody>
             </table>
           </div>

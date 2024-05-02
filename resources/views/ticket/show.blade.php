@@ -35,89 +35,84 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content"> 
-
-
-
-   
-								<div class="x_content">
-									<br>
-									<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Requested by <span class="required"></span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control" value="{{ $ticket->user->name }}" disabled>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Location Service <span class="required"></span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="last-name" name="last-name" required="required" class="form-control" value="{{ $ticket->service_location }}">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->unit }}">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Request</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->request }}">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Assigned to</label>
-											<div class="col-md-6 col-sm-6 ">
-											<input id="middle-name" class="form-control" type="text" name="middle-name" value="@foreach($ticket->users as $assigned_user){{ $loop->first ? '' : ', ' }}{{ $assigned_user->name }}@endforeach">
-
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Priority</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->priority_level }}">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->status }}">
-											</div>
-										</div>
-										<div class="ln_solid"></div>
-										<div class="item form-group justify-content-center">
-											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button class="btn btn-primary" type="button">Cancel</button>
-												<button class="btn btn-primary" type="reset">Reset</button>
-												<button type="submit" class="btn btn-success">Submit</button>
-											</div>
-										</div>
-
-									</form>
-								</div>
-							</div>
-						</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </div>
-        </div>
+			<br>
+			<form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+				<div class="field item form-group">
+					<label class="col-form-label col-md-3 col-sm-3 label-align">
+						Assign to<span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6">
+						@if(isset($userIds) && $userIds->isNotEmpty())
+							<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
+								@foreach($userIds as $user)
+									<option value="{{ $user->id }}" 
+										@foreach($ticket->users as $assigned_user)
+											{{ $assigned_user->id == $user->id ? 'selected' : '' }}
+										@endforeach>
+										<span class='text-black'>
+											<strong>{{ $user->name }}</strong><br>
+											<small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+											<small>Assigned to Tickets: {{ $user->tickets->count() }}</small><br>
+										</span>
+									</option>
+								@endforeach
+							</select>
+						@endif
+					</div>
+				</div>
+				<div class="item form-group">
+					<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Requested by <span class="required"></span>
+					</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input type="text" id="first-name" required="required" class="form-control" value="{{ $ticket->user->name }}" disabled>
+					</div>
+				</div>
+				<div class="item form-group">
+					<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Location Service <span class="required"></span>
+					</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input type="text" id="last-name" name="last-name" required="required" class="form-control" value="{{ $ticket->service_location }}">
+					</div>
+				</div>
+				<div class="item form-group">
+					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->unit }}">
+					</div>
+				</div>
+				<div class="item form-group">
+					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Request</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->request }}">
+					</div>
+				</div>
+				<div class="item form-group">
+					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Priority</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->priority_level }}">
+					</div>
+				</div>
+				<div class="item form-group">
+					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
+					<div class="col-md-6 col-sm-6 ">
+						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->status }}">
+					</div>
+				</div>
+				<div class="ln_solid"></div>
+				<div class="item form-group justify-content-center">
+					<div class="col-md-6 col-sm-6 offset-md-3">
+						<button class="btn btn-primary" type="button">Cancel</button>
+						<button class="btn btn-primary" type="reset">Reset</button>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</div>
+				</div>
+			  </form>
+		    </div>
+	      </div>
+	    </div>
+	   </div>
       </div>
+     </div>
     </div>
   </div>
 </div>

@@ -172,13 +172,31 @@
                         @endif
                         @if(auth()->user()->role == 1)
                         <td>
-                            <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
+                            <!-- <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
                                 class="btn btn-sm btn-warning">
                                 <i class="fa fa-edit"></i>
                             </a>
                             <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
                                 <i class="fa fa-trash"></i>
-                            </button>
+                            </button> -->
+                            
+                          <div class="item form-group">
+                            <div class="col-md-6 col-sm-6">
+                              <div id="" class="btn-group"`>
+                                <a href="{{ route('ticket.show', $ticket->id) }}" type="button"
+                                      class="btn btn-sm btn-secondary">
+                                      <i class="fa fa-eye"></i>
+                                  </a>
+                                  <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
+                                      class="btn btn-sm btn-warning">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                                  <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
+                                      <i class="fa fa-trash"></i>
+                                  </button>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         @endif
                       </tr>

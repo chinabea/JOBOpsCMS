@@ -60,6 +60,26 @@
                     <input type="text" id="first-name" required="required" class="form-control" value="{{ $ticket->user->name }}" disabled>
                   </div>
                 </div>
+
+                
+                <div class="field item form-group">
+					<label class="col-form-label col-md-3 col-sm-3 label-align">Assign to<span class="required">*</span></label>
+					<div class="col-md-6 col-sm-6">
+						@if(isset($userIds) && $userIds->isNotEmpty())
+						<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
+							@foreach($userIds as $user)
+								<option value="{{ $user->id }}"
+										@foreach($ticket->users as $assigned_user)
+											{{ $assigned_user->id == $user->id ? 'selected' : '' }}
+										@endforeach>
+									{{ $user->name }}
+								</option>
+							@endforeach
+						</select>
+						@endif
+					</div>
+				</div>
+
                 <div class="item form-group">
                   <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Location Service <span class="required"></span>
                   </label>

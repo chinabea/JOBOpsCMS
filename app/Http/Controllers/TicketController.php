@@ -233,7 +233,11 @@ class TicketController extends Controller
             
             $user = Ticket::with('users')->findOrFail($id);
 
-            return view('ticket.show', compact('ticket','user'));
+            $userIds = User::whereIn('role', [1, 2])
+                   ->where('is_approved', true)
+                   ->get();
+
+            return view('ticket.show', compact('ticket','user','userIds'));
         } catch (Exception $e) {
             // Handle the exception, you can log it for debugging or display an error message to the user.
             return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
