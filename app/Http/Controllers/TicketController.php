@@ -244,8 +244,10 @@ class TicketController extends Controller
     {
         try {
             $ticket = Ticket::findOrFail($id);
+            $priority_level = $ticket->priority_level; 
+            $status = $ticket->status; 
             
-            return view('ticket.edit', compact('ticket'));
+            return view('ticket.edit', compact('ticket','priority_level','status'))->with('error', 'An error occurred');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
