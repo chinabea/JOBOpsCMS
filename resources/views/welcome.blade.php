@@ -11,7 +11,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('landing/assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('production/images/MICT-Logo.png') }}" rel="icon">
   <link href="{{ asset('landing/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -27,14 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('landing/assets/css/style.css') }}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: JobOps
-  * Template URL: https://bootstrapmade.com/free-bootstrap-app-landing-page-template/
-  * Updated: Mar 17 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  
 </head>
 
 <body>
@@ -44,21 +37,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <!-- <h1><a href="index.html">JobOps</a></h1> -->
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="{{ asset('landing/assets/img/logo.png') }}" alt="" class="img-fluid"></a> -->
-        <a href="index.html"><img src="{{ asset('production/images/MICT-Logo.png') }}" alt="" class="img-fluid"></a>
+        <h1><a href="index.html">JobOps</a></h1>
+        <!-- <a href="index.html"><img src="{{ asset('production/images/MICT-Logo.png') }}" alt=""></a> -->
         
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#features">App Features</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#features">App Features</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li> -->
           <li><a class="nav-link scrollto" href="#faq">F.A.Q</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -74,7 +65,7 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
+          </li> -->
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="{{ url('login/google') }}">Get Started</a></li>
         </ul>
@@ -94,14 +85,12 @@
             <h1>Job Operations Central Management System</h1>
             <h2>Lorem ipsum dolor sit amet, tota senserit percipitur ius ut, usu et fastidii forensibus voluptatibus. His ei nihil feugait</h2>
               <a href="{{ url('login/google') }}" class="download-btn"> 
-                <img src="https://accounts.google.com/favicon.ico" alt="" width="20" class="mr-2">
-                <!-- <i class="bx bxl-google"></i> -->
-                Google Mail
+                Sign in with CSPC Mail
               </a>
           </div>
         </div>
         <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
-          <img src="{{ asset('landing/assets/img/features.png') }}" class="img-fluid" alt="">
+          <img src="{{ asset('landing/assets/img/hero-img.png') }}" class="img-fluid" alt="" style="width: auto; height: 500px;">
         </div>
       </div>
     </div>
@@ -656,5 +645,4 @@
   <script src="{{ asset('landing/assets/js/main.js') }}"></script>
 
 </body>
-
 </html>
