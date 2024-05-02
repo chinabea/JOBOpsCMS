@@ -49,6 +49,20 @@
 								@csrf
 								<input class="form-control" type="hidden" name="user_id" value="{{ auth()->id() }}">
 
+							<div class="field item form-group">
+								<label class="col-form-label col-md-3 col-sm-3  label-align">Assign to<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6">
+									<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
+										@foreach($userIds as $user)
+											<option value="{{ $user->id }}" data-content="
+												<span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+												<small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+												<small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+											</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
 							<div class="item form-group">
 								<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Service Location <span class="required">*</span>
 								</label>
@@ -68,12 +82,6 @@
 								</label>
 								<div class="col-md-6 col-sm-6 ">
 									<input type="text" id="request" name="request" required="required" class="form-control">
-								</div>
-							</div>
-							<div class="item form-group">
-								<label for="file_path" class="col-form-label col-md-3 col-sm-3 label-align">Upload File</label>
-								<div class="col-md-6 col-sm-6 ">
-									<input id="file_path" class="form-control" type="file" name="file_path">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -104,18 +112,10 @@
 									<input class="form-control" class='date' type="date" name="deadline" id="deadline" required='required'>
 								</div>
 							</div>
-							<div class="field item form-group">
-								<label class="col-form-label col-md-3 col-sm-3  label-align">Assign to<span class="required">*</span></label>
-								<div class="col-md-6 col-sm-6">
-									<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
-										@foreach($userIds as $user)
-											<option value="{{ $user->id }}" data-content="
-												<span class='text-black'><strong><br>{{ $user->name }}</strong><br>
-												<small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
-												<small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
-											</option>
-										@endforeach
-									</select>
+							<div class="item form-group">
+								<label for="file_path" class="col-form-label col-md-3 col-sm-3 label-align">Upload File</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input id="file_path" class="form-control" type="file" name="file_path">
 								</div>
 							</div>
 							<div class="ln_solid"></div>
