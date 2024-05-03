@@ -6,10 +6,31 @@ use App\Models\Ticket;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
     
+    public function setupProfileForm()
+    {
+        $user = Auth::user();
+        return view('user.setup-profile', compact('user'));
+    }
+
+    public function saveProfile(Request $request)
+    {
+        $request->validate([
+            // Validation rules here
+        ]);
+
+        $user = Auth::user();
+        $user->update($request->all()); // Ensure only safe fields are updated
+
+        return redirect()->route('welcome')->with('success', 'Profile setup successfully, Account is currently pending approval by an administrator. Please check back later!');
+     
+    }
+
     // Method to approve a user
     public function approve($id)
     {

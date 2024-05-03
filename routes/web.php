@@ -18,13 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/not-approved', function () {
-    return view('user.not-approved'); 
-})->name('not-approved');
+
+Route::get('/account-pending', function () {
+    return view('account.pending'); 
+})->name('account.pending');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/setup-profile', [UserController::class, 'setupProfileForm'])->name('user.setupProfile');
+    Route::post('/setup-profile', [UserController::class, 'saveProfile'])->name('user.saveProfile');
+});
+
 
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
     
@@ -101,6 +110,7 @@ Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('pri
 // Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
+
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

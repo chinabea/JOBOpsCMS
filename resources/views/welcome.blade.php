@@ -82,6 +82,11 @@
       <div class="row">
         <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
           <div>
+            @if(session('success'))
+                <div style="background-color: green; color: white; padding: 10px;">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h1>Job Operations Central Management System</h1>
             <h2>Lorem ipsum dolor sit amet, tota senserit percipitur ius ut, usu et fastidii forensibus voluptatibus. His ei nihil feugait</h2>
               <a href="{{ url('login/google') }}" class="download-btn"> 

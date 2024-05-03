@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Exception; 
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -16,8 +17,55 @@ class LoginController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
+//     public function handleGoogleCallback()
+// {
+//     try {
+//         $googleUser = Socialite::driver('google')->user();
+//         session(['profilePictureUrl' => $googleUser->getAvatar()]);
+        
+//         $localUser = User::where('email', $googleUser->getEmail())->first();
+
+//         if ($localUser) {
+//             if ($localUser->avatar !== $googleUser->getAvatar()) {
+//                 $localUser->avatar = $googleUser->getAvatar();
+//                 $localUser->save();
+//             }
+
+//             Auth::login($localUser, true);
+
+//             if (!$localUser->is_approved) {
+//                 // Redirect them to a specific page if the account is not approved
+//                 return redirect()->route('account.pending');
+//             }
+
+//             if ($localUser->role == '1') {
+//                 return redirect()->route('admin.home');
+//             } elseif ($localUser->role == '2') {
+//                 return redirect()->route('mict.home');
+//             } else {
+//                 return redirect()->route('staff.home');
+//             }
+//         } else {
+//             $newUser = User::create([
+//                 'name' => $googleUser->getName(),
+//                 'email' => $googleUser->getEmail(),
+//                 'avatar' => $googleUser->getAvatar(),
+//                 'is_approved' => false,
+//                 'password' => '',
+//             ]);
+
+//             Auth::login($newUser, true);
+//             return redirect()->route('account.pending');
+//         }
+//     } catch (Exception $e) {
+//         Log::error("Error during Google login: " . $e->getMessage());
+//         return redirect('/login')->with('error', 'Failed to log in with Google. Please try again.');
+//     }
+// }
+
     public function handleGoogleCallback()
-{
+    {
+        try {
     // Attempt to retrieve the user information from Google
     $googleUser = Socialite::driver('google')->user();
 
@@ -37,9 +85,13 @@ class LoginController extends Controller
         Auth::login($localUser, true);
 
         // Check if the user is approved
-        if (!$localUser->is_approved) {
-            return redirect()->route('not-approved');
+        // if (!$localUser->is_approved) {
+        //     return redirect()->route('not-approved');
+        // }
+        if (!$localUser->is_approved || is_null($localUser->phone_number)) {
+            return redirect()->route('user.setupProfile');
         }
+        
         
         // Further role-based redirection
         if ($localUser->role == '1') {
@@ -54,7 +106,6 @@ class LoginController extends Controller
         $newUser = User::create([
             'name' => $googleUser->getName(),
             'email' => $googleUser->getEmail(),
-            'google_id' => $googleUser->getId(),
             'avatar' => $googleUser->getAvatar(), // Save the avatar URL
             'is_approved' => false,
             'password' => '',  // No password needed as OAuth is used
@@ -64,59 +115,19 @@ class LoginController extends Controller
         Auth::login($newUser, true);
 
         // Redirect to a not-approved page until an admin approves them
-        return redirect()->route('not-approved')->with('info', 'Your account is awaiting approval.');
+        // return redirect()->route('not-approved')->with('info', 'Your account is awaiting approval.');
+        
+        return redirect()->route('user.setupProfile');
+    }
+    } catch (Exception $e) {
+        // Log the exception
+        Log::error("Error during Google login: " . $e->getMessage());
+
+        // Optionally, redirect to a custom error page or back with an error message
+        return redirect('/login')->with('error', 'Failed to log in with Google. Please try again.');
     }
 }
 
-
-    // public function handleGoogleCallback()
-    // {
-    //     // Attempt to retrieve the user information from Google
-    //     $googleUser = Socialite::driver('google')->user();
-
-    //     session(['profilePictureUrl' => $googleUser->getAvatar()]);
-        
-    //     // Attempt to find the user in the local database by email
-    //     $localUser = User::where('email', $googleUser->getEmail())->first();
-    
-    //     // Check if the user exists in the local database
-    //     if ($localUser) {
-    //         // Automatically log in the user and "remember" them
-    //         Auth::login($localUser, true);
-    
-    //         // Check if the user is approved
-    //         if (!$localUser->is_approved) {
-    //             // Redirect them to a "not approved" page
-    //             return redirect()->route('not-approved');
-    //         }
-            
-    //         // Further role-based redirection
-    //         if ($localUser->role == '1') {
-    //             // If the user is an admin
-    //             return redirect()->route('admin.home');
-    //         } else {
-    //             // Default redirection for regular approved users
-    //             return redirect()->route('mict-staff.home');
-    //         }
-    //     } else {
-    //         // If the user does not exist, create a new user in the database
-    //         $newUser = User::create([
-    //             'name' => $googleUser->getName(),          // Assume you have a 'name' column
-    //             'email' => $googleUser->getEmail(),        // Email from Google account
-    //             'google_id' => $googleUser->getId(),       // Google ID to link account
-    //             'is_approved' => false,                    // Newly created users are not approved by default
-    //             'password' => '',                          // No password needed as OAuth is used
-    //             // Add additional fields as required by your application
-    //         ]);
-    
-    //         // Log in the newly created user
-    //         Auth::login($newUser, true);
-    
-    //         // Redirect them to a not-approved page until an admin approves them
-    //         return redirect()->route('not-approved')->with('info', 'Your account is awaiting approval.');
-    //     }
-    // }
-    
     public function logout(Request $request)
     {
         auth()->logout();
