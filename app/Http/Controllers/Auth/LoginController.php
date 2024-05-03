@@ -83,14 +83,16 @@ class LoginController extends Controller
 
         // Automatically log in the user and "remember" them
         Auth::login($localUser, true);
-
-        // Check if the user is approved
-        // if (!$localUser->is_approved) {
-        //     return redirect()->route('not-approved');
-        // }
-        if (!$localUser->is_approved || is_null($localUser->phone_number)) {
+        
+        if (is_null($localUser->expertise)) {
             return redirect()->route('user.setupProfile');
-        }
+        } elseif ($localUser->expertise && !$localUser->is_approved) {
+            return redirect()->route('account.pending');
+        } 
+        
+        // if (!$localUser->is_approved || is_null($localUser->phone_number)) {
+        //     return redirect()->route('user.setupProfile');
+        // }
         
         
         // Further role-based redirection
