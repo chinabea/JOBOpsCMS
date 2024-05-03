@@ -17,51 +17,6 @@ class LoginController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-//     public function handleGoogleCallback()
-// {
-//     try {
-//         $googleUser = Socialite::driver('google')->user();
-//         session(['profilePictureUrl' => $googleUser->getAvatar()]);
-        
-//         $localUser = User::where('email', $googleUser->getEmail())->first();
-
-//         if ($localUser) {
-//             if ($localUser->avatar !== $googleUser->getAvatar()) {
-//                 $localUser->avatar = $googleUser->getAvatar();
-//                 $localUser->save();
-//             }
-
-//             Auth::login($localUser, true);
-
-//             if (!$localUser->is_approved) {
-//                 // Redirect them to a specific page if the account is not approved
-//                 return redirect()->route('account.pending');
-//             }
-
-//             if ($localUser->role == '1') {
-//                 return redirect()->route('admin.home');
-//             } elseif ($localUser->role == '2') {
-//                 return redirect()->route('mict.home');
-//             } else {
-//                 return redirect()->route('staff.home');
-//             }
-//         } else {
-//             $newUser = User::create([
-//                 'name' => $googleUser->getName(),
-//                 'email' => $googleUser->getEmail(),
-//                 'avatar' => $googleUser->getAvatar(),
-//                 'is_approved' => false,
-//                 'password' => '',
-//             ]);
-
-//             Auth::login($newUser, true);
-//             return redirect()->route('account.pending');
-//         }
-//     } catch (Exception $e) {
-//         Log::error("Error during Google login: " . $e->getMessage());
-//         return redirect('/login')->with('error', 'Failed to log in with Google. Please try again.');
-//     }
-// }
 
     public function handleGoogleCallback()
     {
@@ -89,11 +44,6 @@ class LoginController extends Controller
         } elseif ($localUser->expertise && !$localUser->is_approved) {
             return redirect()->route('account.pending');
         } 
-        
-        // if (!$localUser->is_approved || is_null($localUser->phone_number)) {
-        //     return redirect()->route('user.setupProfile');
-        // }
-        
         
         // Further role-based redirection
         if ($localUser->role == '1') {
