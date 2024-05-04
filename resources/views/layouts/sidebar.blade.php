@@ -36,7 +36,7 @@
                 </li>
                 <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="{{ route('create.ticket') }}">Create Ticket</a></li>
+                        <li><a href="{{ route('create.ticket') }}">Request Ticket</a></li>
                         @if(Auth::user()->role == 1)
                         <li><a href="{{ route('tickets') }}">All Tickets</a></li>
                         @else
