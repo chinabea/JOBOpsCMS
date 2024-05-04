@@ -66,14 +66,20 @@
               <!-- start skills -->
               <h4>Expertise</h4>
               <ul class="list-unstyled user_data">
-                @if(!empty($user->expertise) && is_array($user->expertise))
-                    @foreach($user->expertise as $skill)
-                        <li><i class="fa fa-asterisk"></i> {{ $skill }}</li>
-                    @endforeach 
-                @else
-                    <li><i class="fa fa-asterisk"></i> No expertise listed.</li>
-                @endif
+                  @php
+                  
+                      $expertiseList = !empty($user->expertise) ? json_decode($user->expertise, true) : null;
+                  @endphp
+
+                  @if(!empty($expertiseList) && is_array($expertiseList))
+                      @foreach($expertiseList as $skill)
+                          <li><i class="fa fa-info-circle"></i> {{ $skill }}</li>
+                      @endforeach
+                  @else
+                      <li><i class="fa fa-info-circle"></i> No expertise listed.</li>
+                  @endif
               </ul>
+
             
                 <!-- <li>
                   <p>Web Applications</p>

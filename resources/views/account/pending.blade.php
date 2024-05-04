@@ -6,7 +6,7 @@
 <section id="details" class="details">
     <div class="container">
         <div class="row content">
-            <div class="col-md-4 mt-4 mt-md-0" data-aos="fade-left">
+            <div class="col-md-4 mt-5" data-aos="fade-left">
                 <img src="{{ asset('landing/assets/img/details-2.png') }}" class="img-fluid" alt="">
             </div>
             <div class="col-md-8 pt-4 mt-5" data-aos="fade-up">
