@@ -122,6 +122,7 @@ class DatabaseSeeder extends Seeder
         $users = User::pluck('id')->toArray(); // Get all user IDs from the User table
         $priorityLevels = ['High', 'Mid', 'Low'];
         $statusOptions = ['Open', 'In Progress', 'Closed'];
+        $unitOptions = ['MICT', 'MIS', 'Repair', 'Network'];
 
         for ($i = 0; $i < 70; $i++) { // Generate 50 tickets
             $randomTimestamp = $faker->dateTimeBetween('-1 years', 'now');
@@ -130,7 +131,7 @@ class DatabaseSeeder extends Seeder
             Ticket::create([
                 'user_id'          => $faker->randomElement($users),
                 'service_location' => $faker->streetAddress,
-                'unit'             => $faker->word,
+                'unit'             => $faker->randomElement($unitOptions),
                 'request'          => $faker->sentence,
                 'priority_level'   => $faker->randomElement($priorityLevels),
                 'deadline'         => $faker->date(),
