@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('service_location');
-            $table->string('unit');
+            $table->enum('unit', ['MICT', 'MIS', 'Repair', 'Network']);
             $table->string('request');
             $table->enum('priority_level', ['High', 'Mid', 'Low']);
             $table->date('deadline');
