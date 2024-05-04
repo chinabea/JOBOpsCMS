@@ -69,35 +69,42 @@ class UserController extends Controller
         }
     }
     public function edit($id)
-{
-    try {
-        $user = User::findOrFail($id);
-        $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff'];
-        $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
+    {
+        try {
+            $user = User::findOrFail($id);
+            // Assuming the expertise data might be stored as a comma-separated string or JSON
+            // Ensure it's properly converted to an array
+            $existingExpertise = !empty($user->expertise) ? json_decode($user->expertise, true) : [];
+            
+            // If json_decode fails and returns null, ensure we default to an empty array
+            if (!is_array($existingExpertise)) {
+                $existingExpertise = [];
+            }
 
-        $assignedTickets = Ticket::whereHas('users', function ($query) use ($user) {
-            $query->where('users.id', $user->id);
-        })
-        ->with(['user', 'users'])
-        ->orderBy('created_at', 'desc')
-        ->get();
+            $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff'];
+            $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
 
-        $monthlyTicketsData = Ticket::select(DB::raw("YEAR(created_at) as year"), DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
-        ->where('user_id', $user->id)
-        ->groupBy('year', 'month')
-        ->orderBy('year', 'asc')
-        ->orderBy('month', 'asc')
-        ->get();
+            $assignedTickets = Ticket::whereHas('users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })
+            ->with(['user', 'users'])
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        // Decode the expertise JSON string into a PHP array
-        $existingExpertise = !empty($user->expertise) ? json_decode($user->expertise, true) : [];
+            $monthlyTicketsData = Ticket::select(DB::raw("YEAR(created_at) as year"), DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
+            ->where('user_id', $user->id)
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+            
 
-        return view('user.user-profile', compact('user', 'roles', 'expertiseOptions', 'assignedTickets', 'existingExpertise', 'monthlyTicketsData'));
-    } catch (Exception $e) {
-        // Handle the exception here, you can log it or return an error response
-        return $e->getMessage();
+            return view('user.user-profile', compact('user', 'roles', 'expertiseOptions', 'assignedTickets', 'existingExpertise', 'monthlyTicketsData'));
+        } catch (Exception $e) {
+            // Handle the exception here, you can log it or return an error response
+            return $e->getMessage();
+        }
     }
-}
 
     
     // public function edit($id)
@@ -153,8 +160,9 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            $user->expertise = implode(',', $request->expertise); // Convert array to comma-separated string, if storing as string
-            $user->save();
+            $expertise = $request->input('expertise');
+            $user->update($request->all()); // Ensure only safe fields are updated
+    
     
             // Log activity
             ActivityLogger::log('Updated', $user, 'User updated');

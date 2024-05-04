@@ -79,33 +79,6 @@
                       <li><i class="fa fa-info-circle"></i> No expertise listed.</li>
                   @endif
               </ul>
-
-            
-                <!-- <li>
-                  <p>Web Applications</p>
-                  <div class="progress progress_sm">
-                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                  </div>
-                </li>
-                <li>
-                  <p>Website Design</p>
-                  <div class="progress progress_sm">
-                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                  </div>
-                </li>
-                <li>
-                  <p>Automation & Testing</p>
-                  <div class="progress progress_sm">
-                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                  </div>
-                </li>
-                <li>
-                  <p>UI / UX</p>
-                  <div class="progress progress_sm">
-                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                  </div>
-                </li> -->
-              </ul>
               <!-- end of skills -->
 
             </div>
@@ -233,14 +206,20 @@
                           <div class="col-sm-10">
                               <div id="dynamic-expertise">
                                   <!-- Placeholder for existing expertise entries -->
-                                  @foreach($existingExpertise as $expertise)
-                                  <div class="input-group mb-2">
-                                      <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise" value="{{ $expertise }}">
-                                      <div class="input-group-append">
-                                          <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
-                                      </div>
-                                  </div>
-                                  @endforeach
+                                  
+            @if(!empty($existingExpertise))
+                @foreach($existingExpertise as $expertise)
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise" value="{{ $expertise }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p>No expertise listed.</p>
+            @endif
+                              
                                   <!-- New expertise entry field -->
                                   <div class="input-group mb-2">
                                       <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
