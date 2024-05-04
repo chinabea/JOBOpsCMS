@@ -75,9 +75,14 @@
 					</div>
 				</div>
 				<div class="item form-group">
-					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
+					<label for="unit" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
 					<div class="col-md-6 col-sm-6 ">
-						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->unit }}">
+						<select id="unit" class="form-control" name="unit">
+							<option value="open" {{ $ticket->unit == 'MICT' ? 'selected' : '' }}> MICT</option>
+							<option value="pending" {{ $ticket->unit == 'MIS' ? 'selected' : '' }}>MIS</option>
+							<option value="closed" {{ $ticket->unit == 'Repair' ? 'selected' : '' }}>Repair</option>
+							<option value="closed" {{ $ticket->unit == 'Network' ? 'selected' : '' }}>Network</option>
+						</select>
 					</div>
 				</div>
 				<div class="item form-group">
@@ -87,23 +92,31 @@
 					</div>
 				</div>
 				<div class="item form-group">
-					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Priority</label>
+					<label for="priority_level" class="col-form-label col-md-3 col-sm-3 label-align">Priority</label>
 					<div class="col-md-6 col-sm-6 ">
-						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->priority_level }}">
+						<select id="priority_level" class="form-control" name="priority_level">
+							<option value="open" {{ $ticket->priority_level == 'High' ? 'selected' : '' }}>High</option>
+							<option value="pending" {{ $ticket->priority_level == 'Mid' ? 'selected' : '' }}>Mid</option>
+							<option value="closed" {{ $ticket->priority_level == 'Low' ? 'selected' : '' }}>Low</option>
+						</select>
 					</div>
 				</div>
 				<div class="item form-group">
-					<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
+					<label for="status" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
 					<div class="col-md-6 col-sm-6 ">
-						<input id="middle-name" class="form-control" type="text" name="middle-name" value="{{ $ticket->status }}">
+						<select id="status" class="form-control" name="status">
+							<option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
+							<option value="pending" {{ $ticket->status == 'pending' ? 'selected' : '' }}>In Progress</option>
+							<option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
+						</select>
 					</div>
 				</div>
 				<div class="ln_solid"></div>
 				<div class="item form-group justify-content-center">
 					<div class="col-md-6 col-sm-6 offset-md-3">
-						<button class="btn btn-primary" type="button">Cancel</button>
-						<button class="btn btn-primary" type="reset">Reset</button>
-						<button type="submit" class="btn btn-success">Submit</button>
+						<button class="btn btn-secondary btn-round" type="button" onclick="history.back();"><i class="fa fa-reply"></i> Cancel</button>
+						<button class="btn btn-primary btn-round" id="reset" type="reset"><i class="fa fa-refresh"></i> Reset</button>
+						<button type="submit" class="btn btn-info btn-round"><i class="fa fa-upload"></i> Submit</button>
 					</div>
 				</div>
 			  </form>
