@@ -74,65 +74,60 @@
                 <div class="row x_title">
                   <div class="col-md-6">
                     <!-- <h3>Ticket Summary</h3> -->
-                    <h2>Ticket Summary <small>Yearly requests</small></h2>
+                    <h3>Ticket Summary <small>Yearly requests</small></h3>
                   </div>
                 </div>
 
                 <div class="col-md-9 col-sm-9 ">
-                  <canvas id="ticketsChart" width="400" height="150"></canvas>
+                  <canvas id="ticketsChart" width="400" height="150"  style="height:280px"></canvas>
                 </div>
                 <div class="col-md-3 col-sm-3 bg-white">
-                      <div>
-                        <div class="x_title">
-                          <h2><i class="fa fa-users"></i> For Approval Users</h2>
-                          <div class="clearfix"></div>
-                        </div>
-                        <ul class="list-unstyled top_profiles scroll-view">
-            
-                        <style>
-                          .avatar-img {
-                              width: 50px;
-                              height: 50px;
-                              border-radius: 50%;
-                              padding: 5px; /* Adjust as needed */
-                          }
-                        </style>            
-                        @forelse ($unapprovedUsers as $user)
-                          <li class="media event d-flex align-items-center">
-                              @if($user->avatar)
-                                  <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
-                                  
-                              @else
-                                  <a class="pull-left border-green profile_thumb">
-                                  <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
-                                  </a>
-                                  
-                              @endif
-                              <div class="media-body" style="margin-left: 10px;">
-                                  <a class="title" href="{{ route('user.edit', $user->id) }}">{{ $user->name }}</a>
-                                  <p>{{ $user->job_position }} </p>
-                                  <p> <small>{{ $user->created_at }}</small></p>
-                              </div>
-                            </li>
-                          @empty
-                            <li>No unapproved users found.</li>
-                          @endforelse
-                          
-                        </ul>
+                    <div>
+                      <div class="x_title align-items-center">
+                        <h2><i class="fa fa-users"></i> Pending User Approvals</h2>
+                        <div class="clearfix"></div>
                       </div>
+                      <ul class="list-unstyled top_profiles scroll-view">
+          
+                      <style>
+                        .avatar-img {
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            padding: 5px; /* Adjust as needed */
+                        }
+                      </style>            
+                      @forelse ($unapprovedUsers as $user)
+                        <li class="media event d-flex align-items-center">
+                            @if($user->avatar)
+                                <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
+                                
+                            @else
+                                <a class="pull-left border-green profile_thumb">
+                                <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
+                                </a>
+                                
+                            @endif
+                            <div class="media-body" style="margin-left: 10px;">
+                                <a class="title" href="{{ route('user.edit', $user->id) }}">{{ $user->name }}</a>
+                                <p>{{ $user->job_position }} </p>
+                                <p> <small>{{ $user->created_at }}</small></p>
+                            </div>
+                          </li>
+                          
+                          <hr>
+                        @empty
+                          <li>No unapproved users found.</li>
+                        @endforelse
+                      </ul>
                     </div>
-
-                    
-                <div class="clearfix"></div>
+                    </div>
+                  <div class="clearfix"></div>
+                </div>
               </div>
             </div>
-
-          </div>
           <br />
-
-
           <!-- other rows here -->
-        
         </div>
         <!-- /page content -->
 

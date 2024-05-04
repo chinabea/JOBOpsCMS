@@ -84,19 +84,11 @@
                                 Guest
                             @endif
                         </td>
-                        <!-- <td class="align-middle">
-                          @if($user->is_approved == true)  
-                            approved
-                          @else
-                            disapproved
-                          @endif
-                        </td> -->
-
                         <td>
                             @if (!$user->is_approved)
-                                <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info">Approve</a>
+                                <a href="{{ route('users.approve', $user->id) }}" class="btn btn-sm btn-info"><i class="fa fa-check-square-o"></i> Approve</a>
                             @else
-                                <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger">Disapprove</a>
+                                <a href="{{ route('users.disapprove', $user->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i> Disapprove</a>
                             @endif
                         </td>
                         <td class="align-middle">
