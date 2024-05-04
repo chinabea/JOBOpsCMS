@@ -78,10 +78,10 @@
 					<label for="unit" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
 					<div class="col-md-6 col-sm-6 ">
 						<select id="unit" class="form-control" name="unit">
-							<option value="open" {{ $ticket->unit == 'MICT' ? 'selected' : '' }}> MICT</option>
-							<option value="pending" {{ $ticket->unit == 'MIS' ? 'selected' : '' }}>MIS</option>
-							<option value="closed" {{ $ticket->unit == 'Repair' ? 'selected' : '' }}>Repair</option>
-							<option value="closed" {{ $ticket->unit == 'Network' ? 'selected' : '' }}>Network</option>
+							<option value="MICT" {{ $ticket->unit == 'MICT' ? 'selected' : '' }}> MICT</option>
+							<option value="MIS" {{ $ticket->unit == 'MIS' ? 'selected' : '' }}>MIS</option>
+							<option value="Repair" {{ $ticket->unit == 'Repair' ? 'selected' : '' }}>Repair</option>
+							<option value="Network" {{ $ticket->unit == 'Network' ? 'selected' : '' }}>Network</option>
 						</select>
 					</div>
 				</div>
@@ -95,9 +95,9 @@
 					<label for="priority_level" class="col-form-label col-md-3 col-sm-3 label-align">Priority</label>
 					<div class="col-md-6 col-sm-6 ">
 						<select id="priority_level" class="form-control" name="priority_level">
-							<option value="open" {{ $ticket->priority_level == 'High' ? 'selected' : '' }}>High</option>
-							<option value="pending" {{ $ticket->priority_level == 'Mid' ? 'selected' : '' }}>Mid</option>
-							<option value="closed" {{ $ticket->priority_level == 'Low' ? 'selected' : '' }}>Low</option>
+							<option value="High" {{ $ticket->priority_level == 'High' ? 'selected' : '' }}>High</option>
+							<option value="Mid" {{ $ticket->priority_level == 'Mid' ? 'selected' : '' }}>Mid</option>
+							<option value="Low" {{ $ticket->priority_level == 'Low' ? 'selected' : '' }}>Low</option>
 						</select>
 					</div>
 				</div>
@@ -105,10 +105,16 @@
 					<label for="status" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
 					<div class="col-md-6 col-sm-6 ">
 						<select id="status" class="form-control" name="status">
-							<option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Open</option>
-							<option value="pending" {{ $ticket->status == 'pending' ? 'selected' : '' }}>In Progress</option>
-							<option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
+							<option value="Open" {{ $ticket->status == 'Open' ? 'selected' : '' }}>Open</option>
+							<option value="In Progress" {{ $ticket->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+							<option value="Closed" {{ $ticket->status == 'Closed' ? 'selected' : '' }}>Closed</option>
 						</select>
+					</div>
+				</div>
+				<div class="item form-group">
+					<label for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
+					<div class="col-md-6 col-sm-6 ">
+						<textarea id="description" class="form-control" type="text" name="description" value="{{ $ticket->description }}"></textarea>
 					</div>
 				</div>
 				<div class="ln_solid"></div>

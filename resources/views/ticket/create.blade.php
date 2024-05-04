@@ -6,7 +6,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Ticket</h3>
+				<h3>Create Ticket</h3>
 			</div>
 
 			<div class="title_right">
@@ -25,7 +25,7 @@
 			<div class="col-md-12 col-sm-12 ">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Create Ticket</small></h2>
+						<h2>Ticket Details</small></h2>
 						<ul class="nav navbar-right panel_toolbox">
 							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 							</li>
@@ -64,30 +64,29 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Service Location <span class="required">*</span>
+								<label class="col-form-label col-md-3 col-sm-3 label-align" for="service_location">Service Location <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 ">
-									<input type="text" id="first-name" name="service_location" required="required" class="form-control ">
+									<input type="text" id="service_location" name="service_location" required="required" class="form-control ">
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align" for="unit">Unit <span class="required">*</span>
-								</label>
+								<label for="unit" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
 								<div class="col-md-6 col-sm-6 ">
-									<input type="text" id="unit" name="unit" required="required" class="form-control">
+									<select id="unit" class="form-control" name="unit">
+										<option value=""> Select Unit</option>
+										<option value="MICT" name="unit"> MICT</option>
+										<option value="MIS" name="unit">MIS</option>
+										<option value="Repair" name="unit">Repair</option>
+										<option value="Network" name="unit">Network</option>
+									</select>
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align" for="unit">Request <span class="required">*</span>
+								<label class="col-form-label col-md-3 col-sm-3 label-align" for="request">Request <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 ">
 									<input type="text" id="request" name="request" required="required" class="form-control">
-								</div>
-							</div>
-							<div class="item form-group">
-								<label for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
-								<div class="col-md-6 col-sm-6 ">
-									<input id="description" class="form-control" type="text" name="description">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -113,6 +112,12 @@
 								</div>
 							</div>
 							<div class="item form-group">
+								<label for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description<span class="required">*</span></label>
+								<div class="col-md-6 col-sm-6 ">
+									<textarea id="description" class="form-control" type="text" required="required" name="description"></textarea>
+								</div>
+							</div>
+							<div class="item form-group">
 								<label for="file_path" class="col-form-label col-md-3 col-sm-3 label-align">Upload File</label>
 								<div class="col-md-6 col-sm-6 ">
 									<input id="file_path" class="form-control" type="file" name="file_path">
@@ -125,7 +130,6 @@
 									<button type="submit" class="btn btn-success">Submit</button>
 								</div>
 							</div>
-
 						</form>
 					</div>
 				</div>
