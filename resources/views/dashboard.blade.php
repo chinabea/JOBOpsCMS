@@ -98,70 +98,26 @@
                           }
                         </style>            
                         @forelse ($unapprovedUsers as $user)
-                            <li class="media event d-flex align-items-center">
-                                @if($user->avatar)
-                                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
-                                @else
-                                    <a class="pull-left border-green profile_thumb">
-                                    <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
-                                    </a>
-                                    
-                                @endif
-                                <div class="media-body">
-                                    <a class="title" href="{{ route('user.edit', $user->id) }}" style="margin-left: 10px;">{{ $user->name }}</a>
-                                </div>
+                          <li class="media event d-flex align-items-center">
+                              @if($user->avatar)
+                                  <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
+                                  
+                              @else
+                                  <a class="pull-left border-green profile_thumb">
+                                  <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
+                                  </a>
+                                  
+                              @endif
+                              <div class="media-body" style="margin-left: 10px;">
+                                  <a class="title" href="{{ route('user.edit', $user->id) }}">{{ $user->name }}</a>
+                                  <p>{{ $user->job_position }} </p>
+                                  <p> <small>{{ $user->created_at }}</small></p>
+                              </div>
                             </li>
-                        @empty
+                          @empty
                             <li>No unapproved users found.</li>
-                        @endforelse
-
-
-
-
-                          <!-- <li class="media event">
-                            <a class="pull-left border-green profile_thumb">
-                              <i class="fa fa-user green"></i>
-                            </a>
-                            <div class="media-body">
-                              <a class="title" href="#">Ms. Mary Jane</a>
-                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                              <p> <small>12 Sales Today</small>
-                              </p>
-                            </div>
-                          </li> -->
-                          <!-- <li class="media event">
-                            <a class="pull-left border-blue profile_thumb">
-                              <i class="fa fa-user blue"></i>
-                            </a>
-                            <div class="media-body">
-                              <a class="title" href="#">Ms. Mary Jane</a>
-                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                              <p> <small>12 Sales Today</small>
-                              </p>
-                            </div>
-                          </li> -->
-                          <!-- <li class="media event">
-                            <a class="pull-left border-aero profile_thumb">
-                              <i class="fa fa-user aero"></i>
-                            </a>
-                            <div class="media-body">
-                              <a class="title" href="#">Ms. Mary Jane</a>
-                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                              <p> <small>12 Sales Today</small>
-                              </p>
-                            </div>
-                          </li> -->
-                          <!-- <li class="media event">
-                            <a class="pull-left border-green profile_thumb">
-                              <i class="fa fa-user green"></i>
-                            </a>
-                            <div class="media-body">
-                              <a class="title" href="#">Ms. Mary Jane</a>
-                              <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                              <p> <small>12 Sales Today</small>
-                              </p>
-                            </div>
-                          </li> -->
+                          @endforelse
+                          
                         </ul>
                       </div>
                     </div>
@@ -180,7 +136,7 @@
         </div>
         <!-- /page content -->
 
-        <script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('ticketsChart').getContext('2d');

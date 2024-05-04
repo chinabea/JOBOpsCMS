@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'John Carlo Dacara',
                 'email' => 'johdacara@my.cspc.edu.ph',
                 'role' => 2,
+                'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKSDUrjoiSNypUvGZdT8iNqHHnd7A5ATUycaAP6GbH6pH9GDg=s96-c',
                 'is_approved' => true,
                 'phone_number' => null,
                 'job_position' => null,
@@ -78,25 +79,25 @@ class DatabaseSeeder extends Seeder
             //     'expertise' => null,
                 
             // ],
-            [
-                'name' => 'Jessemri Tabayag',
-                'email' => 'jestabayag@my.cspc.edu.ph',
-                'role' => null,
-                'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKUB0nARYGxuJCevZG8KLnVwpmTDrJsZfFZa7ZdFCLaiJ49pWfI=s96-c',
-                'is_approved' => false,
-                'phone_number' => null,
-                'job_position' => null,
-                'expertise' => null,
+            // [
+            //     'name' => 'Jessemri Tabayag',
+            //     'email' => 'jestabayag@my.cspc.edu.ph',
+            //     'role' => null,
+            //     'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKjGmqvq6Rrri0tkpCM3vx2q7lZc30Wm2OUs1BFdeq-_-8jLF-n=s96-c',
+            //     'is_approved' => false,
+            //     'phone_number' => null,
+            //     'job_position' => 'Admin Aide 2',
+            //     'expertise' => null,
                 
                 
-            ],
+            // ],
             [
                 'name' => 'Louie Molina',
                 'email' => 'loumolina@my.cspc.edu.ph',
                 'role' => null,
                 'is_approved' => false,
                 'phone_number' => null,
-                'job_position' => null,
+                'job_position' => 'Admin Aide',
                 'expertise' => null,
                 
             ],
@@ -104,9 +105,10 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Rica Theresa Adante',
                 'email' => 'ricadante@my.cspc.edu.ph',
                 'role' => null,
+                'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocLDuPOe6NaSoJcu5ATbEJsn3ptMJlkAgp3awFZQCY8cqCl4bA=s96-c',
                 'is_approved' => false,
                 'phone_number' => null,
-                'job_position' => null,
+                'job_position' => 'Admin Aide',
                 'expertise' => null,
                 
             ],
