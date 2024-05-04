@@ -11,57 +11,58 @@
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-users"></i> Total Users</span>
         <div class="count">{{ $totalUsers }}</div>
-        <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+        <span class="count_bottom"><i class="green">{{ number_format($userPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-book"></i> Total Tickets</span>
         <div class="count">{{ $totalTickets }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{ number_format($ticketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-folder-open"></i> Open Tickets</span>
-        <div class="count">{{ $allOpen }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalOpenTickets }}</div>
+        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{ number_format($totalOpenTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-line-chart"></i> In Progress</span>
-        <div class="count">{{ $allInProgress }}</div>
-        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+        <div class="count">{{ $totalInProgressTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalInProgressTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-folder"></i> Closed Tickets</span>
-        <div class="count">{{ $allClosed }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalClosedTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalClosedTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-flag"></i> High Priority</span>
-        <div class="count">{{ $allHigh }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalHighLevelTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalHighLevelTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-minus-square"></i> Mid Priority</span>
-        <div class="count">{{ $allMid }}</div>
+        <div class="count">{{ $totalMidLevelTickets }}</div>
         <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalMidLevelTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-sort-amount-asc"></i> Low Priority</span>
-        <div class="count">{{ $allLow }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalLowLevelTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalLowLevelTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-times"></i> Unassigned Tickets</span>
-        <div class="count">{{ $unassignedTickets }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalUnassignedTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalUnassignedTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-check-square-o"></i> For Approval Users</span>
-        <div class="count">{{ $forApproval }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalPendingApprovalofUsers }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalPendingApprovalofUsersPercentageChange, 2) }}% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Assigned to Me</span>
-        <div class="count">{{ $assignedTickets }}</div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        <div class="count">{{ $totalAssignedTickets }}</div>
+        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{ number_format($totalAssignedTicketsPercentageChange, 2) }}% </i> From last Week</span>
       </div>
     </div>
   </div>
