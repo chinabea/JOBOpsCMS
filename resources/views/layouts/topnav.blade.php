@@ -21,19 +21,19 @@
                       @endif
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">Profile</a>
+                  <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}"><i class="fa fa-user mr-2"></i> Profile</a>
 
-                      <a class="dropdown-item"  href="javascript:;">
+                      <!-- <a class="dropdown-item"  href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
-                      </a>
-                  <a class="dropdown-item"  href="javascript:;">Help</a>
+                      </a> -->
+                  <!-- <a class="dropdown-item"  href="javascript:;">Help</a> -->
                     <!-- <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a> -->
 
 
                     
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fa fa-sign-out mr-2"></i>
                     Logout
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
