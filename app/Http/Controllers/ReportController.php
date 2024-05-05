@@ -89,13 +89,13 @@ class ReportController extends Controller
         // Adjust database query to filter records based on the date range
         $tickets = Ticket::whereBetween('created_at', [$start_date, $end_date])->get();
 
-        $pdf = PDF::loadView('reports.ticket-reports', compact('tickets'));
+        $pdf = PDF::loadView('reports.tickets-reports', compact('tickets'));
 
         // Validate the date range
         $formattedStartDate = Carbon::parse($start_date)->startOfDay();
         $formattedEndDate = Carbon::parse($end_date)->endOfDay();
         
-        return $pdf->stream('ticket-reports-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
+        return $pdf->stream('tickets-reports-' . $formattedStartDate . '-' . $formattedEndDate . '.pdf');
         
     }
 

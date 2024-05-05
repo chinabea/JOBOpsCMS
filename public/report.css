@@ -52,8 +52,33 @@ tr:nth-child(even) {
     vertical-align: middle;
 }
 
-.custom-paragraph{
+.institution-details {
     line-height: 0.2;
+    font-family: 'Calibri', sans-serif;
 }
-/* public/css/pdf-styles.css */
+.cspc-logo {
+    max-width: 10%; 
+    margin: 0;
+}
 
+.mict-logo {
+    max-width: 11%; 
+    margin: 0;
+}
+.republic {
+    font-size: 10pt; 
+}
+.cspc {
+    font-size: 12pt; 
+    font-weight: bold; 
+}
+.mict {
+    font-size: 13pt; 
+    font-weight: bold; 
+    margin-bottom: 1;
+    font-family: 'Calibri', sans-serif;
+}
+.header-line {
+    width: 100%; 
+    margin: 0;
+}

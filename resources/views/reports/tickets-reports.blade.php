@@ -19,35 +19,38 @@
             <p class="mict">Management Information and Communication Technology</p>
         <img class="header-line" src="{{ public_path('production/images/header-line.png') }}" alt="Header Line">
     </header>
-    <h2 class="text-center">USERS</h2>
+    <h2 class="text-center">TICKETS</h2><br>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>high-priority.report
-                    <th>Role</th>
-                    <th>Email</th>
+                    <th>Request by</th>
+                    <th>Location</th>
+                    <th>Unit</th>
+                    <th>Request</th>
+                    <th>Assigned to</th>
+                    <th>Priority</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>
-                                @if ($user->role == 1)
-                                    Admin
-                                @elseif ($user->role == 2)
-                                    MICT Staff
-                                @elseif ($user->role == 3)
-                                    Staff
-                                @else
-                                    Guest
-                                @endif
-                            </td>
-                            <td>{{ $user->email }}</td>
-                            </td>
-                        </tr>
+                @foreach($tickets as $ticket)
+                @if(auth()->user()->role == 1 || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $ticket->user->name }}</td>
+                    <td>{{ $ticket->service_location }}</td>
+                    <td>{{ $ticket->unit }}</td>
+                    <td>{{ $ticket->request }}</td>
+                    <td>
+                        @foreach ($ticket->users as $assigned_user)
+                        {{ $assigned_user->name }}
+                        @endforeach
+                    </td>
+                    <td>{{ $ticket->priority_level }}</td>
+                    <td>{{ $ticket->status }}</td>
+                </tr>
+                    @endif
                     @endforeach
             </tbody>
         </table>
