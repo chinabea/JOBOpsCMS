@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
                 'role' => 2,
                 'avatar' => 'https://lh3.googleusercontent.com/a-/ALV-UjUyzMg5jnHLaIdqVOMbOfKy5sg3jjS-0QBMjHXk14sVzI10lSZcGBwjtKQj1k0fSphccVgWSuhjQiJZKUauEH1erHlTV1egHnFzXInY_x44JRpyRIcoCTkHwbVLAzUzapUs-_QDlfwPuK9yFLAalRQkmTRGSbe1YPxixEU5pvK8wbgRc92cNgV727ERWMi33Wglb_7ZlF78xYQ2dcui4XMpmU5-2mH9NmeZ5blLPgovGEyoUQfFHMsM9cj6OIy7030e5RRyKkfOoqB6-ogVj9wI_9C8oZJarYQYUurz_P7gQokUhVMI0QtnkeUaKbzrFsltN8V-ukM7_2Ji75-T_H2z5RVTGn9KGYzWxIRso9yxuhTXVjkYNDRndVCP8SapkCIynkdD-LHcmiaWsUGOb8Cn35FKlXAkFV00l_J8EME4LB2vGdENNCP2Bje6P0ijO9JnKgpr7HiON4w9rK5b8hsLqmjXqdA9y7EsBrzhGQvIoTB8IwsN0mZPQM5fg33WeaSebgAoqejm-iNTYVV8_i171jSm0tdu5e-5uMlmguJKFVMOOsqtTmuqvImSdVRGnEaXrluab2M4FX2Q2b0TburziOpuDhTm6fIbjz3J3aMSkAofR4fzr8NZphKDW30xNO_mzy50o2bC0tYopiD_tL1rj-IRfqIO-xY_TwrsPt3ngC3T6599U5_896dPFrffAlEtogH7t9HaQdHxKgH3NiPhJC0DWj5LBdUehJGcF9sMRFz6W2LnO6oXAneItDFQYL1TiBs8uFcChd4PFKRakFDUyLwgG8Lq_ewVh8kAu-hkZ_qamKYO5DdZWfMTCZYacDDZWP6sY9pOR_C_Yw94Kn06KfgWcxn-lAAFueSO5JVZG20o4bl9hrxg46Eq9vg5QAhFTZ1SENMKkLhplgBNHS3V_ruGNDdZkHtvZdXr9VCAl6J2io_H9dvkOOs9LN7P8sMiioZ8u4uKBPYOLhG0BNam4Q=s96-c',
                 'is_approved' => true,
-                'phone_number' => null,
-                'job_position' => null,
-                'expertise' => null,
+                'phone_number' => '09628950257',
+                'job_position' => 'Software Developer',
+                'expertise' => '["Web Developer"]', 
                 
             ],
             [
@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocIGM3-G1PBRp1kRe61ZRM4xR67hq-bUW4O3BkjhHdyDisp6bOM=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09246794618',
-                'job_position' => 'Software Devs',
-                'expertise' => 'Software Developer',
+                'job_position' => 'Software Developer',
+                'expertise' => '["Developer"]',
             ],
             [
                 'name' => 'JESSICA MATAYA',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
                 'is_approved' => false,
                 'phone_number' => '09386390756',
                 'job_position' => 'Admin Aide 1',
-                'expertise' => 'Networking',
+                'expertise' => '["Networking"]',
             ],
             [
                 'name' => 'John Carlo Dacara',
@@ -53,9 +53,9 @@ class DatabaseSeeder extends Seeder
                 'role' => 2,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKSDUrjoiSNypUvGZdT8iNqHHnd7A5ATUycaAP6GbH6pH9GDg=s96-c',
                 'is_approved' => true,
-                'phone_number' => null,
-                'job_position' => null,
-                'expertise' => null,
+                'phone_number' => '09248769368',
+                'job_position' => 'Admin Aide',
+                'expertise' => '["Technician"]',
                 
             ],
             // [
@@ -97,21 +97,24 @@ class DatabaseSeeder extends Seeder
         
         // Ticket seeding
         $faker = Faker::create();
-        $approvedUsers = User::where('is_approved', true)->pluck('id')->toArray();
-        
+        $approvedUsers = User::where('is_approved', true)
+                      ->whereIn('role', [1, 2]) 
+                      ->pluck('id')
+                      ->toArray();
+                      
         $serviceLocationOptions = [
-            'Academic Building V', 'Cashier Office', 'Registrar Office', // More options...
+            'Academic Building V', 'Cashier Office', 'Registrar Office', 
         ];
         $unitOptions = ['MICT', 'MIS', 'Repair', 'Network'];
         $requestOptions = [
-            'Unable to Access Student Database', 'Email Setup on New Staff Computers', // More options...
+            'Unable to Access Student Database', 'Email Setup on New Staff Computers', 
         ];
         $priorityLevels = ['High', 'Mid', 'Low'];
         $statusOptions = ['Open', 'In Progress', 'Closed'];
 
         for ($i = 0; $i < 70; $i++) {
             $ticket = Ticket::create([
-                'user_id'          => $faker->randomElement($approvedUsers), // Assuming there is still a user_id if needed
+                'user_id'          => $faker->randomElement($approvedUsers), 
                 'service_location' => $faker->randomElement($serviceLocationOptions),
                 'unit'             => $faker->randomElement($unitOptions),
                 'request'          => $faker->randomElement($requestOptions),
