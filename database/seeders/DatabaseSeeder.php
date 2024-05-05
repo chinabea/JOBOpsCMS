@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Ticket;
-use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
@@ -17,15 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-    
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        
+        // User seeding
         $users = [
             [
                 'name' => 'China Bea',
@@ -70,16 +59,6 @@ class DatabaseSeeder extends Seeder
                 
             ],
             // [
-            //     'name' => 'Mark Louis Odavar',
-            //     'email' => 'mlodavar@my.cspc.edu.ph',
-            //     'role' => 2,
-            //     'is_approved' => true,
-            //     'phone_number' => null,
-            //     'job_position' => null,
-            //     'expertise' => null,
-                
-            // ],
-            // [
             //     'name' => 'Jessemri Tabayag',
             //     'email' => 'jestabayag@my.cspc.edu.ph',
             //     'role' => null,
@@ -88,8 +67,6 @@ class DatabaseSeeder extends Seeder
             //     'phone_number' => null,
             //     'job_position' => 'Admin Aide 2',
             //     'expertise' => null,
-                
-                
             // ],
             [
                 'name' => 'Louie Molina',
@@ -118,209 +95,43 @@ class DatabaseSeeder extends Seeder
             User::create($userData);
         }
         
+        // Ticket seeding
         $faker = Faker::create();
-        $users = User::pluck('id')->toArray(); // Get all user IDs from the User table
+        $approvedUsers = User::where('is_approved', true)->pluck('id')->toArray();
+        
+        $serviceLocationOptions = [
+            'Academic Building V', 'Cashier Office', 'Registrar Office', // More options...
+        ];
+        $unitOptions = ['MICT', 'MIS', 'Repair', 'Network'];
+        $requestOptions = [
+            'Unable to Access Student Database', 'Email Setup on New Staff Computers', // More options...
+        ];
         $priorityLevels = ['High', 'Mid', 'Low'];
         $statusOptions = ['Open', 'In Progress', 'Closed'];
-        $unitOptions = ['MICT', 'MIS', 'Repair', 'Network'];
 
-        for ($i = 0; $i < 70; $i++) { // Generate 50 tickets
-            $randomTimestamp = $faker->dateTimeBetween('-1 years', 'now');
-
-
-            Ticket::create([
-                'user_id'          => $faker->randomElement($users),
-                'service_location' => $faker->streetAddress,
+        for ($i = 0; $i < 70; $i++) {
+            $ticket = Ticket::create([
+                'user_id'          => $faker->randomElement($approvedUsers), // Assuming there is still a user_id if needed
+                'service_location' => $faker->randomElement($serviceLocationOptions),
                 'unit'             => $faker->randomElement($unitOptions),
-                'request'          => $faker->sentence,
+                'request'          => $faker->randomElement($requestOptions),
                 'priority_level'   => $faker->randomElement($priorityLevels),
                 'deadline'         => $faker->date(),
-                'description'      => $faker->paragraph($nbSentences = 1, $variableNbSentences = true), // Limiting to 3 sentences
-                // 'assigned_to'      => $faker->randomElement($users + [null]), // Random user or null
-                'file_path'        => $faker->randomElement([$faker->imageUrl(), null]), // Random image URL or null
+                'description'      => $faker->sentence(),
+                'file_path'        => $faker->randomElement([$faker->imageUrl(), null]),
                 'status'           => $faker->randomElement($statusOptions),
-                'created_at'       => $randomTimestamp, // Random creation date within the last two years
-                'updated_at'       => $randomTimestamp  // Ensures created_at and updated_at are the same
+                'created_at'       => $faker->dateTimeThisYear(),
+                'updated_at'       => $faker->dateTimeThisYear()
             ]);
+
+            // Assign approved users to tickets using the pivot table
+            // Can assign multiple users or none
+            $numberOfUsersToAssign = $faker->numberBetween(0, 3);
+            $assignedUsers = $faker->randomElements($approvedUsers, $numberOfUsersToAssign);
+
+            foreach ($assignedUsers as $userId) {
+                $ticket->users()->attach($userId); // Assuming Ticket model has users() relation defined
+            }
         }
-
-        
-        // $tickets = [
-            
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Academic Building V',
-        //         'unit' => 'MIS',
-        //         'request' => 'Damage Printer',
-        //         'description' => 'Printer Damage Damage Damage Printer Printer',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'Open',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier Office',
-        //         'unit' => 'MIT',
-        //         'request' => 'aircon',
-        //         'description' => 'Damage Damage Printer Printer',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Office',
-        //         'unit' => 'Repair',
-        //         'request' => 'ID issues',
-        //         'description' => 'Need for Repair',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 02, 22),
-        //         'status' => 'Closed',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier',
-        //         'unit' => 'Repair',
-        //         'request' => 'Repair',
-        //         'description' => 'Damage',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 10, 27),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-            
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Academic Building V',
-        //         'unit' => 'MIS',
-        //         'request' => 'Damage Printer',
-        //         'description' => 'Printer Damage Damage Damage Printer Printer',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'Open',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier Office',
-        //         'unit' => 'MIT',
-        //         'request' => 'aircon',
-        //         'description' => 'Damage Damage Printer Printer',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Office',
-        //         'unit' => 'Repair',
-        //         'request' => 'ID issues',
-        //         'description' => 'Need for Repair',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 02, 22),
-        //         'status' => 'Closed',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Academic Building V',
-        //         'unit' => 'MIS',
-        //         'request' => 'Damage Printer',
-        //         'description' => 'Printer Damage Damage Damage Printer Printer',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'Open',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier Office',
-        //         'unit' => 'MIT',
-        //         'request' => 'aircon',
-        //         'description' => 'Damage Damage Printer Printer',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Office',
-        //         'unit' => 'Repair',
-        //         'request' => 'ID issues',
-        //         'description' => 'Need for Repair',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 02, 22),
-        //         'status' => 'Closed',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier',
-        //         'unit' => 'Repair',
-        //         'request' => 'Repair',
-        //         'description' => 'Damage',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 10, 27),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-            
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Academic Building V',
-        //         'unit' => 'MIS',
-        //         'request' => 'Damage Printer',
-        //         'description' => 'Printer Damage Damage Damage Printer Printer',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'Open',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Cashier Office',
-        //         'unit' => 'MIT',
-        //         'request' => 'aircon',
-        //         'description' => 'Damage Damage Printer Printer',
-        //         'priority_level' => 'Mid',
-        //         'deadline' => Carbon::create(2023, 12, 22),
-        //         'status' => 'In Progress',
-        //         'assigned_to' => 2
-        //     ],
-        //     [
-        //         'user_id' => 3,
-        //         'service_location' => 'Office',
-        //         'unit' => 'Repair',
-        //         'request' => 'ID issues',
-        //         'description' => 'Need for Repair',
-        //         'priority_level' => 'High',
-        //         'deadline' => Carbon::create(2023, 02, 22),
-        //         'status' => 'Closed',
-        //         'assigned_to' => 2
-        //     ],
-        // ];
-
-        // foreach ($tickets as $ticketData) {
-        //     Ticket::create($ticketData);
-        // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
