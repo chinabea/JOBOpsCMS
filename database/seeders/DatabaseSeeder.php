@@ -112,7 +112,8 @@ class DatabaseSeeder extends Seeder
         $priorityLevels = ['High', 'Mid', 'Low'];
         $statusOptions = ['Open', 'In Progress', 'Closed'];
 
-        for ($i = 0; $i < 70; $i++) {
+        for ($i = 0; $i < 70; $i++) {            
+            $randomTimestamp = $faker->dateTimeBetween('-1 years', 'now');
             $ticket = Ticket::create([
                 'user_id'          => $faker->randomElement($approvedUsers), 
                 'service_location' => $faker->randomElement($serviceLocationOptions),
@@ -123,8 +124,10 @@ class DatabaseSeeder extends Seeder
                 'description'      => $faker->sentence(),
                 'file_path'        => $faker->randomElement([$faker->imageUrl(), null]),
                 'status'           => $faker->randomElement($statusOptions),
-                'created_at'       => $faker->dateTimeThisYear(),
-                'updated_at'       => $faker->dateTimeThisYear()
+                'created_at' => $randomTimestamp,
+                'updated_at' => $randomTimestamp,
+                // 'created_at'       => $faker->dateTimeThisYear(),
+                // 'updated_at'       => $faker->dateTimeThisYear()
             ]);
 
             // Assign approved users to tickets using the pivot table
