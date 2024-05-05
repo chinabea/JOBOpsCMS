@@ -93,7 +93,7 @@
                                     @foreach ($ticket->users as $assigned_user)
                                         <a class="dropdown-item">
                                             <strong>{{ $assigned_user->name }}</strong><br>
-                                            <small>Expertise: {{ $assigned_user->expertise }}</small><br>
+                                            <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
                                             <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                         </a>
                                     @endforeach

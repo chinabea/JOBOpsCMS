@@ -110,7 +110,7 @@
                                                   @foreach($userIds as $user)
                                                         <option value="{{ $user->id }}" data-content="
                                                             <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
-                                                            <small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+                                                            <small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
                                                             <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
                                                         </option>
                                                     @endforeach
@@ -134,7 +134,7 @@
                                         @foreach ($ticket->users as $assigned_user)
                                             <a class="dropdown-item">
                                                 <strong>{{ $assigned_user->name }}</strong><br>
-                                                <small>Expertise: {{ $assigned_user->expertise }}</small><br>
+                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
                                                 <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                             </a>
                                         @endforeach

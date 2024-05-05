@@ -56,7 +56,7 @@
 										@foreach($userIds as $user)
 											<option value="{{ $user->id }}" data-content="
 												<span class='text-black'><strong><br>{{ $user->name }}</strong><br>
-												<small>Expertise: {{ $user->expertise ?? 'No Expertise' }}</small><br>
+												<small>Expertise: {{ implode(', ', $user->expertise ?? ['No Expertise']) }}</small><br>
 												<small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
 											</option>
 										@endforeach
