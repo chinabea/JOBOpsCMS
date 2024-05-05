@@ -86,7 +86,7 @@
 
               <div class="profile_title">
                 <div class="col-md-6">
-                  <h2>Ticket Submissions per Month</h2>
+                  <h2>Ticket Requests per Month</h2>
                 </div>
                 
               </div>
