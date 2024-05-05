@@ -72,14 +72,9 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
-            // Assuming the expertise data might be stored as a comma-separated string or JSON
-            // Ensure it's properly converted to an array
-            $existingExpertise = !empty($user->expertise) ? json_decode($user->expertise, true) : [];
-            
-            // If json_decode fails and returns null, ensure we default to an empty array
-            if (!is_array($existingExpertise)) {
-                $existingExpertise = [];
-            }
+
+            // Directly use $user->expertise as an array
+            $existingExpertise = $user->expertise ?? [];
 
             $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff'];
             $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];

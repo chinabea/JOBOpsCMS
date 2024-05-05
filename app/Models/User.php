@@ -43,6 +43,10 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    protected $casts = [
+        'expertise' => 'array',
+    ];
+
     protected function casts(): array
     {
         return [
@@ -77,5 +81,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Expertise::class); // Adjust based on your actual data structure
     }
-
 }

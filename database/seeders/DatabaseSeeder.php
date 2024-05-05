@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
                 'is_approved' => true,
                 'phone_number' => '09628950257',
                 'job_position' => 'Software Developer',
-                'expertise' => '["Web Developer"]', 
+                'expertise' => ['Developer', 'Software Programmer'],
                 
             ],
             [
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 'is_approved' => true,
                 'phone_number' => '09246794618',
                 'job_position' => 'Software Developer',
-                'expertise' => '["Developer"]',
+                'expertise' => ['Developer', 'Software Programmer'],
             ],
             [
                 'name' => 'JESSICA MATAYA',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
                 'is_approved' => false,
                 'phone_number' => '09386390756',
                 'job_position' => 'Admin Aide 1',
-                'expertise' => '["Networking"]',
+                'expertise' => ['Networking'],
             ],
             [
                 'name' => 'John Carlo Dacara',
@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
                 'is_approved' => true,
                 'phone_number' => '09248769368',
                 'job_position' => 'Admin Aide',
-                'expertise' => '["Technician"]',
+                'expertise' => ['Technician'],
                 
             ],
             // [
