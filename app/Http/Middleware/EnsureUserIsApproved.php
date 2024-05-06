@@ -16,7 +16,7 @@ class EnsureUserIsApproved
     {
         if (auth()->check() && !auth()->user()->is_approved) {
             auth()->logout();
-            return redirect()->route('not-approved')->withErrors('Your account is awaiting approval.');
+            return redirect()->route('account.pending')->withErrors('Your account is awaiting approval.');
         }
         return $next($request);
     }
