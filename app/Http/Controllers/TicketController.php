@@ -158,8 +158,9 @@ class TicketController extends Controller
             $ticket = Ticket::findOrFail($id);
             $priority_level = $ticket->priority_level; 
             $status = $ticket->status; 
+            $userIds = User::where('role', 2)->where('is_approved', true)->get();  
             
-            return view('ticket.edit', compact('ticket','priority_level','status'))->with('error', 'An error occurred');
+            return view('ticket.edit', compact('ticket','priority_level','status','userIds'))->with('error', 'An error occurred');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -170,6 +171,7 @@ class TicketController extends Controller
         try {
             $ticket = Ticket::findOrFail($id);
             $ticket->update($request->all());
+            
 
             // Log activity
             ActivityLogger::log('Updated', $ticket, 'Ticket updated');
