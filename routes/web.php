@@ -14,6 +14,7 @@ use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -53,11 +54,12 @@ Route::prefix('admin')->middleware(['auth', 'cache', 'approved','admin'])->group
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
     Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 });
+
+Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');

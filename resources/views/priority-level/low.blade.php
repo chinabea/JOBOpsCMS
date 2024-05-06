@@ -160,6 +160,10 @@
                         @endif
                         @if(auth()->user()->role == 1)
                         <td class="align-middle">
+                          <a href="{{ route('ticket.show', $ticket->id) }}" type="button"
+                                class="btn btn-sm btn-secondary">
+                                <i class="fa fa-eye"></i>
+                            </a>
                             <a href="{{ route('update.ticket', $ticket->id) }}" type="button"
                                 class="btn btn-sm btn-warning">
                                 <i class="fa fa-edit"></i>
