@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('director')->middleware(['auth', 'cache', 'approved','director'])->group(function () {
+Route::prefix('director')->middleware(['auth', 'cache', 'approved', 'directors'])->group(function () {
     
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('director.home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('director.dashboard');
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -26,22 +26,22 @@ Route::prefix('director')->middleware(['auth', 'cache', 'approved','director'])-
 
 });
 
-Route::prefix('unit-head')->middleware(['auth', 'cache', 'approved','unit-head'])->group(function () {
+Route::prefix('unit-head')->middleware(['auth', 'cache', 'approved', 'unit-heads'])->group(function () {
     
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('unit-head.home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('unit-head.dashboard');
 
 });
 
-Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved','mict-staff'])->group(function () {
+Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved', 'mict-staffs'])->group(function () {
     
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('mict-staff.home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('mict-staff.dashboard');
 
 });
 
 
-Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staff'])->group(function () {
+Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staffs'])->group(function () {
     
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('staff.home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('staff.dashboard');
 
 });
 
@@ -121,7 +121,7 @@ Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
 
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-});
+// Route::fallback(function () {
+//     return response()->view('errors.404', [], 404);
+// });
 
