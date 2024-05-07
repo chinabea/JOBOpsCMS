@@ -11,13 +11,13 @@
                 <li class="nav-item">
                    
                     @if(Auth::user()->role == 4)
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('staff.home') }}" class="nav-link {{ Route::currentRouteName() == 'staff' ? 'active' : '' }}">
                     @elseif(Auth::user()->role == 3) 
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('mict-staff.home') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.home' ? 'active' : '' }}">
                     @elseif(Auth::user()->role == 2)
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('unit-head.home') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.home' ? 'active' : '' }}">
                     @elseif(Auth::user()->role == 1)
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('director.home') }}" class="nav-link {{ Route::currentRouteName() == 'director.home' ? 'active' : '' }}">
                     @else
                         {{ Auth::user()->name }} 
                     @endif
