@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'JESSICA MATAYA',
                 'email' => 'jesmataya@my.cspc.edu.ph',
-                // 'role' => 2,
+                'role' => 3,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKUB0nARYGxuJCevZG8KLnVwpmTDrJsZfFZa7ZdFCLaiJ49pWfI=s96-c',
-                'is_approved' => false,
+                'is_approved' => true,
                 'phone_number' => '09386390756',
                 'job_position' => 'Admin Aide 1',
                 'expertise' => ['Networking'],
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'John Carlo Dacara',
                 'email' => 'johdacara@my.cspc.edu.ph',
-                'role' => 2,
+                'role' => 4,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKSDUrjoiSNypUvGZdT8iNqHHnd7A5ATUycaAP6GbH6pH9GDg=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09248769368',
@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
         // Ticket seeding
         $faker = Faker::create();
         $approvedUsers = User::where('is_approved', true)
-                      ->whereIn('role', [1, 2]) 
+                      ->whereIn('role', [1, 2, 3]) 
                       ->pluck('id')
                       ->toArray();
                       
@@ -132,12 +132,13 @@ class DatabaseSeeder extends Seeder
 
             // Assign approved users to tickets using the pivot table
             // Can assign multiple users or none
-            $numberOfUsersToAssign = $faker->numberBetween(0, 3);
-            $assignedUsers = $faker->randomElements($approvedUsers, $numberOfUsersToAssign);
+            $numberOfUsersToAssign = $faker->numberBetween(0, 3); // Number of users to assign
+            $assignedUsers = $faker->randomElements($approvedUsers, $numberOfUsersToAssign); // Correctly picking random elements
 
             foreach ($assignedUsers as $userId) {
                 $ticket->users()->attach($userId); // Assuming Ticket model has users() relation defined
             }
+
         }
     }
 }

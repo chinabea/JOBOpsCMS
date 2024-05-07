@@ -77,8 +77,6 @@
         <script src="{{ asset('plugins/codemirror/mode/css/css.js') }}"></script>
         <script src="{{ asset('plugins/codemirror/mode/xml/xml.js') }}"></script>
         <script src="{{ asset('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
-        <!-- Custom Js -->
-        <script src="{{ asset('js/custom.js') }}"></script>
         <script src="{{ asset('js/jquery-3.5.1.slim.min.js') }}"></script>
         <!-- ChartJS -->
         <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
@@ -90,6 +88,8 @@
         <script src="{{ asset('plugins/flot/plugins/jquery.flot.resize.js') }}"></script>
         <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
         <script src="{{ asset('plugins/flot/plugins/jquery.flot.pie.js') }}"></script>
+        <!-- Custom Js -->
+        <script src="{{ asset('js/custom.js') }}"></script>
 
 
         <script>
