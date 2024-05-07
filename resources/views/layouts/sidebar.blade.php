@@ -9,7 +9,19 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                   
+                    @if(Auth::user()->role == 4)
+                        <a href="#" class="nav-link">
+                    @elseif(Auth::user()->role == 3) 
+                        <a href="#" class="nav-link">
+                    @elseif(Auth::user()->role == 2)
+                        <a href="#" class="nav-link">
+                    @elseif(Auth::user()->role == 1)
+                        <a href="#" class="nav-link">
+                    @else
+                        {{ Auth::user()->name }} 
+                    @endif
+
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>

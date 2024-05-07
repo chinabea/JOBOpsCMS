@@ -1,62 +1,41 @@
-@extends('layouts.template')
 
-@section('content')
-<div class="right_col" role="main" style="min-height: 606.8px;">
-  <div class="">
-    <div class="page-title">
-      <div class="title_left">
-        <h3>Users</h3>
-      </div>
 
-      <div class="title_right">
-        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+@extends('layouts.template') @section('content') <div class="content-wrapper">
+    <section class="content-header">
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
+                            <form action="{{ route('generate.users.report') }}" method="post">
+                                @csrf
+                                <div class="row justify-content-center">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label for="start_date">Start Date:</label>
+                                            <input type="date" class="form-control" name="start_date" id="start_date">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="end_date">End Date:</label>
+                                            <input type="date" class="form-control" name="end_date" id="end_date">
+                                        </div>
+                                    </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Actions</label>
+                                        <div>
+                                            <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-refresh"></i> </button>
+                                            <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            </form>
 
-    <div class="clearfix"></div>
-
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>List of Users</h2>
-            <ul class="nav navbar-right panel_toolbox">
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <form action="{{ route('generate.users.report') }}" method="post">
-                @csrf
-                <div class="row justify-content-center">
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <label for="start_date">Start Date:</label>
-                            <input type="date" class="form-control" name="start_date" id="start_date">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="end_date">End Date:</label>
-                            <input type="date" class="form-control" name="end_date" id="end_date">
-                        </div>
-                    </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Actions</label>
-                        <div>
-                            <button type="button" id="reset" class="btn btn-warning"><i class="fa fa-refresh"></i> </button>
-                            <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf"></i> Generate PDF</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form>
-            <table id="datatable" class="table table-bordered table-hover text-center table-striped table-sm">
+                            <table id="datatable" class="table table-bordered table-hover text-center table-striped table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -103,11 +82,10 @@
                     @endforeach
                 </tbody>
             </table>
-          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-@endsection
+    </section>
+</div> @endsection
