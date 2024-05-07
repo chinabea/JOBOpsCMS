@@ -1,110 +1,124 @@
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-              <nav class="nav navbar-nav">
-              <ul class=" navbar-right">
-                <li class="nav-item dropdown open" style="padding-left: 15px;">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ $profilePictureUrl }}" alt="">
-                      @if(Auth::user()->role == 1)
-                          {{ Auth::user()->name }}
-                      @elseif(Auth::user()->role == 2)
-                          {{ Auth::user()->name }}
-                      @elseif(Auth::user()->role == 3)
-                          {{ Auth::user()->name }}
-                      @else
-                          {{ Auth::user()->name }}
-                      @endif
-                  </a>
-                  <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}"><i class="fa fa-user mr-2"></i> Profile</a>
 
-                      <!-- <a class="dropdown-item"  href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a> -->
-                  <!-- <a class="dropdown-item"  href="javascript:;">Help</a> -->
-                    <!-- <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a> -->
+        
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav ">
+      <li class="nav-item ">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ route('notifications') }}">
+          <i class="far fa-bell"></i>
+          @if(auth()->check())
+              <span class="badge badge-warning navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+          @endif
+        </a>
+        
+        <style>
+        .icon-circle {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        </style>
+
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @if(auth()->check())
+          <a href="{{ route('notifications') }}" class="dropdown-item dropdown-header btn bg-navy">Notifications ({{ auth()->user()->unreadNotifications->count() }})</a>
+        @endif
+        <div class="dropdown-divider"></div>
+        <div style="max-height: 300px; overflow-y: auto;">
+        
+
+        @if (Auth::check())
+        @foreach (Auth::user()->unreadNotifications as $notification)
+        <!-- Message Start -->
+        <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
+          <div class="media">
+          <span class="mr-3 icon-circle bg-info d-flex justify-content-center align-items-center">
+              <i class="{{ $notification->data['icon'] }}"></i> 
+          </span>
+            <div class="media-body">
+              <p class="text-sm text-bold"><i class="fas fa-clock"></i> {{ $notification->created_at->diffForHumans() }}</p>
+              <p class="text-sm text-bold">{{ $notification->data['message'] }}</p>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        <!-- Message End -->
+        @endforeach
+        @foreach (Auth::user()->readNotifications as $notification)
+        <a href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}" class="dropdown-item bg-light ">
+          <div class="media">
+          <span class="mr-3 my-2 icon-circle bg-info d-flex justify-content-center align-items-center">
+              <i class="{{ $notification->data['icon'] }}"></i> 
+          </span>
+            <div class="media-body">
+              <p class="text-sm text-muted"><i class="fas fa-clock"></i> {{ $notification->created_at->diffForHumans() }}</p>
+              <p class="text-sm">{{ $notification->data['message'] }}</p>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        
+        @endforeach
+        @endif
 
 
-                    
+      </div>
+      <div class="dropdown-divider" style="margin-top: 8px; margin-bottom: 8px;"></div>
+      <form method="POST" action="{{ route('mark-all-as-read') }}">
+        @csrf
+        @method('POST')
+        <button type="submit" class="btn btn-link dropdown-item dropdown-footer">Mark All as Read</button>
+      </form>
+    </div>
+  </li>
+
+<style>
+    .unread-notification {
+        background-color: #f3f4f6;
+    }
+
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if(Auth::user()->role == 4)
+                      Staff, {{ Auth::user()->name }} 
+                    @elseif(Auth::user()->role == 3) 
+                       MICT Staff, {{ Auth::user()->name }} 
+                    @elseif(Auth::user()->role == 2)
+                        Unit Admin, {{ Auth::user()->name }} 
+                    @elseif(Auth::user()->role == 1)
+                        Director, {{ Auth::user()->name }} 
+                    @else
+                        {{ Auth::user()->name }} 
+                    @endif
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <!-- <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a> -->
+                <!-- <div class="dropdown-divider"></div> -->
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-sign-out mr-2"></i>
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                   </form>
                 </a>
-
-
-                  </div>
-                </li>
-
-                <li role="presentation" class="nav-item dropdown open">
-                  <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bell-o"></i>
-                    <!-- <span class="badge bg-green">6</span> -->
-                    @if(auth()->check())
-                        <span class="badge bg-green">{{ auth()->user()->unreadNotifications->count() }}</span>
-                    @endif
-                  </a>
-                  <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-
-                  
-        @if (Auth::check())
-        @foreach (Auth::user()->unreadNotifications as $notification)
-        <li class="nav-item">
-          <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
-            <span class="image"><img src="{{ $profilePictureUrl }}" alt="Profile Image" /></span>
-            <span>
-              <span>China Bea</span>
-              <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
-            </span>
-            <span class="message">
-              {{ $notification->data['message'] }}
-            </span>
-          </a>
+            </div>
         </li>
-        @endforeach
-        @foreach (Auth::user()->readNotifications as $notification)
-        <li class="nav-item">
-          <a class="dropdown-item bg-light" href="{{ route('mark-notification-as-read', ['notification' => $notification->id]) }}">
-            <span class="image"><img src="{{ $profilePictureUrl }}" alt="Profile Image" /></span>
-            <span>
-              <span>China Bea</span>
-              <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
-            </span>
-            <span class="message">
-              {{ $notification->data['message'] }}
-            </span>
-          </a>
-        </li>
-        @endforeach
-        @endif
-        
+    </ul>
+</nav>
 
-                    <li class="nav-item">
-                      <div class="text-center">
-                       
-      <form method="POST" action="{{ route('mark-all-as-read') }}">
-        @csrf
-        @method('POST')
-                        <button type="submit" class="dropdown-item">
-                          <strong>Mark All as Read</strong>
-                          <!-- <i class="fa fa-angle-right"></i> -->
-                        </button>
-      </form>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+

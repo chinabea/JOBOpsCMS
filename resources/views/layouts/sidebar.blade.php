@@ -1,97 +1,149 @@
-
-<div class="col-md-3 left_col menu_fixed sidebar-dark">
-    <div class="left_col scroll-view sidebar-dark">
-    <div class="navbar nav_title sidebar-dark" style="border: 0;">
-        <a href="{{ route('admin.home') }}" class="site_title">
-        <img src="{{ asset('production/images/MICT-logo.png') }}" style="width: 50px; height: auto;">
-        <span><b>JOB OPS</b></span></a>
-    </div>
-    <div class="clearfix"></div>
-    <div class="profile clearfix">
-        <div class="profile_pic">
-        <img  src="{{ $profilePictureUrl }}" alt="..." class="img-circle profile_img">
-        </div>
-        <div class="profile_info">
-            @if(Auth::user()->role == 1)
-                <span>Admin</span>
-                <h2>{{ Auth::user()->name }}</h2> 
-            @elseif(Auth::user()->role == 2) 
-                <span>MICT Staff</span>
-                <h2>{{ Auth::user()->name }}</h2> 
-            @elseif(Auth::user()->role == 3)
-                <span>Staff</span>
-                <h2>{{ Auth::user()->name }}</h2> 
-            @else
-                <span>Guest</span>
-                <h2>{{ Auth::user()->name }}</h2> 
-            @endif
-        </div>
-    </div>
-    <br />
-    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-        <div class="menu_section">
-            <h3>General</h3>
-            <ul class="nav side-menu">
-                <li><a href="{{ route('admin.home') }}"><i class="fa fa-home"></i> Dashboard </a>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link sidebar-dark-primary">
+        <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">JobOps CMS</span>
+    </a>
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
                 </li>
-                <li><a><i class="fa fa-book"></i> Tickets <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="{{ route('create.ticket') }}">Request Ticket</a></li>
-                        @if(Auth::user()->role == 1)
-                        <li><a href="{{ route('tickets') }}">All Tickets</a></li>
-                        @else
-                        <li><a href="{{ route('tickets') }}">My Tickets</a></li>
-                        @endif
+                <li class="nav-header">MAIN MENU</li>
+                <li class="nav-item">
+                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <p> Users </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Tickets <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('create.ticket') }}" class="nav-link {{ Route::currentRouteName() == 'create.ticket' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Request Ticket</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <p>All Tickets</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-danger"></i>
+                                <p>My Tickets</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-            </ul>
-        </div>
-        <div class="menu_section">
-            <h3>ADMINISTRATION</h3>
-            <ul class="nav side-menu">
-                @if(Auth::user()->role == 1)
-                <li><a href="{{ route('users') }}"><i class="fa fa-users"></i> Users </a></li>
-                <li><a href="{{ route('tickets.unassigned') }}"><i class="fa fa-times"></i> Unassigned Tickets </a></li>
-                @else 
-                    <li><a href="{{ route('tickets.unassigned') }}"><i class="fa fa-times"></i> My Unassigned Tickets </a></li>
-                
-                @endif
-                <li><a href="{{ route('tickets.assigned') }}"><i class="fa fa-check-square-o"></i> Assigned Tickets to Me </a></li>
-                <li><a><i class="fa fa-flag"></i> Priorities <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="{{ route('priority-level.high') }}">High</a></li>
-                        <li><a href="{{ route('priority-level.mid') }}">Mid</a></li>
-                        <li><a href="{{ route('priority-level.low') }}">Low</a></li>
+                <li class="nav-item">
+                            <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
+                        <i class="fas fa-times-circle nav-icon"></i>
+                        <p>Unassigned Tickets</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>My Unassigned Tickets</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                            <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>Assigned Tickets</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-flag"></i>
+                        <p> Priorities <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('priority-level.high') }}" class="nav-link {{ Route::currentRouteName() == 'priority-level.high' ? 'active' : '' }}">
+                                <i class="nav-icon far fa-circle text-danger"></i>
+                                <p>High</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('priority-level.mid') }}" class="nav-link {{ Route::currentRouteName() == 'priority-level.mid' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <p>Mid</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('priority-level.low') }}" class="nav-link {{ Route::currentRouteName() == 'priority-level.low' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Low</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-tasks"></i> Statuses <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="{{ route('status.open') }}">Open</a></li>
-                        <li><a href="{{ route('status.in-progress') }}">In Progress</a></li>
-                        <li><a href="{{ route('status.closed') }}">Closed</a></li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-tasks"></i>
+                        <p> Status <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('status.open') }}" class="nav-link {{ Route::currentRouteName() == 'status.open' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-danger"></i>
+                                <p>Open</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.in-progress') }}}" class="nav-link {{ Route::currentRouteName() == 'status.in-progress' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <p>In Progress</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.closed') }}" class="nav-link {{ Route::currentRouteName() == 'status.closed' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Closed</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon text-success"></i>
+                                <p>Completed</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li><a href="{{ route('activity-log') }}"><i class="fa fa-folder-open"></i> Activity Logs </a></li>
-                <li><a href="{{ route('faqs') }}"><i class="fa fa-question-circle"></i> F.A.Qs </a></li>
-                <!-- <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li> -->
-            </ul>
-        </div>
+                <li class="nav-item">
+                            <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
+                        <i class="fas fa-folder-open nav-icon"></i>
+                        <p>Activity Logs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                            <a href="{{ route('faqs') }}" class="nav-link {{ Route::currentRouteName() == 'faqs' ? 'active' : '' }}">
+                        <i class="fas fa-question-circle nav-icon"></i>
+                        <p>FAQs</p>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a id="theme-toggle" class="nav-link">
+                        <i class="nav-icon fas fa-adjust"></i>
+                        <p>Theme</p>
+                    </a>
+                </li>
     </div>
-</div>
-    <!-- <div class="sidebar-footer hidden-small">
-        <a data-toggle="tooltip" data-placement="top" title="Settings">
-        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-        </a>
-        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-        </a>
-        <a data-toggle="tooltip" data-placement="top" title="Lock">
-        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-        </a>
-        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-        </a>
-    </div> -->
-</div>
-</div>
-    
+</aside>
