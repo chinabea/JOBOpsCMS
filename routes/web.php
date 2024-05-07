@@ -80,12 +80,9 @@ Route::get('/show/ticket/{id}', [TicketController::class, 'show'])->name('ticket
 Route::get('/edit-ticket/{id}', [TicketController::class, 'edit'])->name('edit.ticket');
 Route::put('/edit-ticket/{id}', [TicketController::class, 'update'])->name('update.ticket');
 Route::delete('/delete-ticket/{id}', [TicketController::class, 'destroy'])->name('destroy.ticket');
-// Route::post('/assign-ticket', [TicketController::class, 'assignTicket'])->name('assignTicket');
-// Route::get('/tickets/{ticket}/assign', [TicketController::class, 'assignUsers'])->name('tickets.assign');
 Route::post('tickets/{ticket}/update-users', [TicketController::class, 'updateUsers'])->name('tickets.updateUsers');
 Route::get('/tickets/unassigned', [TicketController::class, 'unassigned'])->name('tickets.unassigned');
 Route::get('/tickets/assigned', [TicketController::class, 'assignedToMe'])->name('tickets.assigned');
-// Route::get('/user-tickets-chart', [TicketController::class, 'userTicketsChart'])->name('user.tickets.chart');
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/create/faq', [FaqsController::class, 'create'])->name('create.faq');
@@ -95,7 +92,6 @@ Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
 Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
 
-// Route::get('/reports/tickets/{user}', [ReportController::class, 'userTicketsReport'])->name('reports.user.tickets');
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
 Route::post('/generate-faqs-report', [ReportController::class, 'faqsReport'])->name('generate.faqs.report');
