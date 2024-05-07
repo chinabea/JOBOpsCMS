@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 
-class Staff
+class MICTStaff
 {
     /**
      * Handle an incoming request.
@@ -22,10 +21,11 @@ class Staff
 
         $user = Auth::user();
         
-        if($user->role == 4){
+        if($user->role == 3){
             return $next($request);
         } else {
-            return redirect()->route('staff.home');
+            return redirect()->route('mict-staff.home');
         }
+        
     }
 }

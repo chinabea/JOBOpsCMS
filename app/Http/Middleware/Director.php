@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 
-class Mict
+class Director
 {
     /**
      * Handle an incoming request.
@@ -17,16 +16,16 @@ class Mict
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
-            return redirect('/login');
+            return redirect('welcome');
         }
 
         $user = Auth::user();
         
-        if($user->role == 2){
+        if($user->role == 1){
             return $next($request);
         } else {
-            return redirect()->route('mict.home');
+            return redirect()->route('director.home');
         }
-        
+
     }
 }
