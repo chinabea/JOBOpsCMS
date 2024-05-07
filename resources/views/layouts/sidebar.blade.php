@@ -59,6 +59,13 @@
                             </a>
                         </li>
                     </ul>
+                </li><br>
+                <li class="nav-header">ADMINISTRATION</li>
+                <li class="nav-item">
+                            <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
+                        <i class="fas fa-check-circle nav-icon"></i>
+                        <p>Assigned Tickets</p>
+                    </a>
                 </li>
                 <li class="nav-item">
                             <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
@@ -70,12 +77,6 @@
                     <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
                         <i class="fas fa-check-circle nav-icon"></i>
                         <p>My Unassigned Tickets</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                            <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
-                        <i class="fas fa-check-circle nav-icon"></i>
-                        <p>Assigned Tickets</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -157,5 +158,5 @@
                         <p>Theme</p>
                     </a>
                 </li>
-    </div>
-</aside>
+            </div>
+        </aside>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JobOps CMS</title>
     <link rel="icon" type="image/png" href="{{ asset('dist/img/MICT-Logo.png') }}">
+    
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="{{ asset('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
     <!-- Font Awesome -->
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js') }}"></script>
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') }}">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -51,7 +52,8 @@
 </head> @php $theme = false; @endphp
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-    <div class="wrapper"> @include('layouts.topnav') @include('layouts.sidebar') @yield('content') @include('layouts.footer') <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <div class="wrapper"> @include('layouts.topnav') @include('layouts.sidebar') @yield('content') @include('layouts.footer') 
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- DataTables  & Plugins -->
         <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -81,6 +83,15 @@
         <!-- ChartJS -->
         <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
         <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+        
+        <!-- FLOT CHARTS -->
+        <script src="{{ asset('plugins/flot/jquery.flot.js') }}"></script>
+        <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+        <script src="{{ asset('plugins/flot/plugins/jquery.flot.resize.js') }}"></script>
+        <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+        <script src="{{ asset('plugins/flot/plugins/jquery.flot.pie.js') }}"></script>
+
+
         <script>
             // Function to toggle and persist the theme
             function toggleTheme() {
@@ -193,6 +204,7 @@
         toastr.error('{{ session('error') }}');
     </script>
 @endif
-</body>
 
+
+</body>
 </html>
