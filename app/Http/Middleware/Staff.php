@@ -25,7 +25,7 @@ class Staff
         if($user->role == 4){
             return $next($request);
         } else {
-            return redirect()->route('staff.home');
+            return redirect()->route('staff.dashboard');
         }
     }
 }

@@ -14,10 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'cache' => \App\Http\Middleware\DisablePageCaching::class,
             'approved' => \App\Http\Middleware\EnsureUserIsApproved::class,
-            'director' => \App\Http\Middleware\Director::class,
-            'unit-head' => \App\Http\Middleware\UnitHead::class,
-            'mict-staff' => \App\Http\Middleware\MICTStaff::class,
-            'staff' => \App\Http\Middleware\Staff::class,
+            'directors' => \App\Http\Middleware\Director::class,
+            'unit-heads' => \App\Http\Middleware\UnitHead::class,
+            'mict-staffs' => \App\Http\Middleware\MICTStaff::class,
+            'staffs' => \App\Http\Middleware\Staff::class,
             
         ]);
         

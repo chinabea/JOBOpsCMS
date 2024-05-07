@@ -16,7 +16,7 @@ class Authenticate
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return route('welcome');
         }
     }
     // protected function redirectTo(Request $request): ?string

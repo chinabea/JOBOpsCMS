@@ -46,10 +46,14 @@ class LoginController extends Controller
         } 
         
         // Further role-based redirection
-        if ($localUser->role == '1') {
-            return redirect()->route('admin.home');
-        } elseif ($localUser->role == '2') {
-            return redirect()->route('mict.home');
+        if ($localUser->role == 1) {
+            return redirect()->route('director.dashboard');
+        } elseif ($localUser->role == 2) {
+            return redirect()->route('unit-head.dashboard');
+        } elseif ($localUser->role == 3) {
+            return redirect()->route('mict-staff.dashboard');
+        } elseif ($localUser->role == 4) {
+            return redirect()->route('staff.dashboard');
         } else {
             return redirect()->route('staff.home');
         }
@@ -76,7 +80,7 @@ class LoginController extends Controller
         Log::error("Error during Google login: " . $e->getMessage());
 
         // Optionally, redirect to a custom error page or back with an error message
-        return redirect('/login')->with('error', 'Failed to log in with Google. Please try again.');
+        return redirect('welcome')->with('error', 'Failed to log in with Google. Please try again.');
     }
 }
 

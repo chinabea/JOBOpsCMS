@@ -25,7 +25,7 @@ class MICTStaff
         if($user->role == 3){
             return $next($request);
         } else {
-            return redirect()->route('mict-staff.home');
+            return redirect()->route('mict-staff.dashboard');
         }
         
     }

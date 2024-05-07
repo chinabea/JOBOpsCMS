@@ -25,7 +25,7 @@ class UnitHead
         if($user->role == 2){
             return $next($request);
         } else {
-            return redirect()->route('unit-head.home');
+            return redirect()->route('unit-head.dashboard');
         }
     }
 }
