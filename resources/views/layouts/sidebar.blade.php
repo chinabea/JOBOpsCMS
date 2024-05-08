@@ -4,7 +4,57 @@
         <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">JobOps CMS</span>
     </a>
+    <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Staff
+            @if(Auth::user()->role == 4)
+                Staff, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 3) 
+                MICT Staff, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 2)
+                Unit Admin, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 1)
+                Director, {{ Auth::user()->name }} 
+            @else
+                {{ Auth::user()->name }} 
+            @endif
+            
+        </a>
+        </div>
+      </div> -->
+
+      
+      
+    <!-- Sidebar -->
     <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ $profilePictureUrl }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">
+            @if(Auth::user()->role == 4)
+                Staff, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 3) 
+                MICT Staff, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 2)
+                Unit Admin, {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 1)
+                Director, {{ Auth::user()->name }} 
+            @else
+                {{ Auth::user()->name }} 
+            @endif
+
+          </a>
+        </div>
+      </div>
+
+
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -64,7 +114,7 @@
                 <li class="nav-item">
                             <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
                         <i class="fas fa-check-circle nav-icon"></i>
-                        <p>Assigned Tickets</p>
+                        <p>Assigned Tickets To Me</p>
                     </a>
                 </li>
                 <li class="nav-item">

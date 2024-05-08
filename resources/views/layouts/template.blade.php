@@ -90,7 +90,7 @@
         <script src="{{ asset('plugins/flot/plugins/jquery.flot.pie.js') }}"></script>
         <!-- Custom Js -->
         <script src="{{ asset('js/custom.js') }}"></script>
-
+<!-- 
 
         <script>
             // Function to toggle and persist the theme
@@ -185,7 +185,7 @@
                     }
                 });
             });
-        </script>
+        </script> -->
         
 @if(session('success'))
     <script>
