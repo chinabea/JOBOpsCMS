@@ -2,155 +2,251 @@
 
 @section('content')
 
-<div class="right_col" role="main">
-  <div class="">
-    <div class="page-title">
-      <div class="title_left">
-        <h3>User Profile</h3>
-      </div>
+<div class="content-wrapper">
+  <section class="content-header">
+  </section>
+  
+  <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
 
-      <div class="title_right">
-        <div class="col-md-5 col-sm-5  form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for...">
-            <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button">Go!</button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="clearfix"></div>
-
-    <div class="row">
-      <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>User Report</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Settings 1</a>
-                    <a class="dropdown-item" href="#">Settings 2</a>
-                  </div>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          
-          <div class="x_content">
-            <div class="col-md-3 col-sm-3  profile_left">
-              <div class="profile_img">
-                <div id="crop-avatar">
-                  <!-- Current avatar -->
-                  <img class="profile-user-img img-fluid" src="{{ $user->avatar }}" alt="Avatar" title="Change the avatar"  style="width: 230px; height: 230px;">
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{{ $user->avatar}}"
+                       alt="User profile picture">
                 </div>
-              </div>
-              <h3>{{ $user->name }}</h3>
 
-              <ul class="list-unstyled user_data">
-                @if(!empty($user->phone_number))
-                    <li><i class="fa fa-phone"></i> {{ $user->phone_number }}</li>
-                @endif
-                @if(!empty($user->job_position))
-                  <li><i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}</li>
-                @endif
-              </ul>
-              <br />
-              <!-- start skills -->
-              <h4>Expertise</h4>
-              <ul class="list-unstyled user_data">
-                @if(!empty($user->expertise) && is_array($user->expertise))
-                    @foreach($user->expertise as $skill)
-                        <li><i class="fa fa-info-circle"></i> {{ $skill }}</li>
-                    @endforeach
-                @else
-                    <li><i class="fa fa-info-circle"></i> No expertise listed.</li>
-                @endif
-              </ul>
-              <!-- end of skills -->
+                <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-            </div>
-            <div class="col-md-9 col-sm-9 ">
+                <p class="text-muted text-center"><i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}</p>
+                <p class="text-muted text-center"><i class="fa fa-phone"></i> {{ $user->phone_number }}</p>
 
-              <div class="profile_title">
-                <div class="col-md-6">
-                  <h2>Ticket Requests per Month</h2>
-                </div>
-                
-              </div>
-              <!-- start of user-activity-graph -->
-              <div id="tickets_graph_bar" style="width:100%; height:280px;"></div>
-              <!-- end of user-activity-graph -->
-
-              <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                  <!-- <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a>
-                  </li> -->
-                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Tickets Worked on</a>
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Followers</b> <a class="float-right">1,322</a>
                   </li>
-                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Edit Profile</a>
+                  <li class="list-group-item">
+                    <b>Following</b> <a class="float-right">543</a>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Friends</b> <a class="float-right">13,287</a>
                   </li>
                 </ul>
-                <div id="myTabContent" class="tab-content">
-                  <!-- </div> -->
-                  <div role="tabpanel" class="tab-pane active" id="tab_content2" aria-labelledby="profile-tab">
 
-                    <!-- start user projects -->
-                    <table class="data table table-striped no-margin">
-                      <thead>
-                          <tr>
-                              <th>#</th>
-                              <th> Request by</th>
-                              <th> Location</th>
-                              <th> Unit</th>
-                              <th> Request</th>
-                              <th> Assigned to</th>
-                              <th> Priority</th>
-                              <th> Status</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          @foreach($assignedTickets as $ticket)
-                          <tr>
-                              <td>{{ $loop->iteration }}</td>
-                              <td>{{ $ticket->user->name }}</td>
-                              <td>{{ $ticket->service_location }}</td>
-                              <td>{{ $ticket->unit }}</td>
-                              <td>{{ $ticket->request }}</td>
-                              <td>
-                                @foreach ($ticket->users as $assigned_user)
-                                  {{ $assigned_user->name }}
-                                @endforeach
-                              </td>
-                              <td>
-                                @if ($ticket->priority_level === 'High')
-                                <span class="badge badge-danger">High</span>
-                                @elseif ($ticket->priority_level === 'Mid')
-                                <span class="badge badge-warning">Mid</span>
-                                @elseif ($ticket->priority_level === 'Low')
-                                <span class="badge badge-secondary">Low</span>
-                                @endif
-                              </td>
-                              @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
-                              <td>{{ $ticket->status }}</td>
-                              @else
-                              <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td>
-                              @endif
-                            </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
-                    <!-- end user projects -->
+                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              </div>
+            </div>
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">About Me</h3>
+              </div>
+              <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                <p class="text-muted">
+                  B.S. in Computer Science from the University of Tennessee at Knoxville
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                <p class="text-muted">Malibu, California</p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                <p class="text-muted">
+                  <span class="tag tag-danger">UI Design</span>
+                  <span class="tag tag-success">Coding</span>
+                  <span class="tag tag-info">Javascript</span>
+                  <span class="tag tag-warning">PHP</span>
+                  <span class="tag tag-primary">Node.js</span>
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            
+          
+          <div class="card card-primary">
+              <div class="card-header">
+              <h1 class="card-title"><i class="fas fa-chart-bar"></i> Yearly Summary of Requested Tickets</h1>
+          </div>
+              <div class="card-body">
+              <div class="chart">
+                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              </div>
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                    <!-- Post -->
+                    
+                  <table id="datatable-responsive" class="table table-bordered table-hover text-center table-striped table-sm">
+                              <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th> Request by</th>
+                                      <th> Location</th>
+                                      <th> Unit</th>
+                                      <th> Request</th>
+                                      <th> Assigned to</th>
+                                      <th> Priority Level</th>
+                                      <th> Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  @foreach($assignedTickets as $ticket)
+                                  @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                                  <tr>
+                                      <td>{{ $loop->iteration }}</td>
+                                      <td>{{ $ticket->user->name }}</td>
+                                      <td>{{ $ticket->service_location }}</td>
+                                      <td>{{ $ticket->unit }}</td>
+                                      <td>{{ $ticket->request }}</td>
+                                      <td>
+                                                  @foreach ($ticket->users as $assigned_user)
+                                                     <small>{{ $assigned_user->name }}</small>    
+                                                  @endforeach
+                                      </td>
+                                      <td>
+                                        @if ($ticket->priority_level === 'High')
+                                        <span class="badge badge-danger">High</span>
+                                        @elseif ($ticket->priority_level === 'Mid')
+                                        <span class="badge badge-warning">Mid</span>
+                                        @elseif ($ticket->priority_level === 'Low')
+                                        <span class="badge badge-secondary">Low</span>
+                                        @endif
+                                      </td>
+                                      <td>{{ $ticket->status }}</td>
+                                     
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                              </tbody>
+                          </table>
                   </div>
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                    <form class="form-horizontal" action="{{ route('user.edit', $user->id) }}" method="post">
+                  <div class="tab-pane" id="timeline">
+                    <!-- The timeline -->
+                    <div class="timeline timeline-inverse">
+                      <!-- timeline time label -->
+                      <div class="time-label">
+                        <span class="bg-danger">
+                          10 Feb. 2014
+                        </span>
+                      </div>
+                      <!-- /.timeline-label -->
+                      <!-- timeline item -->
+                      <div>
+                        <i class="fas fa-envelope bg-primary"></i>
+
+                        <div class="timeline-item">
+                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
+
+                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+
+                          <div class="timeline-body">
+                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                            quora plaxo ideeli hulu weebly balihoo...
+                          </div>
+                          <div class="timeline-footer">
+                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
+                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+                      <!-- timeline item -->
+                      <div>
+                        <i class="fas fa-user bg-info"></i>
+
+                        <div class="timeline-item">
+                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
+
+                          <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
+                          </h3>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+                      <!-- timeline item -->
+                      <div>
+                        <i class="fas fa-comments bg-warning"></i>
+
+                        <div class="timeline-item">
+                          <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
+
+                          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+
+                          <div class="timeline-body">
+                            Take me to your leader!
+                            Switzerland is small and neutral!
+                            We are more like Germany, ambitious and misunderstood!
+                          </div>
+                          <div class="timeline-footer">
+                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+                      <!-- timeline time label -->
+                      <div class="time-label">
+                        <span class="bg-success">
+                          3 Jan. 2014
+                        </span>
+                      </div>
+                      <!-- /.timeline-label -->
+                      <!-- timeline item -->
+                      <div>
+                        <i class="fas fa-camera bg-purple"></i>
+
+                        <div class="timeline-item">
+                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
+
+                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+
+                          <div class="timeline-body">
+                            <img src="https://placehold.it/150x100" alt="...">
+                            <img src="https://placehold.it/150x100" alt="...">
+                            <img src="https://placehold.it/150x100" alt="...">
+                            <img src="https://placehold.it/150x100" alt="...">
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+                      <div>
+                        <i class="far fa-clock bg-gray"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="settings">
+                    
+                  <form class="form-horizontal" action="{{ route('user.edit', $user->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -202,19 +298,19 @@
                               <div id="dynamic-expertise">
                                   <!-- Placeholder for existing expertise entries -->
                                   
-            @if(!empty($existingExpertise))
-                @foreach($existingExpertise as $expertise)
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise" value="{{ $expertise }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p>No expertise listed.</p>
-            @endif
-                              
+                                @if(!empty($existingExpertise))
+                                    @foreach($existingExpertise as $expertise)
+                                        <div class="input-group mb-2">
+                                            <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise" value="{{ $expertise }}">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <p>No expertise listed.</p>
+                                @endif
+                                                  
                                   <!-- New expertise entry field -->
                                   <div class="input-group mb-2">
                                       <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
@@ -237,63 +333,17 @@
                         </div>
                     </form>
                   </div>
+                  <!-- /.tab-pane -->
                 </div>
-              </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
             </div>
+            <!-- /.card -->
           </div>
+          <!-- /.col -->
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-        
-<script type="text/javascript" src="{{ asset('cdn/gstatic.com-charts-loader.js') }}"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Month', 'Tickets'],
-            @foreach($monthlyTicketsData as $data)
-                ['{{ $data->year }}-{{ $data->month }}', {{ $data->count }}],
-            @endforeach
-        ]);
-
-        var options = {
-            // chart: {
-            //     title: 'Monthly Tickets',
-            //     subtitle: 'Ticket submissions per month',
-            // },
-            bars: 'vertical',
-            vAxis: {format: 'decimal'},
-            height: 280,
-            colors: ['#1b9e77', '#d95f02', '#7570b3']
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('tickets_graph_bar'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-</script>
-<script>
-function addExpertise() {
-    var container = document.getElementById('dynamic-expertise');
-    var input = document.createElement('div');
-    input.classList.add('input-group', 'mb-2');
-    input.innerHTML = `
-        <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
-        <div class="input-group-append">
-            <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
-        </div>`;
-    container.appendChild(input);
-}
-
-function removeExpertise(button) {
-    var group = button.closest('.input-group');
-    group.parentNode.removeChild(group);
-}
-
-</script>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+  </div> 
 @endsection
