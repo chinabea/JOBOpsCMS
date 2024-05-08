@@ -89,7 +89,6 @@
         <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
         <script src="{{ asset('plugins/flot/plugins/jquery.flot.pie.js') }}"></script>
         
-<script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
         <!-- Custom Js -->
         <script src="{{ asset('js/custom.js') }}"></script>
 <!-- 

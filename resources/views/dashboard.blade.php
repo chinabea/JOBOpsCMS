@@ -230,6 +230,8 @@
         <div class="clearfix"></div>
       </div>
     </div>
+    
+<script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('ticketsChart').getContext('2d');
