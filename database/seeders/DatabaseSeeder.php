@@ -72,6 +72,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Louie Molina',
                 'email' => 'loumolina@my.cspc.edu.ph',
                 'role' => null,
+                'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocLIEi3iP9WuXqHV_W1U__h7MFcAFPmwnDCOSmJjhHErFqxQ2g=s96-c',
                 'is_approved' => false,
                 'phone_number' => null,
                 'job_position' => 'Admin Aide',
