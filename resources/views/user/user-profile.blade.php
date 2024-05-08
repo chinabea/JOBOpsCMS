@@ -87,10 +87,13 @@
           </div>
               <div class="card-body">
               <div class="chart">
-                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <!-- start of user-activity-graph -->
+                <div id="tickets_graph_bar" style="width:100%; height:280px;"></div>
+                <!-- end of user-activity-graph -->
                 </div>
               </div>
               </div>
+              
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
@@ -333,17 +336,60 @@
                         </div>
                     </form>
                   </div>
-                  <!-- /.tab-pane -->
                 </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
+              </div>
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
   </div> 
+  
+<script type="text/javascript" src="{{ asset('cdn/gstatic.com-charts-loader.js') }}"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Tickets'],
+            @foreach($monthlyTicketsData as $data)
+                ['{{ $data->year }}-{{ $data->month }}', {{ $data->count }}],
+            @endforeach
+        ]);
+
+        var options = {
+            // chart: {
+            //     title: 'Monthly Tickets',
+            //     subtitle: 'Ticket submissions per month',
+            // },
+            bars: 'vertical',
+            vAxis: {format: 'decimal'},
+            height: 280,
+            colors: ['#1b9e77', '#d95f02', '#7570b3']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('tickets_graph_bar'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>
+<script>
+function addExpertise() {
+    var container = document.getElementById('dynamic-expertise');
+    var input = document.createElement('div');
+    input.classList.add('input-group', 'mb-2');
+    input.innerHTML = `
+        <input type="text" class="form-control" name="expertise[]" placeholder="Enter expertise">
+        <div class="input-group-append">
+            <button class="btn btn-danger" type="button" onclick="removeExpertise(this)">-</button>
+        </div>`;
+    container.appendChild(input);
+}
+
+function removeExpertise(button) {
+    var group = button.closest('.input-group');
+    group.parentNode.removeChild(group);
+}
+</script>
+
 @endsection
