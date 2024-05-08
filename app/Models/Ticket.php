@@ -11,7 +11,7 @@ class Ticket extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['service_location','unit', 'request', 'priority_level', 'description', 'user_id', 'is_approved', 'deadline', 'file_path'];
+    public $fillable = ['service_location','unit_id', 'request', 'priority_level', 'description', 'user_id', 'is_approved', 'deadline', 'file_path'];
 
     
     public function user()
@@ -29,10 +29,22 @@ class Ticket extends Model
         return $this->belongsToMany(User::class, 'ticket_user')
                     ->withTimestamps();
     }
-    // public function users()
-    // {
-    //     return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id') ->withTimestamps();
-    // }
+    
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function jobType()
+    {
+        return $this->belongsTo(JobType::class);
+    }
+
+    public function problemType()
+    {
+        return $this->belongsTo(ProblemType::class);
+    }
 
 
 }
