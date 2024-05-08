@@ -33,20 +33,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">{{ $totalUsers }}</span>
-                <small>{{ number_format($userPercentageChange, 2) }}% From last Week</small>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box bg-success">
               <span class="info-box-icon"><i class="fas fa-book"></i></span>
@@ -87,8 +73,6 @@
           </div>
           <!-- /.col -->
         </div>
-        
-        
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box bg-navy">
@@ -147,8 +131,6 @@
           </div>
           <!-- /.col -->
         </div>
-        
-        
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box bg-maroon">
@@ -191,53 +173,99 @@
             </div>
             <!-- /.info-box -->
           </div>
-          
           <!-- /.col -->
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- AREA CHART -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-chart-bar"></i> Yearly Summary of Requested Tickets</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              
-
-
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+        <!-- AREA CHART -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class=""><i class="fas fa-chart-bar"></i> 
+            Ticket Summary <small>Yearly requests</small>
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+        <div class="col-md-9 col-sm-9 ">
+          <canvas id="ticketsChart" width="400" height="150"  style="height:280px"></canvas>
+        </div>
+        <div class="col-md-3 col-sm-3 bg-white">
+          <div>
+            <div class="x_title align-items-center">
+              <h6><i class="fa fa-users"></i> Pending User Approvals</h6>
+              <div class="clearfix"></div>
+            </div>
+            <ul class="list-unstyled top_profiles scroll-view">
+            <style>
+              .avatar-img {
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  padding: 5px; /* Adjust as needed */
+              }
+            </style>            
+            @forelse ($unapprovedUsers as $user)
+              <li class="media event d-flex align-items-center">
+                  @if($user->avatar)
+                      <img src="{{ $user->avatar }}" alt="{{ $user->name }}'s avatar" style="width: 55px; height: 55px; border-radius: 50%; padding: 5px;">
+                      
+                  @else
+                      <a class="pull-left border-green profile_thumb">
+                      <i class="fa fa-user green" aria-hidden="true"></i> <!-- Font Awesome icon -->
+                      </a>
+                      
+                  @endif
+                  <div class="media-body" style="margin-left: 10px;">
+                      <a class="title" href="{{ route('user.edit', $user->id) }}">{{ $user->name }}</a>
+                      <p>{{ $user->job_position }} </p>
+                      <p> <small>{{ $user->created_at }}</small></p>
+                  </div>
+                </li>
+                
+                <hr>
+              @empty
+                <li>No unapproved users found.</li>
+              @endforelse
+            </ul>
+          </div>
+          </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('ticketsChart').getContext('2d');
+        var ticketsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [@foreach($monthlyTicketsData as $data) '{{ $data->year }}-{{ $data->month }}', @endforeach],
+                datasets: [{
+                    label: 'Monthly Ticket Counts',
+                    data: [@foreach($monthlyTicketsData as $data) {{ $data->count }}, @endforeach],
+                    backgroundColor: 'rgba(38, 185, 154, 0.31)',
+                    borderColor: 'rgba(38, 185, 154, 0.7)',
+                    pointBorderColor: 'rgba(38, 185, 154, 0.7)',
+                    pointBackgroundColor: 'rgba(38, 185, 154, 0.7)',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointBorderWidth: 1,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        });
+    });
+    </script>
+    </div>
+  </section>
+</div>
 
 @endsection
