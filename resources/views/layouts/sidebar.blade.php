@@ -78,12 +78,6 @@
                 </li>
                 <li class="nav-header">MAIN MENU</li>
                 <li class="nav-item">
-                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
-                        <p> Users </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p> Tickets <i class="fas fa-angle-left right"></i>
@@ -96,37 +90,49 @@
                                 <p>Request Ticket</p>
                             </a>
                         </li>
+                        @if(Auth::user()->role == 1)
                         <li class="nav-item">
                             <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-warning"></i>
                                 <p>All Tickets</p>
                             </a>
                         </li>
+                        @else
                         <li class="nav-item">
                             <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-danger"></i>
                                 <p>My Tickets</p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li><br>
                 <li class="nav-header">ADMINISTRATION</li>
+                    @if(Auth::user()->role == 1)
+                    <li class="nav-item">
+                        <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users mr-2"></i>
+                            <p> Users </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                                <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
+                            <i class="fas fa-times-circle nav-icon"></i>
+                            <p>Unassigned Tickets</p>
+                        </a>
+                    </li>
+                    @else 
+                    <li class="nav-item">
+                        <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
+                            <i class="fas fa-check-circle nav-icon"></i>
+                            <p>My Unassigned Tickets</p>
+                        </a>
+                    </li>
+                    @endif
                 <li class="nav-item">
                             <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
                         <i class="fas fa-check-circle nav-icon"></i>
                         <p>Assigned Tickets To Me</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                            <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
-                        <i class="fas fa-times-circle nav-icon"></i>
-                        <p>Unassigned Tickets</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('tickets.unassigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.unassigned' ? 'active' : '' }}">
-                        <i class="fas fa-check-circle nav-icon"></i>
-                        <p>My Unassigned Tickets</p>
                     </a>
                 </li>
                 <li class="nav-item">

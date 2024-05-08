@@ -80,8 +80,7 @@
           </div>
           <div class="col-md-9">
             
-          
-          <div class="card card-primary">
+          <div class="card">
               <div class="card-header">
               <h1 class="card-title"><i class="fas fa-chart-bar"></i> Yearly Summary of Requested Tickets</h1>
           </div>
@@ -106,50 +105,49 @@
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
                     <!-- Post -->
-                    
-                  <table id="datatable-responsive" class="table table-bordered table-hover text-center table-striped table-sm">
-                              <thead>
-                                  <tr>
-                                      <th>#</th>
-                                      <th> Request by</th>
-                                      <th> Location</th>
-                                      <th> Unit</th>
-                                      <th> Request</th>
-                                      <th> Assigned to</th>
-                                      <th> Priority Level</th>
-                                      <th> Status</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  @foreach($assignedTickets as $ticket)
-                                  @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
-                                  <tr>
-                                      <td>{{ $loop->iteration }}</td>
-                                      <td>{{ $ticket->user->name }}</td>
-                                      <td>{{ $ticket->service_location }}</td>
-                                      <td>{{ $ticket->unit }}</td>
-                                      <td>{{ $ticket->request }}</td>
-                                      <td>
-                                                  @foreach ($ticket->users as $assigned_user)
-                                                     <small>{{ $assigned_user->name }}</small>    
-                                                  @endforeach
-                                      </td>
-                                      <td>
-                                        @if ($ticket->priority_level === 'High')
-                                        <span class="badge badge-danger">High</span>
-                                        @elseif ($ticket->priority_level === 'Mid')
-                                        <span class="badge badge-warning">Mid</span>
-                                        @elseif ($ticket->priority_level === 'Low')
-                                        <span class="badge badge-secondary">Low</span>
-                                        @endif
-                                      </td>
-                                      <td>{{ $ticket->status }}</td>
-                                     
-                                    </tr>
-                                    @endif
-                                    @endforeach
-                              </tbody>
-                          </table>
+                  <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th> Request by</th>
+                              <th> Location</th>
+                              <th> Unit</th>
+                              <th> Request</th>
+                              <th> Assigned to</th>
+                              <th> Priority Level</th>
+                              <th> Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach($assignedTickets as $ticket)
+                          @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
+                          <tr>
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $ticket->user->name }}</td>
+                              <td>{{ $ticket->service_location }}</td>
+                              <td>{{ $ticket->unit }}</td>
+                              <td>{{ $ticket->request }}</td>
+                              <td>
+                                          @foreach ($ticket->users as $assigned_user)
+                                              <small>{{ $assigned_user->name }}</small>    
+                                          @endforeach
+                              </td>
+                              <td>
+                                @if ($ticket->priority_level === 'High')
+                                <span class="badge badge-danger">High</span>
+                                @elseif ($ticket->priority_level === 'Mid')
+                                <span class="badge badge-warning">Mid</span>
+                                @elseif ($ticket->priority_level === 'Low')
+                                <span class="badge badge-secondary">Low</span>
+                                @endif
+                              </td>
+                              <td>{{ $ticket->status }}</td>
+                              
+                            </tr>
+                            @endif
+                            @endforeach
+                      </tbody>
+                  </table>
                   </div>
                   <div class="tab-pane" id="timeline">
                     <!-- The timeline -->
