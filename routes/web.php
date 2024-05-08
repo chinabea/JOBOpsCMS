@@ -10,6 +10,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\UnitController;
 use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -115,6 +116,13 @@ Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('pri
 // Route for Admin and MICT Staff only
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
+
+Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
+Route::post('/units', [UnitController::class, 'store'])->name('units.store');
+
+Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
+Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
+
 
 
 // Route::fallback(function () {
