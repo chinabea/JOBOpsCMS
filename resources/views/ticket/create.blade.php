@@ -3,103 +3,137 @@
 @extends('layouts.template')
 
 @section('content')
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .hidden { display: none; }
+</style>
+
 <div class="content-wrapper">
     <section class="content-header">
     </section>
 
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid mt-5">
             <div class="row align-content-center">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
-							<form action="{{ route('store.ticket') }}" method="post" enctype="multipart/form-data">
-								@csrf
-								<input class="form-control" type="hidden" name="user_id" value="{{ auth()->id() }}">
 
-							<div class="field item form-group">
-								<label class="col-form-label col-md-3 col-sm-3  label-align">Assign to<span class="required">*</span></label>
-								<div class="col-md-6 col-sm-6">
-									<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
-										@foreach($userIds as $user)
-											<option value="{{ $user->id }}" data-content="
-												<span class='text-black'><strong><br>{{ $user->name }}</strong><br>
-												<small>Expertise: {{ implode(', ', $user->expertise ?? ['No Expertise']) }}</small><br>
-												<small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
-											</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
-							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align" for="service_location">Service Location <span class="required">*</span>
-								</label>
-								<div class="col-md-6 col-sm-6 ">
-									<input type="text" id="service_location" name="service_location" required="required" class="form-control ">
-								</div>
-							</div>
-							<div class="item form-group">
-								<label for="unit" class="col-form-label col-md-3 col-sm-3 label-align">Unit</label>
-								<div class="col-md-6 col-sm-6 ">
-									<select id="unit" class="form-control" name="unit">
-										<option value=""> Select Unit</option>
-										<option value="MICT" name="unit"> MICT</option>
-										<option value="MIS" name="unit">MIS</option>
-										<option value="Repair" name="unit">Repair</option>
-										<option value="Network" name="unit">Network</option>
-									</select>
-								</div>
-							</div>
-							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align" for="request">Request <span class="required">*</span>
-								</label>
-								<div class="col-md-6 col-sm-6 ">
-									<input type="text" id="request" name="request" required="required" class="form-control">
-								</div>
-							</div>
-							<div class="item form-group">
-								<label class="col-form-label col-md-3 col-sm-3 label-align">Priority Level</label>
-								<div class="col-md-6 col-sm-6 ">
-									<div id="gender" class="btn-group" data-toggle="buttons">
-										<label class="btn btn-danger" data-toggle-class="btn-warning" data-toggle-passive-class="btn-default">
-											<input type="radio" name="priority_level" value="high" class="join-btn"> &nbsp; High &nbsp;
-										</label>
-										<label class="btn btn-warning" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-											<input type="radio" name="priority_level" value="mid" class="join-btn"> Mid
-										</label>
-										<label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-											<input type="radio" name="priority_level" value="low" class="join-btn"> Low
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="field item form-group">
-								<label class="col-form-label col-md-3 col-sm-3  label-align">Deadline<span class="required">*</span></label>
-								<div class="col-md-6 col-sm-6">
-									<input class="form-control" class='date' type="date" name="deadline" id="deadline" required='required'>
-								</div>
-							</div>
-							<div class="item form-group">
-								<label for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description<span class="required">*</span></label>
-								<div class="col-md-6 col-sm-6 ">
-									<textarea id="description" class="form-control" type="text" required="required" name="description"></textarea>
-								</div>
-							</div>
-							<div class="item form-group">
-								<label for="file_path" class="col-form-label col-md-3 col-sm-3 label-align">Upload File</label>
-								<div class="col-md-6 col-sm-6 ">
-									<input id="file_path" class="form-control" type="file" name="file_path">
-								</div>
-							</div>
-							<div class="ln_solid"></div>
-							<div class="item form-group">
-								<div class="col-md-6 col-sm-6 offset-md-3">
-									<button class="btn btn-primary" id="reset" type="reset">Reset</button>
-									<button type="submit" class="btn btn-success">Submit</button>
-								</div>
-							</div>
-						</form>
+
+			<div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form>
+                <div class="card-body">
+                    <div class="container mt-5">
+                        <div class="form-group">
+                            <label for="service-location">Service Location</label>
+                            <input type="building_number" name="building_number" class="form-control" placeholder="Enter Building Number or Name"><br>
+                            <input type="office_name" name="office_name" class="form-control" placeholder="Enter Office Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="description" name="description" class="form-control" placeholder="Enter Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file_path" class="custom-file-input">
+                                <label class="custom-file-label" for="file_path" name="file_path">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unitSelection" class="form-label">Select Unit:</label>
+                            <select class="form-select form-control" id="unitSelection">
+                                <option value="">Select a Unit</option>
+                                <option value="MICT">MICT</option>
+                                <option value="MIS">MIS</option>
+                                <option value="ICTRM">ICT Repair and Maintenance</option>
+                                <option value="Network">Network</option>
+                            </select>
+                        </div>
+                        <!-- Job Type Selection -->
+                        <div class="mb-3">
+                            <label for="jobType" class="form-label">Job Type:</label>
+                            <select class="form-select form-control" id="jobType" disabled>
+                                <option>Select a Job Type</option>
+                                <!-- Options will be added dynamically -->
+                            </select>
+                        </div>
+                        <!-- Problem/Equipment Type Selection -->
+                        <div class="mb-3">
+                            <label for="problemType" class="form-label">Type of Problem/Equipment Type:</label>
+                            <select class="form-select form-control" id="problemType" disabled>
+                                <option>Select Type</option>
+                                <!-- Options will be added dynamically -->
+                            </select>
+                        </div>
+                    </div>
+           
+
+
+<script>
+document.getElementById('unitSelection').addEventListener('change', function() {
+    var jobType = document.getElementById('jobType');
+    var problemType = document.getElementById('problemType');
+    jobType.innerHTML = ''; // Clear previous options
+    problemType.innerHTML = ''; // Clear previous options
+
+    if (this.value === "ICTRM") {
+        jobType.disabled = false;
+        jobType.add(new Option("Select a Job Type", ""));
+        jobType.add(new Option("Repair", "Repair"));
+        jobType.add(new Option("Installation", "Installation"));
+        jobType.add(new Option("Software Upgrade", "Software Upgrade"));
+        jobType.add(new Option("Preventive Maintenance", "Preventive Maintenance"));
+        jobType.add(new Option("Corrective Maintenance", "Corrective Maintenance"));
+        jobType.add(new Option("Others", "Others"));
+
+        problemType.disabled = false;
+        problemType.add(new Option("Select Type", ""));
+        problemType.add(new Option("ICTRAM", "ICTRAM"));
+        problemType.add(new Option("All-in-one PC", "All-in-one PC"));
+        problemType.add(new Option("System Unit", "System Unit"));
+        problemType.add(new Option("Printer", "Printer"));
+        problemType.add(new Option("Laptop", "Laptop"));
+    } else {
+        jobType.disabled = true;
+        problemType.disabled = true;
+    }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -107,6 +141,10 @@
         </div>
     </section>
 </div>
+
+
+
+
 
 @endsection
 

@@ -106,6 +106,24 @@
                         </li>
                         @endif
                     </ul>
+                    <li class="nav-item">
+                        <a href="{{ route('units.create') }}" class="nav-link {{ Route::currentRouteName() == 'units.create' ? 'active' : '' }}">
+                            <i class="fas fa-cogs nav-icon"></i>
+                            <p>Unit</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('jobs.create') }}" class="nav-link {{ Route::currentRouteName() == 'jobs.create' ? 'active' : '' }}">
+                            <i class="fas fa-folder nav-icon"></i>
+                            <p>Job Type</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('problemOrEquipments.create') }}" class="nav-link {{ Route::currentRouteName() == 'problemOrEquipments.create' ? 'active' : '' }}">
+                            <i class="fas fa-folder nav-icon"></i>
+                            <p>Problem / Equipment</p>
+                        </a>
+                    </li>
                 </li><br>
                 <li class="nav-header">ADMINISTRATION</li>
                     @if(Auth::user()->role == 1)
@@ -207,6 +225,12 @@
                         <p>FAQs</p>
                     </a>
                 </li>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}">
+                        <i class="fas fa-cogs nav-icon"></i>
+                        <p>Settings</p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">

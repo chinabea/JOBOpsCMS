@@ -20,9 +20,7 @@ return new class extends Migration
 
             $table->string('building_number');
             $table->string('office_name');
-            // $table->string('request');
             $table->enum('priority_level', ['High', 'Mid', 'Low'])->nullable();
-            // $table->date('deadline');
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
             $table->enum('status', ['Open','In Progress', 'Closed'])->default('Open');
