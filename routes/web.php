@@ -11,6 +11,8 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\ProblemController;
 use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -123,9 +125,12 @@ Route::post('/units', [UnitController::class, 'store'])->name('units.store');
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
+Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
+Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
 
 
-// Route::fallback(function () {
-//     return response()->view('errors.404', [], 404);
-// });
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
 
