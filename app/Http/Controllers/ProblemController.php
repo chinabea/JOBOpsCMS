@@ -29,4 +29,10 @@ class ProblemController extends Controller
 
         return redirect()->route('problemOrEquipments.create')->with('success', 'Unit type added successfully!');
     }
+    
+    public function getEquipmentTypesByJob($jobId)
+    {
+        $equipmentTypes = Equipment::where('job_id', $jobId)->get();
+        return response()->json($equipmentTypes);
+    }
 }

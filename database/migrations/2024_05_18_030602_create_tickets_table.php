@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('unit_id');  // Make sure this line exists
             $table->unsignedBigInteger('job_type_id')->nullable();
-            $table->unsignedBigInteger('problem_type_id')->nullable();
+            $table->unsignedBigInteger('equipment_type_id')->nullable();
 
             $table->string('building_number');
             $table->string('office_name');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units');
             $table->foreign('job_type_id')->references('id')->on('job_types');
-            $table->foreign('problem_type_id')->references('id')->on('problem_types');
+            $table->foreign('equipment_type_id')->references('id')->on('problem_types');
             
             $table->timestamps();
             

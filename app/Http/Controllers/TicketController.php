@@ -8,10 +8,23 @@ use App\Models\User;
 use App\Models\Ticket;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
+use App\Models\JobType;
+use App\Models\ProblemTypeOrEquipment;
+use App\Models\Unit;
 
 class TicketController extends Controller
 {
-        
+    public function getJobTypesByUnit($unitId)
+    {
+        $unit = Unit::find($unitId);
+        if (!$unit) {
+            return response()->json(['message' => 'Unit not found'], 404);
+        }
+
+        $jobTypes = $unit->jobTypes; // Assuming there is a 'jobTypes' relationship defined in Unit model
+        return response()->json($jobTypes);
+    }
+    
 
     public function assignedToMe()
     {
@@ -61,6 +74,7 @@ class TicketController extends Controller
     public function create()
     {
         try {
+            $units = Unit::all();
             $user = auth()->user();
             $tickets = Ticket::all();
             // $users = User::all(); 
@@ -73,7 +87,7 @@ class TicketController extends Controller
                 'Low' => 'Low'
             ];
 
-            return view('ticket.create', compact('tickets', 'priorities', 'userIds'));
+            return view('ticket.create', compact('tickets', 'priorities', 'userIds', 'units'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }

@@ -28,4 +28,12 @@ class JobController extends Controller
 
         return redirect()->route('jobs.create')->with('success', 'Job Type successfully added!');
     }
+    
+    public function getJobTypesByUnit($unitId)
+    {
+        $jobTypes = JobType::where('unit_id', $unitId)->get();
+        return response()->json($jobTypes);
+    }
+    
+    
 }

@@ -121,7 +121,13 @@
                     <li class="nav-item">
                         <a href="{{ route('problemOrEquipments.create') }}" class="nav-link {{ Route::currentRouteName() == 'problemOrEquipments.create' ? 'active' : '' }}">
                             <i class="fas fa-folder nav-icon"></i>
-                            <p>Problem / Equipment</p>
+                            <p>Problem</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('equipments.create') }}" class="nav-link {{ Route::currentRouteName() == 'equipments.create' ? 'active' : '' }}">
+                            <i class="fas fa-folder nav-icon"></i>
+                            <p>Equipment Type</p>
                         </a>
                     </li>
                 </li><br>

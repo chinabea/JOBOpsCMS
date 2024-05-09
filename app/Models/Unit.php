@@ -18,4 +18,9 @@ class Unit extends Model
     {
         return $this->hasManyThrough(Ticket::class, JobType::class);
     }
+
+    public function equipmentTypes()
+    {
+        return $this->hasMany(EquipmentType::class);
+    }
 }

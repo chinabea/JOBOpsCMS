@@ -13,6 +13,7 @@ use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProblemController;
+use App\Http\Controllers\EquipmentController;
 use App\Services\ActivityLogger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -127,6 +128,18 @@ Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
 Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
 Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
+
+// Route::get('/api/job-types/{unitName}', [TicketController::class, 'getJobTypes']);
+// Route::get('/api/equipment-types/{unitName}', [TicketController::class, 'getEquipmentTypes']);
+
+// Adding API routes for dynamic dropdowns
+Route::get('/api/job-types/{unitId}', [JobController::class, 'getJobTypesByUnit']);
+Route::get('/api/equipment-types/{jobId}', [EquipmentController::class, 'getEquipmentTypesByJob']);
+
+Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('equipments.create');
+Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('equipments.store');
+
+
 
 
 
