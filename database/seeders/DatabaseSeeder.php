@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jestabayag@my.cspc.edu.ph',
-                'role' => 3,
+                'role' => 5,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKjGmqvq6Rrri0tkpCM3vx2q7lZc30Wm2OUs1BFdeq-_-8jLF-n=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09248769368',
