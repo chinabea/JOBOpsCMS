@@ -8,12 +8,29 @@ use App\Models\User;
 use App\Models\Ticket;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
-use App\Models\JobType;
 use App\Models\ProblemTypeOrEquipment;
 use App\Models\Unit;
 
+use App\Models\RequestType;
+use App\Models\Equipment;
+use App\Models\JobType;
+use App\Models\Problem;
+
 class TicketController extends Controller
 {
+
+    public function create()
+    {
+        
+        $requestTypes = RequestType::all();
+        $equipments = Equipment::all();
+        $jobTypes = JobType::all();
+        $problems = Problem::all();
+        
+        return view('ticket.create', compact('requestTypes', 'equipments', 'jobTypes', 'problems'));
+     
+    }
+
     public function getJobTypesByUnit($unitId)
     {
         $unit = Unit::find($unitId);
@@ -66,28 +83,6 @@ class TicketController extends Controller
             $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
             
             return view('ticket.index', compact('tickets','userIds'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
-    }
-
-    public function create()
-    {
-        try {
-            $units = Unit::all();
-            $user = auth()->user();
-            $tickets = Ticket::all();
-            // $users = User::all(); 
-            $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
-
-            // Define priorities directly in the controller as an associative array
-            $priorities = [
-                'High' => 'High',
-                'Mid' => 'Mid',
-                'Low' => 'Low'
-            ];
-
-            return view('ticket.create', compact('tickets', 'priorities', 'userIds', 'units'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
