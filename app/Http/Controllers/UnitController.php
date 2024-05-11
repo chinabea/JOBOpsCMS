@@ -20,15 +20,15 @@ class UnitController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        // try {
             
             $unit = Unit::create($request->all());
             
             return redirect()->route('units.create')->with('success', 'Unit Successfully Added!');
-        } catch (Exception $e) {
+        // } catch (Exception $e) {
             
-            return $e->getMessage();
-        }
+        //     return $e->getMessage();
+        // }
     }
 
     

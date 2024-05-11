@@ -151,6 +151,120 @@
     </script> -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- submission_form.blade.php -->
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2>Submit Ticket</h2>
+        <form method="POST" action="{{ route('units.store') }}">
+            @csrf
+
+            <!-- Common fields -->
+            <div class="form-group">
+                <label for="building_number">Building Number</label>
+                <input type="text" class="form-control" id="building_number" name="building_number" required>
+            </div>
+            <div class="form-group">
+                <label for="office_name">Office Name</label>
+                <input type="text" class="form-control" id="office_name" name="office_name" required>
+            </div>
+
+            <!-- Specific fields for each unit type -->
+            <div class="form-group">
+                <label for="unit_type">Unit Type</label>
+                <select class="form-control" id="unit_type" name="unit_type" required>
+                    <option value="NICMU">NICMU</option>
+                    <option value="MIS">MIS</option>
+                    <option value="ICTRAM">ICTRAM</option>
+                </select>
+            </div>
+            
+            <!-- Fields specific to NICMU -->
+            <div id="nicmu_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="nicmu_jobtype">NICMU Job Type</label>
+                    <input type="text" class="form-control" id="nicmu_jobtype" name="nicmu_jobtype">
+                </div>
+                <div class="form-group">
+                    <label for="nicmu_equipment">NICMU Equipment</label>
+                    <input type="text" class="form-control" id="nicmu_equipment" name="nicmu_equipment">
+                </div>
+            </div>
+
+            <!-- Fields specific to MIS -->
+            <div id="mis_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="mis_requesttype">MIS Request Type</label>
+                    <input type="text" class="form-control" id="mis_requesttype" name="mis_requesttype">
+                </div>
+                <div class="form-group">
+                    <label for="mis_jobtype">MIS Job Type</label>
+                    <input type="text" class="form-control" id="mis_jobtype" name="mis_jobtype">
+                </div>
+                <div class="form-group">
+                    <label for="mis_asname">MIS Assigned Name</label>
+                    <input type="text" class="form-control" id="mis_asname" name="mis_asname">
+                </div>
+            </div>
+
+            <!-- Fields specific to ICTRAM -->
+            <div id="ictram_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="ictram_jobtype">ICTRAM Job Type</label>
+                    <input type="text" class="form-control" id="ictram_jobtype" name="ictram_jobtype">
+                </div>
+                <div class="form-group">
+                    <label for="ictram_equipment">ICTRAM Equipment</label>
+                    <input type="text" class="form-control" id="ictram_equipment" name="ictram_equipment">
+                </div>
+                <div class="form-group">
+                    <label for="ictram_problem">ICTRAM Problem</label>
+                    <input type="text" class="form-control" id="ictram_problem" name="ictram_problem">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ictram_is_warrantry" name="ictram_is_warrantry">
+                    <label class="form-check-label" for="ictram_is_warrantry">Is Warrantry</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        // Show specific fields based on selected unit type
+        $('#unit_type').change(function() {
+            var selectedUnit = $(this).val();
+            $('#nicmu_fields').hide();
+            $('#mis_fields').hide();
+            $('#ictram_fields').hide();
+            if (selectedUnit === 'NICMU') {
+                $('#nicmu_fields').show();
+            } else if (selectedUnit === 'MIS') {
+                $('#mis_fields').show();
+            } else if (selectedUnit === 'ICTRAM') {
+                $('#ictram_fields').show();
+            }
+        });
+    </script>
+@endsection
+
+
 @endsection
 
 
