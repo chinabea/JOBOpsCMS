@@ -108,26 +108,14 @@
                     </ul>
                     <li class="nav-item">
                         <a href="{{ route('units.create') }}" class="nav-link {{ Route::currentRouteName() == 'units.create' ? 'active' : '' }}">
-                            <i class="fas fa-cogs nav-icon"></i>
-                            <p>Unit</p>
+                            <i class="fas fa-university nav-icon"></i>
+                            <p>Units</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('jobs.create') }}" class="nav-link {{ Route::currentRouteName() == 'jobs.create' ? 'active' : '' }}">
-                            <i class="fas fa-folder nav-icon"></i>
-                            <p>Job Type</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('problemOrEquipments.create') }}" class="nav-link {{ Route::currentRouteName() == 'problemOrEquipments.create' ? 'active' : '' }}">
-                            <i class="fas fa-folder nav-icon"></i>
-                            <p>Problem</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('equipments.create') }}" class="nav-link {{ Route::currentRouteName() == 'equipments.create' ? 'active' : '' }}">
-                            <i class="fas fa-folder nav-icon"></i>
-                            <p>Equipment Type</p>
+                        <a href="{{ route('ictrams.create') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.create' ? 'active' : '' }}">
+                            <i class="fas fa-university nav-icon"></i>
+                            <p>ICTRAM</p>
                         </a>
                     </li>
                 </li><br>
