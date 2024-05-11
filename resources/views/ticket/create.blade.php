@@ -25,7 +25,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <!-- <form> -->
               <form action="{{ route('store.ticket') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
@@ -52,81 +52,39 @@
                             </div>
                             </div>
                         </div>
-                                    <!-- <div class="mb-3">
-                                        <label for="unitSelection" class="form-label">Select Unit:</label>
-                                        <select class="form-select form-control" id="unitSelection">
-                                            <option value="">Select a Unit</option>
-                                            @foreach ($units as $unit)
-                                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="jobType" class="form-label">Job Type:</label>
-                                        <select class="form-select form-control" id="jobType" disabled>
-                                            <option>Select a Job Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="problemType" class="form-label">Type of Problem/Equipment Type:</label>
-                                        <select class="form-select form-control" id="problemType" disabled>
-                                            <option>Select Type</option>
-                                        </select>
-                                    </div> -->
+                              
 
-                                    <div class="mb-3">
-    <label for="unitSelection" class="form-label">Select Unit:</label>
-    <select class="form-select form-control" id="unitSelection">
-        <option value="">Select a Unit</option>
-        @foreach ($units as $unit)
-            <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-        @endforeach
-    </select>
+
+                        <label for="requestType">Request Type:</label>
+        <select id="requestType" name="requestType" class="form-control">
+            @foreach($requestTypes as $requestType)
+            <option value="{{ $requestType->id }}">{{ $requestType->name }}</option>
+            @endforeach
+        </select>
+
+        <label for="jobType">Job Type:</label>
+        <select id="jobType" name="jobType" class="form-control">
+            @foreach($jobTypes as $jobType)
+            <option value="{{ $jobType->id }}">{{ $jobType->name }}</option>
+            @endforeach
+        </select>
+
+        <label for="equipment">Equipment:</label>
+        <select id="equipment" name="equipment" class="form-control">
+            @foreach($equipments as $equipment)
+            <option value="{{ $equipment->id }}">{{ $equipment->name }}</option>
+            @endforeach
+        </select>
+
+        <label for="problem">Problem:</label>
+        <select id="problem" name="problem" class="form-control">
+            @foreach($problems as $problem)
+            <option value="{{ $problem->id }}">{{ $problem->name }}</option>
+            @endforeach
+        </select>
+
+
 </div>
-<div class="mb-3">
-    <label for="jobType" class="form-label">Job Type:</label>
-    <select class="form-select form-control" id="jobType" disabled>
-        <option>Select a Job Type</option>
-        <!-- Options will be added dynamically -->
-    </select>
-</div>
-
-
-                    </div>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#unitSelection').on('change', function() {
-        var unitId = $(this).val();
-        $('#jobType').empty().append('<option>Select a Job Type</option>');
-        if (unitId) {
-            $.ajax({
-                url: '/api/job-types/' + unitId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    if (data.length) {
-                        $('#jobType').prop('disabled', false);
-                        $.each(data, function(key, value) {
-                            $('#jobType').append('<option value="' + value.id + '">' + value.name + '</option>');
-                        });
-                    }
-                }
-            });
-        } else {
-            $('#jobType').prop('disabled', true);
-        }
-    });
-
-    $('#jobType').on('change', function() {
-        var jobId = $(this).val();
-        // similar AJAX call to '/api/equipment-types/' + jobId
-        // update another dropdown or UI element based on job selection
-    });
-});
-</script>
-
-
                         </div>
                     </div>
                 </div>
@@ -137,6 +95,60 @@ $(document).ready(function() {
 
 
 
+<!-- 
+
+<script>
+        $(document).ready(function () {
+            $('#requestType').change(function () {
+                var id = $(this).val();
+                $('#jobType').empty();
+                $.ajax({
+                    url: '/api/request-types/' + id + '/job-types',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $('#jobType').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                        $('#jobType').change();
+                    }
+                });
+            });
+
+            $('#jobType').change(function () {
+                var id = $(this).val();
+                $('#equipment').empty();
+                $.ajax({
+                    url: '/job-types/' + id + '/equipments',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $('#equipment').append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                        $('#equipment').change();
+                    }
+                });
+            });
+
+            $('#equipment').change(function () {
+                var id = $(this).val();
+                $('#problem').empty();
+                $.ajax({
+                    url: '/equipments/' + id + '/problems',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $('#problem').append('<option value="' + value.id + '">' + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#requestType').change(); // Trigger change to load initial job types
+        });
+    </script> -->
 
 
 @endsection
