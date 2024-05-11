@@ -282,3 +282,15 @@ $(function () {
           }
       });
   });
+
+// for delete
+
+function confirmDelete(unitId) {
+  if (confirm("Are you sure you want to delete this unit?")) {
+      // Get the delete form
+      var deleteForm = document.getElementById('delete-form-' + unitId);
+
+      // Submit the form
+      deleteForm.submit();
+  }
+}

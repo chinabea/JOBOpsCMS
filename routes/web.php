@@ -154,16 +154,6 @@ Route::get('/job-types/{id}/equipments', [RequestController::class, 'getEquipmen
 Route::get('/equipments/{id}/problems', [RequestController::class, 'getProblems']);
 
 
-
-// PER UNIT
-// Route::get('/units/create', [UnitController::class, 'createIctram'])->name('ictram.create');
-// Route::post('/units', [UnitController::class, 'storeIctram'])->name('ictram.store');
-
-
-
-
-
-
 // Routes for Unit
 Route::get('/units', [UnitController::class, 'index'])->name('units.index');
 Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');

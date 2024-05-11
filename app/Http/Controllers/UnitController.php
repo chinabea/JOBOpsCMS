@@ -10,33 +10,36 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('units.index', compact('units'));
+        return view('unit.create', compact('units'));
     }
 
     public function create()
     {
-        return view('unit.create');
+        $units = Unit::all();
+        return view('unit.create', compact('units'));
     }
 
     public function store(Request $request)
     {
-        // try {
+        $unit = Unit::create($request->all());
+        
+        return redirect()->route('units.create')->with('success', 'Unit Successfully Added!');
             
-            $unit = Unit::create($request->all());
-            
-            return redirect()->route('units.create')->with('success', 'Unit Successfully Added!');
-        // } catch (Exception $e) {
-            
-        //     return $e->getMessage();
-        // }
     }
-
     
     public function edit($id)
     {
         $unit = Unit::findOrFail($id);
         return view('units.edit', compact('unit'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $unit = Unit::findOrFail($id);
+        $unit->update($request->all());
+        return redirect()->route('units.index')->with('success', 'Unit updated successfully');
+    }
+
     
     public function destroy($id)
     {
