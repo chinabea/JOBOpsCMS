@@ -13,11 +13,18 @@ class UnitController extends Controller
         return view('unit.create', compact('units'));
     }
 
+    // public function create()
+    // {
+    //     $units = Unit::all();
+    //     return view('unit.create', compact('units'));
+    // }
     public function create()
     {
+        $unit = new Unit(); // Create a new Unit instance
         $units = Unit::all();
-        return view('unit.create', compact('units'));
+        return view('unit.create', compact('units', 'unit'));
     }
+
 
     public function store(Request $request)
     {
