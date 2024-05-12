@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Mark Louis Odavar',
                 'email' => 'mlodavar@my.cspc.edu.ph',
-                'role' => 2,
+                'role' => 3,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocIGM3-G1PBRp1kRe61ZRM4xR67hq-bUW4O3BkjhHdyDisp6bOM=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09246794618',
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'JESSICA MATAYA',
                 'email' => 'jesmataya@my.cspc.edu.ph',
-                'role' => 3,
+                'role' => 2,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKUB0nARYGxuJCevZG8KLnVwpmTDrJsZfFZa7ZdFCLaiJ49pWfI=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09386390756',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Jessemri Tabayag',
                 'email' => 'jestabayag@my.cspc.edu.ph',
-                'role' => 5,
+                'role' => 4,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKjGmqvq6Rrri0tkpCM3vx2q7lZc30Wm2OUs1BFdeq-_-8jLF-n=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09248769368',
