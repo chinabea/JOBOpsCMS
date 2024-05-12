@@ -125,7 +125,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('ictrams.create') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.create' ? 'active' : '' }}">
+                        <a href="{{ route('nicmus.create') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.create' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-danger"></i>
                             <p>NICMU</p>
                         </a>
