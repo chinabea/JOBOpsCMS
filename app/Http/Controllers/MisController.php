@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mis;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class MisController extends Controller
@@ -12,23 +13,33 @@ class MisController extends Controller
         $mises = Mis::all();
         return view('mises.index', compact('mises'));
     }
+
     public function create()
     {
-        return view('mises.create');
+        $units = Unit::all();
+        return view('unit.mis.create', compact('units'));
     }
-
+    
     public function store(Request $request)
     {
         try {
-            
-            $mis = Mis::create($request->all());
-            
-            return redirect()->route('mis')->with('success', 'MIS Successfully Added!');
+            // Set a default value for unit if it's not submitted with the form data
+            $unit = $request->input('unit', 'MIS-Management Information System');
+    
+            // Create a new Ictram record with the submitted data
+            $mis = Mis::create([
+                'unit' => $unit,
+                'jobtype' => $request->input('jobtype'),
+                'requesttype' => $request->input('requesttype'),
+                'asname' => $request->input('asname'),
+            ]);
+    
+            return redirect()->route('mises.create')->with('success', 'ICTRAM Successfully Added!');
         } catch (Exception $e) {
-            
             return $e->getMessage();
         }
     }
+
     public function edit($id)
     {
         $mis = Mis::findOrFail($id);

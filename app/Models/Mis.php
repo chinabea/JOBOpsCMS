@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Mis extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'unit',
+        'jobtype',
+        'requesttype',
+        'asname',
+
+        
+    ];
 }
