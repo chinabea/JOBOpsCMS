@@ -18,15 +18,16 @@
                                         @csrf
                                     <div class="form-group">
                                         <label for="unit_id">Unit</label>
-                                        <select class="form-control" id="unit_id" name="unit_id" required>
+                                        <select class="form-control" id="unit_id" name="unit_id" required disabled>
                                             <option value="">Select Unit</option>
-                                    @foreach($units as $unit)
-                                        <option value="{{ $unit->id }}"{{ $unit->name === 'ICTRAM' ? ' selected' : '' }}{{ $unit->name === 'ICTRAM' ? ' disabled' : '' }}>
-                                            {{ $unit->name }}
-                                        </option>
-                                    @endforeach
+                                                @foreach($units as $unit)
+                                                    <option value="{{ $unit->id }}"{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' selected' : '' }}{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' disabled' : '' }}>
+                                                        {{ $unit->name }}
+                                                    </option>
+                                                @endforeach
                                         </select>
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="jobtype">Job Type</label>
                                         <input type="text" class="form-control" id="jobtype" name="jobtype" required>
