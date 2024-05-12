@@ -90,14 +90,14 @@
                     </ul>
                 </li><br>
                 <li class="nav-header">ADMINISTRATION</li>
-                    @if(Auth::user()->role == 1)
-                    <li class="nav-item">
-                        <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users mr-2"></i>
-                            <p> Users </p>
-                        </a>
-                    </li>
-                    @endif
+                @if(Auth::user()->role == 1)
+                <li class="nav-item">
+                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <p> Users </p>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-university"></i>

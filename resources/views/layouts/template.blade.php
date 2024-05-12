@@ -7,18 +7,18 @@
     <title>
         @auth
             @if(auth()->user()->role === 1)
-                JobOps CMS | Director
+                JObOps CMS | Director
             @elseif(auth()->user()->role === 2)
-                JobOps CMS | Unit Head
+                JObOps CMS | Unit Head
             @elseif(auth()->user()->role === 3)
-                JobOps CMS | MICT Staff
+                JObOps CMS | MICT Staff
             @elseif(auth()->user()->role === 4)
-                JobOps CMS | Student
+                JObOps CMS | Student
             @else
-                JobOps CMS
+                JObOps CMS
             @endif
         @else
-            JobOps CMS
+            JObOps CMS
         @endauth
     </title>
     <link rel="icon" type="image/png" href="{{ asset('dist/img/MICT-Logo.png') }}">
