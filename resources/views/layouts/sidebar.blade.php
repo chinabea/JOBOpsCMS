@@ -33,18 +33,22 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ $profilePictureUrl }}" class="img-circle elevation-2" alt="User Image">
+        <img src="{{ $profilePictureUrl }}" class="img-circle elevation-2" alt="User Image">
+
         </div>
         <div class="info">
           <a href="#" class="d-block">
             @if(Auth::user()->role == 4)
-                Staff, {{ Auth::user()->name }} 
+                <!-- Staff, <br>  -->
+                {{ Auth::user()->name }} 
             @elseif(Auth::user()->role == 3) 
-                MICT Staff, {{ Auth::user()->name }} 
+                MICT Staff, <br> {{ Auth::user()->name }} 
             @elseif(Auth::user()->role == 2)
-                Unit Admin, {{ Auth::user()->name }} 
+               <label class="text-sm"></label> Unit Admin, <br> {{ Auth::user()->name }} 
             @elseif(Auth::user()->role == 1)
-                Director, {{ Auth::user()->name }} 
+            <!-- <p class="text-sm">Director,</p>   -->
+            <!-- <small>Director,</small><br>  -->
+            {{ Auth::user()->name }} 
             @else
                 {{ Auth::user()->name }} 
             @endif

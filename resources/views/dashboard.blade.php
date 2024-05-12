@@ -21,62 +21,69 @@
     <section class="content">
       <div class="container-fluid">
         
-        <div class="row">
+      <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-info">
-              <span class="info-box-icon"><i class="fas fa-users"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Users</span>
                 <span class="info-box-number">{{ $totalUsers }}</span>
                 <small>{{ number_format($userPercentageChange, 2) }}% From last Week</small>
               </div>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
+          <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-success">
-              <span class="info-box-icon"><i class="fas fa-book"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-success"><i class="fas fa-book"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Tickets</span>
                 <span class="info-box-number">{{ $totalTickets }}</span>
                 <small>{{ number_format($ticketsPercentageChange, 2) }}% From last Week</small>
               </div>
+              <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-warning">
-              <span class="info-box-icon"><i class="fas fa-folder-open"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-warning"><i class="fas fa-folder-open"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Open Tickets</span>
                 <span class="info-box-number">{{ $totalOpenTickets }}</span>
                 <small>{{ number_format($totalOpenTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
+              <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-danger">
-              <span class="info-box-icon"><i class="fas fa-spinner"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-danger"><i class="fas fa-spinner"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">In Progress</span>
                 <span class="info-box-number">{{ $totalInProgressTickets }}</span>
                 <small>{{ number_format($totalInProgressTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
+              <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
         </div>
+
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-navy">
-              <span class="info-box-icon"><i class="fas fa-folder"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-navy"><i class="fas fa-folder"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Closed Tickets</span>
@@ -89,8 +96,8 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-purple">
-              <span class="info-box-icon"><i class="fas fa-flag"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-purple"><i class="fas fa-flag"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">High Priority</span>
@@ -103,11 +110,10 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-fuchsia">
-              <span class="info-box-icon"><i class="fas fa-minus-square"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-fuchsia"><i class="far fa-copy"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">Mid Priority</span>
+              <div class="info-box-content"> Priority</span>
                 <span class="info-box-number">{{ $totalMidLevelTickets }}</span>
                 <small>{{ number_format($totalMidLevelTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
@@ -117,8 +123,8 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-pink">
-              <span class="info-box-icon"><i class="fas fa-clock"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-gray-dark"><i class="fas fa-clock"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Low Priority</span>
@@ -131,10 +137,11 @@
           </div>
           <!-- /.col -->
         </div>
+
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-maroon">
-              <span class="info-box-icon"><i class="fas fa-times"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-maroon"><i class="fas fa-times"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text"> Unassigned Tickets</span>
@@ -147,8 +154,8 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-orange">
-              <span class="info-box-icon"><i class="fas fa-check"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-orange"><i class="fas fa-check"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">For Approval Users</span>
@@ -161,8 +168,8 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-teal">
-              <span class="info-box-icon"><i class="fas fa-user"></i></span>
+            <div class="info-box shadow">
+              <span class="info-box-icon bg-teal"><i class="fas fa-user"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Assigned to Me</span>
@@ -175,6 +182,8 @@
           </div>
           <!-- /.col -->
         </div>
+
+        
         <!-- AREA CHART -->
         <div class="card">
           <div class="card-header">
