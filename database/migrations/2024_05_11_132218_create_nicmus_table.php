@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('nicmus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->string('unit');
             $table->string('jobtype');
             $table->string('equipment');
             $table->timestamps();

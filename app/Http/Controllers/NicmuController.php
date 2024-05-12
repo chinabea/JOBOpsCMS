@@ -15,22 +15,27 @@ class NicmuController extends Controller
 
     public function create()
     {
-        return view('nicmus.create');
+        return view('unit.nicmu.create');
     }
-
+    
     public function store(Request $request)
     {
         try {
+            // Set a default value for unit if it's not submitted with the form data
+            $unit = $request->input('unit', 'NICMU-Network Internet and Communications Management Unit');
             
-            $nicmu = Nicmu::create($request->all());
-            
-            return redirect()->route('nicmu')->with('success', 'NICMU Successfully Added!');
+            // Create a new Ictram record with the submitted data
+            $nicmu = Nicmu::create([
+                'unit' => $unit,
+                'jobtype' => $request->input('jobtype'),
+                'equipment' => $request->input('equipment'),
+            ]);
+    
+            return redirect()->route('nicmus.create')->with('success', 'NICMU  Successfully Added!');
         } catch (Exception $e) {
-            
             return $e->getMessage();
         }
     }
-
     
     public function edit($id)
     {

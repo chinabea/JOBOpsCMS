@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nicmu extends Model
 {
     use HasFactory;
-    protected $fillable = ['unit_id', 'jobtype', 'equipment'];
+    protected $fillable = ['unit', 'jobtype', 'equipment'];
 
     public function unit()
     {
