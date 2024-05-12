@@ -9,7 +9,7 @@ class Ictram extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'unit_id',
+        'unit',
         'jobtype',
         'equipment',
         'problem',

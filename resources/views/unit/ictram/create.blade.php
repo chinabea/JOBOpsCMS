@@ -1,5 +1,3 @@
-
-
 @extends('layouts.template')
 
 @section('content')
@@ -17,15 +15,16 @@
                                     <form method="POST" action="{{ route('ictrams.store') }}">
                                         @csrf
                                     <div class="form-group">
-                                        <label for="unit_id">Unit</label>
-                                        <select class="form-control" id="unit_id" name="unit_id" required disabled>
+                                        <label for="unit">Unit</label>
+                                        <input type="text" class="form-control" id="unit" name="unit" value="ICTRAM-ICT Repair and Management" required disabled>
+                                        <!-- <select class="form-control" id="unit_id" name="unit_id" required>
                                             <option value="">Select Unit</option>
                                                 @foreach($units as $unit)
-                                                    <option value="{{ $unit->id }}"{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' selected' : '' }}{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' disabled' : '' }}>
+                                                    <option value="{{ $unit->id }}"{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' selected disabled' : '' }}>
                                                         {{ $unit->name }}
                                                     </option>
                                                 @endforeach
-                                        </select>
+                                        </select> -->
                                     </div>
                                     
                                     <div class="form-group">
