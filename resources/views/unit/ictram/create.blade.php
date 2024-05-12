@@ -17,14 +17,6 @@
                                     <div class="form-group">
                                         <label for="unit">Unit</label>
                                         <input type="text" class="form-control" id="unit" name="unit" value="ICTRAM-ICT Repair and Management" required disabled>
-                                        <!-- <select class="form-control" id="unit_id" name="unit_id" required>
-                                            <option value="">Select Unit</option>
-                                                @foreach($units as $unit)
-                                                    <option value="{{ $unit->id }}"{{ $unit->name === 'ICTRAM-ICT Repair and Management' ? ' selected disabled' : '' }}>
-                                                        {{ $unit->name }}
-                                                    </option>
-                                                @endforeach
-                                        </select> -->
                                     </div>
                                     
                                     <div class="form-group">
