@@ -16,8 +16,8 @@ class MisController extends Controller
 
     public function create()
     {
-        $units = Unit::all();
-        return view('unit.mis.create', compact('units'));
+        
+        return view('unit.mis.create');
     }
     
     public function store(Request $request)

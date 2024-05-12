@@ -19,7 +19,7 @@ use App\Services\ActivityLogger;
 use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\IctramController;
-use App\Http\Controllers\UnitController;
+// use App\Http\Controllers\UnitController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -155,13 +155,13 @@ Route::get('/equipments/{id}/problems', [RequestController::class, 'getProblems'
 
 
 // Routes for Unit
-Route::get('/units', [UnitController::class, 'index'])->name('units.index');
-Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
-Route::post('/units', [UnitController::class, 'store'])->name('units.store');
-Route::get('/units/{id}', [UnitController::class, 'show'])->name('units.show');
-Route::get('/units/{id}/edit', [UnitController::class, 'edit'])->name('units.edit');
-Route::put('/units/{id}', [UnitController::class, 'update'])->name('units.update');
-Route::delete('/units/{id}', [UnitController::class, 'destroy'])->name('units.destroy');
+// Route::get('/units', [UnitController::class, 'index'])->name('units.index');
+// Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
+// Route::post('/units', [UnitController::class, 'store'])->name('units.store');
+// Route::get('/units/{id}', [UnitController::class, 'show'])->name('units.show');
+// Route::get('/units/{id}/edit', [UnitController::class, 'edit'])->name('units.edit');
+// Route::put('/units/{id}', [UnitController::class, 'update'])->name('units.update');
+// Route::delete('/units/{id}', [UnitController::class, 'destroy'])->name('units.destroy');
 
 
 // Routes for NICMU

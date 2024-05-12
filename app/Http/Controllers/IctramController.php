@@ -16,8 +16,7 @@ class IctramController extends Controller
 
     public function create()
     {
-        $units = Unit::all();
-        return view('unit.ictram.create', compact('units'));
+        return view('unit.ictram.create');
     }
     public function store(Request $request)
     {
