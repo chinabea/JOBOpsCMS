@@ -105,15 +105,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('units.create') }}" class="nav-link {{ Route::currentRouteName() == 'units.create' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon text-info"></i>
-                                <p>Add Unit</p>
-                            </a>
-                        </li>
-                        @if(Auth::user()->role == 1)
+                    @if(Auth::user()->role == 1)
                     <li class="nav-item">
-                        <a href="{{ route('ictrams.create') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.create' ? 'active' : '' }}">
+                        <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-primary"></i>
                             <p>ICTRAM</p>
                         </a>
