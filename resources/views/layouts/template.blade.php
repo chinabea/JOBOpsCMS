@@ -4,7 +4,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JobOps CMS</title>
+    <title>
+        @auth
+            @if(auth()->user()->role === 1)
+                JobOps CMS | Director
+            @elseif(auth()->user()->role === 2)
+                JobOps CMS | Unit Head
+            @elseif(auth()->user()->role === 3)
+                JobOps CMS | MICT Staff
+            @elseif(auth()->user()->role === 4)
+                JobOps CMS | Student
+            @else
+                JobOps CMS
+            @endif
+        @else
+            JobOps CMS
+        @endauth
+    </title>
     <link rel="icon" type="image/png" href="{{ asset('dist/img/MICT-Logo.png') }}">
     
     <!-- Google Font: Source Sans Pro -->
