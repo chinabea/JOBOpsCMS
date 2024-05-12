@@ -53,9 +53,63 @@
                                                 <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
+                                                        
+                                                        <!-- Define the show modal -->
+                                                        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="showModalLabel">Unit Details</h5>
+                                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="mb-3">
+                                                                            <label for="showName" class="form-label">Name</label>
+                                                                            <input type="text" class="form-control" id="showName" name="name" value="{{ $unit->name }}" readonly>
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="showCreatedAt" class="form-label">Created Date</label>
+                                                                            <input type="text" class="form-control" id="showCreatedAt" name="name" value="{{ $unit->created_at }}" readonly>
+                                                                        </div>
+                                                                        <!-- Add other fields as needed -->
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                         <a href="#" class="btn btn-sm btn-secondary" onclick="openShowModal('{{ $unit->id }}')">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
+                                                        
+                                                        <!-- Define the edit modal -->
+                                                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="editModalLabel">Edit Unit</h5>
+                                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form id="editForm" action="{{ route('units.update', $unit->id) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="modal-body">
+                                                                            <div class="mb-3">
+                                                                                <label for="editName" class="form-label">Name</label>
+                                                                                <input type="text" class="form-control" id="editName" name="name" value="{{ $unit->name }}" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
                                                         <button class="btn btn-sm btn-warning" onclick="openEditModal('{{ $unit->id }}')">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
@@ -85,31 +139,6 @@
     </section>
 </div> 
 
-<!-- Define the show modal -->
-<div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="showModalLabel">Unit Details</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="showName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="showName" name="name" value="{{ $unit->name }}" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="showCreatedAt" class="form-label">Created Date</label>
-                    <input type="text" class="form-control" id="showCreatedAt" name="name" value="{{ $unit->created_at }}" readonly>
-                </div>
-                <!-- Add other fields as needed -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     function openShowModal(unitId) {
@@ -125,31 +154,6 @@
 </script>
 
 
-<!-- Define the edit modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Unit</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editForm" action="{{ route('units.update', $unit->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="editName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="editName" name="name" value="{{ $unit->name }}" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <script>
     function openEditModal(unitId) {
