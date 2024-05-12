@@ -119,7 +119,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('ictrams.create') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.create' ? 'active' : '' }}">
+                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-warning"></i>
                             <p>MIS</p>
                         </a>
