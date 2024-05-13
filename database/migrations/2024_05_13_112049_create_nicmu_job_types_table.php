@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nicmu_job_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('jobType_name');
             $table->timestamps();
         });
     }
