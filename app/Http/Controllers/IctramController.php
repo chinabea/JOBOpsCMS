@@ -11,12 +11,14 @@ class IctramController extends Controller
     public function index()
     {
         $ictrams = Ictram::all();
-        return view('ictrams.index', compact('ictrams'));
+        return view('unit.ictram.index', compact('ictrams'));
     }
 
     public function create()
     {
-        return view('unit.ictram.create');
+        
+        $ictrams = Ictram::all();
+        return view('unit.ictram.index', compact('ictrams'));
     }
     public function store(Request $request)
     {
@@ -44,6 +46,13 @@ class IctramController extends Controller
     {
         $ictram = Ictram::findOrFail($id);
         return view('ictrams.edit', compact('ictram'));
+    }
+
+    
+    public function show($id)
+    {
+        $ictram = Ictram::findOrFail($id);
+        return view('ictrams.index', compact('ictram'));
     }
     
     public function destroy($id)
