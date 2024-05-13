@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ictram_equipments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('equipment_name');
             $table->unsignedBigInteger('ictram_job_type_id');
             $table->timestamps();
 

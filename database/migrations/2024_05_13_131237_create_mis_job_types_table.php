@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mis_job_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('jobType_name');
             $table->unsignedBigInteger('mis_request_type_id');
             $table->unsignedBigInteger('asname_id'); // Modify this line
             $table->timestamps();

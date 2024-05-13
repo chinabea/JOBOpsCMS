@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mis_request_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('requestType_name');
             $table->timestamps();
         });
     }
