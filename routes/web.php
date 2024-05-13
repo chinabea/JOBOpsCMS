@@ -19,6 +19,7 @@ use App\Services\ActivityLogger;
 use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\ICTRAMController;
+use App\Http\Controllers\ICTRAMRequestController;
 // use App\Http\Controllers\UnitController;
 
 use Illuminate\Support\Facades\Auth;
@@ -192,13 +193,13 @@ Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.des
 // Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
 
 
-Route::get('/ictram/requests', [ICTRAMController::class, 'index'])->name('ictram.index');
-Route::get('/ictram/requests/create', [ICTRAMController::class, 'create'])->name('ictram.create');
-Route::post('/ictram/requests', [ICTRAMController::class, 'store'])->name('ictram.store');
-Route::get('/ictram/requests/{id}', [ICTRAMController::class, 'show'])->name('ictram.show');
-Route::get('/ictram/requests/{id}/edit', [ICTRAMController::class, 'edit'])->name('ictram.edit');
-Route::put('/ictram/requests/{id}', [ICTRAMController::class, 'update'])->name('ictram.update');
-Route::delete('/ictram/requests/{id}', [ICTRAMController::class, 'destroy'])->name('ictram.destroy');
+Route::get('/ictram/requests', [ICTRAMRequestController::class, 'index'])->name('ictram.index');
+Route::get('/ictram/requests/create', [ICTRAMRequestController::class, 'create'])->name('ictram.create');
+Route::post('/ictram/requests', [ICTRAMRequestController::class, 'store'])->name('ictram.store');
+Route::get('/ictram/requests/{id}', [ICTRAMRequestController::class, 'show'])->name('ictram.show');
+Route::get('/ictram/requests/{id}/edit', [ICTRAMRequestController::class, 'edit'])->name('ictram.edit');
+Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])->name('ictram.update');
+Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.destroy');
 
 
 Route::fallback(function () {
