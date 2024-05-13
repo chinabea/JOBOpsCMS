@@ -105,10 +105,13 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                    </ul>
+                </li>
+                <br><li class="nav-header">UNITS</li>
                     @if(Auth::user()->role == 1)
                     <li class="nav-item">
                         <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-primary"></i>
+                        <i class="far fa-circle nav-icon text-white"></i>
                             <p>ICTRAM</p>
                         </a>
                     </li>
@@ -125,8 +128,6 @@
                         </a>
                     </li>
                         @endif
-                    </ul>
-                </li>
                     
                 <br><li class="nav-header">OTHERS</li>
                 <li class="nav-item">

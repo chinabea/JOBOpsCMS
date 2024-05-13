@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class IctramJobType extends Model
 {
     use HasFactory;
+    public $fillable = ['name'];
 }

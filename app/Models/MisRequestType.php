@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MisRequestType extends Model
 {
     use HasFactory;
+    
+    public $fillable = ['name'];
 }

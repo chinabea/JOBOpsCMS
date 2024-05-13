@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MisAsname extends Model
 {
     use HasFactory;
+
+    public $fillable = ['name'];
 }

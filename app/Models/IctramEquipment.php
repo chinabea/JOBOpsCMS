@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class IctramEquipment extends Model
 {
     use HasFactory;
+
+    public $fillable = ['name'];
+
+
 }
