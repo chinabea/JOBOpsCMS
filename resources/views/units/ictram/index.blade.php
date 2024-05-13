@@ -15,7 +15,7 @@
                                     data-backdrop="static" data-keyboard="false" data-target="#ictramCreateModal">
                                 <i class="fas fa-plus"></i> Add ICTRAM
                             </button>
-                            @include('unit.ictram.create')
+                            @include('units.ictram.create')
                         </div>
                         <div class="card-body">
                                 <table class="table table-sm table-bordered" id="example1">
