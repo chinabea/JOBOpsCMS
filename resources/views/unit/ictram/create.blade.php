@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="jobForm" action="{{ route('job-types.store') }}" method="POST">
+                <form id="jobForm" action="#" method="POST">
                     <div class="mb-3">
                         <label for="jobType">Job Type:</label>
                         <input type="text" class="form-control" id="jobType" name="jobType" placeholder="Enter job type">
