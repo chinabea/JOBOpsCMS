@@ -126,18 +126,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Seed ICTRAM Equipments
-        DB::table('ictram_equipments')->insert([
-            ['equipment_name' => 'All in One PC', 'ictram_job_type_id' => 1],
-            ['equipment_name' => 'Printer', 'ictram_job_type_id' => 2],
-            // Add more equipments as needed
-        ]);
+        // DB::table('ictram_equipments')->insert([
+        //     ['equipment_name' => 'All in One PC', 'ictram_job_type_id' => 1],
+        //     ['equipment_name' => 'Printer', 'ictram_job_type_id' => 2],
+        //     // Add more equipments as needed
+        // ]);
 
         // Seed ICTRAM Problems
-        DB::table('ictram_problems')->insert([
-            ['problem_description' => 'No dial tone', 'ictram_equipment_id' => 1],
-            ['problem_description' => 'Paper Jams', 'ictram_equipment_id' => 2],
-            // Add more problems as needed
-        ]);
+        // DB::table('ictram_problems')->insert([
+        //     ['problem_description' => 'No dial tone', 'ictram_equipment_id' => 1],
+        //     ['problem_description' => 'Paper Jams', 'ictram_equipment_id' => 2],
+        //     // Add more problems as needed
+        // ]);
         
         // Seed MIS Request Types
         DB::table('mis_request_types')->insert([
