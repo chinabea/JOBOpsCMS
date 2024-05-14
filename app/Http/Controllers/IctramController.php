@@ -43,11 +43,24 @@ class ICTRAMController extends Controller
     }
     
     // Handle form submission
-    public function storeIctram(Request $request)
+    public function storeEquipment(Request $request)
     {
         $ictram = IctramEquipment::create($request->all());
 
         return redirect()->route('ictrams.index')->with('success', 'ICTRAM Request created successfully.');
+    }
+    
+    // Handle form submission
+    public function storeProblem(Request $request)
+    {
+
+        $equipments = IctramEquipment::all();
+        $problem = IctramProblem::create([
+            'ictram_equipment_id' => $request->input('ictram_equipment_id'),
+            'problem_description' => $request->input('problem_description'),
+        ]);
+
+        return redirect()->route('ictrams.index', compact('equipments'));
     }
 
 
