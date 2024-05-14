@@ -1,31 +1,52 @@
+<!-- ictramCreateModal.blade.php -->
+
 <div class="modal fade" id="ictramCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Add Job Types and Equipments</h4>
+                <h4 class="modal-title" id="myModalLabel">Add Job Types, Equipments, and Problems</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="jobForm" action="{{ route('ictram.store') }}" method="POST">
+                <form id="jobForm" action="{{ route('ictrams.storeIctram') }}" method="POST">
                     @csrf
+                    <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+
                     <div class="mb-3">
-                        <label for="user_id">User ID:</label>
-                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter user ID">
+                        <label for="jobType">Job Type</label>
+                        @if($jobTypes->count() > 0)
+                            <select class="form-control" id="jobType" name="ictram_job_type_id">
+                                <option value="">Select Job Type</option>
+                                @foreach($jobTypes as $jobType)
+                                    <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
+                                @endforeach
+                            </select>
+                        @else
+                            <input type="text" class="form-control" id="jobType_name" name="jobType_name" placeholder="Enter job type">
+                        @endif
                     </div>
+
                     <div class="mb-3">
-                        <label for="ictram_job_type_id">Job Type ID:</label>
-                        <input type="text" class="form-control" id="ictram_job_type_id" name="ictram_job_type_id" placeholder="Enter job type ID">
+                        <label for="equipment">Equipment</label>
+                        @if($equipments->count() > 0)
+                            <select class="form-control" id="equipment" name="equipment_name">
+                                <option value="">Select Equipment</option>
+                                @foreach($equipments as $equipment)
+                                    <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
+                                @endforeach
+                            </select>
+                        @else
+                            <input type="text" class="form-control" id="equipment_name" name="equipment_name" placeholder="Enter equipment">
+                        @endif
                     </div>
+
                     <div class="mb-3">
-                        <label for="ictram_equipment_id">Equipment ID:</label>
-                        <input type="text" class="form-control" id="ictram_equipment_id" name="ictram_equipment_id" placeholder="Enter equipment ID">
+                        <label for="problem">Problem</label>
+                            <input type="text" class="form-control" id="problem_description" name="problem_description" placeholder="Enter problem or issues">
                     </div>
-                    <div class="mb-3">
-                        <label for="ictram_problem_id">Problem ID:</label>
-                        <input type="text" class="form-control" id="ictram_problem_id" name="ictram_problem_id" placeholder="Enter problem ID">
-                    </div>
+
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -35,6 +56,3 @@
         </div>
     </div>
 </div>
-
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ClXO1TxVvR+abT7xanlJo1A2e9cApvIOYwA4X2FJC7cbtFFJ5v5x2k4jwTfsR/pj" crossorigin="anonymous"></script>

@@ -100,7 +100,7 @@
                 @endif
                     @if(Auth::user()->role == 1)
                     <li class="nav-item">
-                        <a href="{{ route('ictram.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictram.index' ? 'active' : '' }}">
+                        <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-white"></i>
                             <p>ICTRAM</p>
                         </a>
