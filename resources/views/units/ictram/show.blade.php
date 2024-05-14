@@ -1,4 +1,4 @@
-<div class="modal fade" id="ictramShowModal{{ $ictram->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="ictramShowModal{{ $jobType->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,19 +15,15 @@
                 
                 <div class="form-group">
                     <label for="showJobtype">Job Type</label>
-                    <input type="text" class="form-control" id="showJobtype" name="jobtype" value="{{ $ictram->jobtype }}" readonly>
+                    <input type="text" class="form-control" id="showJobtype" name="jobtype" value="{{ $jobType->jobtype }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="showEquipment">Equipment</label>
-                    <input type="text" class="form-control" id="showEquipment" name="equipment" value="{{ $ictram->equipment }}" readonly>
+                    <input type="text" class="form-control" id="showEquipment" name="equipment" value="{{ $jobType->equipment }}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="showProblem">Problem</label>
-                    <input type="text" class="form-control" id="showProblem" name="problem" value="{{ $ictram->problem }}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="showIsWarrantry">Is Warrantry</label>
-                    <input type="text" class="form-control" id="showIsWarrantry" name="is_warrantry" value="{{ $ictram->is_warrantry ? 'Yes' : 'No' }}" readonly>
+                    <input type="text" class="form-control" id="showProblem" name="problem" value="{{ $jobType->problem }}" readonly>
                 </div>
 
             </div>
