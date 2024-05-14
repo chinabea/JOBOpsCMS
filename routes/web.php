@@ -183,23 +183,27 @@ Route::get('/mises/{id}/edit', [MisController::class, 'edit'])->name('mises.edit
 Route::put('/mises/{id}', [MisController::class, 'update'])->name('mises.update');
 Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroy');
 
-// Routes for ICTRAM
-// Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
-// Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
-// Route::post('/ictrams', [ICTRAMController::class, 'store'])->name('ictrams.store');
-// Route::get('/ictrams/{id}', [ICTRAMController::class, 'show'])->name('ictrams.show');
-// Route::get('/ictrams/{id}/edit', [ICTRAMController::class, 'edit'])->name('ictrams.edit');
-// Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.update');
-// Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
+// Routes for ICTRAM Director Side
+Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
+Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
+Route::post('/ictrams/storeJobType', [ICTRAMController::class, 'storeJobType'])->name('ictrams.storeJobType');
+Route::post('/ictrams/storeEquipment', [ICTRAMController::class, 'storeEquipment'])->name('ictrams.storeEquipment');
+Route::post('/ictrams/storeProblem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');
+Route::get('/ictrams/{id}', [ICTRAMController::class, 'show'])->name('ictrams.show');
+Route::get('/ictrams/{id}/edit', [ICTRAMController::class, 'edit'])->name('ictrams.edit');
+Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.update');
+Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
+Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 
 
-Route::get('/ictram/requests', [ICTRAMRequestController::class, 'index'])->name('ictram.index');
-Route::get('/ictram/requests/create', [ICTRAMRequestController::class, 'create'])->name('ictram.create');
-Route::post('/ictram/requests', [ICTRAMRequestController::class, 'store'])->name('ictram.store');
-Route::get('/ictram/requests/{id}', [ICTRAMRequestController::class, 'show'])->name('ictram.show');
-Route::get('/ictram/requests/{id}/edit', [ICTRAMRequestController::class, 'edit'])->name('ictram.edit');
-Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])->name('ictram.update');
-Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.destroy');
+// Routes for ICTRAM for Client side
+Route::get('/ictram/requests', [ICTRAMRequestController::class, 'index'])->name('ictram.request.index');
+Route::get('/ictram/requests/create', [ICTRAMRequestController::class, 'create'])->name('ictram.request.create');
+Route::post('/ictram/requests', [ICTRAMRequestController::class, 'store'])->name('ictram.request.store');
+Route::get('/ictram/requests/{id}', [ICTRAMRequestController::class, 'show'])->name('ictram.request.show');
+Route::get('/ictram/requests/{id}/edit', [ICTRAMRequestController::class, 'edit'])->name('ictram.request.edit');
+Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])->name('ictram.request.update');
+Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.request.destroy');
 
 
 Route::fallback(function () {
