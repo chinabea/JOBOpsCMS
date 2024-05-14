@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -95,6 +96,94 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $userData) {
             User::create($userData);
         }
+        
+        // Seed NICMU Job Types
+        DB::table('nicmu_job_types')->insert([
+            ['jobType_name' => 'New Connection'],
+            ['jobType_name' => 'Repair'],
+            // Add more job types as needed
+        ]);
+
+        // Seed NICMU Equipments
+        DB::table('nicmu_equipments')->insert([
+            ['equipment_name' => 'Telephone', 'nicmu_job_type_id' => 1],
+            ['equipment_name' => 'Internet', 'nicmu_job_type_id' => 2],
+            // Add more equipments as needed
+        ]);
+
+        // Seed NICMU Problems
+        DB::table('nicmu_problems')->insert([
+            ['problem_description' => 'No dial tone', 'nicmu_equipment_id' => 1],
+            ['problem_description' => 'Slow connection', 'nicmu_equipment_id' => 2],
+            // Add more problems as needed
+        ]);
+        
+        // Seed ICTRAM Job Types
+        DB::table('ictram_job_types')->insert([
+            ['jobType_name' => 'Installation'],
+            ['jobType_name' => 'Repair'],
+            // Add more job types as needed
+        ]);
+
+        // Seed ICTRAM Equipments
+        DB::table('ictram_equipments')->insert([
+            ['equipment_name' => 'All in One PC', 'ictram_job_type_id' => 1],
+            ['equipment_name' => 'Printer', 'ictram_job_type_id' => 2],
+            // Add more equipments as needed
+        ]);
+
+        // Seed ICTRAM Problems
+        DB::table('ictram_problems')->insert([
+            ['problem_description' => 'No dial tone', 'ictram_equipment_id' => 1],
+            ['problem_description' => 'Paper Jams', 'ictram_equipment_id' => 2],
+            // Add more problems as needed
+        ]);
+        
+        // Seed MIS Request Types
+        DB::table('mis_request_types')->insert([
+            ['requestType_name' => 'Software Installation'],
+            ['requestType_name' => 'Hardware Repair'],
+            // Add more request types as needed
+        ]);
+
+        // Seed Asnames
+        DB::table('mis_asnames')->insert([
+            ['name' => 'Office 365'],
+            ['name' => 'SIAS'],
+            // Add more assets as needed
+        ]);
+
+        // Seed MIS Job Types
+        DB::table('mis_job_types')->insert([
+            ['jobType_name' => 'Install OS', 'mis_request_type_id' => 1, 'asname_id' => 1],
+            ['jobType_name' => 'Repair Hard Drive', 'mis_request_type_id' => 2, 'asname_id' => 2],
+            // Add more job types as needed
+        ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
         // $tickets = [
