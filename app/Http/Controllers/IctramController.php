@@ -4,95 +4,50 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ictram;
+use App\Models\IctramJobType;
+use App\Models\IctramEquipment;
+use App\Models\IctramProblem;
 
 class ICTRAMController extends Controller
 {
-    // public function index()
-    // {
-    //     $ictrams = Ictram::all();
-    //     return view('unit.ictram.index', compact('ictrams'));
-    // }
-
-    // public function create()
-    // {
-        
-    //     $ictrams = Ictram::all();
-    //     return view('unit.ictram.index', compact('ictrams'));
-    // }
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         // Set a default value for unit if it's not submitted with the form data
-    //         $unit = $request->input('unit', 'ICTRAM-ICT Repair and Management');
     
-    //         // Create a new Ictram record with the submitted data
-    //         $ictram = Ictram::create([
-    //             'unit' => $unit,
-    //             'jobtype' => $request->input('jobtype'),
-    //             'equipment' => $request->input('equipment'),
-    //             'problem' => $request->input('problem'),
-    //             'is_warrantry' => $request->has('is_warrantry'), // Convert checkbox value to boolean
-    //         ]);
-    
-    //         return redirect()->route('ictrams.create')->with('success', 'ICTRAM Successfully Added!');
-    //     } catch (Exception $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
-
-    
-    // public function edit($id)
-    // {
-    //     $ictram = Ictram::findOrFail($id);
-    //     return view('ictrams.edit', compact('ictram'));
-    // }
-
-    
-    // public function show($id)
-    // {
-    //     $ictram = Ictram::findOrFail($id);
-    //     return view('ictrams.index', compact('ictram'));
-    // }
-    
-    // public function destroy($id)
-    // {
-    //     $ictram = Ictram::findOrFail($id);
-    //     $ictram->delete();
-    //     return redirect()->route('ictrams.index')->with('success', 'ICTRAM deleted successfully');
-    // }
-
-
     public function index()
     {
         $ictrams = Ictram::all();
-        return view('unit.ictram.index', compact('ictrams'));
+        $jobTypes = IctramJobType::all();
+        $equipments = IctramEquipment::all();
+        $problems = IctramProblem::all();
+
+        
+        $ictrams = Ictram::with('jobTypes.equipments.problems')->get();
+        
+        // return view('units.ictram.index', compact('ictrams'));
+        
+        return view('units.ictram.index', compact('ictrams', 'jobTypes', 'equipments', 'problems'));
     }
 
+    // Display the form
     public function create()
     {
-        
-        $ictrams = Ictram::all();
-        return view('unit.ictram.index', compact('ictrams'));
+        $jobTypes = IctramJobType::all();
+        return view('units.ictram.index', compact('jobTypes'));
     }
-    public function store(Request $request)
+
+    // Handle form submission
+    public function storeJobType(Request $request)
     {
-        try {
-            // Set a default value for unit if it's not submitted with the form data
-            $unit = $request->input('unit', 'ICTRAM-ICT Repair and Management');
+        
+        $jobType = IctramJobType::create($request->all());
 
-            // Create a new Ictram record with the submitted data
-            $ictram = Ictram::create([
-                'unit' => $unit,
-                'jobtype' => $request->input('jobtype'),
-                'equipment' => $request->input('equipment'),
-                'problem' => $request->input('problem'),
-                'is_warrantry' => $request->has('is_warrantry'), // Convert checkbox value to boolean
-            ]);
+        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Job Type created successfully.');
+    }
+    
+    // Handle form submission
+    public function storeIctram(Request $request)
+    {
+        $ictram = IctramEquipment::create($request->all());
 
-            return redirect()->route('ictrams.create')->with('success', 'ICTRAM Successfully Added!');
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Request created successfully.');
     }
 
 
@@ -101,7 +56,6 @@ class ICTRAMController extends Controller
         $ictram = Ictram::findOrFail($id);
         return view('ictrams.edit', compact('ictram'));
     }
-
 
     public function show($id)
     {
@@ -116,18 +70,19 @@ class ICTRAMController extends Controller
         return redirect()->route('ictrams.index')->with('success', 'ICTRAM deleted successfully');
     }
 
+    
+    public function getEquipmentsByJobType($jobType)
+    {
+        // Fetch equipment options based on the selected job type
+        $equipments = IctramEquipment::where('job_type_id', $jobType)->get();
 
+        // Construct HTML options for the equipment dropdown
+        $options = '';
+        foreach ($equipments as $equipment) {
+            $options .= '<option value="' . $equipment->id . '">' . $equipment->equipment_name . '</option>';
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        // Return the HTML options
+        return $options;
+    }
 }
