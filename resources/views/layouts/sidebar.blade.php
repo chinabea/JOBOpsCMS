@@ -98,16 +98,6 @@
                     </a>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-university"></i>
-                        <p> Units <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                    </ul>
-                </li>
-                <br><li class="nav-header">UNITS</li>
                     @if(Auth::user()->role == 1)
                     <li class="nav-item">
                         <a href="{{ route('ictram.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictram.index' ? 'active' : '' }}">
