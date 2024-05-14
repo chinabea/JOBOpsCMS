@@ -16,4 +16,10 @@ class Ictram extends Model
         'is_warrantry',
         // '_token', // Add this line
     ];
+
+    
+    public function jobTypes()
+    {
+        return $this->hasMany(IctramJobType::class);
+    }
 }
