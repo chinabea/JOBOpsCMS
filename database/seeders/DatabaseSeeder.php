@@ -122,13 +122,18 @@ class DatabaseSeeder extends Seeder
         DB::table('ictram_job_types')->insert([
             ['jobType_name' => 'Installation'],
             ['jobType_name' => 'Repair'],
-            // Add more job types as needed
+            ['jobType_name' => 'Software Upgrade'],
+            ['jobType_name' => 'Preventive Maintenance'],
+            ['jobType_name' => 'Coorective Maintenance'],
+            
         ]);
 
         // Seed ICTRAM Equipments
         DB::table('ictram_equipments')->insert([
             ['equipment_name' => 'All in One PC', 'ictram_job_type_id' => 1],
             ['equipment_name' => 'Printer', 'ictram_job_type_id' => 2],
+            ['equipment_name' => 'System Unit', 'ictram_job_type_id' => 3],
+            ['equipment_name' => 'Laptop', 'ictram_job_type_id' => 4],
             // Add more equipments as needed
         ]);
 
@@ -136,7 +141,8 @@ class DatabaseSeeder extends Seeder
         DB::table('ictram_problems')->insert([
             ['problem_description' => 'No dial tone', 'ictram_equipment_id' => 1],
             ['problem_description' => 'Paper Jams', 'ictram_equipment_id' => 2],
-            // Add more problems as needed
+            ['problem_description' => 'Gneneral Slowdown', 'ictram_equipment_id' => 2],
+            ['problem_description' => 'Not Turning On', 'ictram_equipment_id' => 2],
         ]);
         
         // Seed MIS Request Types
@@ -159,9 +165,37 @@ class DatabaseSeeder extends Seeder
             ['jobType_name' => 'Repair Hard Drive', 'mis_request_type_id' => 2, 'asname_id' => 2],
             // Add more job types as needed
         ]);
+        
 
+        // Seed job types
+        // $jobTypes = ['Installation', 'Repair', 'Software Upgrade', 'Preventive Maintenance', 'Corrective Maintenance', 'Others'];
+        // foreach ($jobTypes as $jobType) {
+        //     \App\Models\IctramJobType::create(['jobType_name' => $jobType]);
+        // }
 
+        // // Seed equipment types
+        // $equipmentTypes = ['Printer', 'All in One PC', 'System Unit', 'Laptop'];
+        // foreach ($equipmentTypes as $equipmentType) {
+        //     \App\Models\IctramEquipment::create(['equipment_name' => $equipmentType]);
+        // }
 
+        // // Seed problems
+        // $problems = [
+        //     'Printer' => ['Paper Jams', 'Poor Printing Quality', 'Offline Printer'],
+        //     'All in One PC' => ['Not Turning On', 'Strange or Garbled Image on the Screen'],
+        //     'System Unit' => ['Not Turning On'],
+        //     'Laptop' => ['Not Turning On', 'Strange or Garbled Image on the Screen']
+        // ];
+
+        // foreach ($problems as $equipmentName => $equipmentProblems) {
+        //     $equipment = \App\Models\IctramEquipment::where('equipment_name', $equipmentName)->first();
+        //     foreach ($equipmentProblems as $problemDescription) {
+        //         \App\Models\IctramProblem::create([
+        //             'problem_description' => $problemDescription,
+        //             'ictram_equipment_id' => $equipment->id
+        //         ]);
+        //     }
+        // }
 
 
 
