@@ -17,51 +17,49 @@ class ICTRAMController extends Controller
     
         return view('units.ictram.create', compact('jobTypes', 'equipments'));
     }
- public function store(Request $request)
-{
-    // Validate the request
-    $request->validate([
-        'jobType_id' => 'required_without:jobType_name|nullable|exists:ictram_job_types,id',
-        'jobType_name' => 'required_without:jobType_id|nullable|string|max:255',
-        'equipment_id' => 'required_without:equipment_name|nullable|exists:ictram_equipments,id',
-        'equipment_name' => 'required_without:equipment_id|nullable|string|max:255',
-        'problem_description' => 'required|string|max:255',
-    ]);
-
-    // Create or find Job Type
-    if ($request->filled('jobType_name')) {
-        $jobType = IctramJobType::firstOrCreate(['jobType_name' => $request->input('jobType_name')]);
-    } else {
-        $jobType = IctramJobType::find($request->input('jobType_id'));
-    }
-
-    // Check if the equipment with the given name and job type exists
-    if ($request->filled('equipment_name')) {
-        $existingEquipment = IctramEquipment::where('equipment_name', $request->input('equipment_name'))
-            ->where('ictram_job_type_id', $jobType->id)
-            ->first();
-
-        if (!$existingEquipment) {
-            // Create new Equipment if it does not exist
+    public function store(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'jobType_id' => 'required_without:jobType_name|nullable|exists:ictram_job_types,id',
+            'jobType_name' => 'required_without:jobType_id|nullable|string|max:255',
+            'equipment_id' => 'required_without:equipment_name|nullable|exists:ictram_equipments,id',
+            'equipment_name' => 'required_without:equipment_id|nullable|string|max:255',
+            'problem_description' => 'required|string|max:255',
+        ]);
+    
+        // Create or find Job Type
+        if ($request->filled('jobType_name')) {
+            $jobType = IctramJobType::create(['jobType_name' => $request->input('jobType_name')]);
+        } else {
+            $jobType = IctramJobType::find($request->input('jobType_id'));
+        }
+    
+        // Create or find Equipment without auto-associating it with an existing job type
+        if ($request->filled('equipment_name')) {
             $equipment = IctramEquipment::create([
                 'equipment_name' => $request->input('equipment_name'),
                 'ictram_job_type_id' => $jobType->id,
             ]);
         } else {
-            $equipment = $existingEquipment;
+            $equipment = IctramEquipment::find($request->input('equipment_id'));
+            // Ensure the equipment is not auto-associated with an existing job type
+            if ($equipment && $equipment->ictram_job_type_id != $jobType->id) {
+                $equipment->ictram_job_type_id = $jobType->id;
+                $equipment->save();
+            }
         }
-    } else {
-        $equipment = IctramEquipment::find($request->input('equipment_id'));
+    
+        // Create Problem associated with Equipment
+        IctramProblem::create([
+            'problem_description' => $request->input('problem_description'),
+            'ictram_equipment_id' => $equipment->id,
+        ]);
+    
+        return redirect()->back()->with('success', 'ICTRAM records created successfully.');
     }
-
-    // Create Problem associated with Equipment
-    IctramProblem::create([
-        'problem_description' => $request->input('problem_description'),
-        'ictram_equipment_id' => $equipment->id,
-    ]);
-
-    return redirect()->back()->with('success', 'ICTRAM records created successfully.');
-}
+    
+    
 
     
     // public function store(Request $request)

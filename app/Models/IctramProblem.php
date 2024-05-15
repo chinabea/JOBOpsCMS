@@ -11,9 +11,14 @@ class IctramProblem extends Model
     public $fillable = ['problem_description', 
                         'ictram_equipment_id'];
     
+    // public function equipment()
+    // {
+    //     return $this->belongsTo(IctramEquipment::class);
+    // }
+    
     public function equipment()
     {
-        return $this->belongsTo(IctramEquipment::class);
+        return $this->belongsTo(ICTRAMEquipment::class, 'ictram_equipment_id');
     }
 
 }
