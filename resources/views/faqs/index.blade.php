@@ -35,16 +35,6 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    <!-- Floating button -->
-                                    <div class="float-button">
-                                        <button  type="button"  class="btn btn-primary rounded-circle custom-btn" onclick="location.href='{{ route('create.faq') }}'" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                        @include('faqs.create')
-
-                                
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,5 +44,12 @@
         </div>
     </section>
 </div>
+                                    <!-- Floating button -->
+                                    <div class="float-button">
+                                        <button  type="button"  class="btn btn-primary rounded-circle custom-btn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#createFaqModal">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                        @include('faqs.create')
 @endsection
 
