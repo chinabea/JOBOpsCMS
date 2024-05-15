@@ -23,7 +23,7 @@
         
       <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
@@ -37,7 +37,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-success"><i class="fas fa-book"></i></span>
 
               <div class="info-box-content">
@@ -51,7 +51,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fas fa-folder-open"></i></span>
 
               <div class="info-box-content">
@@ -65,7 +65,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-danger"><i class="fas fa-spinner"></i></span>
 
               <div class="info-box-content">
@@ -82,7 +82,7 @@
 
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-navy"><i class="fas fa-folder"></i></span>
 
               <div class="info-box-content">
@@ -96,7 +96,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-purple"><i class="fas fa-flag"></i></span>
 
               <div class="info-box-content">
@@ -110,7 +110,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-fuchsia"><i class="far fa-copy"></i></span>
 
               <div class="info-box-content"> Priority</span>
@@ -123,7 +123,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-gray-dark"><i class="fas fa-clock"></i></span>
 
               <div class="info-box-content">
@@ -140,7 +140,7 @@
 
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-maroon"><i class="fas fa-times"></i></span>
 
               <div class="info-box-content">
@@ -154,7 +154,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-orange"><i class="fas fa-check"></i></span>
 
               <div class="info-box-content">
@@ -168,7 +168,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box shadow">
+            <div class="info-box">
               <span class="info-box-icon bg-teal"><i class="fas fa-user"></i></span>
 
               <div class="info-box-content">
