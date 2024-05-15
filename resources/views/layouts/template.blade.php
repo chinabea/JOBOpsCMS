@@ -49,6 +49,11 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('cdn/toastr.min.css') }}">
     <script src="{{ asset('cdn/toastr.min.js') }}"></script>
+    
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="../../plugins/codemirror/codemirror.css">
+    <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
+
 </head> @php $theme = false; @endphp
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -91,103 +96,9 @@
         
         <!-- Custom Js -->
         <script src="{{ asset('js/custom.js') }}"></script>
-<!-- 
-
-        <script>
-            // Function to toggle and persist the theme
-            function toggleTheme() {
-                const body = document.body;
-                if (body.classList.contains('dark-mode')) {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
-            // Add a click event listener to the theme toggle button
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', toggleTheme);
-        </script>
-        <script>
-            // Retrieve the user's theme preference from local storage
-            const savedTheme = localStorage.getItem('theme');
-            // Set the theme based on the user's preference
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            } else if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-            }
-        </script>
-        <script>
-            function confirmDelete(url) {
-                if (confirm('Delete?')) {
-                    // Create a hidden form and submit it programmatically
-                    var form = document.createElement('form');
-                    form.action = url;
-                    form.method = 'POST';
-                    form.innerHTML = '@csrf @method("delete")';
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            }
-        </script>
-        <script>
-            $(document).ready(function() {
-                $("#generate_pdf").on("click", function() {
-                    // Submit the form directly when the "Generate PDF" button is clicked
-                    $("#exportForm").submit();
-                });
-                $('#reset').on('click', function() {
-                    // Reload the page on reset button click
-                    location.reload();
-                });
-            });
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var filterType = document.getElementById('filter_type');
-                var yearFilter = document.getElementById('yearFilter');
-                var dateFilter = document.getElementById('dateFilter');
-                filterType.addEventListener('change', function() {
-                    if (filterType.value === 'year') {
-                        yearFilter.style.display = 'block';
-                        dateFilter.style.display = 'none';
-                    } else {
-                        yearFilter.style.display = 'none';
-                        dateFilter.style.display = 'block';
-                    }
-                });
-            });
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var isTextSelected = false;
-                $('body').on('mousedown', function(event) {
-                    isTextSelected = false;
-                });
-                $('body').on('mouseup', function(event) {
-                    isTextSelected = (window.getSelection().toString() !== '');
-                });
-                $('tbody').on('click', 'tr.clickable-row', function(event) {
-                    // Check if the event target is not an input field to avoid handling clicks on inputs
-                    if (!$(event.target).is('input')) {
-                        // Prevent right-click default behavior
-                        if (event.button === 2 || isTextSelected) {
-                            event.preventDefault();
-                            return;
-                        }
-                        var url = $(this).data('href');
-                        if (url) {
-                            window.location = url;
-                        }
-                    }
-                });
-            });
-        </script> -->
         
+
+
 @if(session('success'))
     <script>
         toastr.success('{{ session('success') }}');

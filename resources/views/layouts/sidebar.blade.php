@@ -1,7 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8; border: 2px solid white; border-radius: 50%;">
+
         <span class="brand-text font-weight-light">JObOps CMS</span>
     </a>
 
@@ -88,7 +89,8 @@
                         </li>
                         @endif
                     </ul>
-                </li><br>
+                </li>
+                <!-- <br> -->
                 <li class="nav-header">ADMINISTRATION</li>
                 @if(Auth::user()->role == 1)
                 <li class="nav-item">
@@ -119,7 +121,8 @@
                     </li>
                         @endif
                     
-                <br><li class="nav-header">OTHERS</li>
+                <!-- <br> -->
+                <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
                             <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
                         <i class="fas fa-folder-open nav-icon"></i>
