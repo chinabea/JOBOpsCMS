@@ -15,9 +15,15 @@ class IctramEquipment extends Model
                         'ictram_job_type_id'];
 
     
-    public function jobType()
+    // public function jobType()
+    // {
+    //     return $this->belongsTo(IctramJobType::class);
+    // }
+    
+
+    public function jobTypes()
     {
-        return $this->belongsTo(IctramJobType::class);
+        return $this->belongsToMany(IctramJobType::class, 'ictram_job_type_equipment', 'ictram_equipment_id', 'ictram_job_type_id');
     }
 
     public function problems()
