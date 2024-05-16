@@ -27,8 +27,14 @@
                                                     {!! $faq->answer !!}
                                                 </div>
                                                 <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-secondary btn-sm">Read more</a>
-                                                    <a href="{{ route('update.faq', $faq->id) }}" type="button" class="btn btn-sm btn-warning">Edit </a>
+                                                    <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#showFaqModal" data-faq-id="{{ $faq->id }}">Read more</a>
+                                                    @include('faqs.show')
+                                                    
+                                                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editFaqModal{{ $faq->id }}">
+                                                        Edit
+                                                    </button>
+                                                    @include('faqs.edit')
+                                                    
                                                     <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.faq', $faq->id) }}')"> Delete </button>
                                                 </div>
                                             </div>

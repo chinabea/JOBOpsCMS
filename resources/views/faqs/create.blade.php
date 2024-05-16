@@ -15,10 +15,10 @@
                         <input type="text" class="form-control" name="question" id="question" required>
                     </div>
                     
-            <div class="form-group">
-                <label for="answer">Answer</label>
-                <textarea  id="answer" name="answer" class="form-control"></textarea>
-            </div>
+                    <div class="form-group">
+                        <label for="answer">Answer</label>
+                        <textarea  id="answer" name="answer" class="form-control"></textarea>
+                    </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add FAQ</button>

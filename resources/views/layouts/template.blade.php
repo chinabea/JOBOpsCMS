@@ -101,25 +101,37 @@
         <!-- Custom Js -->
         <script src="{{ asset('js/custom.js') }}"></script>
         
+        <script>
+        function confirmDelete(url) {
+            if (confirm('Are you sure you want to delete this record?')) {
+                // Create a hidden form and submit it programmatically
+                var form = document.createElement('form');
+                form.action = url;
+                form.method = 'POST';
+                form.innerHTML = '@csrf @method('delete')';
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+        </script>
 
-
-@if(session('success'))
-    <script>
-        toastr.success('{{ session('success') }}');
-    </script>
-@elseif(session('delete'))
-    <script>
-        toastr.delete('{{ session('delete') }}');
-    </script>
-@elseif(session('message'))
-    <script>
-        toastr.message('{{ session('message') }}');
-    </script>
-@elseif(session('error'))
-    <script>
-        toastr.error('{{ session('error') }}');
-    </script>
-@endif
+        @if(session('success'))
+            <script>
+                toastr.success('{{ session('success') }}');
+            </script>
+        @elseif(session('delete'))
+            <script>
+                toastr.delete('{{ session('delete') }}');
+            </script>
+        @elseif(session('message'))
+            <script>
+                toastr.message('{{ session('message') }}');
+            </script>
+        @elseif(session('error'))
+            <script>
+                toastr.error('{{ session('error') }}');
+            </script>
+        @endif
 
 
 </body>

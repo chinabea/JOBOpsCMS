@@ -78,13 +78,13 @@ class FaqsController extends Controller
     public function show($id)
     {
         try {
-            // Retrieve and show the specific item using the provided ID
+            // Find the FAQ item by its ID
             $faq = FAQs::findOrFail($id);
-
+    
+            // You can then pass this FAQ item to a view to display its details
             return view('faqs.show', compact('faq'));
         } catch (Exception $e) {
-            // Handle the exception, you can log it for debugging or display an error message to the user.
-            return back()->with('error', 'An error occurred while fetching the FAQs: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
 
@@ -101,19 +101,25 @@ class FaqsController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
-            $faq = FAQs::findOrFail($id);
-            $faq->update($request->all());
-    
-            // Log activity
-            ActivityLogger::log('Updated', $faq, 'F.A.Q updated');
-            
-            return redirect()->route('faqs')->with('success', 'FAQ Successfully Updated!');
-            // return redirect()->back()->with('success', 'Task Successfully Updated!');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
+        // Extract YouTube link from the textarea
+        $answer = $request->input('answer');
+        $youtubeLink = $this->extractYouTubeLink($answer);
+
+        // Retrieve the existing FAQ instance from the database
+        $faq = FAQs::findOrFail($id);
+
+        // Update the properties of the FAQ instance
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->youtube_link = $youtubeLink;
+
+        // Save the changes
+        $faq->save();
+        
+        return redirect()->route('faqs')->with('success', 'FAQ updated successfully');
+      
     }
+    
 
     public function destroy($id)
     {
