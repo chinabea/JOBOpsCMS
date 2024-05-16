@@ -11,6 +11,6 @@ class FAQs extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['question', 'answer'];
+    public $fillable = ['question', 'answer', 'youtube_link'];
     
 }

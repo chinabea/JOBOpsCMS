@@ -67,4 +67,9 @@
         max-height: 80vh; /* Adjust the max-height as needed */
         overflow-y: auto;
     }
+    .float-button button {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 3); /* Example shadow effect */
+    }
+    
+    
             

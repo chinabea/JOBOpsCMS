@@ -6,6 +6,7 @@ use App\Services\ActivityLogger;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FaqsController extends Controller
 {
@@ -48,36 +49,32 @@ class FaqsController extends Controller
 
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'question' => 'required',
-        //     'answer' => 'required',
-        // ]);
+        // Extract YouTube link from the textarea
+        $answer = $request->input('answer');
+        $youtubeLink = $this->extractYouTubeLink($answer);
 
         $faq = new FAQs();
         $faq->question = $request->question;
         $faq->answer = $request->answer;
+        $faq->youtube_link = $youtubeLink; // Save the extr
         $faq->save();
 
         return redirect()->route('faqs')->with('success', 'FAQ created successfully');
     }
     
-    // public function store(Request $request)
-    // {
-    //     try {
-    //         // Create a new FAQ entry with the data from the request
-    //         $faq = FAQs::create($request->all());
-        
-    //         // Log activity after the FAQ is successfully created
-    //         ActivityLogger::log('Created', $faq, 'F.A.Q created');
+    private function extractYouTubeLink($text)
+    {
+        // Use regex to find YouTube links in the text
+        preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $text, $matches);
 
-    //         // Redirect to the index or show view, or perform other actions
-    //         return redirect()->route('faqs')->with('success', 'FAQ Successfully Added!');
-    //     } catch (Exception $e) {
-    //         // Handle the exception here, you can log it or return an error response
-    //         return $e->getMessage();
-    //     }
-    // }
+        // Check if a YouTube link was found
+        if (isset($matches[1])) {
+            return 'https://www.youtube.com/embed/' . $matches[1];
+        }
 
+        return null; // Return null if no YouTube link found
+    }
+  
     public function show($id)
     {
         try {
