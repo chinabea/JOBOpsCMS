@@ -128,17 +128,11 @@ Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('pri
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
-// Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
-// Route::post('/units', [UnitController::class, 'store'])->name('units.store');
-
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
 Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
 Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
-
-// Route::get('/api/job-types/{unitName}', [TicketController::class, 'getJobTypes']);
-// Route::get('/api/equipment-types/{unitName}', [TicketController::class, 'getEquipmentTypes']);
 
 // Adding API routes for dynamic dropdowns
 Route::get('/api/job-types/{unitId}', [JobController::class, 'getJobTypesByUnit']);
@@ -154,17 +148,6 @@ Route::post('/ICTRAM-unit/store', [ICTRAMController::class, 'store'])->name('ict
 Route::get('/request-types/{id}/job-types', [RequestController::class, 'getJobTypes']);
 Route::get('/job-types/{id}/equipments', [RequestController::class, 'getEquipments']);
 Route::get('/equipments/{id}/problems', [RequestController::class, 'getProblems']);
-
-
-// Routes for Unit
-// Route::get('/units', [UnitController::class, 'index'])->name('units.index');
-// Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
-// Route::post('/units', [UnitController::class, 'store'])->name('units.store');
-// Route::get('/units/{id}', [UnitController::class, 'show'])->name('units.show');
-// Route::get('/units/{id}/edit', [UnitController::class, 'edit'])->name('units.edit');
-// Route::put('/units/{id}', [UnitController::class, 'update'])->name('units.update');
-// Route::delete('/units/{id}', [UnitController::class, 'destroy'])->name('units.destroy');
-
 
 // Routes for NICMU
 Route::get('/nicmus', [NicmuController::class, 'index'])->name('nicmus.index');
