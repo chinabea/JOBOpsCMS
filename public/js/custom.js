@@ -295,13 +295,41 @@ function confirmDelete(unitId) {
   }
 }
 
-$(function () {
-  // Summernote
-  $('#summernote').summernote()
+// $(function () {
+//   // Summernote
+//   $('#summernote').summernote()
 
-  // CodeMirror
-  CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-  mode: "htmlmixed",
-  theme: "monokai"
+//   // CodeMirror
+//   CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+//   mode: "htmlmixed",
+//   theme: "monokai"
+//   });
+// })
+
+// IMAGE SUBMISSION
+$(document).ready(function () {
+  $('#answer').summernote({
+      callbacks: {
+          onInit: function () {
+              // Get the Summernote editor instance
+              var summernote = $('#answer').summernote();
+
+              // Attach an event listener to the image button
+              summernote.summernote('toolbar').find('.note-icon-picture').on('click', function () {
+                  // Your custom action when the image button is clicked
+                  handleImageSubmission();
+              });
+          }
+      }
   });
-})
+});
+
+function handleImageSubmission() {
+  // Perform actions for image submission
+  var imageUrl = prompt("Enter the URL of the image:");
+  
+  if (imageUrl) {
+      // Insert the image into the Summernote editor
+      $('#answer').summernote('editor.insertImage', imageUrl);
+  }
+}

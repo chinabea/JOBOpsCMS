@@ -44,12 +44,14 @@
         </div>
     </section>
 </div>
-                                    <!-- Floating button -->
-                                    <div class="float-button">
-                                        <button  type="button"  class="btn btn-primary rounded-circle custom-btn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#createFaqModal">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                        @include('faqs.create')
+
+<!-- Floating button -->
+<div class="float-button">
+    <button  type="button"  class="btn btn-primary rounded-circle custom-btn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#createFaqModal">
+        <i class="fa fa-plus"></i>
+    </button>
+</div>
+@include('faqs.create')
+
 @endsection
 

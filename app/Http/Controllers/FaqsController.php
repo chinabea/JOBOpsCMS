@@ -5,6 +5,7 @@ use App\Models\FAQs;
 use App\Services\ActivityLogger;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FaqsController extends Controller
 {
@@ -29,22 +30,53 @@ class FaqsController extends Controller
         }
     }
 
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules
+        ]);
+
+        $image = $request->file('image');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+
+        // Store the image in the 'public/uploads' directory
+        $image->storeAs('public/uploads', $imageName);
+
+        // Return the URL of the stored image
+        return response()->json(['location' => asset('storage/uploads/' . $imageName)]);
+    }
+
     public function store(Request $request)
     {
-        try {
-            // Create a new FAQ entry with the data from the request
-            $faq = FAQs::create($request->all());
-        
-            // Log activity after the FAQ is successfully created
-            ActivityLogger::log('Created', $faq, 'F.A.Q created');
+        // $validatedData = $request->validate([
+        //     'question' => 'required',
+        //     'answer' => 'required',
+        // ]);
 
-            // Redirect to the index or show view, or perform other actions
-            return redirect()->route('faqs')->with('success', 'FAQ Successfully Added!');
-        } catch (Exception $e) {
-            // Handle the exception here, you can log it or return an error response
-            return $e->getMessage();
-        }
+        $faq = new FAQs();
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->save();
+
+        return redirect()->route('faqs')->with('success', 'FAQ created successfully');
     }
+    
+    // public function store(Request $request)
+    // {
+    //     try {
+    //         // Create a new FAQ entry with the data from the request
+    //         $faq = FAQs::create($request->all());
+        
+    //         // Log activity after the FAQ is successfully created
+    //         ActivityLogger::log('Created', $faq, 'F.A.Q created');
+
+    //         // Redirect to the index or show view, or perform other actions
+    //         return redirect()->route('faqs')->with('success', 'FAQ Successfully Added!');
+    //     } catch (Exception $e) {
+    //         // Handle the exception here, you can log it or return an error response
+    //         return $e->getMessage();
+    //     }
+    // }
 
     public function show($id)
     {

@@ -62,4 +62,9 @@
         transform: scale(1.1); /* Scale up the button */
         opacity: 1; /* Change opacity to fully visible */
     }
+    
+    .modal-body {
+        max-height: 80vh; /* Adjust the max-height as needed */
+        overflow-y: auto;
+    }
             
