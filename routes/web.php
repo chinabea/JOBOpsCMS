@@ -102,6 +102,12 @@ Route::get('/faqs/show/{id}', [FaqsController::class, 'show'])->name('faq.show')
 Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
 Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
+// Route::post('/upload-image', [FaqsController::class, 'uploadImage'])->name('upload.image');
+Route::post('/upload-image', [FaqsController::class, 'uploadImage'])->name('upload.uploadImage'); 
+
+
+
+
 
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
