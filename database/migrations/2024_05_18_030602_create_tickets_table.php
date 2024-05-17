@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
 
-            $table->string('building_number');
+            $table->string('building_number')->nullable();
             $table->string('office_name')->nullable();
             $table->enum('priority_level', ['High', 'Mid', 'Low'])->nullable();
             $table->string('description')->nullable();

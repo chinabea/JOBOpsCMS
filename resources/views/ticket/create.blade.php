@@ -2,6 +2,7 @@
 @extends('layouts.template')
 
 @section('content')
+
 <div class="content-wrapper">
     <section class="content-header">
     </section>
@@ -51,7 +52,6 @@
                             <input type="checkbox" class="form-check-input" id="covered_under_warranty" name="covered_under_warranty" value="1">
                             <label class="form-check-label" for="covered_under_warranty">Covered Under Warranty?</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
