@@ -91,8 +91,8 @@
                     </ul>
                 </li>
                 <!-- <br> -->
-                <li class="nav-header">ADMINISTRATION</li>
                 @if(Auth::user()->role == 2)
+                <li class="nav-header">ADMINISTRATION</li>
                 <li class="nav-item">
                     <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-university mr-2"></i>
@@ -141,7 +141,43 @@
                         </a>
                     </li>
                         @endif
-                    
+
+
+                        
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Status <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('status.open') }}" class="nav-link {{ Route::currentRouteName() == 'status.open' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Open</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.in-progress') }}" class="nav-link {{ Route::currentRouteName() == 'status.in-progress' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>In Progress</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.closed') }}" class="nav-link {{ Route::currentRouteName() == 'status.closed' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Closed</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.completed') }}" class="nav-link {{ Route::currentRouteName() == 'status.completed' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Completed</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
