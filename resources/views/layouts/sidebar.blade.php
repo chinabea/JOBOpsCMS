@@ -92,6 +92,15 @@
                 </li>
                 <!-- <br> -->
                 <li class="nav-header">ADMINISTRATION</li>
+                @if(Auth::user()->role == 2)
+                <li class="nav-item">
+                    <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <p> ICTRAM Tickets </p>
+                    </a>
+                </li>
+                @endif
+
                 @if(Auth::user()->role == 1)
                 <li class="nav-item">
                     <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
