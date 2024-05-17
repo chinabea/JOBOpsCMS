@@ -11,10 +11,6 @@ use Illuminate\Http\Request;
 use App\Models\ProblemTypeOrEquipment;
 use App\Models\Unit;
 
-use App\Models\RequestType;
-use App\Models\Equipment;
-use App\Models\JobType;
-use App\Models\Problem;
 
 class TicketController extends Controller
 {
@@ -22,12 +18,7 @@ class TicketController extends Controller
     public function create()
     {
         
-        $requestTypes = RequestType::all();
-        $equipments = Equipment::all();
-        $jobTypes = JobType::all();
-        $problems = Problem::all();
-        
-        return view('ticket.create', compact('requestTypes', 'equipments', 'jobTypes', 'problems'));
+        return view('ticket.create');
      
     }
 
@@ -87,17 +78,22 @@ class TicketController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
     public function store(Request $request)
     {
         // Validate the request data
         $request->validate([
             'file_upload' => 'nullable|file|max:2048',
             'assigned_to' => 'required|array',
-            'assigned_to.*' => 'exists:users,id'
+            'assigned_to.*' => 'exists:users,id',
+            'serial_number' => 'nullable|integer|unique:tickets,serial_number',
+            'covered_under_warranty' => 'boolean'
         ]);
 
         // Extract ticket data excluding file upload and assigned_to
         $ticketData = $request->except(['file_upload', 'assigned_to']);
+        $ticketData['serial_number'] = $request->serial_number;
+        $ticketData['covered_under_warranty'] = $request->has('covered_under_warranty');
         
         // Create the ticket
         $ticket = Ticket::create($ticketData);
@@ -114,11 +110,11 @@ class TicketController extends Controller
         // Authentication user is the requestor
         $authUser = auth()->user(); 
 
-        $assignedUsers = User::findMany($ticket->assigned_to); // Assuming 'assigned_to' is an array of user IDs
-        $assignedNames = $assignedUsers->pluck('name')->join(', ');
-
         // Notify the requestor and admins
         $admins = User::where('role', 1)->get();
+        $assignedUsers = User::findMany($request->assigned_to); // Assuming 'assigned_to' is an array of user IDs
+        $assignedNames = $assignedUsers->pluck('name')->join(', ');
+
         foreach ($admins as $admin) {
             $isSelf = $admin->id === $authUser->id;
             $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf, $assignedNames));
@@ -129,7 +125,7 @@ class TicketController extends Controller
         foreach ($request->assigned_to as $userId) {
             $user = User::find($userId);
             $isSelf = $user->id === $authUser->id;
-            if ($user && $user->id !== $authUser->id) {
+            if ($user && !$isSelf) {
                 $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
             }
         }
@@ -138,8 +134,70 @@ class TicketController extends Controller
         ActivityLogger::log('Created', $ticket, 'Ticket created');
         
         // Redirect with success message
-        return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
+        return redirect()->route('tickets.index')->with('success', 'Ticket Successfully Created!');
     }
+
+
+    // public function store(Request $request)
+    // {
+    //     // Validate the request data
+    //     $request->validate([
+    //         'file_upload' => 'nullable|file|max:2048',
+    //         'assigned_to' => 'required|array',
+    //         'assigned_to.*' => 'exists:users,id'
+    //     ]);
+
+    //     // Extract ticket data excluding file upload and assigned_to
+    //     $ticketData = $request->except(['file_upload', 'assigned_to']);
+        
+    //     // Create the ticket
+    //     $ticket = Ticket::create($ticketData);
+        
+    //     // Handle file upload
+    //     if ($request->hasFile('file_upload')) {
+    //         $file = $request->file('file_upload');
+    //         $filename = time() . '_' . $file->getClientOriginalName();
+    //         $filePath = $file->storeAs('uploads', $filename, 'public');
+    //         $ticket->file_path = $filePath;
+    //         $ticket->save();
+    //     }
+        
+    //     // Authentication user is the requestor
+    //     $authUser = auth()->user(); 
+
+    //     $assignedUsers = User::findMany($ticket->assigned_to); // Assuming 'assigned_to' is an array of user IDs
+    //     $assignedNames = $assignedUsers->pluck('name')->join(', ');
+
+    //     // Notify the requestor and admins
+    //     $admins = User::where('role', 1)->get();
+    //     foreach ($admins as $admin) {
+    //         $isSelf = $admin->id === $authUser->id;
+    //         $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf, $assignedNames));
+    //     }
+
+    //     // Attach and notify assigned users
+    //     $ticket->users()->syncWithoutDetaching($request->assigned_to);
+    //     foreach ($request->assigned_to as $userId) {
+    //         $user = User::find($userId);
+    //         $isSelf = $user->id === $authUser->id;
+    //         if ($user && $user->id !== $authUser->id) {
+    //             $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
+    //         }
+    //     }
+
+
+    //     $ticket = new Ticket();
+    //     $ticket->serial_number = $request->serial_number;
+    //     $ticket->covered_under_warranty = $request->has('covered_under_warranty');
+    //     // Set other fields as necessary
+    //     $ticket->save();
+        
+    //     // Log activity
+    //     ActivityLogger::log('Created', $ticket, 'Ticket created');
+        
+    //     // Redirect with success message
+    //     return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
+    // }
 
 
     public function show($id)

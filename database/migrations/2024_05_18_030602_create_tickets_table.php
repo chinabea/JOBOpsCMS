@@ -20,7 +20,9 @@ return new class extends Migration
             $table->enum('priority_level', ['High', 'Mid', 'Low'])->nullable();
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
-            $table->enum('status', ['Open','In Progress', 'Closed'])->default('Open')->nullable();
+            $table->enum('status', ['Open','In Progress','Closed', 'Completed'])->default('Open')->nullable();
+            $table->unsignedBigInteger('serial_number')->nullable();
+            $table->boolean('covered_under_warranty')->default(false);
             
             $table->unsignedBigInteger('ictram_job_type_id')->nullable();
             $table->unsignedBigInteger('ictram_equipment_id')->nullable();
