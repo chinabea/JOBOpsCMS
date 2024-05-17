@@ -43,10 +43,16 @@
                                         <th><i class="fa fa-tasks"></i> Status</th> @if(auth()->user()->role == 1) <th><i class="fa fa-pencil-square-o"></i> Action(s)</th> @endif
                                     </tr>
                                 </thead>
-                                <tbody> @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id())) <tr>
+                                <tbody> 
+                                    @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id())) <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
-                                        <td>{{ $ticket->service_location }}</td>
+                                        <td>
+                                            {{ $ticket->building_number }}
+                                            {{ $ticket->office_name }}
+                                            
+
+                                        </td>
                                         <td>{{ $ticket->unit }}</td>
                                         <td>{{ $ticket->request }}</td>
                                         <td> @if($ticket->users->isEmpty())

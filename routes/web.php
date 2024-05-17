@@ -19,7 +19,8 @@ use App\Services\ActivityLogger;
 use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\ICTRAMController;
-use App\Http\Controllers\ICTRAMRequestController;
+// use App\Http\Controllers\ICTRAMRequestController;
+use App\Http\Controllers\UnitController;
 // use App\Http\Controllers\UnitController;
 
 use Illuminate\Support\Facades\Auth;
@@ -191,6 +192,9 @@ Route::get('/ictram/requests/{id}', [ICTRAMRequestController::class, 'show'])->n
 Route::get('/ictram/requests/{id}/edit', [ICTRAMRequestController::class, 'edit'])->name('ictram.request.edit');
 Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])->name('ictram.request.update');
 Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.request.destroy');
+
+// Tickets Per Unit
+Route::get('/ictram-tickets', [UnitController::class, 'index'])->name('ictram-tickets');
 
 
 Route::fallback(function () {
