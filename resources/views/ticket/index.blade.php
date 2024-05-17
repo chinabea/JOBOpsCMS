@@ -101,7 +101,14 @@
                                                     <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
                                                 </select>
                                             </form>
-                                        </td> @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td>
+                                        </td> 
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ ($ticket->age / 3) * 100 }}%;" aria-valuenow="{{ $ticket->age }}" aria-valuemin="0" aria-valuemax="3"></div>
+                                            </div>
+                                            <!-- <p>Age: {{ $ticket->age }} days</p> -->
+                                        </td>
+                                        @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
@@ -126,4 +133,31 @@
             </div>
         </div>
     </section>
-</div> @endsection
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.check-aging').click(function() {
+            var ticketId = $(this).data('ticket-id');
+
+            // Send AJAX request to check ticket aging
+            $.ajax({
+                url: '/checkTicketAging/' + ticketId,
+                type: 'GET',
+                success: function(response) {
+                    if (response.message === 'Ticket expired') {
+                        $('#ticket_status_' + ticketId).html('<span class="badge badge-danger">Expired</span>');
+                    } else {
+                        $('#ticket_status_' + ticketId).html('<span class="badge badge-success">Active</span>');
+                    }
+                    alert(response.message); // You can remove this alert if not needed
+                },
+                error: function(xhr, status, error) {
+                    alert('Error checking ticket aging');
+                }
+            });
+        });
+    });
+</script>
+@endsection

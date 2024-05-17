@@ -15,7 +15,7 @@ class Ticket extends Model
                         'description', 'user_id', 'is_approved', 'deadline', 'file_path',
                          'status', 'ictram_job_type_id', 'ictram_equipment_id', 'ictram_problem_id',
                         'nicmu_job_type_id', 'nicmu_equipment_id', 'nicmu_problem_id',
-                        'mis_request_type_id', 'mis_job_type_id', 'mis_asname_id'
+                        'mis_request_type_id', 'mis_job_type_id', 'mis_asname_id',
                     ];
 
     
@@ -101,5 +101,11 @@ class Ticket extends Model
         return $this->belongsTo(MisAsname::class);
     }
 
+    // Define the function to calculate age
+    public function age()
+    {
+        return now()->diffInDays($this->created_at);
+    }
+    
 
 }

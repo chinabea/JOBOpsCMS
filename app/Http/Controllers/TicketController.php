@@ -10,6 +10,7 @@ use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use App\Models\ProblemTypeOrEquipment;
 use App\Models\Unit;
+use Carbon\Carbon;
 
 
 class TicketController extends Controller
@@ -72,6 +73,12 @@ class TicketController extends Controller
             // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
             $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
             $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
+
+            // Calculate age for each ticket
+            $tickets->each(function ($ticket) {
+                $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
+            });
+
             
             return view('ticket.index', compact('tickets','userIds'));
         } catch (Exception $e) {
