@@ -194,7 +194,9 @@ Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])-
 Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.request.destroy');
 
 // Tickets Per Unit
-Route::get('/ictram-tickets', [UnitController::class, 'index'])->name('ictram-tickets');
+Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ictram-tickets');
+Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
+Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 
 
 Route::fallback(function () {

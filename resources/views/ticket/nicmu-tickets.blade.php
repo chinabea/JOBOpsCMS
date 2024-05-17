@@ -9,28 +9,6 @@
                         <div class="card-body">
                             <h1 class="card-title font-weight-bold">Submitted Projects</h1>
                             <div class="mb-5"></div>
-                            <!-- <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="start_date">Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date" id="start_date">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="end_date">End Date:</label>
-                                            <input type="date" class="form-control" name="end_date" id="end_date">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Actions</label>
-                                            <div>
-                                                <button type="button" id="reset" class="btn btn-warning"><i class="fas fa-refresh"></i> </button>
-                                                <button type="submit" class="btn btn-info"><i class="fas fa-file-pdf"></i> Generate PDF</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -45,7 +23,7 @@
                                 </thead>
                                 <tbody> 
                                     @foreach($tickets as $ticket) 
-                                        @if ($ticket->ictram_job_type_id)
+                                        @if ($ticket->nicmu_job_type_id)
                                             <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ticket->user->name }}</td>
@@ -53,10 +31,10 @@
                                                 {{ $ticket->building_number }},
                                                 {{ $ticket->office_name }}
                                             </td>
-                                            <td>{{ $ticket->ictramJobType->jobType_name }}</td>
+                                            <td>{{ $ticket->nicmuJobType->jobType_name }}</td>
                                             <td>
-                                                {{ $ticket->ictramEquipment->equipment_name }} - 
-                                                {{ $ticket->ictramProblem->problem_description }}
+                                                {{ $ticket->nicmuEquipment->equipment_name }} - 
+                                                {{ $ticket->nicmuProblem->problem_description }}
 
                                             <td> @if($ticket->users->isEmpty())
                                                 <!-- Button trigger modal -->
@@ -120,9 +98,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td> @endif
+                                            </td> 
+                                            @endif
                                         </tr>
+                                        
                                         @endif
+                                        
                                     @endforeach 
                                 </tbody>
                             </table>
