@@ -16,10 +16,10 @@ return new class extends Migration
             // $table->string('google_id')->nullable()->unique(); // To store Google's user ID
             $table->string('name');
             $table->integer('role')->nullable();
+            $table->string('job_position')->nullable();
             $table->string('email')->unique();
             $table->string('avatar', 1512)->nullable();
             $table->string('phone_number', 11)->nullable();
-            $table->string('job_position')->nullable();
             $table->string('expertise')->nullable();
             $table->boolean('is_approved')->default(false); 
             $table->rememberToken();

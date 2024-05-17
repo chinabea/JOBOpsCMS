@@ -11,5 +11,11 @@ class NicmuEquipment extends Model
     
     public $fillable = ['name',
                         'nicmu_job_type_id', ];
+    
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 
 }

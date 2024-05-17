@@ -26,4 +26,10 @@ class IctramJobType extends Model
     {
         return $this->belongsToMany(IctramEquipment::class, 'ictram_job_type_equipment', 'ictram_job_type_id', 'ictram_equipment_id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }

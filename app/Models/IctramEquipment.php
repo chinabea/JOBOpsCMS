@@ -31,5 +31,10 @@ class IctramEquipment extends Model
         return $this->hasMany(IctramProblem::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 
 }

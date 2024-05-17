@@ -21,4 +21,9 @@ class IctramProblem extends Model
         return $this->belongsTo(ICTRAMEquipment::class, 'ictram_equipment_id');
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
 }
