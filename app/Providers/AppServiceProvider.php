@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
             $profilePictureUrl = session('profilePictureUrl');
             $view->with('profilePictureUrl', $profilePictureUrl);
         });
+        
     }
 }
