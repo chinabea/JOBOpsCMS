@@ -95,19 +95,19 @@
                 @if(Auth::user()->role == 2)
                 <li class="nav-item">
                     <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <i class="nav-icon fas fa-university mr-2"></i>
                         <p> ICTRAM Tickets </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <i class="nav-icon fas fa-university mr-2"></i>
                         <p> NICMU Tickets </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <i class="nav-icon fas fa-university mr-2"></i>
                         <p> MIS Tickets </p>
                     </a>
                 </li>
