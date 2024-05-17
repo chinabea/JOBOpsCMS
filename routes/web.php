@@ -168,7 +168,6 @@ Route::put('/mises/{id}', [MisController::class, 'update'])->name('mises.update'
 Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroy');
 
 // Routes for ICTRAM Director Side
-
 Route::get('/ictram/create', [ICTRAMController::class, 'create'])->name('ictram.create');
 Route::post('/ictram/store', [ICTRAMController::class, 'store'])->name('ictram.store');
 
