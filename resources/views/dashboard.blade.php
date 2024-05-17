@@ -198,7 +198,7 @@
         </div>
         <div class="col-md-3 col-sm-3 bg-white">
           <div>
-            <div class="x_title align-items-center">
+            <div class="align-items-center">
               <h6><i class="fa fa-users"></i> Pending User Approvals</h6>
               <div class="clearfix"></div>
             </div>
