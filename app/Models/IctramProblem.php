@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class IctramProblem extends Model
 {
     use HasFactory;
-    public $fillable = ['problem_description', 
-                        'ictram_equipment_id'];
+    public $fillable = ['problem_description'];
     
     public function equipment()
     {

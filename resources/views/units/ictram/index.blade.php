@@ -26,6 +26,7 @@
                                 <i class="fas fa-plus"></i> Add Job
                             </button>
                             @include('units.ictram.create-jobType')
+                             @include('units.ictram.modal.add-jobType')
             
                             <button type="button" class="btn bg-info float-right mx-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
                                 <i class="fas fa-plus"></i> Add Equipment

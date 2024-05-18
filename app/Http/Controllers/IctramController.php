@@ -121,11 +121,37 @@ class ICTRAMController extends Controller
     // Handle form submission
     public function storeJobType(Request $request)
     {
+        // Validate the request if needed
+        $validatedData = $request->validate([
+            'jobType_name' => 'required|string|max:255',
+            // Add more validation rules as needed
+        ]);
+
+        // Create a new IctramJobType instance
+        $jobType = new IctramJobType();
+        $jobType->jobType_name = $request->input('jobType_name');
+        // You can assign other properties here if needed
+        $jobType->save();
+
+        // You can return a response if needed, for example:
+        return response()->json(['success' => true, 'message' => 'ICTRAM Job Type created successfully.']);
+    }
+
+        public function storeWithRelationShip(Request $request)
+    {   
+        IctramEquipment::create([
+            'equipment_name' => $request->input('equipment_name'),
+            'ictram_job_type_id' => $request->input('ictram_job_type_id'),
+        ]);
         
-        $jobType = IctramJobType::create($request->all());
+        IctramProblem::create([
+            'ictram_equipment_id' => $request->input('ictram_equipment_id'),
+            'problem_description' => $request->input('problem_description'),
+        ]);
 
         return redirect()->route('ictrams.index')->with('success', 'ICTRAM Job Type created successfully.');
     }
+
     
     // Handle form submission
     public function storeEquipment(Request $request)

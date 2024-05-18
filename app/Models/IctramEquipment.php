@@ -10,9 +10,8 @@ class IctramEquipment extends Model
     use HasFactory;
 
     protected $table = 'ictram_equipments';
-
-    public $fillable = ['equipment_name',
-                        'ictram_job_type_id'];
+    
+    public $fillable = ['equipment_name'];
 
     
     public function jobType()

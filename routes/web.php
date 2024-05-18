@@ -20,6 +20,8 @@ use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\ICTRAMController;
 use App\Http\Controllers\ICTRAMRequestController;
+use App\Http\Controllers\ICTRAM\JobTypeController;
+
 // use App\Http\Controllers\UnitController;
 
 use Illuminate\Support\Facades\Auth;
@@ -186,6 +188,9 @@ Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.des
 // Routes for ICTRAM Director Side
 Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
 Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
+Route::get('/ictrams/JobTypes', [JobTypeController::class, 'index'])->name('ictrams.JobTypes');
+// Route::post('/ictrams/Equipment', [ICTRAMController::class, 'storeEquipment'])->name('ictrams.storeEquipment');
+// Route::post('/ictrams/Problem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');
 Route::post('/ictrams/storeJobType', [ICTRAMController::class, 'storeJobType'])->name('ictrams.storeJobType');
 Route::post('/ictrams/storeEquipment', [ICTRAMController::class, 'storeEquipment'])->name('ictrams.storeEquipment');
 Route::post('/ictrams/storeProblem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');

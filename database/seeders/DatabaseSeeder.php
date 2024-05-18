@@ -127,15 +127,15 @@ class DatabaseSeeder extends Seeder
 
         // Seed ICTRAM Equipments
         DB::table('ictram_equipments')->insert([
-            ['equipment_name' => 'All in One PC', 'ictram_job_type_id' => 1],
-            ['equipment_name' => 'Printer', 'ictram_job_type_id' => 2],
+            ['equipment_name' => 'All in One PC'],
+            ['equipment_name' => 'Printer'],
             // Add more equipments as needed
         ]);
 
         // Seed ICTRAM Problems
         DB::table('ictram_problems')->insert([
-            ['problem_description' => 'No dial tone', 'ictram_equipment_id' => 1],
-            ['problem_description' => 'Paper Jams', 'ictram_equipment_id' => 2],
+            ['problem_description' => 'No dial tone'],
+            ['problem_description' => 'Paper Jams'],
             // Add more problems as needed
         ]);
         
