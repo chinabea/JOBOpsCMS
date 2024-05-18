@@ -14,14 +14,14 @@
                     @csrf
                     <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                     
-    <div class="form-group">
-        <label for="ictram_equipment_id">Equipment</label>
-        <select name="ictram_equipment_id" id="ictram_equipment_id" class="form-control" required>
-            @foreach($equipments as $equipment)
-                <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
-            @endforeach
-        </select>
-    </div>
+                    <div class="form-group">
+                        <label for="ictram_equipment_id">Equipment</label>
+                        <select name="ictram_equipment_id" id="ictram_equipment_id" class="form-control" required>
+                            @foreach($equipments as $equipment)
+                                <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <label for="equipment">Problem Description</label>
@@ -31,7 +31,7 @@
                     
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Add equipment</button>
                     </div>
                 </form>
             </div>

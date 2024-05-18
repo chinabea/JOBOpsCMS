@@ -22,7 +22,7 @@ class Staff
 
         $user = Auth::user();
         
-        if($user->role == 4){
+        if($user->role == 5){
             return $next($request);
         } else {
             return redirect()->route('staff.dashboard');

@@ -19,10 +19,15 @@ use App\Services\ActivityLogger;
 use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\ICTRAMController;
+
 use App\Http\Controllers\ICTRAMRequestController;
 use App\Http\Controllers\ICTRAM\JobTypeController;
 use App\Http\Controllers\ICTRAM\EquipmentController;
 use App\Http\Controllers\ICTRAM\ProblemController;
+
+
+// use App\Http\Controllers\ICTRAMRequestController;
+use App\Http\Controllers\UnitController;
 
 // use App\Http\Controllers\UnitController;
 
@@ -57,6 +62,12 @@ Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved', 'mict-staf
 Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staffs'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('staff.dashboard');
+
+});
+
+Route::prefix('student')->middleware(['auth', 'cache', 'approved','student'])->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('student.dashboard');
 
 });
 
@@ -105,7 +116,8 @@ Route::post('/store/faq', [FaqsController::class, 'store'])->name('store.faq');
 Route::get('/faqs/show/{id}', [FaqsController::class, 'show'])->name('faq.show');
 Route::get('/edit-faq/{id}', [FaqsController::class, 'edit'])->name('edit.faq');
 Route::put('/edit-faq/{id}', [FaqsController::class, 'update'])->name('update.faq');
-Route::delete('/delete-faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
+Route::delete('/faqs/{id}', [FaqsController::class, 'destroy'])->name('destroy.faq');
+Route::post('/upload-image', [FaqsController::class, 'uploadImage'])->name('upload.uploadImage'); 
 
 Route::post('/generate-tickets-report', [ReportController::class, 'ticketsReport'])->name('generate.tickets.report');
 Route::post('/generate-users-report', [ReportController::class, 'usersReport'])->name('generate.users.report');
@@ -122,6 +134,7 @@ Route::post('/unassigned/tickets', [ReportController::class, 'unassignedReport']
 Route::get('/status/open', [StatusController::class, 'open'])->name('status.open');
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
 Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
+Route::get('/status/completed', [StatusController::class, 'completed'])->name('status.completed');
 
 Route::get('/priority-level/high', [PriorityController::class, 'high'])->name('priority-level.high');
 Route::get('/priority-level/mid', [PriorityController::class, 'mid'])->name('priority-level.mid');
@@ -131,17 +144,11 @@ Route::get('/priority-level/low', [PriorityController::class, 'low'])->name('pri
 Route::patch('tickets/{id}/status', [TicketController::class, 'updateStatus'])->name('tickets.updateStatus');
 Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
 
-// Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
-// Route::post('/units', [UnitController::class, 'store'])->name('units.store');
-
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
 // Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
 // Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
-
-// Route::get('/api/job-types/{unitName}', [TicketController::class, 'getJobTypes']);
-// Route::get('/api/equipment-types/{unitName}', [TicketController::class, 'getEquipmentTypes']);
 
 // Adding API routes for dynamic dropdowns
 Route::get('/api/job-types/{unitId}', [JobController::class, 'getJobTypesByUnit']);
@@ -157,17 +164,6 @@ Route::post('/ICTRAM-unit/store', [ICTRAMController::class, 'store'])->name('ict
 Route::get('/request-types/{id}/job-types', [RequestController::class, 'getJobTypes']);
 Route::get('/job-types/{id}/equipments', [RequestController::class, 'getEquipments']);
 Route::get('/equipments/{id}/problems', [RequestController::class, 'getProblems']);
-
-
-// Routes for Unit
-// Route::get('/units', [UnitController::class, 'index'])->name('units.index');
-// Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
-// Route::post('/units', [UnitController::class, 'store'])->name('units.store');
-// Route::get('/units/{id}', [UnitController::class, 'show'])->name('units.show');
-// Route::get('/units/{id}/edit', [UnitController::class, 'edit'])->name('units.edit');
-// Route::put('/units/{id}', [UnitController::class, 'update'])->name('units.update');
-// Route::delete('/units/{id}', [UnitController::class, 'destroy'])->name('units.destroy');
-
 
 // Routes for NICMU
 Route::get('/nicmus', [NicmuController::class, 'index'])->name('nicmus.index');
@@ -188,6 +184,10 @@ Route::put('/mises/{id}', [MisController::class, 'update'])->name('mises.update'
 Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroy');
 
 // Routes for ICTRAM Director Side
+Route::get('/ictram/create', [ICTRAMController::class, 'create'])->name('ictram.create');
+Route::post('/ictram/store', [ICTRAMController::class, 'store'])->name('ictram.store');
+
+Route::get('/ictrams/offices', [ICTRAMController::class, 'offices'])->name('ictrams.offices');
 Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
 Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
 Route::get('/ictrams/job-types', [JobTypeController::class, 'index'])->name('ictrams.JobTypes');
@@ -202,7 +202,6 @@ Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.
 Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 
-
 // Routes for ICTRAM for Client side
 Route::get('/ictram/requests', [ICTRAMRequestController::class, 'index'])->name('ictram.request.index');
 Route::get('/ictram/requests/create', [ICTRAMRequestController::class, 'create'])->name('ictram.request.create');
@@ -211,6 +210,12 @@ Route::get('/ictram/requests/{id}', [ICTRAMRequestController::class, 'show'])->n
 Route::get('/ictram/requests/{id}/edit', [ICTRAMRequestController::class, 'edit'])->name('ictram.request.edit');
 Route::put('/ictram/requests/{id}', [ICTRAMRequestController::class, 'update'])->name('ictram.request.update');
 Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy'])->name('ictram.request.destroy');
+
+// Tickets Per Unit
+Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ictram-tickets');
+Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
+Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
+Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
 
 Route::fallback(function () {

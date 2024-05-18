@@ -10,6 +10,14 @@ class NicmuProblem extends Model
     use HasFactory;
     public $fillable = ['description',
                         'nicmu_equipment_id'];
+
+    
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+                    
                     
 
 }

@@ -20,7 +20,8 @@ return new class extends Migration
 
             $table->foreign('ictram_job_type_id')->references('id')->on('ictram_job_types')->onDelete('cascade');
             $table->foreign('ictram_problem_id')->references('id')->on('ictram_problems')->onDelete('cascade');
-            
+            $table->foreign('ictram_equipment_id')->references('id')->on('ictram_equipments')->onDelete('cascade');
+             
         });
     }
 

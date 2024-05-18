@@ -1,40 +1,30 @@
-
-
-
-@extends('layouts.template')
-
-@section('content')
-<div class="content-wrapper">
-    <section class="content-header">
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
-                            <form action="{{ route('store.faq') }}" method="post">
-                              @csrf
-                              <label for="question">Question</label> <br>
-                              <input  class="form-control" name="question" id="question" required></input><br>
-
-                              <label for="answer">Answer</label> <br>
-                              <input  class="form-control" name="answer" id="answer" required></input><br>
-
-                              <button type="submit" class="btn btn-primary col start" name="submit_project">
-                                  <i class="fa fa-upload"></i>
-                                  <span>Submit</span>
-                              </button>
-                            </form>
-                        </div>
+<div class="modal fade" id="createFaqModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add FAQ</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('store.faq') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <input type="text" class="form-control" name="question" id="question" required>
                     </div>
-                </div>
+                    
+                    <div class="form-group">
+                        <label for="answer">Answer</label>
+                        <textarea  id="answer" name="answer" class="form-control"></textarea>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add FAQ</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 </div>
-
-@endsection
-

@@ -14,15 +14,27 @@ class IctramEquipment extends Model
     public $fillable = ['equipment_name'];
 
     
-    public function jobType()
+    // public function jobType()
+    // {
+    //     return $this->belongsTo(IctramJobType::class);
+    // }
+    
+
+    public function jobTypes()
     {
-        return $this->belongsTo(IctramJobType::class);
+        return $this->belongsToMany(IctramJobType::class, 'ictram_job_type_equipment', 'ictram_equipment_id', 'ictram_job_type_id');
     }
 
     public function problems()
     {
         return $this->hasMany(IctramProblem::class);
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    
 
 
 }

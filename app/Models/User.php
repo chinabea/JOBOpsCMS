@@ -70,15 +70,20 @@ class User extends Authenticatable
         return $this->belongsToMany(Ticket::class);
     }
     
-    public function tickets()
-    {
-        return $this->belongsToMany(Ticket::class, 'ticket_user')
-                    ->withTimestamps();
-    }
+    // public function tickets()
+    // {
+    //     return $this->belongsToMany(Ticket::class, 'ticket_user')
+    //                 ->withTimestamps();
+    // }
 
     // Optionally, if expertise is a relationship and not a direct attribute
     public function expertise()
     {
         return $this->hasOne(Expertise::class); // Adjust based on your actual data structure
+    }
+    
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

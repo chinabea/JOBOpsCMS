@@ -43,7 +43,7 @@
                                         <th><i class="fa fa-tasks"></i> Status</th> @if(auth()->user()->role == 1) <th><i class="fa fa-pencil-square-o"></i> Action(s)</th> @endif
                                     </tr>
                                 </thead>
-                                <tbody> @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id())) <tr>
+                                <tbody> @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 3 || $ticket->assigned_to == auth()->id())) <tr>
                                         <td class="align-middle">{{ $loop->iteration }}</td>
                                         <td class="align-middle">{{ $ticket->user->name }}</td>
                                         <td class="align-middle">{{ $ticket->service_location }}</td>
@@ -93,6 +93,7 @@
                                                     <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
                                                     <option value="In Progress" @if ($ticket->status == 'In Progress') selected @endif>In Progress</option>
                                                     <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
+                                                    <option value="Completed" @if ($ticket->status == 'Completed') selected @endif>Completed</option>
                                                 </select>
                                             </form>
                                         </td> @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td class="align-middle">

@@ -22,7 +22,7 @@ class UnitHead
 
         $user = Auth::user();
         
-        if($user->role == 2){
+        if($user->role == 2 || $user->role == 3 || $user->role == 4){
             return $next($request);
         } else {
             return redirect()->route('unit-head.dashboard');

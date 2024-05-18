@@ -9,4 +9,9 @@ class NicmuJobType extends Model
 {
     use HasFactory;
     public $fillable = ['name'];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

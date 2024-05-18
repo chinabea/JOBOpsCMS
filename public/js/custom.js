@@ -283,14 +283,30 @@ $(function () {
       });
   });
 
-// for delete
+// IMAGE SUBMISSION
+$(document).ready(function () {
+  $('#answer').summernote({
+      callbacks: {
+          onInit: function () {
+              // Get the Summernote editor instance
+              var summernote = $('#answer').summernote();
 
-function confirmDelete(unitId) {
-  if (confirm("Are you sure you want to delete this unit?")) {
-      // Get the delete form
-      var deleteForm = document.getElementById('delete-form-' + unitId);
+              // Attach an event listener to the image button
+              summernote.summernote('toolbar').find('.note-icon-picture').on('click', function () {
+                  // Your custom action when the image button is clicked
+                  handleImageSubmission();
+              });
+          }
+      }
+  });
+});
 
-      // Submit the form
-      deleteForm.submit();
+function handleImageSubmission() {
+  // Perform actions for image submission
+  var imageUrl = prompt("Enter the URL of the image:");
+  
+  if (imageUrl) {
+      // Insert the image into the Summernote editor
+      $('#answer').summernote('editor.insertImage', imageUrl);
   }
 }

@@ -1,7 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
-        <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="{{ asset('dist/img/MICT-Logo.png') }}" alt="MICT Logo" class="brand-image img-circle elevation-3" style="opacity: .8; border: 2px solid white; border-radius: 50%;">
+
         <span class="brand-text font-weight-light">JObOps CMS</span>
     </a>
 
@@ -15,17 +16,26 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 4)
+            @if(Auth::user()->role == 1)
+                <small>Director,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 2) 
+                <small>ICTRAM Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 3)
+                <small>NICMU Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 4)
+                <small>MIS Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 5)
+                <small>Staff,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 6)
                 <small>Student,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3) 
+            @elseif(Auth::user()->role == 7)
                 <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2)
-                <small>Unit Admin,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 1)
-                <small>Director,</small><br> 
                 {{ Auth::user()->name }} 
             @else
                 {{ Auth::user()->name }} 
@@ -34,22 +44,21 @@
           </a>
         </div>
       </div>
-
-
-
-        <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                    
-                    @if(Auth::user()->role == 4)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 3) 
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.home' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2)
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.home' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.home' ? 'active' : '' }}">
+                    @if(Auth::user()->role == 1)
+                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
+                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 5)
+                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 6)
+                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 7)
+                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
                     @else
                         {{ Auth::user()->name }} 
                     @endif
@@ -88,8 +97,30 @@
                         </li>
                         @endif
                     </ul>
-                </li><br>
+                </li>
+                <!-- <br> -->
+                @if(Auth::user()->role == 2)
                 <li class="nav-header">ADMINISTRATION</li>
+                <li class="nav-item">
+                    <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> ICTRAM Tickets </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> NICMU Tickets </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> MIS Tickets </p>
+                    </a>
+                </li>
+                @endif
+
                 @if(Auth::user()->role == 1)
                 <li class="nav-item">
                     <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
@@ -98,28 +129,85 @@
                     </a>
                 </li>
                 @endif
-                    @if(Auth::user()->role == 1)
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p> Status <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('status.open') }}" class="nav-link {{ Route::currentRouteName() == 'status.open' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Open</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.in-progress') }}" class="nav-link {{ Route::currentRouteName() == 'status.in-progress' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>In Progress</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.closed') }}" class="nav-link {{ Route::currentRouteName() == 'status.closed' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Closed</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.completed') }}" class="nav-link {{ Route::currentRouteName() == 'status.completed' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Completed</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2  || Auth::user()->role == 3 )
+                    <li class="nav-item">
+                        <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
+                        <td><i class="fas fa-wrench nav-icon"></i>
+                            <p>Purchased Equipments</p>
+                        </a>
+                    </li>
+                    @endif
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
+                    <li class="nav-item">
+                        <a href="{{ route('ictrams.offices') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.offices' ? 'active' : '' }}">
+                        <i class="fas fa-university nav-icon text-white"></i>
+                            <p>Top Offices</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-white"></i>
                             <p>ICTRAM</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-warning"></i>
-                            <p>MIS</p>
-                        </a>
-                    </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 3 )
                     <li class="nav-item">
                         <a href="{{ route('nicmus.create') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.create' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-danger"></i>
                             <p>NICMU</p>
                         </a>
                     </li>
-                        @endif
-                    
-                <br><li class="nav-header">OTHERS</li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 4 )
+                    <li class="nav-item">
+                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-warning"></i>
+                            <p>MIS</p>
+                        </a>
+                    </li>
+                    @endif
+
+
+                        
+
+                <!-- <br> -->
+                <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
                             <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
                         <i class="fas fa-folder-open nav-icon"></i>

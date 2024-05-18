@@ -10,9 +10,19 @@ class IctramProblem extends Model
     use HasFactory;
     public $fillable = ['problem_description'];
     
+    // public function equipment()
+    // {
+    //     return $this->belongsTo(IctramEquipment::class);
+    // }
+    
     public function equipment()
     {
-        return $this->belongsTo(IctramEquipment::class);
+        return $this->belongsTo(ICTRAMEquipment::class, 'ictram_equipment_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 
 }

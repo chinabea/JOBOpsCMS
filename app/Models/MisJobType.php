@@ -14,4 +14,8 @@ class MisJobType extends Model
                         'asname_id',
                     ];
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

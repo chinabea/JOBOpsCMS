@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
+                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Requested Tickets</b></h3> <br><br>
                             <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
                                     <div class="form-group row">
                                         <div class="col-md-6">
@@ -43,10 +43,16 @@
                                         <th><i class="fa fa-tasks"></i> Status</th> @if(auth()->user()->role == 1) <th><i class="fa fa-pencil-square-o"></i> Action(s)</th> @endif
                                     </tr>
                                 </thead>
-                                <tbody> @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id())) <tr>
+                                <tbody> 
+                                    @foreach($tickets as $ticket) @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id())) <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
-                                        <td>{{ $ticket->service_location }}</td>
+                                        <td>
+                                            {{ $ticket->building_number }}
+                                            {{ $ticket->office_name }}
+                                            
+
+                                        </td>
                                         <td>{{ $ticket->unit }}</td>
                                         <td>{{ $ticket->request }}</td>
                                         <td> @if($ticket->users->isEmpty())
@@ -95,7 +101,14 @@
                                                     <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
                                                 </select>
                                             </form>
-                                        </td> @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td>
+                                        </td> 
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ ($ticket->age / 3) * 100 }}%;" aria-valuenow="{{ $ticket->age }}" aria-valuemin="0" aria-valuemax="3"></div>
+                                            </div>
+                                            <!-- <p>Age: {{ $ticket->age }} days</p> -->
+                                        </td>
+                                        @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
@@ -120,4 +133,31 @@
             </div>
         </div>
     </section>
-</div> @endsection
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.check-aging').click(function() {
+            var ticketId = $(this).data('ticket-id');
+
+            // Send AJAX request to check ticket aging
+            $.ajax({
+                url: '/checkTicketAging/' + ticketId,
+                type: 'GET',
+                success: function(response) {
+                    if (response.message === 'Ticket expired') {
+                        $('#ticket_status_' + ticketId).html('<span class="badge badge-danger">Expired</span>');
+                    } else {
+                        $('#ticket_status_' + ticketId).html('<span class="badge badge-success">Active</span>');
+                    }
+                    alert(response.message); // You can remove this alert if not needed
+                },
+                error: function(xhr, status, error) {
+                    alert('Error checking ticket aging');
+                }
+            });
+        });
+    });
+</script>
+@endsection

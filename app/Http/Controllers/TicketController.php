@@ -10,11 +10,8 @@ use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use App\Models\ProblemTypeOrEquipment;
 use App\Models\Unit;
+use Carbon\Carbon;
 
-use App\Models\RequestType;
-use App\Models\Equipment;
-use App\Models\JobType;
-use App\Models\Problem;
 
 class TicketController extends Controller
 {
@@ -22,12 +19,7 @@ class TicketController extends Controller
     public function create()
     {
         
-        $requestTypes = RequestType::all();
-        $equipments = Equipment::all();
-        $jobTypes = JobType::all();
-        $problems = Problem::all();
-        
-        return view('ticket.create', compact('requestTypes', 'equipments', 'jobTypes', 'problems'));
+        return view('ticket.create');
      
     }
 
@@ -81,12 +73,19 @@ class TicketController extends Controller
             // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
             $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
             $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
+
+            // Calculate age for each ticket
+            $tickets->each(function ($ticket) {
+                $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
+            });
+
             
             return view('ticket.index', compact('tickets','userIds'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+    
     public function store(Request $request)
     {
         // Validate the request data
@@ -133,6 +132,13 @@ class TicketController extends Controller
                 $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
             }
         }
+
+
+        $ticket = new Ticket();
+        $ticket->serial_number = $request->serial_number;
+        $ticket->covered_under_warranty = $request->has('covered_under_warranty');
+        // Set other fields as necessary
+        $ticket->save();
         
         // Log activity
         ActivityLogger::log('Created', $ticket, 'Ticket created');

@@ -4,9 +4,6 @@
     100% { color: red; }
 }
 
-.blinking-alert {
-    animation: blink 1s infinite;
-}
 
   body {
     color: #022A44 !important;
@@ -45,4 +42,34 @@
     /* .btn-primary{
         background-color: #022A44 !important;
     } */
+    .float-button {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 1000; /* Ensure it appears above other content */
+        opacity: 0.8;
+    }
 
+    .custom-btn {
+        width: 60px; /* Adjust width as needed */
+        height: 60px; /* Adjust height as needed */
+        font-size: 26px; /* Adjust font size as needed */
+        transition: all 0.3s ease; /* Smooth transition effect */
+    }
+
+    /* Hover effect */
+    .custom-btn:hover {
+        transform: scale(1.1); /* Scale up the button */
+        opacity: 1; /* Change opacity to fully visible */
+    }
+    
+    .modal-body {
+        max-height: 80vh; /* Adjust the max-height as needed */
+        overflow-y: auto;
+    }
+    .float-button button {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 3); /* Example shadow effect */
+    }
+    
+    
+            
