@@ -8,6 +8,13 @@ use App\Models\User;
 
 class UnitController extends Controller
 {
+    public function purchased()
+    {
+        
+
+        // Pass the data to the view
+        return view('units.purchased');
+    }
     
     public function ictramIndex()
     {
