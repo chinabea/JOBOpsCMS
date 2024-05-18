@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TicketsTableSeeder extends Seeder
 {
@@ -12,10 +13,12 @@ class TicketsTableSeeder extends Seeder
      *
      * @return void
      */
+
+   
     public function run()
     {
         // Array of sample data
-        $tickets = [
+        $tickets = [ 
             [
                 'building_number' => 'B1',
                 'office_name' => 'Office A',
@@ -33,8 +36,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => null,
                 'mis_job_type_id' => null,
                 'mis_asname_id' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
             [
                 'building_number' => 'B2',
@@ -53,8 +57,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => 2,
                 'mis_job_type_id' => 2,
                 'mis_asname_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
             [
                 'building_number' => 'B3',
@@ -73,8 +78,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => null,
                 'mis_job_type_id' => null,
                 'mis_asname_id' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
             [
                 'building_number' => 'B1',
@@ -93,8 +99,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => null,
                 'mis_job_type_id' => null,
                 'mis_asname_id' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
             [
                 'building_number' => 'B2',
@@ -113,8 +120,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => null,
                 'mis_job_type_id' => null,
                 'mis_asname_id' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
             [
                 'building_number' => 'B3',
@@ -133,8 +141,9 @@ class TicketsTableSeeder extends Seeder
                 'mis_request_type_id' => 3,
                 'mis_job_type_id' => 3,
                 'mis_asname_id' => 3,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => Carbon::now()->subDays(rand(1,14)),
+                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+            
             ],
         ];
 

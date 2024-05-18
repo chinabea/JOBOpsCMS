@@ -44,22 +44,21 @@
           </a>
         </div>
       </div>
-
-
-
-        <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                    
-                    @if(Auth::user()->role == 4)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 3) 
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.home' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2)
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.home' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.home' ? 'active' : '' }}">
+                    @if(Auth::user()->role == 1)
+                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
+                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 5)
+                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 6)
+                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
+                    @elseif(Auth::user()->role == 7)
+                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
                     @else
                         {{ Auth::user()->name }} 
                     @endif

@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Submitted Projects</b></h3> <br><br>
+                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Requested Tickets</b></h3> <br><br>
                             <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
                                     <div class="form-group row">
                                         <div class="col-md-6">
