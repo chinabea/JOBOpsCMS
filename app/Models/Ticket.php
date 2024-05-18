@@ -100,12 +100,6 @@ class Ticket extends Model
     {
         return $this->belongsTo(MisAsname::class);
     }
-
-    // Define the function to calculate age
-    public function age()
-    {
-        return now()->diffInDays($this->created_at);
-    }
     
 
 }
