@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('nicmu_requests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('nicmu_job_type_id');
             $table->unsignedBigInteger('nicmu_equipment_id');
             $table->unsignedBigInteger('nicmu_problem_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('nicmu_job_type_id')->references('id')->on('nicmu_job_types')->onDelete('cascade');
             $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu_equipments')->onDelete('cascade');
             $table->foreign('nicmu_problem_id')->references('id')->on('nicmu_problems')->onDelete('cascade');

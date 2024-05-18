@@ -11,16 +11,24 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\ProblemController;
-use App\Http\Controllers\EquipmentController;
+// use App\Http\Controllers\ProblemController;
+// use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\RequestTypeController;
 use App\Services\ActivityLogger;
 
 use App\Http\Controllers\NicmuController;
 use App\Http\Controllers\MisController;
 use App\Http\Controllers\ICTRAMController;
+
+use App\Http\Controllers\ICTRAMRequestController;
+use App\Http\Controllers\ICTRAM\JobTypeController;
+use App\Http\Controllers\ICTRAM\EquipmentController;
+use App\Http\Controllers\ICTRAM\ProblemController;
+
+
 // use App\Http\Controllers\ICTRAMRequestController;
 use App\Http\Controllers\UnitController;
+
 // use App\Http\Controllers\UnitController;
 
 use Illuminate\Support\Facades\Auth;
@@ -139,15 +147,15 @@ Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('acti
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
-Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
-Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
+// Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
+// Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
 
 // Adding API routes for dynamic dropdowns
 Route::get('/api/job-types/{unitId}', [JobController::class, 'getJobTypesByUnit']);
-Route::get('/api/equipment-types/{jobId}', [EquipmentController::class, 'getEquipmentTypesByJob']);
+// Route::get('/api/equipment-types/{jobId}', [EquipmentController::class, 'getEquipmentTypesByJob']);
 
-Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('equipments.create');
-Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('equipments.store');
+// Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('equipments.create');
+// Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('equipments.store');
 
 Route::get('/ICTRAM-unit/create', [ICTRAMController::class, 'create'])->name('ictram-unit.create');
 Route::post('/ICTRAM-unit/store', [ICTRAMController::class, 'store'])->name('ictram-unit.store');
@@ -182,6 +190,9 @@ Route::post('/ictram/store', [ICTRAMController::class, 'store'])->name('ictram.s
 Route::get('/ictrams/offices', [ICTRAMController::class, 'offices'])->name('ictrams.offices');
 Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
 Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
+Route::get('/ictrams/job-types', [JobTypeController::class, 'index'])->name('ictrams.JobTypes');
+Route::get('/ictrams/equipments', [EquipmentController::class, 'index'])->name('ictrams.Equipments');
+Route::get('/ictrams/problems', [ProblemController::class, 'index'])->name('ictrams.Problems');
 Route::post('/ictrams/storeJobType', [ICTRAMController::class, 'storeJobType'])->name('ictrams.storeJobType');
 Route::post('/ictrams/storeEquipment', [ICTRAMController::class, 'storeEquipment'])->name('ictrams.storeEquipment');
 Route::post('/ictrams/storeProblem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');

@@ -130,8 +130,25 @@ class DatabaseSeeder extends Seeder
             // Add other seeders here
         ]);
 
+        DB::table('ictram_equipments')->insert([
+            ['equipment_name' => 'All in One PC'],
+            ['equipment_name' => 'Printer'],
+            // Add more equipments as needed
+        ]);
 
-
+        // Seed ICTRAM Problems
+        DB::table('ictram_problems')->insert([
+            ['problem_description' => 'No dial tone'],
+            ['problem_description' => 'Paper Jams'],
+            // Add more problems as needed
+        ]);
+        
+        // Seed MIS Request Types
+        DB::table('mis_request_types')->insert([
+            ['requestType_name' => 'Software Installation'],
+            ['requestType_name' => 'Hardware Repair'],
+            // Add more request types as needed
+        ]);
 
 
 
