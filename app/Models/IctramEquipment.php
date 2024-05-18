@@ -35,6 +35,7 @@ class IctramEquipment extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+    
 
 
 }

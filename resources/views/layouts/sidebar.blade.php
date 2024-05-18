@@ -121,29 +121,7 @@
                     </a>
                 </li>
                 @endif
-                    @if(Auth::user()->role == 1)
-                    <li class="nav-item">
-                        <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-white"></i>
-                            <p>ICTRAM</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-warning"></i>
-                            <p>MIS</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('nicmus.create') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.create' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-danger"></i>
-                            <p>NICMU</p>
-                        </a>
-                    </li>
-                        @endif
-
-
-                        
+                
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
@@ -177,6 +155,48 @@
                         </li>
                     </ul>
                 </li>
+                
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2  || Auth::user()->role == 3 )
+                    <li class="nav-item">
+                        <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
+                        <td><i class="fas fa-wrench nav-icon"></i>
+                            <p>Purchased Equipments</p>
+                        </a>
+                    </li>
+                    @endif
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
+                    <li class="nav-item">
+                        <a href="{{ route('ictrams.offices') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.offices' ? 'active' : '' }}">
+                        <i class="fas fa-university nav-icon text-white"></i>
+                            <p>Top Offices</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-white"></i>
+                            <p>ICTRAM</p>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 3 )
+                    <li class="nav-item">
+                        <a href="{{ route('nicmus.create') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.create' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-danger"></i>
+                            <p>NICMU</p>
+                        </a>
+                    </li>
+                    @endif
+                    @if(Auth::user()->role == 1 || Auth::user()->role == 4 )
+                    <li class="nav-item">
+                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-warning"></i>
+                            <p>MIS</p>
+                        </a>
+                    </li>
+                    @endif
+
+
+                        
 
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>

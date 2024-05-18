@@ -173,6 +173,7 @@ Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.des
 Route::get('/ictram/create', [ICTRAMController::class, 'create'])->name('ictram.create');
 Route::post('/ictram/store', [ICTRAMController::class, 'store'])->name('ictram.store');
 
+Route::get('/ictrams/offices', [ICTRAMController::class, 'offices'])->name('ictrams.offices');
 Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
 Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
 Route::post('/ictrams/storeJobType', [ICTRAMController::class, 'storeJobType'])->name('ictrams.storeJobType');
@@ -198,6 +199,7 @@ Route::delete('/ictram/requests/{id}', [ICTRAMRequestController::class, 'destroy
 Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ictram-tickets');
 Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
+Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
 
 Route::fallback(function () {
