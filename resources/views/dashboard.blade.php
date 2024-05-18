@@ -56,7 +56,7 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Open Tickets</span>
-                <span class="info-box-number">{{ $totalOpenTickets }}</span>
+                <span class="info-box-number">{{ $totalOpenTicketsPerWeek }}</span>
                 <small>{{ number_format($totalOpenTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
               <!-- /.info-box-content -->

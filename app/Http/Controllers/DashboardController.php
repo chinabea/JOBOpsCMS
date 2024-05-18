@@ -13,6 +13,15 @@ class DashboardController extends Controller
     public function index()
     {
 
+        // Get the start and end dates for the current week
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        
+        // Count the open tickets created from Monday to Sunday of the current week
+        $totalOpenTicketsPerWeek = Ticket::where('status', 'Open')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->count();
+
         // statistics calculation
         $today = Carbon::today();
         $lastWeek = Carbon::today()->subWeek();
@@ -87,7 +96,8 @@ class DashboardController extends Controller
         'totalInProgressTickets', 'totalClosedTickets','totalHighLevelTickets', 'totalMidLevelTickets', 'totalLowLevelTickets', 'unapprovedUsers', 'totalUnassignedTickets', 
         'totalPendingApprovalofUsers', 'totalAssignedTickets', 'totalUsers', 'userPercentageChange', 'totalTickets', 'ticketsPercentageChange', 'totalOpenTicketsPercentageChange', 
         'totalInProgressTicketsPercentageChange', 'totalClosedTicketsPercentageChange', 'totalHighLevelTicketsPercentageChange', 'totalMidLevelTicketsPercentageChange', 
-        'totalLowLevelTicketsPercentageChange', 'totalUnassignedTicketsPercentageChange', 'totalPendingApprovalofUsersPercentageChange', 'totalAssignedTicketsPercentageChange'
+        'totalLowLevelTicketsPercentageChange', 'totalUnassignedTicketsPercentageChange', 'totalPendingApprovalofUsersPercentageChange', 'totalAssignedTicketsPercentageChange',
+        'totalOpenTicketsPerWeek',
         ));
     }
 }
