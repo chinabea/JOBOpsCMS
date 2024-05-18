@@ -16,6 +16,15 @@ class MisJobTypesTableSeeder extends Seeder
     {
         // Array of sample data
         $jobTypes = [
+
+            
+            // ['jobType_name' => 'New Account', 'created_at' => now(), 'updated_at' => now()],
+            // ['jobType_name' => 'Reset Password', 'created_at' => now(), 'updated_at' => now()],
+            // ['jobType_name' => 'Restrart', 'created_at' => now(), 'updated_at' => now()],
+            // ['jobType_name' => 'Re-Installation', 'created_at' => now(), 'updated_at' => now()],
+            // ['jobType_name' => 'Reactivation', 'created_at' => now(), 'updated_at' => now()],
+            // ['jobType_name' => 'Restore', 'created_at' => now(), 'updated_at' => now()],
+
             ['jobType_name' => 'New Account', 'mis_request_type_id' => 1, 'asname_id' => 1, 'created_at' => now(), 'updated_at' => now()],
             ['jobType_name' => 'Reset Password', 'mis_request_type_id' => 2, 'asname_id' => 2, 'created_at' => now(), 'updated_at' => now()],
             ['jobType_name' => 'Restrart', 'mis_request_type_id' => 1, 'asname_id' => 1, 'created_at' => now(), 'updated_at' => now()],
