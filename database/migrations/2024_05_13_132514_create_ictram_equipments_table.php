@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ictram_equipments', function (Blueprint $table) {
             $table->id();
             $table->string('equipment_name');
+            $table->unsignedBigInteger('ictram_job_type_id');
             $table->timestamps();
 
             // $table->foreign('ictram_job_type_id')->references('id')->on('ictram_job_types')->onDelete('cascade');

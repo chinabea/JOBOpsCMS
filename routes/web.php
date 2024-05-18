@@ -221,4 +221,3 @@ Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
-
