@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'unit-heads' => \App\Http\Middleware\UnitHead::class,
             'mict-staffs' => \App\Http\Middleware\MICTStaff::class,
             'staffs' => \App\Http\Middleware\Staff::class,
+            'student' => \App\Http\Middleware\Student::class,
             
         ]);
         

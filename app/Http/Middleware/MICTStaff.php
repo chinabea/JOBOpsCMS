@@ -22,7 +22,7 @@ class MICTStaff
 
         $user = Auth::user();
         
-        if($user->role == 3){
+        if($user->role == 7){
             return $next($request);
         } else {
             return redirect()->route('mict-staff.dashboard');

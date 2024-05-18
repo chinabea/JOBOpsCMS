@@ -57,6 +57,12 @@ Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staffs'])->grou
 
 });
 
+Route::prefix('student')->middleware(['auth', 'cache', 'approved','student'])->group(function () {
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('student.dashboard');
+
+});
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -184,7 +190,6 @@ Route::get('/ictrams/{id}/edit', [ICTRAMController::class, 'edit'])->name('ictra
 Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.update');
 Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
-
 
 // Routes for ICTRAM for Client side
 Route::get('/ictram/requests', [ICTRAMRequestController::class, 'index'])->name('ictram.request.index');

@@ -75,35 +75,35 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'JESSICA MATAYA',
                 'email' => 'jesmataya@my.cspc.edu.ph',
-                // MICT Staff
+                // Staff
                 'role' => 5,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocKUB0nARYGxuJCevZG8KLnVwpmTDrJsZfFZa7ZdFCLaiJ49pWfI=s96-c',
                 'is_approved' => true,
                 'phone_number' => '09386390756',
-                'job_position' => 'MICT Staff',
+                'job_position' => 'Staff',
                 'expertise' => ['Networking'],
             ],
             [
                 'name' => 'Louie Molina',
                 'email' => 'loumolina@my.cspc.edu.ph',
-                // Staff
-                'role' => 4,
+                // Student
+                'role' => 6,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocLIEi3iP9WuXqHV_W1U__h7MFcAFPmwnDCOSmJjhHErFqxQ2g=s96-c',
                 'is_approved' => false,
                 'phone_number' => null,
-                'job_position' => null,
+                'job_position' => 'Student',
                 'expertise' => null,
                 
             ],
             [
                 'name' => 'Rica Theresa Adante',
                 'email' => 'ricadante@my.cspc.edu.ph',
-                // Student
-                'role' => 5,
+                // MICT Staff
+                'role' => 7,
                 'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocLDuPOe6NaSoJcu5ATbEJsn3ptMJlkAgp3awFZQCY8cqCl4bA=s96-c',
                 'is_approved' => false,
                 'phone_number' => null,
-                'job_position' => 'Student',
+                'job_position' => 'MICT Staff',
                 'expertise' => null,
                 
             ],

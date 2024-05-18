@@ -16,17 +16,26 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 4)
+            @if(Auth::user()->role == 1)
+                <small>Director,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 2) 
+                <small>ICTRAM Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 3)
+                <small>NICMU Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 4)
+                <small>MIS Unit Head,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 5)
+                <small>Staff,</small><br> 
+                {{ Auth::user()->name }} 
+            @elseif(Auth::user()->role == 6)
                 <small>Student,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3) 
+            @elseif(Auth::user()->role == 7)
                 <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2)
-                <small>Unit Admin,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 1)
-                <small>Director,</small><br> 
                 {{ Auth::user()->name }} 
             @else
                 {{ Auth::user()->name }} 
