@@ -8,8 +8,8 @@ class ProblemController extends Controller
 {
        public function index()
     {
-        $problem = IctramProblem::all();
-        return view('units.ictram.Problem.index', compact('problem'));
+        $problems = IctramProblem::all();
+        return view('units.ictram.Problems.index', compact('problems'));
     }
 }
 

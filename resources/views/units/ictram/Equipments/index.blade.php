@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Job Types</h1>
+            <h1 class="m-0">ICTRAMs Equipments</h1>
           </div>
         </div>
       </div>
@@ -31,18 +31,18 @@
                                     <table class="table table-bordered table-sm text-center">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Job type Name</th>
+                                                <th>Equipment Name</th>
                                                 <th>Created At</th>
                                                 <th>Updated At</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>  
-                                            @foreach($jobTypes as $jobType)
+                                            @foreach($equipments as $equipment)
                                                     <tr>
-                                                        <td>{{ $jobType->jobType_name }}</td>
-                                                        <td>{{ $jobType->created_at ? $jobType->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
-                                                        <td>{{ $jobType->updated_at ? $jobType->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                        <td>{{ $equipment->equipment_name }}</td>
+                                                        <td>{{ $equipment->created_at ? $equipment->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                        <td>{{ $equipment->updated_at ? $equipment->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                     </tr>
                                             @endforeach
 

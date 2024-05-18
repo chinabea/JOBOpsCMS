@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Job Types</h1>
+            <h1 class="m-0">ICTRAMs Problems/Issues</h1>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
                                     <table class="table table-bordered table-sm text-center">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Job type Name</th>
+                                                <th>Problem Description</th>
                                                 <th>Created At</th>
                                                 <th>Updated At</th>
                                                 <th>Actions</th>
