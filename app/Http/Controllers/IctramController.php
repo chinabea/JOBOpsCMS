@@ -166,10 +166,29 @@ class IctramController extends Controller
     }
 
 
-    public function edit($id)
+    public function jobTypeEdit(Request $request, $id)
     {
-        $ictram = Ictram::findOrFail($id);
-        return view('ictrams.edit', compact('ictram'));
+            $jobType = IctramJobType::findOrFail($id);
+            $jobType->update([
+                'jobType_name' => $request->input('edit_jobType_name'),
+            ]);
+         return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM Job type updated successfully.');
+    }
+        public function equipmentEdit(Request $request, $id)
+    {
+            $equipment = IctramEquipment::findOrFail($id);
+            $equipment->update([
+                'equipment_name' => $request->input('edit_equipment_name'),
+            ]);
+         return redirect()->route('ictrams.Equipments')->with('success', 'ICTRAM Equipment updated successfully.');
+    }
+    public function problemEdit(Request $request, $id)
+    {
+            $problem = IctramProblem::findOrFail($id);
+            $problem->update([
+                'problem_description' => $request->input('edit_problem_description'),
+            ]);
+         return redirect()->route('ictrams.Problems')->with('success', 'ICTRAM Problem updated successfully.');
     }
 
     public function show($id)
@@ -178,11 +197,23 @@ class IctramController extends Controller
         return view('ictrams.index', compact('ictram'));
     }
 
-    public function destroy($id)
+    public function destroyJobType($id)
     {
-        $ictram = Ictram::findOrFail($id);
-        $ictram->delete();
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM deleted successfully');
+            $jobType = IctramJobType::findOrFail($id);
+            $jobType->delete();
+        return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM Job type deleted successfully');
+    }
+    public function destroyEquipment($id)
+    {
+            $equipment = IctramEquipment::findOrFail($id);
+            $equipment->delete();
+        return redirect()->route('ictrams.Equipments')->with('success', 'ICTRAM Equipment deleted successfully');
+    }
+    public function destroyProblem($id)
+    {
+            $problem = IctramProblem::findOrFail($id);
+            $problem->delete();
+        return redirect()->route('ictrams.Problems')->with('success', 'ICTRAM Problem deleted successfully');
     }
 
     

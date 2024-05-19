@@ -21,8 +21,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @include('units.ictram.modal.create-equipment')
                             <div class="d-flex fex-row justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
                                 <i class="fas fa-plus"></i> Add Equipment
                             </button>
                             </div>
@@ -43,11 +44,12 @@
                                                         <td>{{ $equipment->equipment_name }}</td>
                                                         <td>{{ $equipment->created_at ? $equipment->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                         <td>{{ $equipment->updated_at ? $equipment->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
-                                                            <td>
-                                                            <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button>
-                                                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCourseModal"><i class="fas fa-trash"></i></button>
-                                                                </form>
-                                                            </td>
+                                                        <td>
+                                                            @include('units.ictram.modal.edit-equipment')
+                                                            @include('units.ictram.modal.delete-equipment')
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ictramEditEquipmentModal{{ $equipment->id }}"><i class="fas fa-pen"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ictramDeleteEquipmentModal{{ $equipment->id }}"><i class="fas fa-trash"></i></button>
+                                                        </td>
                                                     </tr>
                                             @endforeach
 

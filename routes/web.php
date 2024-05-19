@@ -201,9 +201,15 @@ Route::post('/ictrams/storeJobType', [ICTRAMController::class, 'storeJobType'])-
 Route::post('/ictrams/storeEquipment', [ICTRAMController::class, 'storeEquipment'])->name('ictrams.storeEquipment');
 Route::post('/ictrams/storeProblem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');
 Route::get('/ictrams/{id}', [ICTRAMController::class, 'show'])->name('ictrams.show');
-Route::get('/ictrams/{id}/edit', [ICTRAMController::class, 'edit'])->name('ictrams.edit');
+Route::put('/ictrams/{id}/edit-job-types', [ICTRAMController::class, 'jobTypeEdit'])->name('ictrams.editJobType');
+Route::put('/ictrams/{id}/edit-equipment', [ICTRAMController::class, 'equipmentEdit'])->name('ictrams.editEquipment');
+Route::put('/ictrams/{id}/edit-problem', [ICTRAMController::class, 'problemEdit'])->name('ictrams.editProblem');
+
 Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.update');
-Route::delete('/ictrams/{id}', [ICTRAMController::class, 'destroy'])->name('ictrams.destroy');
+Route::delete('/ictrams/delete-job-type/{id}', [ICTRAMController::class, 'destroyJobType'])->name('ictrams.destroyJobType');
+Route::delete('/ictrams/delete-equipment/{id}', [ICTRAMController::class, 'destroyEquipment'])->name('ictrams.destroyEquipment');
+Route::delete('/ictrams/delete-problem/{id}', [ICTRAMController::class, 'destroyProblem'])->name('ictrams.destroyProblem');
+
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 
 // Routes for ICTRAM for Client side
