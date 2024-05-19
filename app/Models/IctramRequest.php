@@ -9,10 +9,8 @@ class IctramRequest extends Model
 {
     use HasFactory;
 
-    public $fillable = ['user_id',
-                        'ictram_job_type_id',
+    public $fillable = ['ictram_job_type_id',
                         'ictram_equipment_id',
-                        'ictram_problem_id',
-                    ];
+                        'ictram_problem_id',];
                     
 }
