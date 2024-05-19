@@ -21,12 +21,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            
-                            <button type="button" class="btn bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
-                                <i class="fas fa-plus"></i> Add Job
+                            @include('units.ictram.modal.create-problem')
+                            <div class="d-flex fex-row justify-content-end mb-2">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
+                                <i class="fas fa-plus"></i> Add Issue/Problem
                             </button>
-
-
+                            </div>
                                 <div class="mb-4">
                                     <table class="table table-bordered table-sm text-center">
                                         <thead class="thead-light">
@@ -43,6 +43,10 @@
                                                         <td>{{ $problem->problem_description }}</td>
                                                         <td>{{ $problem->created_at ? $problem->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                         <td>{{ $problem->updated_at ? $problem->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button>
+                                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCourseModal"><i class="fas fa-trash"></i></button>
+                                                        </td>
                                                     </tr>
                                             @endforeach
 

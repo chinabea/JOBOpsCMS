@@ -165,10 +165,13 @@ class ICTRAMController extends Controller
     }
 
 
-    public function edit($id)
+    public function jobTypeEdit(Request $request, $id)
     {
-        $ictram = Ictram::findOrFail($id);
-        return view('ictrams.edit', compact('ictram'));
+            $jobType = IctramJobType::findOrFail($id);
+            $jobType->update([
+                'jobType_name' => $request->input('edit_jobType_name'),
+            ]);
+         return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM Job type updated successfully.');
     }
 
     public function show($id)
@@ -177,11 +180,11 @@ class ICTRAMController extends Controller
         return view('ictrams.index', compact('ictram'));
     }
 
-    public function destroy($id)
+    public function destroyJobType($id)
     {
-        $ictram = Ictram::findOrFail($id);
-        $ictram->delete();
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM deleted successfully');
+            $jobType = IctramJobType::findOrFail($id);
+            $jobType->delete();
+        return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM deleted successfully');
     }
 
     

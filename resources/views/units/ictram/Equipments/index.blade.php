@@ -21,8 +21,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @include('units.ictram.modal.create-equipment')
                             <div class="d-flex fex-row justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
                                 <i class="fas fa-plus"></i> Add Equipment
                             </button>
                             </div>
@@ -46,7 +47,7 @@
                                                             <td>
                                                             <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button>
                                                                     <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCourseModal"><i class="fas fa-trash"></i></button>
-                                                                </form>
+
                                                             </td>
                                                     </tr>
                                             @endforeach
