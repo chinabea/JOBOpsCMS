@@ -209,6 +209,7 @@ Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.
 Route::delete('/ictrams/delete-job-type/{id}', [ICTRAMController::class, 'destroyJobType'])->name('ictrams.destroyJobType');
 Route::delete('/ictrams/delete-equipment/{id}', [ICTRAMController::class, 'destroyEquipment'])->name('ictrams.destroyEquipment');
 Route::delete('/ictrams/delete-problem/{id}', [ICTRAMController::class, 'destroyProblem'])->name('ictrams.destroyProblem');
+Route::delete('/ictrams/delete-relation/{id}', [AssignController::class, 'destroy'])->name('ictrams.destroyIctram');
 
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 

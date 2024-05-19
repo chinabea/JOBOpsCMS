@@ -111,11 +111,16 @@
                         <tr>
                             <th>Equipment</th>
                             <th>Problem</th>
+                            <th width="7%">Action</th>
                         </tr>
                         @foreach ($ictrams as $index => $ictram)
                             <tr>
                                 <td>{{ $ictram->equipment->equipment_name }}</td>
                                 <td>{{ $ictram->problem->problem_description }}</td>
+                                <td>
+                                    @include('units.ictram.modal.delete-dataWithRelation')
+                                    <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#ictramDeletedataWithRelationModal{{ $ictram->id }}" style="opacity: 0.8;"><i class="fas fa-trash text-red"></i></button>
+                                </td>
                             </tr>
                         @endforeach
                     @endforeach

@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ictramEditEquipmentModal{{ $equipment->id }}Label">Edit Job Type</h5>
+                <h5 class="modal-title" id="ictramEditEquipmentModal{{ $equipment->id }}Label">Edit Equipment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +13,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="edit_equipment_name">Job Type Name</label>
+                        <label for="edit_equipment_name">Equipment Name</label>
                         <input type="text" class="form-control" id="edit_equipment_name" name="edit_equipment_name" value="{{ $equipment->equipment_name }}" required>
                     </div>
                     <!-- Add more input fields for other attributes if needed -->
