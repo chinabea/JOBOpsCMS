@@ -20,6 +20,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card px-3 pt-3 pb-1">
+                        @include('units.ictram.modal.create-jobType')
+                        @include('units.ictram.modal.create-equipment')
+                        @include('units.ictram.modal.create-problem')
                         <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST" onsubmit="return validateForm()">
                                 @csrf
                                 <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
@@ -27,7 +30,7 @@
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="jobType">Job Type</label>
                                         <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         </div>
@@ -50,7 +53,7 @@
                                 <div class="mx-2 w-100">
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="equipment">Equipment</label>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
@@ -68,14 +71,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                
                                 <div class="mx-2 w-100">
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="jobType">Problem</label>
                                         <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         </div>
@@ -96,44 +96,30 @@
                                 </div>
                                 </div>
                                 <div class="d-flex flex-row justify-content-end mx-2 mt-3">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-sm btn-primary">
                                     <i class="fas fa-check"></i> Save
                                 </button>
                                 </div>
                             </form>
-                            <!-- @include('units.ictram.create-equipment')
-                            
-
-                            @include('units.ictram.create-problem') -->
                     </div>
             <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
-                <!-- <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Job-Types</th>
-                        <th>Equipemnts</th>
-                        <th>Problems</th>
-                    </tr>
-                </thead> -->
-<tbody>
-    @foreach ($sortedIctrams->groupBy('jobType.jobType_name') as $jobTypeName => $ictrams)
-        <tr>
-            <th class="bg-info py-2" colspan="4">{{ $jobTypeName }}</th>
-        </tr>
-        <tr>
-            <th>Equipment</th>
-            <th>Problem</th>
-        </tr>
-        @foreach ($ictrams as $index => $ictram)
-            <tr>
-                <td>{{ $ictram->equipment->equipment_name }}</td>
-                <td>{{ $ictram->problem->problem_description }}</td>
-            </tr>
-        @endforeach
-    @endforeach
-</tbody>
-
-
+                <tbody>
+                    @foreach ($sortedIctrams->groupBy('jobType.jobType_name') as $jobTypeName => $ictrams)
+                        <tr>
+                            <th class="bg-info py-2" colspan="4">{{ $jobTypeName }}</th>
+                        </tr>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Problem</th>
+                        </tr>
+                        @foreach ($ictrams as $index => $ictram)
+                            <tr>
+                                <td>{{ $ictram->equipment->equipment_name }}</td>
+                                <td>{{ $ictram->problem->problem_description }}</td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                </tbody>
             </table>
                 </div>
             </div>

@@ -124,30 +124,12 @@ class ICTRAMController extends Controller
         return view('units.ictram.index', compact('ictrams', 'jobTypes', 'equipments', 'problems'));
     }
 
-    // Display the form
-    // public function create()
-    // {
-    //     $jobTypes = IctramJobType::all();
-    //     return view('units.ictram.index', compact('jobTypes'));
-    // }
-
-    // Handle form submission
     public function storeJobType(Request $request)
     {
-        // Validate the request if needed
-        $validatedData = $request->validate([
-            'jobType_name' => 'required|string|max:255',
-            // Add more validation rules as needed
-        ]);
 
-        // Create a new IctramJobType instance
-        $jobType = new IctramJobType();
-        $jobType->jobType_name = $request->input('jobType_name');
-        // You can assign other properties here if needed
-        $jobType->save();
+        $ictram = IctramJobType::create($request->all());
 
-        // You can return a response if needed, for example:
-        return response()->json(['success' => true, 'message' => 'ICTRAM Job Type created successfully.']);
+        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Job Type added successfully.');
     }
 
         public function storeWithRelationShip(Request $request)
@@ -171,20 +153,15 @@ class ICTRAMController extends Controller
     {
         $ictram = IctramEquipment::create($request->all());
 
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Request created successfully.');
+        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Equipment added successfully.');
     }
     
     // Handle form submission
     public function storeProblem(Request $request)
     {
+        $ictram = IctramProblem::create($request->all());
 
-        $equipments = IctramEquipment::all();
-        $problem = IctramProblem::create([
-            'ictram_equipment_id' => $request->input('ictram_equipment_id'),
-            'problem_description' => $request->input('problem_description'),
-        ]);
-
-        return redirect()->route('ictrams.index', compact('equipments'));
+        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Issue added successfully.');
     }
 
 

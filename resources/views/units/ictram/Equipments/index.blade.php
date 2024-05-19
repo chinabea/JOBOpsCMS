@@ -21,11 +21,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            
-                            <button type="button" class="btn bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
-                                <i class="fas fa-plus"></i> Add Job
+                            <div class="d-flex fex-row justify-content-end mb-2">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                                <i class="fas fa-plus"></i> Add Equipment
                             </button>
-
+                            </div>
 
                                 <div class="mb-4">
                                     <table class="table table-bordered table-sm text-center">
@@ -43,6 +43,11 @@
                                                         <td>{{ $equipment->equipment_name }}</td>
                                                         <td>{{ $equipment->created_at ? $equipment->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                         <td>{{ $equipment->updated_at ? $equipment->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                            <td>
+                                                            <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button>
+                                                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCourseModal"><i class="fas fa-trash"></i></button>
+                                                                </form>
+                                                            </td>
                                                     </tr>
                                             @endforeach
 

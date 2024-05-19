@@ -12,25 +12,9 @@
             <div class="modal-body">
                 <form id="jobForm" action="{{ route('ictrams.storeEquipment') }}" method="POST">
                     @csrf
-                    <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
-
-                    <div class="mb-3">
-                        <label for="jobType">Job Type</label>
-                        @if($jobTypes->count() > 0)
-                            <select class="form-control" id="jobType" name="ictram_job_type_id">
-                                <option value="">Select Job Type</option>
-                                @foreach($jobTypes as $jobType)
-                                    <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
-                                @endforeach
-                            </select>
-                        @else
-                            <input type="text" class="form-control" id="jobType_name" name="jobType_name" placeholder="Enter job type">
-                        @endif
-                    </div>
-
                     <div class="mb-3">
                         <label for="equipment">Equipment</label>
-                            <input type="text" class="form-control" id="equipment_name" name="equipment_name" placeholder="Enter equipment">
+                            <input type="text" class="form-control" id="equipment_name" name="equipment_name" placeholder="Enter equipment" required>
                     </div>
 
                     <div class="modal-footer justify-content-between">
