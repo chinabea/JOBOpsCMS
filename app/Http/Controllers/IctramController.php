@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ictram;
@@ -10,7 +11,7 @@ use App\Models\IctramProblem;
 use Illuminate\Support\Facades\DB;
 use App\Models\Ticket;
 
-class ICTRAMController extends Controller
+class IctramController extends Controller
 {
     public function offices()
     {

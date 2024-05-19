@@ -39,17 +39,17 @@ return new class extends Migration
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreign('ictram_job_type_id')->references('id')->on('ictram_job_types')->onDelete('cascade');
-            $table->foreign('ictram_problem_id')->references('id')->on('ictram_problems')->onDelete('cascade');
-            $table->foreign('ictram_equipment_id')->references('id')->on('ictram_equipments')->onDelete('cascade');
+            $table->foreign('ictram_job_type_id')->references('id')->on('ictram')->onDelete('cascade');
+            $table->foreign('ictram_problem_id')->references('id')->on('ictram')->onDelete('cascade');
+            $table->foreign('ictram_equipment_id')->references('id')->on('ictram')->onDelete('cascade');
 
-            $table->foreign('nicmu_job_type_id')->references('id')->on('nicmu_job_types')->onDelete('cascade');
-            $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu_equipments')->onDelete('cascade');
-            $table->foreign('nicmu_problem_id')->references('id')->on('nicmu_problems')->onDelete('cascade');
+            $table->foreign('nicmu_job_type_id')->references('id')->on('nicmu')->onDelete('cascade');
+            $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu')->onDelete('cascade');
+            $table->foreign('nicmu_problem_id')->references('id')->on('nicmu')->onDelete('cascade');
 
-            $table->foreign('mis_request_type_id')->references('id')->on('mis_request_types')->onDelete('cascade');
-            $table->foreign('mis_job_type_id')->references('id')->on('mis_job_types')->onDelete('cascade');
-            $table->foreign('mis_asname_id')->references('id')->on('mis_asnames')->onDelete('cascade');
+            $table->foreign('mis_request_type_id')->references('id')->on('mis')->onDelete('cascade');
+            $table->foreign('mis_job_type_id')->references('id')->on('mis')->onDelete('cascade');
+            $table->foreign('mis_asname_id')->references('id')->on('mis')->onDelete('cascade');
             
              
         });
