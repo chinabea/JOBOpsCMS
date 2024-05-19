@@ -45,12 +45,11 @@
                                                         <td>{{ $jobType->updated_at ? $jobType->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                      <td>
                                                         <!-- <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button> -->
-                                                            @include('units.ictram.modal.edit-jobType')
-                                                            @include('units.ictram.modal.delete-jobType')
+                                                        @include('units.ictram.modal.edit-equipment')
+                                                        @include('units.ictram.modal.delete-equipment')
                                                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ictramEditJobTypeModal{{ $jobType->id }}"><i class="fas fa-pen"></i></button>
                                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ictramDeleteJobTypeModal{{ $jobType->id }}"><i class="fas fa-trash"></i></button>
-
-                                                </td>
+                                                        </td>
                                                     </tr>
                                             @endforeach
 

@@ -173,6 +173,22 @@ class ICTRAMController extends Controller
             ]);
          return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM Job type updated successfully.');
     }
+        public function equipmentEdit(Request $request, $id)
+    {
+            $equipment = IctramEquipment::findOrFail($id);
+            $equipment->update([
+                'equipment_name' => $request->input('edit_equipment_name'),
+            ]);
+         return redirect()->route('ictrams.Equipments')->with('success', 'ICTRAM Equipment updated successfully.');
+    }
+    public function problemEdit(Request $request, $id)
+    {
+            $problem = IctramProblem::findOrFail($id);
+            $problem->update([
+                'problem_description' => $request->input('edit_problem_description'),
+            ]);
+         return redirect()->route('ictrams.Problems')->with('success', 'ICTRAM Problem updated successfully.');
+    }
 
     public function show($id)
     {
@@ -184,7 +200,19 @@ class ICTRAMController extends Controller
     {
             $jobType = IctramJobType::findOrFail($id);
             $jobType->delete();
-        return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM deleted successfully');
+        return redirect()->route('ictrams.JobTypes')->with('success', 'ICTRAM Job type deleted successfully');
+    }
+    public function destroyEquipment($id)
+    {
+            $equipment = IctramEquipment::findOrFail($id);
+            $equipment->delete();
+        return redirect()->route('ictrams.Equipments')->with('success', 'ICTRAM Equipment deleted successfully');
+    }
+    public function destroyProblem($id)
+    {
+            $problem = IctramProblem::findOrFail($id);
+            $problem->delete();
+        return redirect()->route('ictrams.Problems')->with('success', 'ICTRAM Problem deleted successfully');
     }
 
     
