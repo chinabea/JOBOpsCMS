@@ -20,11 +20,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card px-3 pt-3 pb-1">
-                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST">
+                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST" onsubmit="return validateForm()">
                                 @csrf
                                 <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
-                                <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
-
                                 <div class="mx-2 w-100">
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="jobType">Job Type</label>
@@ -35,10 +33,11 @@
                                         </div>
                                     </div>
                                     <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldJobType" name="jobType_name" placeholder="Select JobType" onclick="toggleDropdown('dropdownMenuJobType')" readonly>
-                                        <input type="hidden" id="hiddenInputJobType" name="ictram_job_type_id">
+                                        <input class="form-control" type="text" id="displayFieldJobType" name="jobType_name" placeholder="Select JobType" onclick="toggleDropdown('dropdownMenuJobType')" readonly required>
+                                        <span id="jobTypeValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
+                                        <input type="hidden" id="hiddenInputJobType" name="ictram_job_type_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuJobType" aria-labelledby="dropdownMenuButtonJobType">
-                                            <div class="px-2 w-100 sticky-top">
+                                            <div class="px-2 w-100 sticky-top bg-light">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuJobType')">
                                             </div>
                                                 @foreach($jobTypes as $jobType)
@@ -57,7 +56,8 @@
                                     </div>
                                     <div class="dropdown">
                                         <input class="form-control" type="text" id="displayFieldEquipment" name="equipment_name" placeholder="Select Equipment" onclick="toggleDropdown('dropdownMenuEquipment')" readonly>
-                                        <input type="hidden" id="hiddenInputEquipmentId" name="ictram_equipment_id">
+                                        <span id="EquipmentValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
+                                        <input type="hidden" id="hiddenInputEquipmentId" name="ictram_equipment_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuEquipment" aria-labelledby="dropdownMenuButtonEquipment">
                                             <div class="px-2 w-100 sticky-top">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuEquipment')">
@@ -81,8 +81,9 @@
                                         </div>
                                     </div>
                                     <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldProblem" name="problem_description" placeholder="Select Problem" onclick="toggleDropdown('dropdownMenuProblem')" readonly>
-                                        <input type="hidden" id="hiddenInputProblem" name="ictram_problem_id">
+                                        <input class="form-control" type="text" id="displayFieldProblem" name="problem_description" placeholder="Select Problem" onclick="toggleDropdown('dropdownMenuProblem')" readonly required>
+                                        <span id="ProblemValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
+                                        <input type="hidden" id="hiddenInputProblem" name="ictram_problem_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuProblem" aria-labelledby="dropdownMenuButtonProblem">
                                             <div class="px-2 w-100 sticky-top">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuProblem')">
@@ -100,11 +101,40 @@
                                 </button>
                                 </div>
                             </form>
-                            @include('units.ictram.create-equipment')
+                            <!-- @include('units.ictram.create-equipment')
                             
 
-                            @include('units.ictram.create-problem')
+                            @include('units.ictram.create-problem') -->
                     </div>
+            <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+                <!-- <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Job-Types</th>
+                        <th>Equipemnts</th>
+                        <th>Problems</th>
+                    </tr>
+                </thead> -->
+<tbody>
+    @foreach ($sortedIctrams->groupBy('jobType.jobType_name') as $jobTypeName => $ictrams)
+        <tr>
+            <th class="bg-info py-2" colspan="4">{{ $jobTypeName }}</th>
+        </tr>
+        <tr>
+            <th>Equipment</th>
+            <th>Problem</th>
+        </tr>
+        @foreach ($ictrams as $index => $ictram)
+            <tr>
+                <td>{{ $ictram->equipment->equipment_name }}</td>
+                <td>{{ $ictram->problem->problem_description }}</td>
+            </tr>
+        @endforeach
+    @endforeach
+</tbody>
+
+
+            </table>
                 </div>
             </div>
         </div>
@@ -112,6 +142,13 @@
 </section>  
 </div> 
 @endsection
+
+<style>
+    .scrollable-menu {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+</style>
 
 <script>
 function toggleDropdown(menuId) {
@@ -155,5 +192,25 @@ function filterDropdown(menuId) {
             dropdownItems[i].style.display = "none";
         }
     }
+}
+function validateForm() {
+    var jobTypeField = document.getElementById("displayFieldJobType").value.trim();
+    var EquipmentField = document.getElementById("displayFieldEquipment").value.trim();
+    var ProblemField = document.getElementById("displayFieldProblem").value.trim();
+    if (jobTypeField === "") {
+        document.getElementById("jobTypeValidationMessage").style.display = "block";
+        return false;
+    } else if (EquipmentField === ""){
+        document.getElementById("EquipmentValidationMessage").style.display = "block";
+        document.getElementById("jobTypeValidationMessage").style.display = "none";
+        return false;
+    } else if (ProblemField === ""){
+        document.getElementById("ProblemValidationMessage").style.display = "block";
+        document.getElementById("EquipmentValidationMessage").style.display = "none";
+        return false;
+    }
+    // Add validation for other fields similarly
+    
+    return true;
 }
 </script>
