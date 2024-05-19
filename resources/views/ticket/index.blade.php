@@ -8,7 +8,30 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Requested Tickets</b></h3> <br><br>
-                            <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
+
+            <form method="GET" action="{{ route('tickets') }}">
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" name="search" placeholder="Search description" value="{{ request('search') }}">
+                    </div>
+                    <div class="col">
+                        <select class="form-control" name="sort_by">
+                            <option value="created_at">Date</option>
+                            <option value="priority_level">Priority</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-control" name="sort_order">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Search & Sort</button>
+                    </div>
+                </div>
+            </form>
+                            <!-- <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
                                     <div class="form-group row">
                                         <div class="col-md-6">
                                             <label for="start_date">Start Date:</label>
@@ -29,7 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
                             <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -125,7 +148,11 @@
                                                 </div>
                                             </div>
                                         </td> @endif
-                                    </tr> @endif @endforeach </tbody>
+                                    </tr> @endif 
+                                    
+
+            {{ $tickets->links() }}
+            @endforeach </tbody>
                             </table>
                         </div>
                     </div>
