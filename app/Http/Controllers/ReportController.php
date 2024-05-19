@@ -7,11 +7,49 @@ use App\Models\FAQs;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\PDF;
+use App\Models\Report; 
 
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function generateReport(Request $request)
+    {
+        // Retrieve search parameters from the request
+        $date = $request->input('date');
+        $name = $request->input('name');
+        $unit = $request->input('unit');
+        $requestType = $request->input('request_type');
+
+        // Query reports table
+        $query = Report::query();
+
+        // Apply filters based on search parameters
+        if ($date) {
+            $query->where('date', $date);
+        }
+
+        if ($name) {
+            $query->where('name', $name);
+        }
+
+        if ($unit) {
+            $query->where('unit', $unit);
+        }
+
+        if ($requestType) {
+            $query->where('request', $requestType);
+        }
+
+        // Sort the results, you can change 'date' to any field you want to sort by
+        $query->orderBy('date', 'asc');
+
+        // Retrieve the sorted and filtered results
+        $reports = $query->get();
+
+        // You can return the results to your view or do further processing here
+        return view('reports.index', compact('reports'));
+    }
 
     public function unassignedReport(Request $request)
     {

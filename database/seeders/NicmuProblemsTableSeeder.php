@@ -16,6 +16,11 @@ class NicmuProblemsTableSeeder extends Seeder
     {
         // Array of sample data
         $problems = [
+            
+            // ['problem_description' => 'Network Downtime', 'created_at' => now(), 'updated_at' => now()],
+            // ['problem_description' => 'Slow Internet Speed', 'created_at' => now(), 'updated_at' => now()],
+            // ['problem_description' => 'Network Congestion', 'created_at' => now(), 'updated_at' => now()],
+
             ['problem_description' => 'Network Downtime', 'nicmu_equipment_id' => 1, 'created_at' => now(), 'updated_at' => now()],
             ['problem_description' => 'Slow Internet Speed', 'nicmu_equipment_id' => 2, 'created_at' => now(), 'updated_at' => now()],
             ['problem_description' => 'Network Congestion', 'nicmu_equipment_id' => 3, 'created_at' => now(), 'updated_at' => now()],
