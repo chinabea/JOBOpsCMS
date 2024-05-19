@@ -24,7 +24,6 @@ use App\Http\Controllers\ICTRAMRequestController;
 use App\Http\Controllers\ICTRAM\JobTypeController;
 use App\Http\Controllers\ICTRAM\EquipmentController;
 use App\Http\Controllers\ICTRAM\ProblemController;
-use App\Http\Controllers\ICTRAM\AssignController;
 
 
 // use App\Http\Controllers\ICTRAMRequestController;
@@ -188,11 +187,8 @@ Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.des
 Route::get('/ictram/create', [ICTRAMController::class, 'create'])->name('ictram.create');
 Route::post('/ictram/store', [ICTRAMController::class, 'store'])->name('ictram.store');
 
-Route::get('/ictrams', [AssignController::class, 'index'])->name('ictrams.index');
-Route::post('/ictrams/add-relation', [AssignController::class, 'storeWithRelationShip'])->name('ictrams.add-relation');
-
-Route::post('/ictrams/storeProblem', [ICTRAMController::class, 'storeProblem'])->name('ictrams.storeProblem');
 Route::get('/ictrams/offices', [ICTRAMController::class, 'offices'])->name('ictrams.offices');
+Route::get('/ictrams', [ICTRAMController::class, 'index'])->name('ictrams.index');
 Route::get('/ictrams/create', [ICTRAMController::class, 'create'])->name('ictrams.create');
 Route::get('/ictrams/job-types', [JobTypeController::class, 'index'])->name('ictrams.JobTypes');
 Route::get('/ictrams/equipments', [EquipmentController::class, 'index'])->name('ictrams.Equipments');

@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Assignation</h1>
+            <h1 class="m-0">ICTRAMs</h1>
           </div>
         </div>
       </div>
@@ -19,91 +19,54 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card px-3 pt-3 pb-1">
-                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST">
-                                @csrf
-                                <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
-                                <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
-
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="jobType">Job Type</label>
-                                        <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldJobType" name="jobType_name" placeholder="Select JobType" onclick="toggleDropdown('dropdownMenuJobType')" readonly>
-                                        <input type="hidden" id="hiddenInputJobType" name="ictram_job_type_id">
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuJobType" aria-labelledby="dropdownMenuButtonJobType">
-                                            <div class="px-2 w-100 sticky-top">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuJobType')">
-                                            </div>
-                                                @foreach($jobTypes as $jobType)
-                                                    <a class="dropdown-item" href="#" onclick="selectItemJobType('{{ $jobType->id }}', '{{ $jobType->jobType_name }}', 'displayFieldJobType', 'hiddenInputJobType')">{{ $jobType->jobType_name }}</a>
-                                                @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="equipment">Equipment</label>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldEquipment" name="equipment_name" placeholder="Select Equipment" onclick="toggleDropdown('dropdownMenuEquipment')" readonly>
-                                        <input type="hidden" id="hiddenInputEquipmentId" name="ictram_equipment_id">
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuEquipment" aria-labelledby="dropdownMenuButtonEquipment">
-                                            <div class="px-2 w-100 sticky-top">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuEquipment')">
-                                            </div>
-                                            @foreach($equipments as $equipment)
-                                                <a class="dropdown-item" href="#" onclick="selectItemEquipment('{{ $equipment->id }}', '{{ $equipment->equipment_name }}', 'displayFieldEquipment', 'hiddenInputEquipmentId')">{{ $equipment->equipment_name }}</a>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="jobType">Problem</label>
-                                        <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal222">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldProblem" name="problem_description" placeholder="Select Problem" onclick="toggleDropdown('dropdownMenuProblem')" readonly>
-                                        <input type="hidden" id="hiddenInputProblem" name="ictram_problem_id">
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuProblem" aria-labelledby="dropdownMenuButtonProblem">
-                                            <div class="px-2 w-100 sticky-top">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuProblem')">
-                                            </div>
-                                                @foreach($problems as $problem)
-                                                    <a class="dropdown-item" href="#" onclick="selectItemProblem('{{ $problem->id }}', '{{ $problem->problem_description }}', 'displayFieldProblem', 'hiddenInputProblem')">{{ $problem->problem_description }}</a>
-                                                @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="d-flex flex-row justify-content-end mx-2 mt-3">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-check"></i> Save
-                                </button>
-                                </div>
-                            </form>
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <button type="button" class="btn bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                                <i class="fas fa-plus"></i> Add Job
+                            </button>
+                            @include('units.ictram.create-jobType')
+                             @include('units.ictram.modal.add-jobType')
+            
+                            <button type="button" class="btn bg-info float-right mx-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
+                                <i class="fas fa-plus"></i> Add Equipment
+                            </button>
                             @include('units.ictram.create-equipment')
                             
-
+                            <button type="button" class="btn bg-info float-right mx-1" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
+                                <i class="fas fa-plus"></i> Add Problem or Issue
+                            </button>
                             @include('units.ictram.create-problem')
+
+                            @foreach($jobTypes as $jobType)
+                                <div class="mb-4">
+                                    <h2 class="mb-3">{{ $jobType->jobType_name }}</h2>
+                                    <table class="table table-bordered table-sm text-center">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Equipment Name</th>
+                                                <th>Problem Description or Issues</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($jobType->equipments as $equipment)
+                                                @foreach($equipment->problems as $problem)
+                                                    <tr>
+                                                        <td>{{ $equipment->equipment_name }}</td>
+                                                        <td>{{ $problem->problem_description }}</td>
+                                                        <td>{{ $problem->created_at ? $problem->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                        <td>{{ $problem->updated_at ? $problem->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,47 +76,39 @@
 </div> 
 @endsection
 
-<script>
-function toggleDropdown(menuId) {
-    var dropdownMenus = document.querySelectorAll('.dropdown-menu');
-    dropdownMenus.forEach(function(menu) {
-        if(menu.id !== menuId){
-        menu.classList.remove("show");
-        }
-    });
-    var dropdownMenu = document.getElementById(menuId);
-    dropdownMenu.classList.toggle("show");
-}
-function selectItemJobType(item1, item, displayId, hiddenId, menuId) {
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
-    toggleDropdown(displayId.replace("displayFieldJobType", "dropdownMenuJobType"));
-}
-function selectItemEquipment(item1, item, displayId, hiddenId, menuId) {
-    console.log("selectItemEquipment", item1);
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
-    toggleDropdown(displayId.replace("displayFieldEquipment", "dropdownMenuEquipment"));
-}
-function selectItemProblem(item1, item, displayId, hiddenId, menuId) {
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
 
-    toggleDropdown(displayId.replace("displayFieldProblem", "dropdownMenuProblem"));
-}
+    <!-- <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3>Select Job Type</h3>
+                <div class="form-group">
+                    <select class="form-select" id="jobTypeSelect">
+                        <option value="installation">Installation</option>
+                        <option value="repair">Repair</option>
+                        <option value="software_upgrade">Software Upgrade</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group d-none" id="otherJobTypeInput">
+                    <label for="otherJobType">Other Job Type:</label>
+                    <input type="text" class="form-control" id="otherJobType" name="otherJobType" placeholder="Enter other job type">
+                </div>
+            </div>
+        </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ClXO1TxVvR+abT7xanlJo1A2e9cApvIOYwA4X2FJC7cbtFFJ5v5x2k4jwTfsR/pj" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const jobTypeSelect = document.getElementById('jobTypeSelect');
+            const otherJobTypeInput = document.getElementById('otherJobTypeInput');
 
-function filterDropdown(menuId) {
-    var input, filter, dropdownItems, items, i;
-    input = document.querySelector("#" + menuId + " .search-input");
-    filter = input.value.toUpperCase();
-    dropdownItems = document.querySelectorAll("#" + menuId + " .dropdown-item");
-    for (i = 0; i < dropdownItems.length; i++) {
-        items = dropdownItems[i].innerText;
-        if (items.toUpperCase().indexOf(filter) > -1) {
-            dropdownItems[i].style.display = "";
-        } else {
-            dropdownItems[i].style.display = "none";
-        }
-    }
-}
-</script>
+            jobTypeSelect.addEventListener('change', function() {
+                if (jobTypeSelect.value === 'others') {
+                    otherJobTypeInput.classList.remove('d-none');
+                } else {
+                    otherJobTypeInput.classList.add('d-none');
+                }
+            });
+        });
+    </script> -->
+
