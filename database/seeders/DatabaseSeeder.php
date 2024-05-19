@@ -130,25 +130,34 @@ class DatabaseSeeder extends Seeder
             // Add other seeders here
         ]);
 
-        DB::table('ictram_equipments')->insert([
-            ['equipment_name' => 'All in One PC'],
-            ['equipment_name' => 'Printer'],
-            // Add more equipments as needed
-        ]);
-
-        // Seed ICTRAM Problems
-        DB::table('ictram_problems')->insert([
-            ['problem_description' => 'No dial tone'],
-            ['problem_description' => 'Paper Jams'],
-            // Add more problems as needed
-        ]);
         
         // Seed MIS Request Types
-        DB::table('mis_request_types')->insert([
-            ['requestType_name' => 'Software Installation'],
-            ['requestType_name' => 'Hardware Repair'],
+        DB::table('ictram')->insert([
+            ['ictram_job_type_id' => 1, 'ictram_equipment_id' => 2, 'ictram_problem_id' => 3],
+            ['ictram_job_type_id' => 2, 'ictram_equipment_id' => 1, 'ictram_problem_id' => 1],
+            ['ictram_job_type_id' => 3, 'ictram_equipment_id' => 2, 'ictram_problem_id' => 2],
+            ['ictram_job_type_id' => 1, 'ictram_equipment_id' => 1, 'ictram_problem_id' => 3],
             // Add more request types as needed
         ]);
+        
+
+        DB::table('nicmu')->insert([
+            ['nicmu_job_type_id' => 1, 'nicmu_equipment_id' => 2, 'nicmu_problem_id' => 3],
+            ['nicmu_job_type_id' => 2, 'nicmu_equipment_id' => 1, 'nicmu_problem_id' => 1],
+            ['nicmu_job_type_id' => 3, 'nicmu_equipment_id' => 2, 'nicmu_problem_id' => 2],
+            ['nicmu_job_type_id' => 1, 'nicmu_equipment_id' => 1, 'nicmu_problem_id' => 3],
+            // Add more equipments as needed
+        ]);
+        
+
+        DB::table('mis')->insert([
+            ['mis_request_type_id' => 1, 'mis_job_type_id' => 2, 'mis_asname_id' => 3],
+            ['mis_request_type_id' => 2, 'mis_job_type_id' => 1, 'mis_asname_id' => 1],
+            ['mis_request_type_id' => 3, 'mis_job_type_id' => 2, 'mis_asname_id' => 2],
+            ['mis_request_type_id' => 1, 'mis_job_type_id' => 1, 'mis_asname_id' => 3],
+            // Add more equipments as needed
+        ]);
+        
 
 
 

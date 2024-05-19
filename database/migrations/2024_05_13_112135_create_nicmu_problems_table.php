@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('nicmu_problems', function (Blueprint $table) {
             $table->id();
             $table->string('problem_description');
-            $table->unsignedBigInteger('nicmu_equipment_id');
+            // $table->unsignedBigInteger('nicmu_equipment_id');
 
-            $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu_equipments')->onDelete('cascade');
+            // $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu_equipments')->onDelete('cascade');
             $table->timestamps();
         });
     }

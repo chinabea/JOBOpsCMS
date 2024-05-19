@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nicmu_requests', function (Blueprint $table) {
+        Schema::create('nicmu', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nicmu_job_type_id');
             $table->unsignedBigInteger('nicmu_equipment_id');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nicmu_requests');
+        Schema::dropIfExists('nicmu');
     }
 };

@@ -17,13 +17,13 @@ class NicmuEquipmentsTableSeeder extends Seeder
         // Array of sample data
         $equipments = [
             
-            // ['equipment_name' => 'Telephone', 'created_at' => now(), 'updated_at' => now()],
-            // ['equipment_name' => 'Internet', 'created_at' => now(), 'updated_at' => now()],
-            // ['equipment_name' => 'CCTV', 'created_at' => now(), 'updated_at' => now()],
+            ['equipment_name' => 'Telephone', 'created_at' => now(), 'updated_at' => now()],
+            ['equipment_name' => 'Internet', 'created_at' => now(), 'updated_at' => now()],
+            ['equipment_name' => 'CCTV', 'created_at' => now(), 'updated_at' => now()],
 
-            ['equipment_name' => 'Telephone', 'nicmu_job_type_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['equipment_name' => 'Internet', 'nicmu_job_type_id' => 2, 'created_at' => now(), 'updated_at' => now()],
-            ['equipment_name' => 'CCTV', 'nicmu_job_type_id' => 3, 'created_at' => now(), 'updated_at' => now()],
+            // ['equipment_name' => 'Telephone', 'nicmu_job_type_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            // ['equipment_name' => 'Internet', 'nicmu_job_type_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+            // ['equipment_name' => 'CCTV', 'nicmu_job_type_id' => 3, 'created_at' => now(), 'updated_at' => now()],
           ];
        
         // Insert the data into the database

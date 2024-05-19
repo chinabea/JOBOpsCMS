@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mis_requests', function (Blueprint $table) {
+        Schema::create('mis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mis_request_type_id');
             $table->unsignedBigInteger('mis_job_type_id');
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('mis_request_type_id')->references('id')->on('mis_request_types')->onDelete('cascade');
             $table->foreign('mis_job_type_id')->references('id')->on('mis_job_types')->onDelete('cascade');
             $table->foreign('mis_asname_id')->references('id')->on('mis_asnames')->onDelete('cascade');
-           
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mis_requests');
+        Schema::dropIfExists('mis');
     }
 };
