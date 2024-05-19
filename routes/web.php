@@ -221,8 +221,9 @@ Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
-Route::get('/export/excel', [ReportController::class, 'exportExcel'])->name('export.excel');
-Route::get('/export/pdf', [ReportController::class, 'exportPDF'])->name('export.pdf');
+Route::get('/reports/excel', [ReportController::class, 'generateExcelReport']);
+Route::get('/reports/pdf', [ReportController::class, 'generatePdfReport']);
+
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

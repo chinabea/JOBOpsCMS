@@ -11,5 +11,9 @@ class Mis extends Model
 
     protected $table = 'mis';
     
+    public $fillable = ['mis_request_type_id',
+                        'mis_job_type_id',
+                        'mis_asname_id' ];
+
 
 }
