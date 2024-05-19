@@ -1,4 +1,3 @@
-<!-- Delete Job Type Modal -->
 <div class="modal fade" id="ictramDeletedataWithRelationModal{{ $ictram->id }}" tabindex="-1" role="dialog" aria-labelledby="ictramDeletedataWithRelationModal{{ $ictram->id }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
