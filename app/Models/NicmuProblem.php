@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NicmuProblem extends Model
 {
     use HasFactory;
-    public $fillable = ['description',
-                        'nicmu_equipment_id'];
+    public $fillable = ['problem_description'];
 
     
 

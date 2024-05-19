@@ -19,10 +19,6 @@ class AssignController extends Controller
         $problems = IctramProblem::all();
         $sortedIctrams = $ictrams->sortBy('jobType.jobType_name');
         
-        // $ictrams = Ictram::with('jobTypes.equipments.problems')->get();
-        
-        // return view('units.ictram.index', compact('ictrams'));
-        
         return view('units.ictram.index', compact('jobTypes', 'equipments', 'problems', 'sortedIctrams'));
     }
     
@@ -50,6 +46,12 @@ class AssignController extends Controller
         
 
         return redirect()->route('ictrams.index')->with('success', 'ICTRAM Saved successfully.');
+    }
+    public function destroy($id)
+    {
+            $jobType = Ictram::findOrFail($id);
+            $jobType->delete();
+        return redirect()->route('ictrams.index')->with('success', 'Deleted successfully');
     }
 }
 

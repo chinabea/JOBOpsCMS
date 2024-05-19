@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NicmuJobType extends Model
 {
     use HasFactory;
-    public $fillable = ['name'];
+    public $fillable = ['jobType_name'];
 
     public function tickets()
     {

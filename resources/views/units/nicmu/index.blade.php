@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Assignation</h1>
+            <h1 class="m-0">NICMUs Assignation</h1>
           </div>
         </div>
       </div>
@@ -20,17 +20,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card px-3 pt-3 pb-1">
-                        @include('units.ictram.modal.create-jobType')
-                        @include('units.ictram.modal.create-equipment')
-                        @include('units.ictram.modal.create-problem')
-                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST" onsubmit="return validateForm()">
+                        @include('units.nicmu.modal.create-jobType')
+                        @include('units.nicmu.modal.create-equipment')
+                        @include('units.nicmu.modal.create-problem')
+                        <form id="jobForm" action="{{ route('nicmu.add-relation') }}" method="POST" onsubmit="return validateForm()">
                                 @csrf
                                 <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
                                 <div class="mx-2 w-100">
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="jobType">Job Type</label>
                                         <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateJobTypeModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         </div>
@@ -38,7 +38,7 @@
                                     <div class="dropdown">
                                         <input class="form-control" type="text" id="displayFieldJobType" name="jobType_name" placeholder="Select JobType" onclick="toggleDropdown('dropdownMenuJobType')" readonly required>
                                         <span id="jobTypeValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputJobType" name="ictram_job_type_id" required>
+                                        <input type="hidden" id="hiddenInputJobType" name="nicmu_job_type_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuJobType" aria-labelledby="dropdownMenuButtonJobType">
                                             <div class="px-2 w-100 sticky-top bg-light">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuJobType')">
@@ -53,14 +53,14 @@
                                 <div class="mx-2 w-100">
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="equipment">Equipment</label>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateEquipmentModal">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateEquipmentModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
                                     <div class="dropdown">
                                         <input class="form-control" type="text" id="displayFieldEquipment" name="equipment_name" placeholder="Select Equipment" onclick="toggleDropdown('dropdownMenuEquipment')" readonly>
                                         <span id="EquipmentValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputEquipmentId" name="ictram_equipment_id" required>
+                                        <input type="hidden" id="hiddenInputEquipmentId" name="nicmu_equipment_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuEquipment" aria-labelledby="dropdownMenuButtonEquipment">
                                             <div class="px-2 w-100 sticky-top">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuEquipment')">
@@ -75,7 +75,7 @@
                                     <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                         <label for="jobType">Problem</label>
                                         <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
+                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateProblemModal">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         </div>
@@ -83,7 +83,7 @@
                                     <div class="dropdown">
                                         <input class="form-control" type="text" id="displayFieldProblem" name="problem_description" placeholder="Select Problem" onclick="toggleDropdown('dropdownMenuProblem')" readonly required>
                                         <span id="ProblemValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputProblem" name="ictram_problem_id" required>
+                                        <input type="hidden" id="hiddenInputProblem" name="nicmu_problem_id" required>
                                         <div class="dropdown-menu scrollable-menu" id="dropdownMenuProblem" aria-labelledby="dropdownMenuButtonProblem">
                                             <div class="px-2 w-100 sticky-top">
                                                 <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuProblem')">
@@ -102,9 +102,9 @@
                                 </div>
                             </form>
                     </div>
-            <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+                                <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
                 <tbody>
-                    @foreach ($sortedIctrams->groupBy('jobType.jobType_name') as $jobTypeName => $ictrams)
+                    @foreach ($sortedNicmus->groupBy('jobType.jobType_name') as $jobTypeName => $nicmus)
                         <tr>
                             <th class="bg-info py-2" colspan="4">{{ $jobTypeName }}</th>
                         </tr>
@@ -113,13 +113,13 @@
                             <th>Problem</th>
                             <th width="7%">Action</th>
                         </tr>
-                        @foreach ($ictrams as $index => $ictram)
+                        @foreach ($nicmus as $index => $nicmu)
                             <tr>
-                                <td>{{ $ictram->equipment->equipment_name }}</td>
-                                <td>{{ $ictram->problem->problem_description }}</td>
+                                <td>{{ $nicmu->equipment->equipment_name }}</td>
+                                <td>{{ $nicmu->problem->problem_description }}</td>
                                 <td>
-                                    @include('units.ictram.modal.delete-dataWithRelation')
-                                    <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#ictramDeletedataWithRelationModal{{ $ictram->id }}" style="opacity: 0.8;"><i class="fas fa-trash text-red"></i></button>
+                                    @include('units.nicmu.modal.delete-dataWithRelation')
+                                    <button type="button" class="btn btn-xs" data-toggle="modal" data-target="#nicmuDeletedataWithRelationModal{{ $nicmu->id }}" style="opacity: 0.8;"><i class="fas fa-trash text-red"></i></button>
                                 </td>
                             </tr>
                         @endforeach

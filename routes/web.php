@@ -168,12 +168,17 @@ Route::get('/equipments/{id}/problems', [RequestController::class, 'getProblems'
 
 // Routes for NICMU
 Route::get('/nicmus', [NicmuController::class, 'index'])->name('nicmus.index');
+Route::post('/nicmus/add-relation', [NicmuController::class, 'storeWithRelationShip'])->name('nicmu.add-relation');
+Route::post('/nicmus/storeJobType', [NicmuController::class, 'storeJobType'])->name('nicmus.storeJobType');
+Route::post('/nicmus/storeEquipment', [NicmuController::class, 'storeEquipment'])->name('nicmus.storeEquipment');
+Route::post('/nicmus/storeProblem', [NicmuController::class, 'storeProblem'])->name('nicmus.storeProblem');
 Route::get('/nicmus/create', [NicmuController::class, 'create'])->name('nicmus.create');
 Route::post('/nicmus', [NicmuController::class, 'store'])->name('nicmus.store');
 Route::get('/nicmus/{id}', [NicmuController::class, 'show'])->name('nicmus.show');
 Route::get('/nicmus/{id}/edit', [NicmuController::class, 'edit'])->name('nicmus.edit');
 Route::put('/nicmus/{id}', [NicmuController::class, 'update'])->name('nicmus.update');
 Route::delete('/nicmus/{id}', [NicmuController::class, 'destroy'])->name('nicmus.destroy');
+Route::delete('/nicmus/delete-relation/{id}', [NicmuController::class, 'destroy'])->name('nicmus.destroyNicmu');
 
 // Routes for MIS
 Route::get('/mises', [MisController::class, 'index'])->name('mises.index');
@@ -209,6 +214,7 @@ Route::put('/ictrams/{id}', [ICTRAMController::class, 'update'])->name('ictrams.
 Route::delete('/ictrams/delete-job-type/{id}', [ICTRAMController::class, 'destroyJobType'])->name('ictrams.destroyJobType');
 Route::delete('/ictrams/delete-equipment/{id}', [ICTRAMController::class, 'destroyEquipment'])->name('ictrams.destroyEquipment');
 Route::delete('/ictrams/delete-problem/{id}', [ICTRAMController::class, 'destroyProblem'])->name('ictrams.destroyProblem');
+Route::delete('/ictrams/delete-relation/{id}', [AssignController::class, 'destroy'])->name('ictrams.destroyIctram');
 
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 

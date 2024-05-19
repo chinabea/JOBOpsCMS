@@ -112,7 +112,7 @@ class IctramController extends Controller
     
     public function index()
     {
-        $ictrams = Ictram::all();
+        // $ictrams = Ictram::all();
         $jobTypes = IctramJobType::all();
         $equipments = IctramEquipment::all();
         $problems = IctramProblem::all();
