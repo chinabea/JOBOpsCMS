@@ -8,18 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Ictram extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'unit',
-        'jobtype',
-        'equipment',
-        'problem',
-        'is_warrantry',
-        // '_token', // Add this line
-    ];
 
+    protected $table = 'ictram';
     
-    public function jobTypes()
-    {
-        return $this->hasMany(IctramJobType::class);
-    }
+    public $fillable = ['ictram_job_type_id',
+                        'ictram_equipment_id',
+                        'ictram_problem_id' ];
+
+
+
 }

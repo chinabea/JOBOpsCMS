@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Nicmu extends Model
 {
     use HasFactory;
-    protected $fillable = ['unit', 'jobtype', 'equipment'];
 
-    public function unit()
-    {
-        return $this->belongsTo(Unit::class);
-    }
+    protected $table = 'nicmu';
+    
+    public $fillable = ['nicmu_job_type_id',
+                        'nicmu_equipment_id',
+                        'nicmu_problem_id' ];
+
 }
