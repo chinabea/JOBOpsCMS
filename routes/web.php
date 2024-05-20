@@ -190,12 +190,30 @@ Route::get('/nicmus/problems', [NicmuController::class, 'problem_index'])->name(
 
 // Routes for MIS
 Route::get('/mises', [MisController::class, 'index'])->name('mises.index');
+Route::post('/mises/add-relation', [MisController::class, 'storeWithRelationShip'])->name('mises.add-relation');
 Route::get('/mises/create', [MisController::class, 'create'])->name('mises.create');
 Route::post('/mises', [MisController::class, 'store'])->name('mises.store');
-Route::get('/mises/{id}', [MisController::class, 'show'])->name('mises.show');
+// Route::get('/mises/{id}', [MisController::class, 'show'])->name('mises.show');
 Route::get('/mises/{id}/edit', [MisController::class, 'edit'])->name('mises.edit');
 Route::put('/mises/{id}', [MisController::class, 'update'])->name('mises.update');
-Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroy');
+
+Route::get('/mises/job-types', [MisController::class, 'jobType_index'])->name('mises.JobTypes');
+Route::get('/mises/request-types', [MisController::class, 'requestType_index'])->name('mises.RequestTypes');
+Route::get('/mises/asnames', [MisController::class, 'asName_index'])->name('mises.AsNames');
+
+Route::post('/mises/storeJobType', [MisController::class, 'storeJobType'])->name('mises.storeJobType');
+Route::post('/mises/storeRequestType', [MisController::class, 'storeRequestType'])->name('mises.storeRequestType');
+Route::post('/mises/storeAsName', [MisController::class, 'storeAsName'])->name('mises.storeAsName');
+
+Route::put('/mises/{id}/edit-job-type', [MisController::class, 'jobTypeEdit'])->name('mises.editJobType');
+Route::put('/mises/{id}/edit-equipment', [MisController::class, 'requestTypeEdit'])->name('mises.editRequestType');
+Route::put('/mises/{id}/edit-problem', [MisController::class, 'asNameEdit'])->name('mises.editAsName');
+
+
+Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroyMis');
+Route::delete('/mises/delete-job-type/{id}', [MisController::class, 'destroyJobType'])->name('mises.destroyJobType');
+Route::delete('/mises/delete-equipment/{id}', [MisController::class, 'destroyRequestType'])->name('mises.destroyRequestType');
+Route::delete('/mises/delete-problem/{id}', [MisController::class, 'destroyAsName'])->name('mises.destroyAsName');
 
 // Routes for ICTRAM Director Side
 Route::get('/ictram/create', [ICTRAMController::class, 'create'])->name('ictram.create');

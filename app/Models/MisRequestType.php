@@ -9,7 +9,7 @@ class MisRequestType extends Model
 {
     use HasFactory;
     
-    public $fillable = ['name'];
+    public $fillable = ['requestType_name'];
     
     public function tickets()
     {
