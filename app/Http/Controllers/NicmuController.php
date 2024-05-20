@@ -54,58 +54,96 @@ class NicmuController extends Controller
 
         return redirect()->route('nicmus.index')->with('success', 'NICMU Saved successfully.');
     }
-    //     public function storeWithRelationShip(Request $request)
-    // {   
-    //     $validator = Validator::make($request->all(), [
-    //         'ictram_job_type_id' => 'required|exists:ictram_job_types,id',
-    //         'ictram_equipment_id' => 'required|exists:ictram_equipments,id',
-    //         'ictram_problem_ids' => 'required|array',
-    //         'ictram_problem_ids.*' => 'exists:ictram_problems,id',
-    //         'ictram_job_type_id' => 'unique:ictrams,ictram_job_type_id,NULL,id,ictram_equipment_id,' . $request->input('ictram_equipment_id'),
-    //     ]);
-
-    //     // if ($validator->fails()) {
-    //     //     return redirect()->back()
-    //     //                 ->withErrors($validator)
-    //     //                 ->withInput()
-    //     //                 ->with('success', 'The data you choose is existing.');
-    //     // }
-
-    //     $jobTypeId = $request->input('ictram_job_type_id');
-    //     $equipmentId = $request->input('ictram_equipment_id');
-    //     $problemIds = $request->input('ictram_problem_ids');
-
-    //     foreach ($problemIds as $problemId) {
-    //         Ictram::create([
-    //             'ictram_job_type_id' => $jobTypeId,
-    //             'ictram_equipment_id' => $equipmentId,
-    //             'ictram_problem_id' => $problemId,
-    //         ]);
-    //     }
-
-    //     return redirect()->route('ictrams.index')->with('success', 'ICTRAM Saved successfully.');
-    // }
 
         public function storeJobType(Request $request)
     {
 
         $nicmu = NicmuJobType::create($request->all());
 
-        return redirect()->route('nicmus.index')->with('success', 'NICMU Job Type added successfully.');
+        return redirect()->back()->with('success', 'NICMU Job Type added successfully.');
+
     }
   
-    // Handle form submission
     public function storeEquipment(Request $request)
     {
         $nicmu = NicmuEquipment::create($request->all());
 
-        return redirect()->route('nicmus.index')->with('success', 'NICMU Equipment added successfully.');
+        return redirect()->back()->with('success', 'NICMU Equipment added successfully.');
     }
-        public function storeProblem(Request $request)
+
+    public function storeProblem(Request $request)
     {
         $nicmu = NicmuProblem::create($request->all());
 
-        return redirect()->route('nicmus.index')->with('success', 'NICMU Issue/Problem added successfully.');
+        return redirect()->back()->with('success', 'NICMU Issue/Problem added successfully.');
+    }
+
+    public function jobType_index()
+    {
+        $jobTypes = NicmuJobType::all();
+        return view('units.nicmu.JobTypes.index', compact('jobTypes'));
+    }
+
+    public function equipment_index()
+    {
+        $equipments = NicmuEquipment::all();
+        return view('units.nicmu.Equipments.index', compact('equipments'));
+    }
+
+    public function problem_index()
+    {
+        $problems = NicmuProblem::all();
+        return view('units.nicmu.Problems.index', compact('problems'));
+    }
+
+        public function jobTypeEdit(Request $request, $id)
+    {
+            $jobType = NicmuJobType::findOrFail($id);
+            $jobType->update([
+                'jobType_name' => $request->input('edit_jobType_name'),
+            ]);
+         return redirect()->route('nicmus.JobTypes')->with('success', 'NICMU Job type updated successfully.');
+    }
+        public function equipmentEdit(Request $request, $id)
+    {
+            $equipment = NicmuEquipment::findOrFail($id);
+            $equipment->update([
+                'equipment_name' => $request->input('edit_equipment_name'),
+            ]);
+         return redirect()->route('nicmus.Equipments')->with('success', 'NICMU Equipment updated successfully.');
+    }
+    public function problemEdit(Request $request, $id)
+    {
+            $problem = NicmuProblem::findOrFail($id);
+            $problem->update([
+                'problem_description' => $request->input('edit_problem_description'),
+            ]);
+         return redirect()->route('nicmus.Problems')->with('success', 'NICMU Problem updated successfully.');
+    }
+
+    // public function show($id)
+    // {
+    //     $ictram = Ictram::findOrFail($id);
+    //     return view('ictrams.index', compact('ictram'));
+    // }
+
+    public function destroyJobType($id)
+    {
+            $jobType = NicmuJobType::findOrFail($id);
+            $jobType->delete();
+        return redirect()->route('nicmus.JobTypes')->with('success', 'NICMU Job type deleted successfully');
+    }
+    public function destroyEquipment($id)
+    {
+            $equipment = NicmuEquipment::findOrFail($id);
+            $equipment->delete();
+        return redirect()->route('nicmus.Equipments')->with('success', 'NICMU Equipment deleted successfully');
+    }
+    public function destroyProblem($id)
+    {
+            $problem = NicmuProblem::findOrFail($id);
+            $problem->delete();
+        return redirect()->route('nicmus.Problems')->with('success', 'NICMU Problem deleted successfully');
     }
 
 

@@ -170,11 +170,23 @@ Route::post('/nicmus/storeEquipment', [NicmuController::class, 'storeEquipment']
 Route::post('/nicmus/storeProblem', [NicmuController::class, 'storeProblem'])->name('nicmus.storeProblem');
 Route::get('/nicmus/create', [NicmuController::class, 'create'])->name('nicmus.create');
 Route::post('/nicmus', [NicmuController::class, 'store'])->name('nicmus.store');
-Route::get('/nicmus/{id}', [NicmuController::class, 'show'])->name('nicmus.show');
+// Route::get('/nicmus/{id}', [NicmuController::class, 'show'])->name('nicmus.show');
 Route::get('/nicmus/{id}/edit', [NicmuController::class, 'edit'])->name('nicmus.edit');
 Route::put('/nicmus/{id}', [NicmuController::class, 'update'])->name('nicmus.update');
 Route::delete('/nicmus/{id}', [NicmuController::class, 'destroy'])->name('nicmus.destroy');
+
+Route::delete('/nicmus/delete-job-type/{id}', [NicmuController::class, 'destroyJobType'])->name('nicmus.destroyJobType');
+Route::delete('/nicmus/delete-equipment/{id}', [NicmuController::class, 'destroyEquipment'])->name('nicmus.destroyEquipment');
+Route::delete('/nicmus/delete-problem/{id}', [NicmuController::class, 'destroyProblem'])->name('nicmus.destroyProblem');
 Route::delete('/nicmus/delete-relation/{id}', [NicmuController::class, 'destroy'])->name('nicmus.destroyNicmu');
+
+Route::put('/nicmus/{id}/edit-job-types', [NICMUController::class, 'jobTypeEdit'])->name('nicmus.editJobType');
+Route::put('/nicmus/{id}/edit-equipment', [NICMUController::class, 'equipmentEdit'])->name('nicmus.editEquipment');
+Route::put('/nicmus/{id}/edit-problem', [NICMUController::class, 'problemEdit'])->name('nicmus.editProblem');
+
+Route::get('/nicmus/job-types', [NicmuController::class, 'jobType_index'])->name('nicmus.JobTypes');
+Route::get('/nicmus/equipments', [NicmuController::class, 'equipment_index'])->name('nicmus.Equipments');
+Route::get('/nicmus/problems', [NicmuController::class, 'problem_index'])->name('nicmus.Problems');
 
 // Routes for MIS
 Route::get('/mises', [MisController::class, 'index'])->name('mises.index');

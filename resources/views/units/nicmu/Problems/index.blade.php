@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Problems/Issues</h1>
+            <h1 class="m-0">NICMUs Problems/Issues</h1>
           </div>
         </div>
       </div>
@@ -21,9 +21,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            @include('units.ictram.modal.create-problem')
+                            @include('units.nicmu.modal.create-problem')
                             <div class="d-flex fex-row justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateProblemModal">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateProblemModal">
                                 <i class="fas fa-plus"></i> Add Issue/Problem
                             </button>
                             </div>
@@ -45,10 +45,10 @@
                                                         <td>{{ $problem->updated_at ? $problem->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                         <td>
                                                         <!-- <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button> -->
-                                                        @include('units.ictram.modal.edit-problem')
-                                                        @include('units.ictram.modal.delete-problem')
-                                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ictramEditProblemModal{{ $problem->id }}"><i class="fas fa-pen"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ictramDeleteProblemModal{{ $problem->id }}"><i class="fas fa-trash"></i></button>
+                                                        @include('units.nicmu.modal.edit-problem')
+                                                        @include('units.nicmu.modal.delete-problem')
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nicmuEditProblemModal{{ $problem->id }}"><i class="fas fa-pen"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#nicmuDeleteProblemModal{{ $problem->id }}"><i class="fas fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                             @endforeach

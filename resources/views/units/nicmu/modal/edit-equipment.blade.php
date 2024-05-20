@@ -1,15 +1,15 @@
 <!-- Edit Job Type Modal -->
-<div class="modal fade" id="ictramEditEquipmentModal{{ $equipment->id }}" tabindex="-1" role="dialog" aria-labelledby="ictramEditEquipmentModal{{ $equipment->id }}Label" aria-hidden="true">
+<div class="modal fade" id="nicmuEditEquipmentModal{{ $equipment->id }}" tabindex="-1" role="dialog" aria-labelledby="nicmuEditEquipmentModal{{ $equipment->id }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ictramEditEquipmentModal{{ $equipment->id }}Label">Edit Equipment</h5>
+                <h5 class="modal-title" id="nicmuEditEquipmentModal{{ $equipment->id }}Label">Edit Equipment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editEquipmentForm{{ $equipment->id }}" action="{{ route('ictrams.editEquipment', $equipment->id) }}" method="POST">
+                <form id="editEquipmentForm{{ $equipment->id }}" action="{{ route('nicmus.editEquipment', $equipment->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

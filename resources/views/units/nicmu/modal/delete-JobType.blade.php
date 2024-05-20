@@ -1,9 +1,9 @@
 <!-- Delete Job Type Modal -->
-<div class="modal fade" id="ictramDeleteJobTypeModal{{ $jobType->id }}" tabindex="-1" role="dialog" aria-labelledby="ictramDeleteJobTypeModal{{ $jobType->id }}Label" aria-hidden="true">
+<div class="modal fade" id="nicmuDeleteJobTypeModal{{ $jobType->id }}" tabindex="-1" role="dialog" aria-labelledby="nicmuDeleteJobTypeModal{{ $jobType->id }}Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ictramDeleteJobTypeModal{{ $jobType->id }}Label">Confirm Delete</h5>
+                <h5 class="modal-title" id="nicmuDeleteJobTypeModal{{ $jobType->id }}Label">Confirm Delete</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form action="{{ route('ictrams.destroyJobType', $jobType->id) }}" method="POST">
+                <form action="{{ route('nicmus.destroyJobType', $jobType->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
