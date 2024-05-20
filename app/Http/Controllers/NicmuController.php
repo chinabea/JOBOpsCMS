@@ -73,8 +73,15 @@ class NicmuController extends Controller
 
     public function storeProblem(Request $request)
     {
-        $nicmu = NicmuProblem::create($request->all());
+        // Retrieve problem descriptions from the request
+        $problemDescriptions = $request->input('problem_description');
 
+        // Loop through each problem description and save it to the database
+        foreach ($problemDescriptions as $description) {
+            NicmuProblem::create([
+                'problem_description' => $description,
+            ]);
+        }
         return redirect()->back()->with('success', 'NICMU Issue/Problem added successfully.');
     }
 
