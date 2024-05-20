@@ -160,11 +160,17 @@ class IctramController extends Controller
     // Handle form submission
     public function storeProblem(Request $request)
     {
-        $ictram = IctramProblem::create($request->all());
+        // Retrieve problem descriptions from the request
+        $problemDescriptions = $request->input('problem_description');
 
+        // Loop through each problem description and save it to the database
+        foreach ($problemDescriptions as $description) {
+            IctramProblem::create([
+                'problem_description' => $description,
+            ]);
+        }
         return redirect()->route('ictrams.index')->with('success', 'ICTRAM Issue added successfully.');
     }
-
 
     public function jobTypeEdit(Request $request, $id)
     {

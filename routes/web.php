@@ -71,6 +71,9 @@ Route::prefix('student')->middleware(['auth', 'cache', 'approved','student'])->g
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('student.dashboard');
 
 });
+Route::get('/testing', function () {
+    return view('testing'); 
+})->name('testing');
 
 Route::get('/', function () {
     return view('welcome');
@@ -148,15 +151,8 @@ Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('acti
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
 Route::post('/jobs/store', [JobController::class, 'store'])->name('jobs.store');
 
-// Route::get('/problem-type/create', [ProblemController::class, 'create'])->name('problemOrEquipments.create');
-// Route::post('/problem-type/store', [ProblemController::class, 'store'])->name('problemOrEquipments.store');
-
 // Adding API routes for dynamic dropdowns
 Route::get('/api/job-types/{unitId}', [JobController::class, 'getJobTypesByUnit']);
-// Route::get('/api/equipment-types/{jobId}', [EquipmentController::class, 'getEquipmentTypesByJob']);
-
-// Route::get('/equipment/create', [EquipmentController::class, 'create'])->name('equipments.create');
-// Route::post('/equipment/store', [EquipmentController::class, 'store'])->name('equipments.store');
 
 Route::get('/ICTRAM-unit/create', [ICTRAMController::class, 'create'])->name('ictram-unit.create');
 Route::post('/ICTRAM-unit/store', [ICTRAMController::class, 'store'])->name('ictram-unit.store');
