@@ -23,7 +23,7 @@
                         @include('units.ictram.modal.create-jobType')
                         @include('units.ictram.modal.create-equipment')
                         @include('units.ictram.modal.create-problem')
-                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST" onsubmit="return validateForm()">
+                        <form id="jobForm" action="{{ route('ictrams.add-relation') }}" method="POST">
                                 @csrf
                             <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
                             <div class="mx-2 w-100">

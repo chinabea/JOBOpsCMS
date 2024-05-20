@@ -23,86 +23,70 @@
                         @include('units.nicmu.modal.create-jobType')
                         @include('units.nicmu.modal.create-equipment')
                         @include('units.nicmu.modal.create-problem')
-                        <form id="jobForm" action="{{ route('nicmu.add-relation') }}" method="POST" onsubmit="return validateForm()">
+                        <form id="jobForm" action="{{ route('nicmu.add-relation') }}" method="POST">
                                 @csrf
-                                <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="jobType">Job Type</label>
-                                        <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateJobTypeModal">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldJobType" name="jobType_name" placeholder="Select JobType" onclick="toggleDropdown('dropdownMenuJobType')" readonly required>
-                                        <span id="jobTypeValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputJobType" name="nicmu_job_type_id" required>
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuJobType" aria-labelledby="dropdownMenuButtonJobType">
-                                            <div class="px-2 w-100 sticky-top bg-light">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuJobType')">
-                                            </div>
-                                                @foreach($jobTypes as $jobType)
-                                                    <a class="dropdown-item" href="#" onclick="selectItemJobType('{{ $jobType->id }}', '{{ $jobType->jobType_name }}', 'displayFieldJobType', 'hiddenInputJobType')">{{ $jobType->jobType_name }}</a>
-                                                @endforeach
-                                        </div>
+                            <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
+                            <div class="mx-2 w-100">
+                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                    <label for="jobType">Job Type</label>
+                                    <div>
+                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateJobTypeModal">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                     </div>
                                 </div>
-                                
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="equipment">Equipment</label>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateEquipmentModal">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldEquipment" name="equipment_name" placeholder="Select Equipment" onclick="toggleDropdown('dropdownMenuEquipment')" readonly>
-                                        <span id="EquipmentValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputEquipmentId" name="nicmu_equipment_id" required>
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuEquipment" aria-labelledby="dropdownMenuButtonEquipment">
-                                            <div class="px-2 w-100 sticky-top">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuEquipment')">
-                                            </div>
-                                            @foreach($equipments as $equipment)
-                                                <a class="dropdown-item" href="#" onclick="selectItemEquipment('{{ $equipment->id }}', '{{ $equipment->equipment_name }}', 'displayFieldEquipment', 'hiddenInputEquipmentId')">{{ $equipment->equipment_name }}</a>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                <div class="dropdown">
+                                    <select name="nicmu_job_type_id" id="nicmu_job_type_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <option value="" disabled selected>Select Job Type</option>
+                                        @foreach($jobTypes as $jobType)
+                                            <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="mx-2 w-100">
-                                    <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                        <label for="jobType">Problem</label>
-                                        <div>
-                                        <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateProblemModal">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <input class="form-control" type="text" id="displayFieldProblem" name="problem_description" placeholder="Select Problem" onclick="toggleDropdown('dropdownMenuProblem')" readonly required>
-                                        <span id="ProblemValidationMessage" class="text-danger" style="display: none;">This field must have a value.</span>
-                                        <input type="hidden" id="hiddenInputProblem" name="nicmu_problem_id" required>
-                                        <div class="dropdown-menu scrollable-menu" id="dropdownMenuProblem" aria-labelledby="dropdownMenuButtonProblem">
-                                            <div class="px-2 w-100 sticky-top">
-                                                <input type="text" class="form-control search-input px-3" placeholder="Search..." oninput="filterDropdown('dropdownMenuProblem')">
-                                            </div>
-                                                @foreach($problems as $problem)
-                                                    <a class="dropdown-item" href="#" onclick="selectItemProblem('{{ $problem->id }}', '{{ $problem->problem_description }}', 'displayFieldProblem', 'hiddenInputProblem')">{{ $problem->problem_description }}</a>
-                                                @endforeach
-                                        </div>
+                            </div>
+                            
+                            <div class="mx-2 w-100">
+                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                    <label for="equipment">Equipment</label>
+                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateEquipmentModal">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <select name="nicmu_equipment_id" id="nicmu_equipment_id" class="selectpicker form-control" data-live-search="true" required>
+                                        <option value="" disabled selected>Select Equipment</option>
+                                        @foreach($equipments as $equipment)
+                                            <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mx-2 w-100">
+                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                    <label for="jobType">Problem</label>
+                                    <div>
+                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateProblemModal">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                     </div>
                                 </div>
+                                <div class="dropdown">
+                                    <select name="nicmu_problem_ids[]" id="nicmu_problem_id" class="selectpicker form-control" data-live-search="true" multiple required>
+                                        @foreach ($problems as $problem)
+                                        <option value="{{ $problem->id }}">{{ $problem->problem_description }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="d-flex flex-row justify-content-end mx-2 mt-3">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-check"></i> Save
-                                </button>
-                                </div>
-                            </form>
+                            </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end mx-2 mt-3">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="fas fa-check"></i> Save
+                            </button>
+                            </div>
+                        </form>
                     </div>
-                                <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+                <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
                 <tbody>
                     @foreach ($sortedNicmus->groupBy('jobType.jobType_name') as $jobTypeName => $nicmus)
                         <tr>
