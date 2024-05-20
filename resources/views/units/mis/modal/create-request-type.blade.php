@@ -1,6 +1,6 @@
 
 
-<div class="modal fade" id="misCreateEquipmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="misCreateRequestTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

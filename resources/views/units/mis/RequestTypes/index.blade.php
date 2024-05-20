@@ -23,7 +23,7 @@
                         <div class="card-body">
                             @include('units.mis.modal.create-request-type')
                             <div class="d-flex fex-row justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#misCreateEquipmentModal">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#misCreateRequestTypeModal">
                                 <i class="fas fa-plus"></i> Add Request Type
                             </button>
                             </div>
