@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ICTRAMs Job Types</h1>
+            <h1 class="m-0">NICMUs Job Types</h1>
           </div>
         </div>
       </div>
@@ -21,9 +21,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                             @include('units.ictram.modal.create-jobType')
+                             @include('units.nicmu.modal.create-jobType')
                             <div class="d-flex fex-row justify-content-end mb-2">
-                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#ictramCreateJobTypeModal">
+                            <button type="button" class="btn btn-sm bg-info" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateJobTypeModal">
                                 <i class="fas fa-plus"></i> Add Job Type
                             </button>
                             </div>
@@ -45,10 +45,10 @@
                                                         <td>{{ $jobType->updated_at ? $jobType->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                                      <td>
                                                         <!-- <button class="btn btn-sm btn-primary"><i class="fas fa-pen"></i></button> -->
-                                                        @include('units.ictram.modal.edit-equipment')
-                                                        @include('units.ictram.modal.delete-equipment')
-                                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#ictramEditJobTypeModal{{ $jobType->id }}"><i class="fas fa-pen"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#ictramDeleteJobTypeModal{{ $jobType->id }}"><i class="fas fa-trash"></i></button>
+                                                        @include('units.nicmu.modal.edit-jobType')
+                                                        @include('units.nicmu.modal.delete-jobType')
+                                                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nicmuEditJobTypeModal{{ $jobType->id }}"><i class="fas fa-pen"></i></button>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#nicmuDeleteJobTypeModal{{ $jobType->id }}"><i class="fas fa-trash"></i></button>
                                                         </td>
                                                     </tr>
                                             @endforeach
