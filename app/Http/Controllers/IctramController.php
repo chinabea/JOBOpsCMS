@@ -130,7 +130,7 @@ class IctramController extends Controller
 
         $ictram = IctramJobType::create($request->all());
 
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Job Type added successfully.');
+        return redirect()->back()->with('success', 'ICTRAM Job Type added successfully.');
     }
 
         public function storeWithRelationShip(Request $request)
@@ -145,7 +145,7 @@ class IctramController extends Controller
             'problem_description' => $request->input('problem_description'),
         ]);
 
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Job Type created successfully.');
+        return redirect()->back()->with('success', 'ICTRAM Job Type created successfully.');
     }
 
     
@@ -154,7 +154,7 @@ class IctramController extends Controller
     {
         $ictram = IctramEquipment::create($request->all());
 
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Equipment added successfully.');
+       return redirect()->back()->with('success', 'ICTRAM Equipment added successfully.');
     }
     
     // Handle form submission
@@ -169,7 +169,7 @@ class IctramController extends Controller
                 'problem_description' => $description,
             ]);
         }
-        return redirect()->route('ictrams.index')->with('success', 'ICTRAM Issue added successfully.');
+        return redirect()->back()->with('success', 'ICTRAM Issue added successfully.');
     }
 
     public function jobTypeEdit(Request $request, $id)
