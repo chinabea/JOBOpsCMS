@@ -24,40 +24,25 @@
       <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Total Users</span>
-                <span class="info-box-number">{{ $totalUsers }}</span>
-                <small>{{ number_format($userPercentageChange, 2) }}% From last Week</small>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-success"><i class="fas fa-book"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Total Tickets</span>
-                <span class="info-box-number">{{ $totalTickets }}</span>
-                <small>{{ number_format($ticketsPercentageChange, 2) }}% From last Week</small>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fas fa-folder-open"></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Open Tickets</span>
                 <span class="info-box-number">{{ $totalOpenTicketsPerWeek }}</span>
                 <small>{{ number_format($totalOpenTicketsPercentageChange, 2) }}% From last Week</small>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-teal"><i class="fas fa-user"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Assigned to Me</span>
+                <span class="info-box-number">{{ $totalAssignedTickets }}</span>
+                <small>{{ number_format($totalAssignedTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -77,10 +62,6 @@
             </div>
             <!-- /.info-box -->
           </div>
-          <!-- /.col -->
-        </div>
-
-        <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-navy"><i class="fas fa-folder"></i></span>
@@ -113,7 +94,7 @@
             <div class="info-box">
               <span class="info-box-icon bg-fuchsia"><i class="far fa-copy"></i></span>
 
-              <div class="info-box-content"> Priority</span>
+              <div class="info-box-content"> Mid Priority</span>
                 <span class="info-box-number">{{ $totalMidLevelTickets }}</span>
                 <small>{{ number_format($totalMidLevelTicketsPercentageChange, 2) }}% From last Week</small>
               </div>
@@ -136,9 +117,6 @@
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-        </div>
-
-        <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-maroon"><i class="fas fa-times"></i></span>
@@ -152,7 +130,9 @@
             </div>
             <!-- /.info-box -->
           </div>
-          <!-- /.col -->
+        </div>
+        
+        <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-orange"><i class="fas fa-check"></i></span>
@@ -169,20 +149,34 @@
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-teal"><i class="fas fa-user"></i></span>
+              <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Assigned to Me</span>
-                <span class="info-box-number">{{ $totalAssignedTickets }}</span>
-                <small>{{ number_format($totalAssignedTicketsPercentageChange, 2) }}% From last Week</small>
+                <span class="info-box-text">Total Users</span>
+                <span class="info-box-number">{{ $totalUsers }}</span>
+                <small>{{ number_format($userPercentageChange, 2) }}% From last Week</small>
               </div>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-        </div>
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-success"><i class="fas fa-book"></i></span>
 
+              <div class="info-box-content">
+                <span class="info-box-text">Total Tickets</span>
+                <span class="info-box-number">{{ $totalTickets }}</span>
+                <small>{{ number_format($ticketsPercentageChange, 2) }}% From last Week</small>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <!-- /.col -->
+        </div>
         
         <!-- AREA CHART -->
         <div class="card">
