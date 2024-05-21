@@ -179,28 +179,115 @@
                             <p>Top Offices</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-white"></i>
                             <p>ICTRAM</p>
                         </a>
-                    </li>
+                    </li> -->
+                <li class="nav-item">
+                    <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-white"></i>
+                        <p> ICTRAM <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Relational</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ictrams.JobTypes') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.JobTypes' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Job Types</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ictrams.Equipments') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.Equipments' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Equipments</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('ictrams.Problems') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.Problems' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Problem/Issues</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                     @endif
                     @if(Auth::user()->role == 1 || Auth::user()->role == 3 )
-                    <li class="nav-item">
-                        <a href="{{ route('nicmus.create') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.create' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-danger"></i>
-                            <p>NICMU</p>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a href="{{ route('nicmus.index') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.index' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-red"></i>
+                        <p> NICMUS <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('nicmus.index') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.index' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Relational</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('nicmus.JobTypes') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.JobTypes' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Job Types</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('nicmus.Equipments') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.Equipments' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Equipments</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('nicmus.Problems') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.Problems' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Problem/Issues</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                     @endif
                     @if(Auth::user()->role == 1 || Auth::user()->role == 4 )
-                    <li class="nav-item">
-                        <a href="{{ route('mises.create') }}" class="nav-link {{ Route::currentRouteName() == 'mises.create' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon text-warning"></i>
-                            <p>MIS</p>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a href="{{ route('mises.index') }}" class="nav-link {{ Route::currentRouteName() == 'mises.index' ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon text-yellow"></i>
+                        <p> mis <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('mises.index') }}" class="nav-link {{ Route::currentRouteName() == 'mises.index' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Relational</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('mises.JobTypes') }}" class="nav-link {{ Route::currentRouteName() == 'mises.JobTypes' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Job Types</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('mises.RequestTypes') }}" class="nav-link {{ Route::currentRouteName() == 'mises.RequestTypes' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Request Types</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('mises.AsNames') }}" class="nav-link {{ Route::currentRouteName() == 'mises.AsNames' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Account Name</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                     @endif
 
 
