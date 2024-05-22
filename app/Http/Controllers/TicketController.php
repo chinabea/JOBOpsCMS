@@ -6,22 +6,79 @@ use App\Notifications\TicketCreatedNotification;
 use App\Notifications\TicketAssignedNotification;
 use App\Models\User;
 use App\Models\Ticket;
+use App\Models\Ictram;
+use App\Models\Nicmu;
+use App\Models\Mis;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use App\Models\ProblemTypeOrEquipment;
 use App\Models\Unit;
 use Carbon\Carbon;
+use App\Models\IctramJobType;
 
 
 class TicketController extends Controller
 {
 
-    public function create()
-    {
+        public function create()
+        {
+            // $ictrams = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            // $nicmus = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            // $mises = Mis::all();
+            return view('ticket.create');
         
-        return view('ticket.create');
-     
+        }
+
+public function getJobTypeDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
     }
+
+    return response()->json($details);
+}
+
+public function getAllDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
+    }
+
+    return response()->json($details);
+}
+
 
     public function getJobTypesByUnit($unitId)
     {
