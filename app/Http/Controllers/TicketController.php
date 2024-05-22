@@ -58,40 +58,6 @@ class TicketController extends Controller
         return view('ticket.index', compact('tickets','userIds'));
     }
 
-    public function filter(Request $request)
-    {
-        $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
-        $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
-
-        $queriedtickets = Ticket::query();
-
-        // Calculate age for each ticket
-        $tickets->each(function ($ticket) {
-            $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
-        });
-        
-        $query = Ticket::query();
-
-        if ($request->has('building_number')) {
-            $query->where('building_number', $request->building_number);
-        }
-
-        if ($request->has('priority_level')) {
-            $query->where('priority_level', $request->priority_level);
-        }
-
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
-
-        $sortBy = $request->input('sort_by', 'id');
-        $sortDirection = $request->input('sort_order', 'asc');
-
-        $tickets = $query->orderBy($sortBy, $sortDirection)->get();
-
-        return view('ticket.result', compact('tickets','userIds'));
-    }
-    
 
     public function exportExcel(Request $request)
     {
