@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <img class="cspc-logo" src="{{ public_path('production/images/CSPC-Logo.jpg') }}" alt="CSPC Logo">
+        <img class="cspc-logo" src="{{ public_path('dist/img/CSPC-Logo.jpg') }}" alt="CSPC Logo">
         <img class="mict-logo" src="{{ public_path('production/images/MICT-Logo.png') }}" alt="MICT Logo">
         <div class="institution-details">
             <p class="republic">Republic of the Philippines</p>
@@ -42,7 +42,6 @@
                     <td>{{ $ticket->service_location }}</td>
                     <td>{{ $ticket->unit }}</td>
                     <td>{{ $ticket->request }}</td>
-                    <td>{{ $ticket->assignedUser->name }}</td>
                     <td>{{ $ticket->priority_level }}</td>
                     <td>{{ $ticket->status }}</td>
                 </tr>

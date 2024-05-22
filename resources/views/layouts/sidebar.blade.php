@@ -288,11 +288,8 @@
                         </li>
                     </ul>
                 </li>
-                    @endif
-
-
-                        
-
+                @endif
+                
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>
                 <li class="nav-item">

@@ -1,69 +1,52 @@
-@extends('layouts.template') @section('content') <div class="content-wrapper">
+
+<!-- index blade view -->
+@extends('layouts.template') 
+@section('content') 
+<div class="content-wrapper">
     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Requsted Tickets</h1>
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
+                    <i class="fas fa-plus"></i> Request Ticket
+                </a>
+                <a href="#" class="btn bg-light text-dark border mr-2" data-widget="control-sidebar" data-slide="true">
+                    <i class="fas fa-filter"></i> Filters <i class="fas fa-angle-right left"></i>
+                </a>
+                @include('filters')
+                <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+          </div>     
+        </div>
+      </div>
     </section>
+    
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title my-1"><i class="fa fa-book"></i> <b>Requested Tickets</b></h3> <br><br>
-
-            <form method="GET" action="{{ route('tickets') }}">
-                <div class="form-row">
-                    <div class="col">
-                        <input type="text" class="form-control" name="search" placeholder="Search description" value="{{ request('search') }}">
-                    </div>
-                    <div class="col">
-                        <select class="form-control" name="sort_by">
-                            <option value="created_at">Date</option>
-                            <option value="priority_level">Priority</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select class="form-control" name="sort_order">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-primary">Search & Sort</button>
-                    </div>
-                </div>
-            </form>
-                            <!-- <form action="{{ route('generate.tickets.report') }}" method="post"> @csrf <div class="row justify-content-center">
-                                    <div class="form-group row">
-                                        <div class="col-md-6">
-                                            <label for="start_date">Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date" id="start_date">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="end_date">End Date:</label>
-                                            <input type="date" class="form-control" name="end_date" id="end_date">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Actions</label>
-                                            <div>
-                                                <button type="button" id="reset" class="btn btn-warning"><i class="fas fa-refresh"></i> </button>
-                                                <button type="submit" class="btn btn-info"><i class="fas fa-file-pdf"></i> Generate PDF</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form> -->
-                            <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
+                            <p class="mb-4"></p>
+                            <table id="example1" class="table table-bordered table-hover text-center table-striped ">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th><i class="fa fa-user"></i> Requestor</th>
-                                        <th><i class="fa fa-location-arrow"></i> Location</th>
-                                        <th><i class="fa fa-university"></i> Unit</th>
-                                        <th><i class="fa fa-wrench"></i> Request</th>
-                                        <th><i class="fa fa-users"></i> Assigned to</th>
-                                        <th><i class="fa fa-flag"></i> Priority Level</th>
-                                        <th><i class="fa fa-tasks"></i> Status</th> @if(auth()->user()->role == 1) <th><i class="fa fa-pencil-square-o"></i> Action(s)</th> @endif
+                                        <th> Requesitor</th>
+                                        <th> Location</th>
+                                        <th> Description</th>
+                                        <th> Priority Level</th>
+                                        <th> Status</th> 
+                                        <th> Age</th> 
+                                        <th> Created at</th> 
+                                        @if(auth()->user()->role == 1) <th> Action(s)</th> @endif
+                                        
                                     </tr>
                                 </thead>
                                 <tbody> 
@@ -71,17 +54,12 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
                                         <td>
-                                            {{ $ticket->building_number }}
+                                            {{ $ticket->building_number }},
                                             {{ $ticket->office_name }}
-                                            
-
                                         </td>
-                                        <td>{{ $ticket->unit }}</td>
-                                        <td>{{ $ticket->request }}</td>
-                                        <td> @if($ticket->users->isEmpty())
-                                            <!-- Button trigger modal -->
+                                        <td>{{ $ticket->description }}</td>
+                                        <!-- <td> @if($ticket->users->isEmpty())
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false"> Assign User </button>
-                                            <!-- Modal -->
                                             <div class="modal fade" id="assignUserModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel{{ $ticket->id }}" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -92,7 +70,6 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <!-- Form inside modal -->
                                                             <form action="{{ route('tickets.updateUsers', $ticket->id) }}" method="POST"> @csrf <div class="form-group">
                                                                     <select class="selectpicker form-control" id="assigned_user_id{{ $ticket->id }}" name="assigned_user_id[]" data-live-search="true" multiple required> @foreach($userIds as $user) <option value="{{ $user->id }}" data-content="
                                                             <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
@@ -116,7 +93,7 @@
                                                         <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                                     </a> @endforeach </div>
                                             </div> @endif
-                                        </td>
+                                        </td> -->
                                         <td> @if ($ticket->priority_level === 'High') <span class="badge badge-danger">High</span> @elseif ($ticket->priority_level === 'Mid') <span class="badge badge-warning">Mid</span> @elseif ($ticket->priority_level === 'Low') <span class="badge badge-secondary">Low</span> @endif </td> @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST"> @csrf @method('PATCH') <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
                                                     <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
@@ -126,11 +103,19 @@
                                             </form>
                                         </td> 
                                         <td>
+                                            
+                                            @php
+                                                $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
+                                                $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
+                                                $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
+                                            @endphp
+
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ ($ticket->age / 3) * 100 }}%;" aria-valuenow="{{ $ticket->age }}" aria-valuemin="0" aria-valuemax="3"></div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <!-- <p>Age: {{ $ticket->age }} days</p> -->
+                                            
                                         </td>
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @else <td class="align-middle"><small class="badge badge-warning"><i class="far fa-clock"></i> {{ $ticket->status }}</small></td> @endif @if(auth()->user()->role == 1) <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
@@ -147,13 +132,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td> @endif
-                                    </tr> @endif 
-                                    
-
-            {{ $tickets->links() }}
-            @endforeach </tbody>
+                                        </td> 
+                                        @endif
+                                    </tr>
+                                     @endif 
+                                    @endforeach
+                                 </tbody>
                             </table>
+                            <div id="ticketList">
+                                <!-- Ticket list content will be dynamically updated here -->
+                                @include('ticket.result', ['tickets' => $tickets])
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,29 +151,6 @@
     </section>
 </div> 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.check-aging').click(function() {
-            var ticketId = $(this).data('ticket-id');
-
-            // Send AJAX request to check ticket aging
-            $.ajax({
-                url: '/checkTicketAging/' + ticketId,
-                type: 'GET',
-                success: function(response) {
-                    if (response.message === 'Ticket expired') {
-                        $('#ticket_status_' + ticketId).html('<span class="badge badge-danger">Expired</span>');
-                    } else {
-                        $('#ticket_status_' + ticketId).html('<span class="badge badge-success">Active</span>');
-                    }
-                    alert(response.message); // You can remove this alert if not needed
-                },
-                error: function(xhr, status, error) {
-                    alert('Error checking ticket aging');
-                }
-            });
-        });
-    });
-</script>
 @endsection
+
+
