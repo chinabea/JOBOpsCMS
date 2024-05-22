@@ -29,43 +29,42 @@ class TicketController extends Controller
         
         }
 
-public function getJobTypeDetails(Request $request)
-{
-    $jobType = $request->query('unit');
+// public function getJobTypeDetails(Request $request)
+// {
+//     $jobType = $request->query('unit');
     
-    switch ($jobType) {
-        case 'ICTRAM':
-            $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
-            $details = ['ictram' => $object];
-            break;
-        case 'NICMUS':
-            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
-            $details = ['nicmu' => $object];
-            break;
-        case 'MIS':
-            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
-            $details = ['mis' => $object];
-            break;
-        default:
-            $details = [];
-            break;
-        if ($request->has('priority_level')) {
-            $query->where('priority_level', $request->priority_level);
-        }
+//     switch ($jobType) {
+//         case 'ICTRAM':
+//             $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+//             $details = ['ictram' => $object];
+//             break;
+//         case 'NICMUS':
+//             $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+//             $details = ['nicmu' => $object];
+//             break;
+//         case 'MIS':
+//             $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+//             $details = ['mis' => $object];
+//             break;
+//         default:
+//             $details = [];
+//             break;
+//         if ($request->has('priority_level')) {
+//             $query->where('priority_level', $request->priority_level);
+//         }
 
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
+//         if ($request->has('status')) {
+//             $query->where('status', $request->status);
+//         }
 
-        $sortBy = $request->input('sort_by', 'id');
-        $sortDirection = $request->input('sort_order', 'asc');
+//         $sortBy = $request->input('sort_by', 'id');
+//         $sortDirection = $request->input('sort_order', 'asc');
 
-        $tickets = $query->orderBy($sortBy, $sortDirection)->get();
+//         $tickets = $query->orderBy($sortBy, $sortDirection)->get();
 
-        return view('ticket.index', compact('tickets','userIds'));
-    }
-
-
+//         return view('ticket.index', compact('tickets','userIds'));
+//     }
+// }
     public function exportExcel(Request $request)
     {
         $tickets = $this->filteredTickets($request);
@@ -174,35 +173,32 @@ public function getJobTypeDetails(Request $request)
 
         // Return the file as a response to the user
         return response()->download($filePath)->deleteFileAfterSend(true);
-    }
-
-    return response()->json($details);
 }
 
-public function getAllDetails(Request $request)
-{
-    $jobType = $request->query('unit');
+// public function getAllDetails(Request $request)
+// {
+//     $jobType = $request->query('unit');
     
-    switch ($jobType) {
-        case 'ICTRAM':
-            $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
-            $details = ['ictram' => $object];
-            break;
-        case 'NICMUS':
-            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
-            $details = ['nicmu' => $object];
-            break;
-        case 'MIS':
-            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
-            $details = ['mis' => $object];
-            break;
-        default:
-            $details = [];
-            break;
-    }
+//     switch ($jobType) {
+//         case 'ICTRAM':
+//             $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
+//             $details = ['ictram' => $object];
+//             break;
+//         case 'NICMUS':
+//             $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+//             $details = ['nicmu' => $object];
+//             break;
+//         case 'MIS':
+//             $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+//             $details = ['mis' => $object];
+//             break;
+//         default:
+//             $details = [];
+//             break;
+//     }
 
-    return response()->json($details);
-}
+//     return response()->json($details);
+// }
 
 
 public function getJobTypeDetails(Request $request)
