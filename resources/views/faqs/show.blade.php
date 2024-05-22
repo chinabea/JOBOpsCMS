@@ -17,6 +17,8 @@
                     <label for="answer">Answer</label>
                     <textarea id="answer" class="form-control" readonly>{!! $faq->answer !!}</textarea>
                 </div>
+
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

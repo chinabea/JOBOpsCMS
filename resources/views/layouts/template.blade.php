@@ -60,7 +60,13 @@
 </head> @php $theme = false; @endphp
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
-    <div class="wrapper"> @include('layouts.topnav') @include('layouts.sidebar') @yield('content') @include('layouts.footer') 
+    <div class="wrapper"> 
+        
+        @include('layouts.topnav') 
+        @include('layouts.sidebar') 
+        @yield('content') 
+        @include('layouts.footer') 
+
         <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- FLOT CHARTS -->

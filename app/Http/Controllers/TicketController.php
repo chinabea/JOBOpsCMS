@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\TicketCreatedNotification;
 use App\Notifications\TicketAssignedNotification;
-use App\Models\User;
-use App\Models\Ticket;
+use App\Models\ProblemTypeOrEquipment;
 use App\Models\Ictram;
 use App\Models\Nicmu;
 use App\Models\Mis;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
-use App\Models\ProblemTypeOrEquipment;
+use App\Models\User;
+use App\Models\Ticket;
 use App\Models\Unit;
 use Carbon\Carbon;
 use App\Models\IctramJobType;
@@ -28,6 +28,57 @@ class TicketController extends Controller
             return view('ticket.create');
         
         }
+
+public function getJobTypeDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
+    }
+
+    return response()->json($details);
+}
+
+public function getAllDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
+    }
+
+    return response()->json($details);
+}
+
 
 public function getJobTypeDetails(Request $request)
 {
@@ -123,25 +174,25 @@ public function getAllDetails(Request $request)
         return view('ticket.unassigned', compact('unassignedTickets','userIds'));
     }
     
-    public function index()
-    {
-        try {
-            // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
-            // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
-            $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
-            $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
+    // public function index()
+    // {
+    //     try {
+    //         // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
+    //         // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
+    //         $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
+    //         $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
 
-            // Calculate age for each ticket
-            $tickets->each(function ($ticket) {
-                $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
-            });
+    //         // Calculate age for each ticket
+    //         $tickets->each(function ($ticket) {
+    //             $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
+    //         });
 
             
-            return view('ticket.index', compact('tickets','userIds'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
-    }
+    //         return view('ticket.index', compact('tickets','userIds'));
+    //     } catch (Exception $e) {
+    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+    //     }
+    // }
     
     public function store(Request $request)
     {

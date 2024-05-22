@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Edit FAQ form -->
                 <form action="{{ route('edit.faq', $faq->id) }}" method="post">
                     @csrf
                     @method('PUT')
@@ -17,8 +16,7 @@
                     <input class="form-control" name="question" id="question" value="{{ $faq->question }}" ></input><br>
 
                     <div class="form-group">
-                        <label for="answer">Answer</label>
-                        <textarea id="answer" name="answer" class="form-control">{!! $faq->answer !!}</textarea>
+                        <label for="answer">Answer</label> <div id="answer" class="form-control" style="height: auto;">{!! htmlspecialchars_decode($faq->answer) !!}</div>
                     </div>
                     
                     <div class="modal-footer justify-content-between">
