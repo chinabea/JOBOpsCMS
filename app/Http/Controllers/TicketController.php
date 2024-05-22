@@ -5,43 +5,50 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\TicketCreatedNotification;
 use App\Notifications\TicketAssignedNotification;
 use App\Models\ProblemTypeOrEquipment;
+use App\Models\Ictram;
+use App\Models\Nicmu;
+use App\Models\Mis;
 use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Unit;
 use Carbon\Carbon;
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Dompdf\Dompdf;
-use Dompdf\Options;
-use Storage;
+use App\Models\IctramJobType;
 
 
 class TicketController extends Controller
 {
 
-    public function index(Request $request)
-    {
-        $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
-        $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
-
-        // Calculate age for each ticket
-        $tickets->each(function ($ticket) {
-            $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
-        });
+        public function create()
+        {
+            // $ictrams = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            // $nicmus = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            // $mises = Mis::all();
+            return view('ticket.create');
         
-        $query = Ticket::query();
-
-        if ($request->has('building_number')) {
-            $query->where('building_number', $request->building_number);
         }
 
+public function getJobTypeDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
         if ($request->has('priority_level')) {
             $query->where('priority_level', $request->priority_level);
         }
@@ -168,71 +175,86 @@ class TicketController extends Controller
         // Return the file as a response to the user
         return response()->download($filePath)->deleteFileAfterSend(true);
     }
+
+    return response()->json($details);
+}
+
+public function getAllDetails(Request $request)
+{
+    $jobType = $request->query('unit');
     
-    public function exportPdf(Request $request)
-    {
-        // Get the filtered tickets
-        $tickets = $this->filteredTickets($request);
-
-        // Generate the HTML content for the PDF
-        $html = view('reports.report-pdf', compact('tickets'))->render();
-
-        // Configure Dompdf options
-        $options = new Options();
-        $options->set('defaultFont', 'Arial');
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true); // Enable remote file access (for images, etc.)
-
-        // Initialize Dompdf with the options
-        $dompdf = new Dompdf($options);
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'landscape');
-        $dompdf->render();
-
-        // Stream the generated PDF
-        return $dompdf->stream('tickets.pdf', [
-            'Attachment' => false // Set to true to force download
-        ]);
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
     }
 
-    private function filteredTickets(Request $request)
-    {
-        $query = Ticket::query();
+    return response()->json($details);
+}
 
-        if ($request->has('building_number')) {
-            $query->where('building_number', $request->building_number);
-        }
 
-        if ($request->has('priority_level')) {
-            $query->where('priority_level', $request->priority_level);
-        }
-
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
-
-        $sortBy = $request->input('sort_by', 'id');
-        $sortDirection = $request->input('sort_order', 'asc');
-
-        return $query->orderBy($sortBy, $sortDirection)->get();
+public function getJobTypeDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
     }
 
+    return response()->json($details);
+}
 
-
-
-
-
-
-
-
-
-
-    public function create()
-    {
-        
-        return view('ticket.create');
-     
+public function getAllDetails(Request $request)
+{
+    $jobType = $request->query('unit');
+    
+    switch ($jobType) {
+        case 'ICTRAM':
+            $object = IctramJobType::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['ictram' => $object];
+            break;
+        case 'NICMUS':
+            $object = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+            $details = ['nicmu' => $object];
+            break;
+        case 'MIS':
+            $object = Mis::with(['requestTypeName', 'jobType', 'asName'])->get();
+            $details = ['mis' => $object];
+            break;
+        default:
+            $details = [];
+            break;
     }
+
+    return response()->json($details);
+}
+
 
     public function getJobTypesByUnit($unitId)
     {
