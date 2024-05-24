@@ -68,7 +68,8 @@
                                             <span class="badge badge-secondary">Low</span> 
                                             @endif 
                                         </td> 
-                                            @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) <td>
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) 
+                                        <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
                                                 @method('PATCH')
@@ -79,7 +80,12 @@
                                                 </select>
                                                 <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
                                             </form>
-                                        </td> 
+                                            @if ($ticket->status == 'In Progress') 
+                                                <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->reason }}">
+                                                    <i class="fas fa-comment"></i>
+                                                </button>
+                                            @endif 
+                                        </td>
                                         <td>
                                             @php
                                                 $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
@@ -122,8 +128,7 @@
             </div>
         </div>
     </section>
-</div> 
-
+</div>
 <script>
     document.getElementById('statusSelect-{{ $ticket->id }}').addEventListener('change', function() {
         const form = document.getElementById('statusForm-{{ $ticket->id }}');
@@ -144,6 +149,7 @@
         }
     });
 </script>
+
 
 @endsection
 

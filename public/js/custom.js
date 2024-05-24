@@ -9,6 +9,10 @@ $(document).ready(function() {
 
 });
 
+  // Initialize Bootstrap tooltips
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 $(function () {
     /* ChartJS

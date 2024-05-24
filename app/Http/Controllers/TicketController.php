@@ -564,7 +564,6 @@ public function getAllDetails(Request $request)
         }
 
     }
-
     public function updateStatus(Request $request, $id)
     {
         // Retrieve the ticket by its ID
@@ -587,6 +586,7 @@ public function getAllDetails(Request $request)
         // Redirect to the tickets route with a success message
         return redirect()->route('tickets')->with('success', 'Ticket status updated successfully.');
     }
+    
     
     
     public function updateUsers(Request $request, $ticketId)
