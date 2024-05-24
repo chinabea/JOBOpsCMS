@@ -16,6 +16,7 @@ class Ticket extends Model
                          'status', 'ictram_job_type_id', 'ictram_equipment_id', 'ictram_problem_id',
                         'nicmu_job_type_id', 'nicmu_equipment_id', 'nicmu_problem_id',
                         'mis_request_type_id', 'mis_job_type_id', 'mis_asname_id',
+                        'reason',
                     ];
 
     

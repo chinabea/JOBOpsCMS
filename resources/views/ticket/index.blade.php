@@ -44,7 +44,9 @@
                                         <th> Status</th> 
                                         <th> Age</th> 
                                         <th> Created at</th> 
-                                        @if(auth()->user()->role == 1) <th> Action(s)</th> @endif
+                                        @if(auth()->user()->role == 1) 
+                                        <th> Action(s)</th> 
+                                        @endif
                                         
                                     </tr>
                                 </thead>
@@ -57,16 +59,28 @@
                                             {{ $ticket->office_name }}
                                         </td>
                                         <td>{{ $ticket->description }}</td>
-                                        <td> @if ($ticket->priority_level === 'High') <span class="badge badge-danger">High</span> @elseif ($ticket->priority_level === 'Mid') <span class="badge badge-warning">Mid</span> @elseif ($ticket->priority_level === 'Low') <span class="badge badge-secondary">Low</span> @endif </td> @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) <td>
-                                            <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST"> @csrf @method('PATCH') <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
+                                        <td> 
+                                            @if ($ticket->priority_level === 'High') 
+                                            <span class="badge badge-danger">High</span> 
+                                            @elseif ($ticket->priority_level === 'Mid') 
+                                            <span class="badge badge-warning">Mid</span> 
+                                            @elseif ($ticket->priority_level === 'Low') 
+                                            <span class="badge badge-secondary">Low</span> 
+                                            @endif 
+                                        </td> 
+                                            @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) <td>
+                                            <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
+                                                @csrf
+                                                @method('PATCH')
+                                                <select name="status" class="form-control form-control-sm" id="statusSelect-{{ $ticket->id }}">
                                                     <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
                                                     <option value="In Progress" @if ($ticket->status == 'In Progress') selected @endif>In Progress</option>
                                                     <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
                                                 </select>
+                                                <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
                                             </form>
                                         </td> 
                                         <td>
-                                            
                                             @php
                                                 $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
                                                 $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
@@ -109,6 +123,27 @@
         </div>
     </section>
 </div> 
+
+<script>
+    document.getElementById('statusSelect-{{ $ticket->id }}').addEventListener('change', function() {
+        const form = document.getElementById('statusForm-{{ $ticket->id }}');
+        const selectedStatus = this.value;
+        const currentStatus = "{{ $ticket->status }}";
+
+        if (selectedStatus === 'In Progress' && currentStatus !== 'In Progress') {
+            const reason = prompt("Why is this ticket being marked as 'In Progress'?");
+            if (reason !== null && reason.trim() !== "") {
+                document.getElementById('reasonInput-{{ $ticket->id }}').value = reason;
+                form.submit();
+            } else {
+                alert("You must provide a reason to mark this ticket as 'In Progress'.");
+                this.value = currentStatus; // Reset to the current status
+            }
+        } else {
+            form.submit();
+        }
+    });
+</script>
 
 @endsection
 

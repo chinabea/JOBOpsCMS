@@ -15,7 +15,7 @@ use Carbon\Carbon;
 use App\Models\IctramJobType;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -567,16 +567,27 @@ public function getAllDetails(Request $request)
 
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|in:Open,In Progress,Closed'
-        ]);
-
+        // Retrieve the ticket by its ID
         $ticket = Ticket::findOrFail($id);
+    
+        // Check if status is being updated to 'In Progress' and was not 'In Progress' before
+        if ($request->status == 'In Progress' && $ticket->status != 'In Progress') {
+            $reason = $request->input('reason');
+            $ticket->reason = $reason;
+            // Example: Log the reason
+            Log::info("Ticket {$id} marked as 'In Progress'. Reason: {$reason}");
+        } else {
+            $ticket->reason = null; // Clear the reason if not in progress
+        }
+    
+        // Update the ticket's status
         $ticket->status = $request->status;
         $ticket->save();
-
+    
+        // Redirect to the tickets route with a success message
         return redirect()->route('tickets')->with('success', 'Ticket status updated successfully.');
     }
+    
     
     public function updateUsers(Request $request, $ticketId)
     {

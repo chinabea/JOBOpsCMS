@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
             $table->enum('status', ['Open','In Progress','Closed', 'Completed'])->default('Open')->nullable();
+            $table->string('reason')->nullable();
             $table->unsignedBigInteger('serial_number')->nullable();
             $table->boolean('covered_under_warranty')->default(false);
             
