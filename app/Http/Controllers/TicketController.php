@@ -32,7 +32,7 @@ class TicketController extends Controller
 {
     public function index(Request $request)
     {
-        $tickets = Ticket::applyTicketFilter($request)->with(['user'])->orderBy('created_at', 'desc')->get();
+        $tickets = Ticket::all();
         $userIds = User::where('role', 2)->where('is_approved', true)->get();
         $query = Ticket::query();
     
