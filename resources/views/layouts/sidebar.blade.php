@@ -121,6 +121,12 @@
                         <p> Users </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('units') }}" class="nav-link {{ Route::currentRouteName() == 'units' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> Units </p>
+                    </a>
+                </li>
                 @endif
                 @if(Auth::user()->role == 2)
                 <li class="nav-item">

@@ -260,6 +260,9 @@ Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
+Route::get('/units', [UnitController::class, 'index'])->name('units');
+
+
 
 
 Route::fallback(function () {
