@@ -261,11 +261,6 @@ Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-ticke
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
 
-Route::get('/search', [ReportController::class, 'index'])->name('search');
-Route::get('/result', [TicketController::class, 'filter'])->name('tickets.filter');
-Route::get('/tickets/export/excel', [ReportController::class, 'exportExcel'])->name('tickets.export.excel');
-Route::get('/tickets/export/pdf', [ReportController::class, 'exportPdf'])->name('tickets.export.pdf');
-
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);

@@ -1,4 +1,4 @@
-<!-- filter blade view -->
+
 <script>
     function removeEmptyFields(event) {
         const form = event.target;
@@ -20,8 +20,7 @@
 
         <h5>Filter</h5><hr>
         <form id="filterForm" method="GET" action="{{ route('tickets') }}">
-
-
+            
             <div id="filterSidebar">
                 <div class="form-group">
                     <label for="search">Search</label>
@@ -77,58 +76,60 @@
                         <option value="desc" {{ request('sort_order') == 'desc' ? 'selected' : '' }}>Descending</option>
                     </select>
                 </div>
-
-                <div class="form-group d-flex justify-content-between">
-                    <a href="{{ route('tickets.export.pdf', array_merge(request()->query(), ['export' => 'pdf'])) }}" class="btn btn-sm btn-danger text-white">
-                        <i class="fa fa-file-pdf"></i> Export PDF
-                    </a>
-                    <a href="{{ route('tickets.export.excel', array_merge(request()->query(), ['export' => 'excel'])) }}" class="btn btn-sm btn-success text-white">
-                        <i class="fa fa-file-excel"></i> Export Excel
-                    </a>
-                </div>
             </div>
+            <div class="form-group d-flex justify-content-between">
+                <a href="{{ route('tickets', array_merge(request()->query(), ['export' => 'pdf'])) }}" class="btn btn-sm btn-danger text-white">
+                    <i class="fa fa-file-pdf"></i> Export PDF
+                </a>
+                <a href="{{ route('tickets', array_merge(request()->query(), ['export' => 'excel'])) }}" class="btn btn-sm btn-success text-white">
+                    <i class="fa fa-file-excel"></i> Export Excel
+                </a>
+            </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+               
         </form>
     </div>
 </aside>
 
-
 <script>
-        $(document).ready(function() {
-            // Function to remove empty fields before sending the form data
-            function removeEmptyFields(formData) {
-                return formData.filter(function(field) {
-                    return field.value.trim() !== "";
-                });
-            }
-
-            // Function to submit the form via AJAX
-            function submitFilterForm() {
-                const $form = $('#filterForm');
-                const formData = $form.serializeArray();
-                const filteredData = removeEmptyFields(formData);
-
-                $.ajax({
-                    url: $form.attr('action'),
-                    method: 'GET',
-                    data: $.param(filteredData),
-                    success: function(response) {
-                        // Assuming the response contains the HTML to update the ticket list
-                        $('#ticketList').html(response);
-                    },
-                    error: function(xhr) {
-                        console.error('Error:', xhr);
-                    }
-                });
-            }
-
-            // Event listener for form change
-            $('#filterForm').on('change', 'input, select', function() {
-                submitFilterForm();
+    $(document).ready(function() {
+        // Function to remove empty fields before sending the form data
+        function removeEmptyFields(formData) {
+            return formData.filter(function(field) {
+                return field.value.trim() !== "";
             });
+        }
 
-            // Close sidebar button
-            $('.close').click(function() {
-                $('.control-sidebar').hide();
+        // Function to submit the form via AJAX
+        function submitFilterForm() {
+            const $form = $('#filterForm');
+            const formData = $form.serializeArray();
+            const filteredData = removeEmptyFields(formData);
+
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'GET',
+                data: $.param(filteredData),
+                success: function(response) {
+                    // Assuming the response contains the HTML to update the ticket list
+                    $('#ticketList').html(response);
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
             });
+        }
+
+        // Event listener for form change
+        $('#filterForm').on('change', 'input, select', function() {
+            submitFilterForm();
         });
-    </script>
+
+        // Close sidebar button
+        $('.close').click(function() {
+            $('.control-sidebar').hide();
+        });
+    });
+</script>
