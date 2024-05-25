@@ -11,8 +11,6 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\JobController;
-// use App\Http\Controllers\ProblemController;
-// use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\RequestTypeController;
 use App\Services\ActivityLogger;
 
@@ -25,13 +23,8 @@ use App\Http\Controllers\ICTRAM\JobTypeController;
 use App\Http\Controllers\ICTRAM\EquipmentController;
 use App\Http\Controllers\ICTRAM\ProblemController;
 use App\Http\Controllers\ICTRAM\AssignController;
-
-
-// use App\Http\Controllers\ICTRAMRequestController;
+use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UnitController;
-
-// use App\Http\Controllers\UnitController;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -262,7 +255,8 @@ Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.
 
 Route::get('/units', [UnitController::class, 'index'])->name('units');
 
-
+// Messaging
+Route::get('/webhook', [MessengerController::class, 'webhook']);
 
 
 Route::fallback(function () {
