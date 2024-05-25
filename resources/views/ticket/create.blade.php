@@ -18,13 +18,14 @@
               </div>
               
               <form action="{{ route('store.ticket') }}" method="post" enctype="multipart/form-data">
+
                 @csrf
                 <div class="card-body">
                     <div class="container mt-5">
                         <div class="form-group">
                             <label for="service-location">Service Location</label>
-                            <input type="text" name="building_number" class="form-control" placeholder="Enter Building Number or Name"><br>
-                            <input type="text" name="office_name" class="form-control" placeholder="Enter Office Name">
+                            <input type="text" name="building_number" class="form-control" placeholder="Enter Building Number or Name" required><br>
+                            <input type="text" name="office_name" class="form-control" placeholder="Enter Office Name" required>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
@@ -149,6 +150,7 @@
                             <label class="form-check-label" for="covered_under_warranty">Covered Under Warranty?</label>
                         </div>
                     </div>
+                    <button type="submit">Request</button>
                 </div>
               </form>
             </div>

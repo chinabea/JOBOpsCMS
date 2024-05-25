@@ -252,12 +252,130 @@ class TicketController extends Controller
 
     public function create()
     {
+        
         // $ictrams = Ictram::with(['jobType', 'equipment', 'problem'])->get();
         // $nicmus = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
-        // $mises = Mis::all();
+        // $mis = Mis::with(['requestType', 'jobType', 'asname'])->get();
+
+        // $ictrams = Ictram::all();
+        // $nicmus = Nicmu::all();
+        // $mis = Mis::all();
+
         return view('ticket.create');
-    
     }
+
+    public function getJobTypes(Request $request)
+    {
+        $type = $request->input('type');
+        $jobTypes = [];
+
+        switch ($type) {
+            case 'ictram':
+                $jobTypes = IctramJobType::all();
+                break;
+            case 'nicmu':
+                // Replace with appropriate model
+                $jobTypes = NicmuJobType::all();
+                break;
+            case 'mis':
+                // Replace with appropriate model
+                $jobTypes = MisJobType::all();
+                break;
+        }
+
+        return response()->json($jobTypes);
+    }
+
+    public function getEquipments(Request $request)
+    {
+        $type = $request->input('type');
+        $jobTypeId = $request->input('job_type_id');
+        $equipments = [];
+
+        switch ($type) {
+            case 'ictram':
+                $equipments = IctramEquipment::where('job_type_id', $jobTypeId)->get();
+                break;
+            case 'nicmu':
+                // Replace with appropriate model and condition
+                $equipments = NicmuEquipment::where('job_type_id', $jobTypeId)->get();
+                break;
+            case 'mis':
+                // Replace with appropriate model and condition
+                $equipments = MisEquipment::where('job_type_id', $jobTypeId)->get();
+                break;
+        }
+
+        return response()->json($equipments);
+    }
+
+    public function getProblems(Request $request)
+    {
+        $type = $request->input('type');
+        $equipmentId = $request->input('equipment_id');
+        $problems = [];
+
+        switch ($type) {
+            case 'ictram':
+                $problems = IctramProblem::where('equipment_id', $equipmentId)->get();
+                break;
+            case 'nicmu':
+                // Replace with appropriate model and condition
+                $problems = NicmuProblem::where('equipment_id', $equipmentId)->get();
+                break;
+            case 'mis':
+                // Replace with appropriate model and condition
+                $problems = MisProblem::where('equipment_id', $equipmentId)->get();
+                break;
+        }
+
+        return response()->json($problems);
+    }
+
+
+
+    // ----------------------------------------------------------------------------------------------------------------------
+
+
+    public function getOptions(Request $request)
+    {
+        $type = $request->input('type');
+        $options = [];
+    
+        switch ($type) {
+            case 'ictram':
+                $options = IctramJobType::with('equipments.problems')->get();
+                break;
+            case 'nicmu':
+                $options = NicmuJobType::with('equipments.problems')->get();
+                break;
+            case 'mis':
+                $options = MisRequestType::with('jobTypes.asnames')->get();
+                break;
+        }
+    
+        return response()->json($options);
+    }
+    
+    // public function getOptions(Request $request)
+    // {
+    //     $type = $request->input('type');
+    //     $options = [];
+
+    //     switch ($type) {
+    //         case 'ictram':
+    //             $options = Ictram::with(['jobType', 'equipment', 'problem'])->get();
+    //             break;
+    //         case 'nicmu':
+    //             $options = Nicmu::with(['jobType', 'equipment', 'problem'])->get();
+    //             break;
+    //         case 'mis':
+    //             $options = Mis::with(['requestType', 'jobType', 'asname'])->get();
+    //             break;
+    //     }
+
+    //     return response()->json($options);
+    // }
 
 // public function getJobTypeDetails(Request $request)
 // {
@@ -437,66 +555,43 @@ public function getAllDetails(Request $request)
     //     }
     // }
     
+
+
     public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'file_upload' => 'nullable|file|max:2048',
-            'assigned_to' => 'required|array',
-            'assigned_to.*' => 'exists:users,id'
+        // Handle file upload
+        if ($request->hasFile('file_path')) {
+            $filePath = $request->file('file_path')->store('uploads');
+        } else {
+            $filePath = null;
+        }
+
+        // Store the data in the database
+        $ticket = new Ticket([
+            'building_number' => $request->input('building_number'),
+            'office_name' => $request->input('office_name'),
+            'description' => $request->input('description'),
+            'file_path' => $filePath,
+            'serial_number' => $request->input('serial_number'),
+            'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
+            'user_id' => auth()->id(), 
+            'ictram_job_type_id' => $request->input('ictram_job_type_id'),
+            'ictram_problem_id' => $request->input('ictram_problem_id'),
+            'ictram_equipment_id' => $request->input('ictram_equipment_id'),
+            'nicmu_job_type_id' => $request->input('nicmu_job_type_id'),
+            'nicmu_equipment_id' => $request->input('nicmu_equipment_id'),
+            'nicmu_problem_id' => $request->input('nicmu_problem_id'),
+            'mis_request_type_id' => $request->input('mis_request_type_id'),
+            'mis_job_type_id' => $request->input('mis_job_type_id'),
+            'mis_asname_id' => $request->input('mis_asname_id'),
         ]);
 
-        // Extract ticket data excluding file upload and assigned_to
-        $ticketData = $request->except(['file_upload', 'assigned_to']);
-        
-        // Create the ticket
-        $ticket = Ticket::create($ticketData);
-        
-        // Handle file upload
-        if ($request->hasFile('file_upload')) {
-            $file = $request->file('file_upload');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('uploads', $filename, 'public');
-            $ticket->file_path = $filePath;
-            $ticket->save();
-        }
-        
-        // Authentication user is the requestor
-        $authUser = auth()->user(); 
-
-        $assignedUsers = User::findMany($ticket->assigned_to); // Assuming 'assigned_to' is an array of user IDs
-        $assignedNames = $assignedUsers->pluck('name')->join(', ');
-
-        // Notify the requestor and admins
-        $admins = User::where('role', 1)->get();
-        foreach ($admins as $admin) {
-            $isSelf = $admin->id === $authUser->id;
-            $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf, $assignedNames));
-        }
-
-        // Attach and notify assigned users
-        $ticket->users()->syncWithoutDetaching($request->assigned_to);
-        foreach ($request->assigned_to as $userId) {
-            $user = User::find($userId);
-            $isSelf = $user->id === $authUser->id;
-            if ($user && $user->id !== $authUser->id) {
-                $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
-            }
-        }
-
-
-        $ticket = new Ticket();
-        $ticket->serial_number = $request->serial_number;
-        $ticket->covered_under_warranty = $request->has('covered_under_warranty');
-        // Set other fields as necessary
         $ticket->save();
-        
-        // Log activity
-        ActivityLogger::log('Created', $ticket, 'Ticket created');
-        
-        // Redirect with success message
-        return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
+
+        // Redirect back or to a success page
+        return redirect()->back()->with('success', 'Ticket created successfully');
     }
+
 
 
     public function show($id)
