@@ -14,6 +14,7 @@ class Mis extends Model
     public $fillable = ['mis_request_type_id',
                         'mis_job_type_id',
                         'mis_asname_id' ];
+                        
     public function requestTypeName()
     {
         return $this->belongsTo(MisRequestType::class, 'mis_request_type_id');

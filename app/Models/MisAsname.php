@@ -16,4 +16,9 @@ class MisAsname extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function mis()
+    {
+        return $this->hasMany(Mis::class, 'mis_asname_id');
+    }
 }

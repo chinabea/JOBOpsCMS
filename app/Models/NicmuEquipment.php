@@ -20,4 +20,9 @@ class NicmuEquipment extends Model
         return $this->hasMany(Ticket::class);
     }
 
+    public function nicmus()
+    {
+        return $this->hasMany(Nicmu::class, 'nicmu_equipment_id');
+    }
+
 }

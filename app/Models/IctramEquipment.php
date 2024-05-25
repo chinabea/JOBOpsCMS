@@ -13,13 +13,6 @@ class IctramEquipment extends Model
     
     public $fillable = ['equipment_name'];
 
-    
-    // public function jobType()
-    // {
-    //     return $this->belongsTo(IctramJobType::class);
-    // }
-    
-
     public function jobTypes()
     {
         return $this->belongsToMany(IctramJobType::class, 'ictram_job_type_equipment', 'ictram_equipment_id', 'ictram_job_type_id');
@@ -33,6 +26,11 @@ class IctramEquipment extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function ictrams()
+    {
+        return $this->hasMany(Ictram::class, 'ictram_equipment_id');
     }
     
 

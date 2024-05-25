@@ -14,4 +14,9 @@ class NicmuJobType extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function nicmus()
+    {
+        return $this->hasMany(Nicmu::class, 'nicmu_job_type_id');
+    }
 }

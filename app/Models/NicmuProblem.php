@@ -8,13 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class NicmuProblem extends Model
 {
     use HasFactory;
-    public $fillable = ['problem_description'];
 
-    
+    public $fillable = ['problem_description'];
 
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function nicmus()
+    {
+        return $this->hasMany(Nicmu::class, 'nicmu_problem_id');
     }
                     
                     

@@ -15,11 +15,6 @@ class IctramJobType extends Model
     {
         return $this->belongsTo(Ictram::class);
     }
-
-    // public function equipments()
-    // {
-    //     return $this->hasMany(IctramEquipment::class);
-    // }
     
 
     public function equipments()
@@ -30,6 +25,11 @@ class IctramJobType extends Model
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+    
+    public function ictrams()
+    {
+        return $this->hasMany(Ictram::class, 'ictram_job_type_id');
     }
 
 }

@@ -16,4 +16,9 @@ class MisJobType extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function mis()
+    {
+        return $this->hasMany(Mis::class, 'mis_job_type_id');
+    }
 }

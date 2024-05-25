@@ -21,4 +21,9 @@ class IctramProblem extends Model
         return $this->hasMany(Ticket::class);
     }
 
+    public function ictrams()
+    {
+        return $this->hasMany(Ictram::class, 'ictram_problem_id');
+    }
+
 }

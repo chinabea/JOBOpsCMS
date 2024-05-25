@@ -15,4 +15,9 @@ class MisRequestType extends Model
     {
         return $this->hasMany(Ticket::class);
     }
+
+    public function mis()
+    {
+        return $this->hasMany(Mis::class, 'mis_request_type_id');
+    }
 }
