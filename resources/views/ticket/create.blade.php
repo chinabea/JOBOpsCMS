@@ -48,10 +48,10 @@
                             <label for="serial_number">Serial Number</label>
                             <input type="number" class="form-control" id="serial_number" name="serial_number" value="{{ old('serial_number') }}">
                         </div>
-                        <div id="app">
-                            <label for="unit">Select Job Type:</label>
-                            <select v-model="selectedUnit" @change="fetchJobTypeDetails">
-                                <option value="" disabled>Select Job Type</option>
+                        <div class="form-group" id="app">
+                            <label for="unit">Select Request</label>
+                            <select class="form-control" v-model="selectedUnit" @change="fetchJobTypeDetails">
+                                <option value="" disabled>Select Request</option>
                                 <option value="ICTRAM">ICTRAM</option>
                                 <option value="NICMUS">NICMUS</option>
                                 <option value="MIS">MIS</option>
@@ -59,84 +59,84 @@
 
                             <!-- ICTRAM Details -->
                             <div v-if="equipmentDetailsICTRAM.length > 0">
-                                <div>
-                                <label for="job_type">Select Job Type Details:</label>
-                                <select v-model="selectedJobTypeICTRAM" @change="fetchEquipmentDetailsICTRAM(selectedJobTypeICTRAM)">
-                                    <option value="" disabled>Select Job Type</option>
-                                    <option v-for="detail in uniqueJobTypeDetailsICTRAM" :key="detail.job_type.id" :value="detail.job_type.id">
-                                        ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
-                                    </option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="job_type">Select Job Type Details:</label>
+                                    <select class="form-control" name="ictram_id" v-model="selectedJobTypeICTRAM" @change="fetchEquipmentDetailsICTRAM(selectedJobTypeICTRAM)">
+                                        <option value="" disabled>Select Job Type</option>
+                                        <option v-for="detail in uniqueJobTypeDetailsICTRAM" :key="detail.job_type.id" :value="detail.job_type.id">
+                                            ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
+                                        </option>
+                                    </select>
                                 </div>
-                                <div>
-                                <label for="equipment">Select Equipment Details:</label>
-                                <select v-model="selectedEquipmentICTRAM" @change="fetchProblemDetailsICTRAM(selectedEquipmentICTRAM)">
-                                    <option value="" disabled>Select Equipment</option>
-                                    <option v-for="detail in uniqueEquipmentDetailsICTRAM" :key="detail.equipment.id" :value="detail.equipment.id">
-                                        ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
-                                    </option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="equipment">Select Equipment Details:</label>
+                                    <select class="form-control" name="ictram_equipment_id" v-model="selectedEquipmentICTRAM" @change="fetchProblemDetailsICTRAM(selectedEquipmentICTRAM)">
+                                        <option value="" disabled>Select Equipment</option>
+                                        <option v-for="detail in uniqueEquipmentDetailsICTRAM" :key="detail.equipment.id" :value="detail.equipment.id">
+                                            ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
+                                        </option>
+                                    </select>
                                 </div>
-                                <div>
-                                <label for="problem">Select Problem Details:</label>
-                                <select v-model="selectedProblemICTRAM">
-                                    <option value="" disabled>Select Problem</option>
-                                    <option v-for="detail in uniqueProblemDetailsICTRAM" :key="detail.problem.id" :value="detail.problem.id">
-                                    ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
-                                    </option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="problem">Select Problem Details:</label>
+                                    <select class="form-control" name="ictram_problem_id" v-model="selectedProblemICTRAM">
+                                        <option value="" disabled>Select Problem</option>
+                                        <option v-for="detail in uniqueProblemDetailsICTRAM" :key="detail.problem.id" :value="detail.problem.id">
+                                        ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
 
                             <!-- NICMUS Details -->
-                            <div v-if="equipmentDetailsNICMU.length > 0">
-                                <div>
-                                <label for="job_type">Select Job Type Details:</label>
-                                <select v-model="selectedJobTypeNICMU" @change="fetchEquipmentDetails(selectedJobTypeNICMU)">
-                                    <option value="" disabled>Select Job Type</option>
-                                    <option v-for="detail in uniqueJobTypeDetailsNICMU" :key="detail.job_type.id" :value="detail.job_type.id">
-                                        ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
-                                    </option>
-                                </select>
+                            <div class="form-group" v-if="equipmentDetailsNICMU.length > 0">
+                                <div class="form-group">
+                                    <label for="job_type">Select Job Type Details:</label>
+                                    <select class="form-control" name="nicmu_id" v-model="selectedJobTypeNICMU" @change="fetchEquipmentDetails(selectedJobTypeNICMU)">
+                                        <option value="" disabled>Select Job Type</option>
+                                        <option v-for="detail in uniqueJobTypeDetailsNICMU" :key="detail.job_type.id" :value="detail.job_type.id">
+                                            ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
+                                        </option>
+                                    </select>
                                 </div>
-                                <div>
-                                <label for="equipment">Select Equipment Details:</label>
-                                <select v-model="selectedEquipmentNICMU" @change="fetchProblemDetails(selectedEquipmentNICMU)">
-                                    <option value="" disabled>Select Equipment</option>
-                                    <option v-for="detail in uniqueEquipmentDetailsNICMU" :key="detail.equipment.id" :value="detail.equipment.id">
-                                    ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
-                                    </option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="equipment">Select Equipment Details:</label>
+                                    <select class="form-control" name="nicmu_equipment_id" v-model="selectedEquipmentNICMU" @change="fetchProblemDetails(selectedEquipmentNICMU)">
+                                        <option value="" disabled>Select Equipment</option>
+                                        <option v-for="detail in uniqueEquipmentDetailsNICMU" :key="detail.equipment.id" :value="detail.equipment.id">
+                                        ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
+                                        </option>
+                                    </select>
                                 </div>
-                                <div>
-                                <label for="problem">Select Problem Details:</label>
-                                <select v-model="selectedProblemNICMU">
-                                    <option value="" disabled>Select Problem</option>
-                                    <option v-for="detail in uniqueProblemDetailsNICMU" :key="detail.problem.id" :value="detail.problem.id">
-                                    ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
-                                    </option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="problem">Select Problem Details:</label>
+                                    <select class="form-control" name="nicmu_problem_id" v-model="selectedProblemNICMU">
+                                        <option value="" disabled>Select Problem</option>
+                                        <option v-for="detail in uniqueProblemDetailsNICMU" :key="detail.problem.id" :value="detail.problem.id">
+                                        ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
 
                             <!-- MIS Details -->
-                            <div v-if="equipmentDetailsMIS.length > 0">
+                            <div class="form-group" v-if="equipmentDetailsMIS.length > 0">
                                 <label for="request_type_name">Request Type Name:</label>
-                                <select v-model="selectedRequestType" @change="fetchRequestTypeDetailsMIS(selectedRequestType)">
+                                <select class="form-control" name="mis_id" v-model="selectedRequestType" @change="fetchRequestTypeDetailsMIS(selectedRequestType)">
                                     <option value="" disabled>Select Request Type</option>
                                     <option v-for="detail in uniqueRequestTypeMIS" :key="detail.request_type_name.id" :value="detail.request_type_name.id">
                                     ID: @{{ detail.request_type_name.id }} - @{{ detail.request_type_name.requestType_name }}
                                     </option>
                                 </select>
                                 <label for="job_type">Select Job Type:</label>
-                                <select v-model="selectedJobTypeMIS" @change="fetchAccountNameMIS(selectedJobTypeMIS)">
+                                <select class="form-control" name="mis_job_type_id" v-model="selectedJobTypeMIS" @change="fetchAccountNameMIS(selectedJobTypeMIS)">
                                     <option value="" disabled>Select Job Type</option>
                                     <option v-for="detail in uniqueJobTypeDetailsMIS" :key="detail.job_type.id" :value="detail.job_type.id">
                                     ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
                                     </option>
                                 </select>
                                 <label for="account_name">Select Account Name:</label>
-                                <select v-model="selectedAccountname">
+                                <select class="form-control" name="mis_asname_id" v-model="selectedAccountname">
                                     <option value="" disabled>Select Account Name</option>
                                     <option v-for="detail in accountNameMISes" :key="detail.as_name.id" :value="detail.as_name.id">
                                     ID: @{{ detail.as_name.id }} - @{{ detail.as_name.name }}

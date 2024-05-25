@@ -25,32 +25,32 @@ return new class extends Migration
             $table->unsignedBigInteger('serial_number')->nullable();
             $table->boolean('covered_under_warranty')->default(false);
             
-            $table->unsignedBigInteger('ictram_job_type_id')->nullable();
-            $table->unsignedBigInteger('ictram_equipment_id')->nullable();
-            $table->unsignedBigInteger('ictram_problem_id')->nullable();
+            $table->unsignedBigInteger('ictram_id')->nullable();
+            // $table->unsignedBigInteger('ictram_equipment_id')->nullable();
+            // $table->unsignedBigInteger('ictram_problem_id')->nullable();
 
-            $table->unsignedBigInteger('nicmu_job_type_id')->nullable();
-            $table->unsignedBigInteger('nicmu_equipment_id')->nullable();
-            $table->unsignedBigInteger('nicmu_problem_id')->nullable();
+            $table->unsignedBigInteger('nicmu_id')->nullable();
+            // $table->unsignedBigInteger('nicmu_equipment_id')->nullable();
+            // $table->unsignedBigInteger('nicmu_problem_id')->nullable();
             
-            $table->unsignedBigInteger('mis_request_type_id')->nullable();
-            $table->unsignedBigInteger('mis_job_type_id')->nullable();
-            $table->unsignedBigInteger('mis_asname_id')->nullable();
+            $table->unsignedBigInteger('mis_id')->nullable();
+            // $table->unsignedBigInteger('mis_job_type_id')->nullable();
+            // $table->unsignedBigInteger('mis_asname_id')->nullable();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->foreign('ictram_job_type_id')->references('id')->on('ictram')->onDelete('cascade');
-            $table->foreign('ictram_problem_id')->references('id')->on('ictram')->onDelete('cascade');
-            $table->foreign('ictram_equipment_id')->references('id')->on('ictram')->onDelete('cascade');
+            $table->foreign('ictram_id')->references('id')->on('ictram')->onDelete('cascade');
+            // $table->foreign('ictram_problem_id')->references('id')->on('ictram')->onDelete('cascade');
+            // $table->foreign('ictram_equipment_id')->references('id')->on('ictram')->onDelete('cascade');
 
-            $table->foreign('nicmu_job_type_id')->references('id')->on('nicmu')->onDelete('cascade');
-            $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu')->onDelete('cascade');
-            $table->foreign('nicmu_problem_id')->references('id')->on('nicmu')->onDelete('cascade');
+            $table->foreign('nicmu_id')->references('id')->on('nicmu')->onDelete('cascade');
+            // $table->foreign('nicmu_equipment_id')->references('id')->on('nicmu')->onDelete('cascade');
+            // $table->foreign('nicmu_problem_id')->references('id')->on('nicmu')->onDelete('cascade');
 
-            $table->foreign('mis_request_type_id')->references('id')->on('mis')->onDelete('cascade');
-            $table->foreign('mis_job_type_id')->references('id')->on('mis')->onDelete('cascade');
-            $table->foreign('mis_asname_id')->references('id')->on('mis')->onDelete('cascade');
+            $table->foreign('mis_id')->references('id')->on('mis')->onDelete('cascade');
+            // $table->foreign('mis_job_type_id')->references('id')->on('mis')->onDelete('cascade');
+            // $table->foreign('mis_asname_id')->references('id')->on('mis')->onDelete('cascade');
             
              
         });

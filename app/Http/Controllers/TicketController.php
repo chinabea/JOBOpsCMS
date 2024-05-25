@@ -575,15 +575,9 @@ public function getAllDetails(Request $request)
             'serial_number' => $request->input('serial_number'),
             'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
             'user_id' => auth()->id(), 
-            'ictram_job_type_id' => $request->input('ictram_job_type_id'),
-            'ictram_problem_id' => $request->input('ictram_problem_id'),
-            'ictram_equipment_id' => $request->input('ictram_equipment_id'),
-            'nicmu_job_type_id' => $request->input('nicmu_job_type_id'),
-            'nicmu_equipment_id' => $request->input('nicmu_equipment_id'),
-            'nicmu_problem_id' => $request->input('nicmu_problem_id'),
-            'mis_request_type_id' => $request->input('mis_request_type_id'),
-            'mis_job_type_id' => $request->input('mis_job_type_id'),
-            'mis_asname_id' => $request->input('mis_asname_id'),
+            'ictram_id' => $request->input('ictram_id'),
+            'nicmu_id' => $request->input('nicmu_id'),
+            'mis_id' => $request->input('mis_id'),
         ]);
 
         $ticket->save();
