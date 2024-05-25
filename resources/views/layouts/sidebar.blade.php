@@ -121,12 +121,6 @@
                         <p> Users </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('units') }}" class="nav-link {{ Route::currentRouteName() == 'units' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> Units </p>
-                    </a>
-                </li>
                 @endif
                 @if(Auth::user()->role == 2)
                 <li class="nav-item">
@@ -295,6 +289,14 @@
                     </ul>
                 </li>
                 @endif
+                @if(Auth::user()->role == 1)
+                <li class="nav-item">
+                    <a href="{{ route('units') }}" class="nav-link {{ Route::currentRouteName() == 'units' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cogs mr-2"></i>
+                        <p> Manage </p>
+                    </a>
+                </li>
+                @endif
                 
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>
@@ -318,15 +320,9 @@
                 </li>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}">
-                        <i class="fas fa-cogs nav-icon"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a id="theme-toggle" class="nav-link">
                         <i class="nav-icon fas fa-adjust"></i>
-                        <p>Theme</p>
+                        <p>Dark Theme</p>
                     </a>
                 </li>
             </div>
