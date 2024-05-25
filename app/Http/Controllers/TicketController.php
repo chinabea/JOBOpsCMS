@@ -557,37 +557,6 @@ public function getAllDetails(Request $request)
     
 
 
-    public function store(Request $request)
-    {
-        // Handle file upload
-        if ($request->hasFile('file_path')) {
-            $filePath = $request->file('file_path')->store('uploads');
-        } else {
-            $filePath = null;
-        }
-
-        // Store the data in the database
-        $ticket = new Ticket([
-            'building_number' => $request->input('building_number'),
-            'office_name' => $request->input('office_name'),
-            'description' => $request->input('description'),
-            'file_path' => $filePath,
-            'serial_number' => $request->input('serial_number'),
-            'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
-            'user_id' => auth()->id(), 
-            'ictram_id' => $request->input('ictram_id'),
-            'nicmu_id' => $request->input('nicmu_id'),
-            'mis_id' => $request->input('mis_id'),
-        ]);
-
-        $ticket->save();
-
-        // Redirect back or to a success page
-        return redirect()->back()->with('success', 'Ticket created successfully');
-    }
-
-
-
     public function show($id)
     {
         try {

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'expertise',
         'google_id', 
         'avatar',
+        'assigned_user_id',
     ];
 
     /**
@@ -70,20 +71,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Ticket::class);
     }
     
-    // public function tickets()
-    // {
-    //     return $this->belongsToMany(Ticket::class, 'ticket_user')
-    //                 ->withTimestamps();
-    // }
-
-    // Optionally, if expertise is a relationship and not a direct attribute
-    public function expertise()
-    {
-        return $this->hasOne(Expertise::class); // Adjust based on your actual data structure
-    }
-    
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
     }
 }
