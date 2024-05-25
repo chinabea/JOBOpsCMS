@@ -150,7 +150,7 @@
                             <label class="form-check-label" for="covered_under_warranty">Covered Under Warranty?</label>
                         </div>
                     </div>
-                    <button type="submit">Request</button>
+                    <button type="submit" class="btn btn-primary float-end">Request</button>
                 </div>
               </form>
             </div>
