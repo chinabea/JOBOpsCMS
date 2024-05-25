@@ -250,100 +250,125 @@ class TicketController extends Controller
     }
 
     // ---------------------------------------------------------------------------------------------------------------------
-public function store(Request $request)
+
+    public function store(Request $request)
     {
-        // Validate the request data
-        $request->validate([
-            'building_number' => 'nullable',
-            'office_name' => 'nullable',
-            'description' => 'nullable',
-            'serial_number' => 'nullable',
-            'file_upload' => 'nullable|file|max:2048',
-            'ictram_job_type_id' => 'nullable',
-            'ictram_equipment_id' => 'nullable',
-            'ictram_problem_id' => 'nullable',
-            'nicmu_job_type_id' => 'nullable',
-            'nicmu_equipment_id' => 'nullable',
-            'nicmu_problem_id' => 'nullable',
-            'mis_request_type_id' => 'nullable',
-            'mis_job_type_id' => 'nullable',
-            'mis_asname_id' => 'nullable',
-        ]);
-        $userId = Auth::id();
-
-        if ($request->hasFile('file_upload')) {
-            $file = $request->file('file_upload');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('uploads', $filename, 'public');
-        }
+        // Handle file upload
+        $filePath = $request->hasFile('file_path') ? $request->file('file_path')->store('uploads') : null;
+    
         // Create a new ticket instance
-        $ticket = new Ticket();
-        $ticket->building_number = $request->building_number;
-        $ticket->office_name = $request->office_name;
-        $ticket->description = $request->description;
-        $ticket->serial_number = $request->serial_number;
-
-        $ticket->ictram_job_type_id = $request->ictram_job_type_id;
-        $ticket->ictram_equipment_id = $request->ictram_equipment_id;
-        $ticket->ictram_problem_id = $request->ictram_problem_id;
-
-        $ticket->nicmu_job_type_id = $request->nicmu_job_type_id;
-        $ticket->nicmu_equipment_id = $request->nicmu_equipment_id;
-        $ticket->nicmu_problem_id = $request->nicmu_problem_id;
-
-        $ticket->mis_request_type_id = $request->mis_request_type_id;
-        $ticket->mis_job_type_id = $request->mis_job_type_id;
-        $ticket->mis_asname_id = $request->mis_asname_id;
-
-        $ticket->user_id = $userId;
-        $ticket->file_path = $filePath;
-
-        // Save the ticket
+        $ticket = new Ticket([
+            'building_number' => $request->input('building_number'),
+            'office_name' => $request->input('office_name'),
+            'description' => $request->input('description'),
+            'file_path' => $filePath,
+            'serial_number' => $request->input('serial_number'),
+            'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
+            'user_id' => auth()->id(), 
+            'ictram_id' => $request->input('ictram_id'),
+            'nicmu_id' => $request->input('nicmu_id'),
+            'mis_id' => $request->input('mis_id'),
+        ]);
+    
+        // Determine the appropriate user roles based on request unit
+        $roles = [2, 3, 4, 7, 8, 9];
+    
+        if ($request->input('ictram_id')) {
+            $roles = [2, 7];
+        } elseif ($request->input('nicmu_id')) {
+            $roles = [3, 8];
+        } elseif ($request->input('mis_id')) {
+            $roles = [4, 9];
+        }
+    
+        // Find users with the specified roles
+        $users = User::whereIn('role', $roles)->get();
+    
+        // Find the user with the least number of assigned tickets
+        $userWithLeastTickets = $users->sortBy(function ($user) {
+            return $user->tickets->count();
+        })->first();
+    
+        // Assign the ticket to that user
+        if ($userWithLeastTickets) {
+            $ticket->assigned_user_id = $userWithLeastTickets->id;
+        }
+    
         $ticket->save();
-
-        // Redirect with success message
-        return redirect()->back()->with('success', 'Ticket Successfully Created!');
+    
+        // Authentication user is the requestor
+        $authUser = auth()->user(); 
+    
+        // Notify the requestor and admins
+        $admins = User::where('role', 1)->get();
+        foreach ($admins as $admin) {
+            $isSelf = $admin->id === $authUser->id;
+            $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf));
+        }
+    
+        // Notify assigned users if there are any
+        if ($request->has('assigned_to')) {
+            $ticket->users()->syncWithoutDetaching($request->assigned_to);
+            foreach ($request->assigned_to as $userId) {
+                $user = User::find($userId);
+                if ($user && $user->id !== $authUser->id) {
+                    $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
+                }
+            }
+        }
+    
+        // Log activity
+        ActivityLogger::log('Created', $ticket, 'Ticket created');
+    
+        // Redirect back or to a success page
+        return redirect()->back()->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
     }
-
-
-    /********    Your previous function here     ********/
 
     // public function store(Request $request)
     // {
-
-    //     return dd($request);
-    //     // Validate the request data
-    //     $request->validate([
-    //         'file_upload' => 'nullable|file|max:2048',
-    //         'assigned_to' => 'required|array',
-    //         'assigned_to.*' => 'exists:users,id',
-    //         'ictram_jobType_id' => 'nullable',
-    //         'ictram_equipment_id' => 'nullable',
-    //         'ictram_problem_id' => 'nullable',
-    //         'nictram_jobType_id' => 'nullable',
-    //         'nictram_equipment_id' => 'nullable',
-    //         'nictram_problem_id' => 'nullable',
-    //         'mis_requestType_id' => 'nullable',
-    //         'mis_jobType_id' => 'nullable',
-    //         'mis_accountName_id' => 'nullable',
+    //         // Handle file upload
+    //         if ($request->hasFile('file_path')) {
+    //             $filePath = $request->file('file_path')->store('uploads');
+    //         } else {
+    //             $filePath = null;
+    //         }
+    //           $ticket = new Ticket([
+    //         'building_number' => $request->input('building_number'),
+    //         'office_name' => $request->input('office_name'),
+    //         'description' => $request->input('description'),
+    //         'file_path' => $filePath,
+    //         'serial_number' => $request->input('serial_number'),
+    //         'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
+    //         'user_id' => auth()->id(), 
+    //         'ictram_id' => $request->input('ictram_id'),
+    //         'nicmu_id' => $request->input('nicmu_id'),
+    //         'mis_id' => $request->input('mis_id'),
     //     ]);
 
-    //     // Extract ticket data excluding file upload and assigned_to
-    //     $ticketData = $request->except(['file_upload', 'assigned_to']);
-        
-    //     // Create the ticket
-    //     $ticket = Ticket::create($ticketData);
-        
-    //     // Handle file upload
-    //     if ($request->hasFile('file_upload')) {
-    //         $file = $request->file('file_upload');
-    //         $filename = time() . '_' . $file->getClientOriginalName();
-    //         $filePath = $file->storeAs('uploads', $filename, 'public');
-    //         $ticket->file_path = $filePath;
-    //         $ticket->save();
+
+    //     // Determine the appropriate user roles based on request unit
+    //     $roles = [2, 3, 4, 7, 8, 9];
+
+    //     if ($request->input('ictram_id')) {
+    //         $roles = [2, 7];
+    //     } elseif ($request->input('nicmu_id')) {
+    //         $roles = [3, 8];
+    //     } elseif ($request->input('mis_id')) {
+    //         $roles = [4, 9];
     //     }
-        
-    //     // Authentication user is the requestor
+
+    //     // Find users with the specified roles
+    //     $users = User::whereIn('role', $roles)->get();
+
+    //     // Find the user with the least number of assigned tickets
+    //     $userWithLeastTickets = $users->sortBy(function ($user) {
+    //         return $user->tickets->count();
+    //     })->first();
+
+    //     // Assign the ticket to that user
+    //     $ticket->assigned_user_id = $userWithLeastTickets->id;
+    //     $ticket->save();
+    //         // Authentication user is the requestor
     //     $authUser = auth()->user(); 
 
     //     $assignedUsers = User::findMany($ticket->assigned_to); // Assuming 'assigned_to' is an array of user IDs
@@ -366,20 +391,17 @@ public function store(Request $request)
     //         }
     //     }
 
-
-    //     $ticket = new Ticket();
-    //     $ticket->serial_number = $request->serial_number;
-    //     $ticket->covered_under_warranty = $request->has('covered_under_warranty');
-    //     // Set other fields as necessary
-    //     $ticket->save();
         
     //     // Log activity
     //     ActivityLogger::log('Created', $ticket, 'Ticket created');
-        
-    //     // Redirect with success message
-    //     return redirect()->route('tickets')->with('success', 'Ticket Successfully Created!');
+
+    //     // Redirect back or to a success page
+    //     return redirect()->back()->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
     // }
 
+
+
+    
     
     public function create()
     {
