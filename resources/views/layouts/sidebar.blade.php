@@ -185,7 +185,7 @@
                             <p>ICTRAM</p>
                         </a>
                     </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-white"></i>
                         <p> ICTRAM <i class="fas fa-angle-left right"></i>
@@ -217,10 +217,10 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                     @endif
                     @if(Auth::user()->role == 1 || Auth::user()->role == 3 )
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('nicmus.index') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-red"></i>
                         <p> NICMUS <i class="fas fa-angle-left right"></i>
@@ -252,10 +252,10 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                     @endif
                     @if(Auth::user()->role == 1 || Auth::user()->role == 4 )
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="{{ route('mises.index') }}" class="nav-link {{ Route::currentRouteName() == 'mises.index' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon text-yellow"></i>
                         <p> MIS <i class="fas fa-angle-left right"></i>
@@ -287,7 +287,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 @endif
                 @if(Auth::user()->role == 1)
                 <li class="nav-item">
