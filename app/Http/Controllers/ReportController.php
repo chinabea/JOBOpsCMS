@@ -25,8 +25,12 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
     public function ticketReport(Request $request){
-        
-        $tickets = Ticket::all();
+
+        $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
+    //     $tickets = Ticket::all();
+    // $tickets = Ticket::with(['user', 'ictram.job_type', 'ictram.equipment', 'ictram.problem', 'nicmu.job_type', 'nicmu.equipment', 'nicmu.problem', 'mis.request_type', 'mis.job_type', 'mis.asname'])
+    //     ->where('building_number', $building_number)
+    //     ->get();
         $userIds = User::where('role', 2)->where('is_approved', true)->get();
         $query = Ticket::query();
     
