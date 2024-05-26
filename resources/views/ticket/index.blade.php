@@ -13,10 +13,6 @@
                 <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
                     <i class="fas fa-plus"></i> Request Ticket
                 </a>
-                <a href="#" class="btn bg-light text-dark border mr-2" data-widget="control-sidebar" data-slide="true">
-                    <i class="fas fa-filter"></i> Filters <i class="fas fa-angle-right left"></i>
-                </a>
-                @include('filters')
                 <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
                     <i class="fas fa-sync-alt"></i>
                 </button>
