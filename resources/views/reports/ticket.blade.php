@@ -2,6 +2,8 @@
 
 @section('content') 
 
+<div id="ticketList">
+<!-- The area where the filtered ticket list will be rendered -->
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -34,6 +36,7 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="mb-4"></p>
+    
                             <table id="example1" class="table table-bordered table-hover text-center table-striped ">
                                 <thead>
                                     <tr>
@@ -72,8 +75,16 @@
                                                 </td> 
                                                 @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) 
                                                     <td>
-                                                        <span class="badge badge-warning">
-                                                            <i class="far fa-clock"></i> 
+                                                        <span class="badge 
+                                                            @if($ticket->status == 'Open') 
+                                                                badge-info 
+                                                            @elseif($ticket->status == 'In Progress') 
+                                                                badge-warning 
+                                                            @elseif($ticket->status == 'Completed') 
+                                                                badge-success 
+                                                            @elseif($ticket->status == 'Closed') 
+                                                                badge-secondary 
+                                                            @endif">
                                                             {{ $ticket->status }}
                                                         </span>
                                                     </td>
@@ -114,6 +125,7 @@
                                     @endforeach
                                  </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -121,5 +133,5 @@
         </div>
     </section>
 </div>
-
+</div>
 @endsection
