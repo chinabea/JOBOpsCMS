@@ -262,6 +262,7 @@ Route::get('/units', [UnitController::class, 'index'])->name('units');
 // Messaging
 Route::get('/webhook', [MessengerController::class, 'webhook']);
 
+Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
