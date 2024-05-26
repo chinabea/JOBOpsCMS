@@ -19,7 +19,7 @@
         </button>
 
         <h5>Filter</h5><hr>
-        <form id="filterForm" method="GET" action="{{ route('tickets') }}">
+        <form id="filterForm" method="GET" action="{{ route('tickets.report') }}">
             
             <div id="filterSidebar">
                 <div class="form-group">
@@ -31,7 +31,7 @@
                     <label for="building_number">Building Number</label>
                     <select class="form-control" name="building_number" id="building_number">
                         <option value="">Select Building Number</option>
-                        @foreach($tickets as $ticket)
+                        @foreach($tickets->unique('building_number') as $ticket)
                             <option value="{{ $ticket->building_number }}">{{ $ticket->building_number }}</option>
                         @endforeach
                     </select>
