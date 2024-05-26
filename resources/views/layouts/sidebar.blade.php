@@ -83,7 +83,7 @@
                         @if(Auth::user()->role == 1)
                         <li class="nav-item">
                             <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon text-warning"></i>
+                                <i class="far fa-circle nav-icon text-info"></i>
                                 <p>All Tickets</p>
                             </a>
                         </li>
