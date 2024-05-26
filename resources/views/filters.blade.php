@@ -78,20 +78,21 @@
                 </div>
             </div>
             <div class="form-group d-flex justify-content-between">
-                <a href="{{ route('tickets', array_merge(request()->query(), ['export' => 'pdf'])) }}" class="btn btn-sm btn-danger text-white">
+                <a href="{{ route('tickets.report', array_merge(request()->query(), ['export' => 'pdf'])) }}" class="btn btn-sm btn-danger text-white">
                     <i class="fa fa-file-pdf"></i> Export PDF
                 </a>
-                <a href="{{ route('tickets', array_merge(request()->query(), ['export' => 'excel'])) }}" class="btn btn-sm btn-success text-white">
+                <a href="{{ route('tickets.report', array_merge(request()->query(), ['export' => 'excel'])) }}" class="btn btn-sm btn-success text-white">
                     <i class="fa fa-file-excel"></i> Export Excel
                 </a>
             </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Search</button>
+            <button type="button" class="btn btn-info btn-block" onclick="printFilteredData()">Print</button>
+            <!-- <button type="submit" class="btn btn-primary btn-block">Search</button> -->
         </div>
-               
         </form>
     </div>
 </aside>
+
 
 <script>
     $(document).ready(function() {
@@ -132,4 +133,14 @@
             $('.control-sidebar').hide();
         });
     });
+
+    // Function to print the filtered data
+    function printFilteredData() {
+        const printContent = document.getElementById('ticketList').innerHTML;
+        const originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+        window.location.reload();  // Reload to restore the original page content
+    }
 </script>
