@@ -220,10 +220,6 @@ tr:nth-child(even) {
                 <th>MIS Job Type</th>
                 <th>MIS Assigned Name</th>
             @endif
-            
-                <!-- <th>ICTRAM</th>
-                <th>NICMU</th>
-                <th>MIS</th> -->
                 <th>Created At</th>
                 <th>Updated At</th>
             </tr>
@@ -245,18 +241,16 @@ tr:nth-child(even) {
                         <td>{{ $ticket->ictram->equipment->equipment_name }}</td>
                         <td>{{ $ticket->ictram->problem->problem_description }}</td>
                     @endif
-                <td>
                     @if($ticket->nicmu)
                         <td>{{ $ticket->nicmu->job_type->name }}</td>
                         <td>{{ $ticket->nicmu->equipment->equipment_name }}</td>
                         <td>{{ $ticket->nicmu->problem->problem_description }}</td>
                     @endif
-                </td>
-                <td>
                     @if($ticket->mis)
-                        {{ $ticket->mis->request_type->name }} - {{ $ticket->mis->job_type->name }} - {{ $ticket->mis->asname->name }}
+                        <td>{{ $ticket->mis->request_type->name }}</td>
+                        <td>{{ $ticket->mis->job_type->name }}</td>
+                        <td>{{ $ticket->mis->asname->name }}</td> 
                     @endif
-                </td>
                 <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                 <td>{{ $ticket->updated_at ? $ticket->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
             </tr>
