@@ -24,6 +24,251 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function ticketReport(Request $request){
+        
+        $tickets = Ticket::all();
+        $userIds = User::where('role', 2)->where('is_approved', true)->get();
+        $query = Ticket::query();
+    
+        // Apply search filter
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('building_number', 'like', '%' . $request->search . '%')
+                ->orWhere('priority_level', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
+            });
+        }
+    
+        // Apply building number filter
+        if ($request->filled('building_number')) {
+            $query->where('building_number', $request->building_number);
+        }
+    
+        // Apply priority level filter
+        if ($request->filled('priority_level')) {
+            $query->where('priority_level', $request->priority_level);
+        }
+    
+        // Apply status filter
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+    
+        // Apply sorting
+        if ($request->filled('sort_by') && $request->filled('sort_order')) {
+            $query->orderBy($request->sort_by, $request->sort_order);
+        }
+    
+        // Check for export requests
+        if ($request->has('export')) {
+            if ($request->export == 'excel') {
+                return $this->exportExcel($request);
+            } elseif ($request->export == 'pdf') {
+                return $this->exportPdf($request);
+            }
+        }
+    
+        // Get the filtered and sorted tickets
+        $tickets = $query->get();
+    
+        return view('reports.ticket', compact('tickets', 'userIds'));
+        
+    }
+
+    public function filteredTickets(Request $request)
+    {
+        $query = Ticket::query();
+
+        // Apply filters
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('building_number', 'like', '%' . $request->search . '%')
+                ->orWhere('priority_level', 'like', '%' . $request->search . '%')
+                ->orWhere('status', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->filled('building_number')) {
+            $query->where('building_number', $request->building_number);
+        }
+
+        if ($request->filled('priority_level')) {
+            $query->where('priority_level', $request->priority_level);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('sort_by') && $request->filled('sort_order')) {
+            $query->orderBy($request->sort_by, $request->sort_order);
+        }
+
+        return $query->get();
+    }
+
+    public function exportExcel(Request $request)
+    {
+            $tickets = $this->filteredTickets($request);
+    
+            // Create a new spreadsheet
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+    
+            // Merge cells for the header
+            $sheet->mergeCells('A1:J1');
+            $sheet->mergeCells('A2:J2');
+            $sheet->mergeCells('A3:J3');
+            $sheet->mergeCells('A4:J4');
+            $sheet->mergeCells('A5:J5');
+            $sheet->mergeCells('A6:J6');
+            $sheet->mergeCells('A7:J7');
+    
+            // Set the header text
+            $sheet->setCellValue('A1', "Republic of the Philippines");
+            $sheet->setCellValue('A2', "CAMARINES SUR POLYTECHNIC COLLEGES");
+            $sheet->setCellValue('A3', "Nabua, Camarines Sur");
+            $sheet->setCellValue('A5', "MANAGEMENT INFORMATION AND COMMUNICATIONS TECHNOLOGY");
+            $sheet->setCellValue('A6', "SUMMARY LIST OF JOB ORDER REQUEST FORM");
+            $sheet->setCellValue('A7', "ICT REPAIR AND INSTALLATION\nfor the Month of January 2024");
+    
+            // Load the logo image
+            $drawing = new Drawing();
+            $drawing->setName('Logo');
+            $drawing->setDescription('This is my logo');
+            $drawing->setPath(public_path('dist/img/CSPC-Logo.jpg')); 
+            $drawing->setHeight(50);
+            $drawing->setCoordinates('A1');
+            $drawing->setOffsetX(1000); // Adjust the offset to center the logo
+            $drawing->setWorksheet($sheet);
+    
+            // Format the header
+            $headerStyle = [
+                'font' => [
+                    'bold' => true,
+                    'size' => 14,
+                ],
+                'alignment' => [
+                    'horizontal' => Alignment::HORIZONTAL_CENTER,
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                    'wrapText' => true,
+                ],
+            ];
+            $sheet->getStyle('A1:J7')->applyFromArray($headerStyle);
+    
+            // Add column headers
+            $sheet->setCellValue('A8', 'No.');
+            $sheet->setCellValue('B8', 'REQUESITOR');
+            $sheet->setCellValue('C8', 'Building Number');
+            $sheet->setCellValue('D8', 'Office');
+            $sheet->setCellValue('E8', 'Priority Level');
+            $sheet->setCellValue('F8', 'Description');
+            $sheet->setCellValue('G8', 'Status');
+            $sheet->setCellValue('H8', 'Serial Number');
+            $sheet->setCellValue('I8', 'Warranty Number');
+            $sheet->setCellValue('J8', 'Date Requested');
+    
+            // Format column headers
+            $columnHeaderStyle = [
+                'font' => [
+                    'bold' => true,
+                ],
+                'alignment' => [
+                    'horizontal' => Alignment::HORIZONTAL_CENTER,
+                    'vertical' => Alignment::VERTICAL_CENTER,
+                ],
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => Border::BORDER_THIN,
+                    ],
+                ],
+            ];
+            $sheet->getStyle('A8:J8')->applyFromArray($columnHeaderStyle);
+    
+            // Populate the spreadsheet with data
+            $row = 9;
+            $index = 1;
+            foreach ($tickets as $ticket) {
+                $sheet->setCellValue('A' . $row, $index);
+                $sheet->setCellValue('B' . $row, $ticket->user_id);
+                $sheet->setCellValue('C' . $row, $ticket->building_number);
+                $sheet->setCellValue('D' . $row, $ticket->office_name);
+                $sheet->setCellValue('E' . $row, $ticket->priority_level);
+                $sheet->setCellValue('F' . $row, $ticket->description);
+                $sheet->setCellValue('G' . $row, $ticket->status);
+                $sheet->setCellValue('H' . $row, $ticket->serial_number);
+                $sheet->setCellValue('I' . $row, $ticket->covered_under_warranty ? 'Yes' : 'No');
+                $sheet->setCellValue('J' . $row, $ticket->created_at);
+                $row++;
+                $index++;
+            }
+    
+            // Adjust column widths
+            foreach (range('A', 'J') as $columnID) {
+                $sheet->getColumnDimension($columnID)->setAutoSize(true);
+            }
+    
+            // Generate and save the spreadsheet to a file
+            $writer = new Xlsx($spreadsheet);
+            $filePath = storage_path('app/public/tickets.xlsx');
+            $writer->save($filePath);
+    
+            // Return the file as a response to the user
+            return response()->download($filePath)->deleteFileAfterSend(true);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        // Get the filtered tickets
+        $tickets = $this->filteredTickets($request);
+
+        // Generate the HTML content for the PDF
+        $html = view('reports.report-pdf', compact('tickets'))->render();
+
+        // Configure Dompdf options
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true); // Enable remote file access (for images, etc.)
+
+        // Initialize Dompdf with the options
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+
+        // Stream the generated PDF
+        return $dompdf->stream('tickets.pdf', [
+            'Attachment' => false // Set to true to force download
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // -----------------------------------------------------------------------------------------------------------------
 
     public function unassignedReport(Request $request)
