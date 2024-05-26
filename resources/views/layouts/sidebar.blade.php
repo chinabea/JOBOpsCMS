@@ -99,7 +99,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <i class="nav-icon fas fa-exclamation-triangle"></i>
                         <p> Status <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
