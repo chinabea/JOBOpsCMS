@@ -111,5 +111,20 @@ class Ticket extends Model
         return $this->belongsTo(MisAsname::class);
     }
     
+    public function ictram()
+    {
+        return $this->belongsTo(Ictram::class, 'ictram_id');
+    }
+
+    public function nicmu()
+    {
+        return $this->belongsTo(Nicmu::class, 'nicmu_id');
+    }
+
+    public function mis()
+    {
+        return $this->belongsTo(Mis::class, 'mis_id');
+    }
+    
 
 }
