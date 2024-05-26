@@ -17,7 +17,22 @@ return new class extends Migration
             $table->unsignedBigInteger('assigned_user_id')->nullable();
 
             $table->string('building_number')->nullable();
-            $table->string('office_name')->nullable();
+            $table->enum('office_name', ['Records Office',
+                                        'CRD',
+                                        'SRRO',
+                                        'Records Office',
+                                        'VPAA',
+                                        'CEA Dean\'s Office',
+                                        'Cashier',
+                                        'CIRL',
+                                        'COA',
+                                        'PRAAS',
+                                        'Accounting Office',
+                                        'HRMDO',
+                                        'CTHBM Dean\'s Office',
+                                        'CGAD',
+                                        'OVPAA',
+                                        'PPFMS',])->default('Open')->nullable();
             $table->enum('priority_level', ['High', 'Mid', 'Low'])->nullable();
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
