@@ -97,53 +97,6 @@
                         @endif
                     </ul>
                 </li>
-                <li class="nav-header">ADMINISTRATION</li>
-                @if(Auth::user()->role == 1 || Auth::user()->role == 2  || Auth::user()->role == 3 )
-                    <li class="nav-item">
-                        <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
-                        <td><i class="fas fa-wrench nav-icon"></i>
-                            <p>Purchased Equipments</p>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
-                    <li class="nav-item">
-                        <a href="{{ route('ictrams.offices') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.offices' ? 'active' : '' }}">
-                        <i class="fas fa-university nav-icon text-white"></i>
-                            <p>Top Offices</p>
-                        </a>
-                    </li>
-                @endif
-                @if(Auth::user()->role == 1)
-                <li class="nav-item">
-                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
-                        <p> Users </p>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->role == 2)
-                <li class="nav-item">
-                    <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> ICTRAM Tickets </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> NICMU Tickets </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> MIS Tickets </p>
-                    </a>
-                </li>
-                @endif
-
-                
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
@@ -178,6 +131,54 @@
                     </ul>
                 </li>
                 
+                <!-- <li class="nav-header">ADMINISTRATION</li> -->
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2  || Auth::user()->role == 3 )
+                    <li class="nav-item">
+                        <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
+                        <td><i class="fas fa-dollar-sign nav-icon"></i></td>
+                            <p>Equipments</p>
+                        </a>
+                    </li>
+                @endif
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
+                    <li class="nav-item">
+                        <a href="{{ route('ictrams.offices') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.offices' ? 'active' : '' }}">
+                        <td><i class="fas fa-chart-line nav-icon"></i></td>
+
+                            <p>Top Offices</p>
+                        </a>
+                    </li>
+                @endif
+                @if(Auth::user()->role == 1)
+                <li class="nav-item">
+                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users mr-2"></i>
+                        <p> Users </p>
+                    </a>
+                </li>
+                @endif
+                @if(Auth::user()->role == 2)
+                <li class="nav-item">
+                    <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> ICTRAM Tickets </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> NICMU Tickets </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-university mr-2"></i>
+                        <p> MIS Tickets </p>
+                    </a>
+                </li>
+                @endif
+
+               
                 @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
                     <!-- <li class="nav-item">
                         <a href="{{ route('ictrams.index') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.index' ? 'active' : '' }}">
@@ -301,7 +302,7 @@
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
-                            <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
+                            <a href="{{ route('tickets.report') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.report' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>Reports</p>
                     </a>
