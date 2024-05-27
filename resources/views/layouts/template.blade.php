@@ -64,6 +64,7 @@
         
         @include('layouts.topnav') 
         @include('layouts.sidebar') 
+        @include('message')
         @yield('content') 
         @include('layouts.footer') 
 
