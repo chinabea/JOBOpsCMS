@@ -260,7 +260,14 @@ Route::get('/units', [UnitController::class, 'index'])->name('units');
 // Route::get('/get-problems', [TicketController::class, 'getProblems']);
 
 // Messaging
-Route::get('/webhook', [MessengerController::class, 'webhook']);
+// Route::get('/webhook', [MessengerController::class, 'webhook']);
+Route::post('/webhook', [App\Http\Controllers\MessengerController::class, 'handleWebhook']);
+Route::get('/webhook', [App\Http\Controllers\MessengerController::class, 'verifyWebhook']);
+
+
+
+
+
 
 Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
 
