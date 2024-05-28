@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="ictram_job_type_id" id="ictram_job_type_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="mis_job_type_id" id="mis_job_type_id" class="selectpicker form-control" data-live-search="true" required>
                                     <option value="" disabled selected>Select Job Type</option>
                                         @foreach($jobTypes as $jobType)
                                             <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
