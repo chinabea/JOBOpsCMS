@@ -193,7 +193,7 @@ tr:nth-child(even) {
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>User ID</th>
                 <th>Building Number</th>
                 <th>Office Name</th>
@@ -218,7 +218,7 @@ tr:nth-child(even) {
             @if($tickets->where('mis_id', '!=', null)->count() > 0)
                 <th>MIS Request Type</th>
                 <th>MIS Job Type</th>
-                <th>MIS Assigned Name</th>
+                <th>MIS Account/System</th>
             @endif
                 <th>Created At</th>
                 <th>Updated At</th>
@@ -227,7 +227,7 @@ tr:nth-child(even) {
         <tbody>
             @foreach($tickets as $ticket)
             <tr>
-                <td>{{ $ticket->id }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $ticket->user->name }}</td>
                 <td>{{ $ticket->building_number }}</td>
                 <td>{{ $ticket->office_name }}</td>
@@ -242,14 +242,14 @@ tr:nth-child(even) {
                         <td>{{ $ticket->ictram->problem->problem_description }}</td>
                     @endif
                     @if($ticket->nicmu)
-                        <td>{{ $ticket->nicmu->job_type->name }}</td>
+                        <td>{{ $ticket->nicmu->jobType->jobType_name }}</td>
                         <td>{{ $ticket->nicmu->equipment->equipment_name }}</td>
                         <td>{{ $ticket->nicmu->problem->problem_description }}</td>
                     @endif
                     @if($ticket->mis)
-                        <td>{{ $ticket->mis->request_type->name }}</td>
-                        <td>{{ $ticket->mis->job_type->name }}</td>
-                        <td>{{ $ticket->mis->asname->name }}</td> 
+                        <td>{{ $ticket->mis->requestTypeName->requestType_name }}</td>
+                        <td>{{ $ticket->mis->jobType->jobType_name }}</td>
+                        <td>{{ $ticket->mis->asName->name }}</td> 
                     @endif
                 <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                 <td>{{ $ticket->updated_at ? $ticket->updated_at->format('F j, Y g:i A') : 'N/A' }}</td>
