@@ -24,34 +24,23 @@ class MisController extends Controller
 
     public function storeWithRelationShip(Request $request)
     {   
-            $validator = Validator::make($request->all(), [
-                'nicmus_job_type_id' => 'required',
-                'nicmus_equipment_id' => 'required',
-                'nicmus_problem_id' => 'required',
-                'nicmus_job_type_id' => 'unique:nicmus,nicmus_job_type_id,NULL,id,nicmus_equipment_id,' . $request->input('nicmus_equipment_id') . ',ictram_problem_id,' . $request->input('ictram_problem_id'),
-            ]);
+        // Extract the data from the request without validation
+        $misRequestTypeId = $request->input('mis_request_type_id');
+        $misJobTypeId = $request->input('mis_job_type_id');
+        $misAsNameId = $request->input('mis_asName_id');
 
-            // if ($validator->fails()) {
-            //     return redirect()->back()
-            //                 ->withErrors($validator)
-            //                 ->withInput()
-            //                 ->with('success', 'The data you choose is existing.');
-            // }
+        // Process the data (for example, save it to the database)
+        // Assuming you have a model that represents the relation
+        // Example:
+        $relation = new Mis();
+        $relation->mis_request_type_id = $misRequestTypeId;
+        $relation->mis_job_type_id = $misJobTypeId;
+        $relation->mis_asName_id = $misAsNameId;
+        $relation->save();
 
-        $jobTypeId = $request->input('nicmu_job_type_id');
-        $equipmentId = $request->input('nicmu_equipment_id');
-        $problemIds = $request->input('nicmu_problem_ids');
-
-        foreach ($problemIds as $problemId) {
-            Nicmu::create([
-                'nicmu_job_type_id' => $jobTypeId,
-                'nicmu_equipment_id' => $equipmentId,
-                'nicmu_problem_id' => $problemId,
-            ]);
-        }
         
 
-        return redirect()->route('nicmus.index')->with('success', 'NICMU Saved successfully.');
+        return redirect()->route('mises.index')->with('success', 'MIS Saved successfully.');
     }
 
 
