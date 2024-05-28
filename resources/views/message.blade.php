@@ -5,7 +5,7 @@
     <div class="card card-info direct-chat direct-chat-info shadow">
         <!-- Chat box content -->
         <div class="card-header">
-            <h3 class="card-title">Shadow - Regular</h3>
+            <h3 class="card-title">Messages</h3>
             <div class="card-tools">
                 <span title="3 New Messages" class="badge bg-danger">3</span>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
