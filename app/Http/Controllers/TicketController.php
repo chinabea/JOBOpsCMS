@@ -590,6 +590,7 @@ public function getAllDetails(Request $request)
         }
 
     }
+
     public function updateStatus(Request $request, $id)
     {
         // Retrieve the ticket by its ID
@@ -613,8 +614,6 @@ public function getAllDetails(Request $request)
         return redirect()->route('tickets')->with('success', 'Ticket status updated successfully.');
     }
     
-    
-    
     public function updateUsers(Request $request, $ticketId)
     {
         $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
@@ -628,22 +627,22 @@ public function getAllDetails(Request $request)
 
     }
     
-
     public function unassign(Request $request, Ticket $ticket)
     {
-
         // Get the current authenticated user
         $user = Auth::user();
 
+        // Store the current assigned user ID in the escalatedBy_for_workloadLimitReached field
+        $ticket->escalatedBy_for_workloadLimitReached = $ticket->assigned_user_id;
+
         // Unassign the ticket and set the escalation reason
         $ticket->assigned_user_id = null;
-        $ticket->escalation_reason = $request->input('reason');
-        // $ticket->escalated_by = $user->id;
+        $ticket->escalationReason_for_workloadLimitReached = $request->input('reason');
         $ticket->save();
         
         // Redirect back with a success message
         return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
     }
-    
+
 
 }

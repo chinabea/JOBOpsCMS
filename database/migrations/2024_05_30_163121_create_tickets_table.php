@@ -27,7 +27,8 @@ return new class extends Migration
             $table->boolean('covered_under_warranty')->default(false);
             $table->enum('initial_assessment', ['On-Site', 'Shipped at Office'])->nullable();
             $table->string('action_performed')->nullable();
-            $table->string('escalation_reason')->nullable();
+            $table->string('escalationReason_for_workloadLimitReached')->nullable();
+            $table->unsignedBigInteger('escalatedBy_for_workloadLimitReached')->nullable();
 
             $table->unsignedBigInteger('ictram_id')->nullable();
             $table->unsignedBigInteger('nicmu_id')->nullable();
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->foreign('nicmu_id')->references('id')->on('nicmu')->onDelete('cascade');
             $table->foreign('mis_id')->references('id')->on('mis')->onDelete('cascade');
             $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('escalatedBy_for_workloadLimitReached')->references('id')->on('users')->onDelete('cascade');
             
              
         });

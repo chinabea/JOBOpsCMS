@@ -28,7 +28,9 @@ class Ticket extends Model
                         'covered_under_warranty',
                         'initial_assessment',
                         'action_performed',
-                        'escalation_reason',
+                        'escalationReason_for_workloadLimitReached',
+                        'escalatedBy_for_workloadLimitReached',
+                        'escalationReasonDue_to_clientNoncompliance',
                     ];
 
     
@@ -132,6 +134,11 @@ class Ticket extends Model
     public function assignedUser()
     {
         return $this->belongsTo(User::class, 'assigned_user_id');
+    }
+
+    public function escalatedBy()
+    {
+        return $this->belongsTo(User::class, 'escalatedBy_for_workloadLimitReached');
     }
     
 }

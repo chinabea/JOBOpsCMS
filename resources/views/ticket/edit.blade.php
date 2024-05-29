@@ -118,25 +118,21 @@
                                 </div>
                               </div>
                             </form>
-
-
                             <p><strong>Assigned To:</strong> {{ $ticket->assignedUser ? $ticket->assignedUser->name : 'Unassigned' }}</p>
-<p><strong>Escalation Reason:</strong> {{ $ticket->escalation_reason ?? 'None' }}</p>
+                            <p><strong>Escalation Reason:</strong> {{ $ticket->escalation_reason_for_workload_limit_reached ?? 'None' }}</p>
 
-@if ($ticket->assigned_user_id == auth()->id() || auth()->user()->role == 1)
-    <hr>
-    <h4>Unassign Ticket</h4>
-    <form action="{{ route('tickets.unassign', $ticket->id) }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="reason">Escalation Reason:</label>
-            <input type="text" name="reason" id="reason" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-danger">Unassign Myself</button>
-    </form>
-@endif
-
-
+                            @if ($ticket->assigned_user_id == auth()->id() || auth()->user()->role == 1)
+                                <hr>
+                                <h4>Reached the Limit of Workload?</h4>
+                                <form action="{{ route('tickets.unassign', $ticket->id) }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="reason">Escalation Reason:</label>
+                                        <input type="text" name="reason" id="reason" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger">Unassign Myself</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
