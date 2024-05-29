@@ -255,11 +255,6 @@ Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-ticke
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 
 Route::get('/units', [UnitController::class, 'index'])->name('units');
-// Route::get('/get-options', [TicketController::class, 'getOptions']);
-// Route::get('/get-job-types', [TicketController::class, 'getJobTypes']);
-// Route::get('/get-equipments', [TicketController::class, 'getEquipments']);
-// Route::get('/get-problems', [TicketController::class, 'getProblems']);
-
 // Messaging
 // Route::get('/webhook', [MessengerController::class, 'webhook']);
 Route::post('/webhook', [App\Http\Controllers\MessengerController::class, 'handleWebhook']);
