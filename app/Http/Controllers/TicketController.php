@@ -644,5 +644,21 @@ public function getAllDetails(Request $request)
         return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
     }
 
+    public function nonComplianceEscalation(Request $request)
+    {
+        $data = $request->all();
+
+        // Handle file upload
+        if ($request->hasFile('clientNoncomplianceFile')) {
+            $path = $request->file('clientNoncomplianceFile')->store('client_noncompliance_files');
+            $data['clientNoncomplianceFile'] = $path;
+        }
+
+        Ticket::create($data);
+
+        return redirect()->back()->with('success', 'Form submitted successfully!');
+    }
+
+    
 
 }

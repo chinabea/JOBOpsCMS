@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('assigned_user_id')->nullable();
 
             $table->string('building_number')->nullable();
@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('action_performed')->nullable();
             $table->string('escalationReason_for_workloadLimitReached')->nullable();
             $table->unsignedBigInteger('escalatedBy_for_workloadLimitReached')->nullable();
+            $table->string('escalationReasonDue_to_clientNoncompliance')->nullable();
+            $table->string('clientNoncomplianceFile')->nullable();
 
             $table->unsignedBigInteger('ictram_id')->nullable();
             $table->unsignedBigInteger('nicmu_id')->nullable();

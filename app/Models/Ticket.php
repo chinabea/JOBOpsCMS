@@ -31,6 +31,7 @@ class Ticket extends Model
                         'escalationReason_for_workloadLimitReached',
                         'escalatedBy_for_workloadLimitReached',
                         'escalationReasonDue_to_clientNoncompliance',
+                        'clientNoncomplianceFile',
                     ];
 
     

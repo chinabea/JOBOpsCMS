@@ -133,6 +133,21 @@
                                     <button type="submit" class="btn btn-danger">Unassign Myself</button>
                                 </form>
                             @endif
+                          
+
+    <form action="{{ route('nonComplianceEscalation') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div>
+            <label for="escalationReasonDue_to_clientNoncompliance">Escalation Reason Due to Client Noncompliance:</label>
+            <input type="text" id="escalationReasonDue_to_clientNoncompliance" name="escalationReasonDue_to_clientNoncompliance">
+        </div>
+        <div>
+            <label for="clientNoncomplianceFile">Client Noncompliance File:</label>
+            <input type="file" id="clientNoncomplianceFile" name="clientNoncomplianceFile">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
                         </div>
                     </div>
                 </div>

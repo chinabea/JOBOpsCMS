@@ -265,6 +265,8 @@ Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('
 // Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
 Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
 Route::post('/tickets/{ticket}/unassign', [TicketController::class, 'unassign'])->name('tickets.unassign');
+Route::post('/non-compliance-escalation', [TicketController::class, 'nonComplianceEscalation'])->name('nonComplianceEscalation');
+
 
 
 Route::fallback(function () {
