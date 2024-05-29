@@ -36,7 +36,7 @@ class TicketController extends Controller
         try {
             // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
             // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
-            $tickets = Ticket::with(['user', 'users'])->orderBy('created_at', 'desc')->get();
+            $tickets = Ticket::orderBy('created_at', 'desc')->get();
             $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
 
             // Calculate age for each ticket
@@ -124,7 +124,7 @@ class TicketController extends Controller
         ActivityLogger::log('Created', $ticket, 'Ticket created');
     
         // Redirect back or to a success page
-        return redirect()->back()->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
+        return redirect()->route('tickets')->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
     }
 
     // public function store(Request $request)
