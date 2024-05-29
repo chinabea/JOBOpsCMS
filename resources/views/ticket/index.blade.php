@@ -52,7 +52,15 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
                                         <td>{{ $ticket->building_number }}, {{ $ticket->office_name }}</td>
-                                        <td>{{ $ticket->description }}</td>
+                                        <td>
+                                            <!-- {{ $ticket->description }} -->
+                                            
+                    @if($ticket->ictram)
+                        {{ $ticket->ictram->jobType->jobType_name }}
+                        {{ $ticket->ictram->equipment->equipment_name }}
+                        {{ $ticket->ictram->problem->problem_description }}
+                    @endif
+                                        </td>
                                         <td>
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                             <script>
@@ -91,8 +99,12 @@
                                                 @method('PATCH')
                                                 <select name="status" class="form-control form-control-sm" id="statusSelect-{{ $ticket->id }}">
                                                     <option value="Open" @if ($ticket->status == 'Open') selected @endif>Open</option>
+                                                    @if ($ticket->ictram)
+                                                        <option value="Purchase Parts" @if ($ticket->status == 'Purchase Parts') selected @endif>Purchase Parts</option>
+                                                    @endif
                                                     <option value="In Progress" @if ($ticket->status == 'In Progress') selected @endif>In Progress</option>
                                                     <option value="Closed" @if ($ticket->status == 'Closed') selected @endif>Closed</option>
+                                                    <option value="Completed" @if ($ticket->status == 'Completed') selected @endif>Completed</option>
                                                 </select>
                                                 <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
                                             </form>
