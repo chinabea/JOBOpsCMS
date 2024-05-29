@@ -31,7 +31,6 @@ class MisController extends Controller
 
         // Process the data (for example, save it to the database)
         // Assuming you have a model that represents the relation
-        // Example:
         $relation = new Mis();
         $relation->mis_request_type_id = $misRequestTypeId;
         $relation->mis_job_type_id = $misJobTypeId;
