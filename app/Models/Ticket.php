@@ -20,12 +20,15 @@ class Ticket extends Model
                         'is_approved', 
                         'deadline', 
                         'file_path',
-                         'status', 
-                         'ictram_id', 
+                        'status', 
+                        'ictram_id', 
                         'nicmu_id', 
                         'mis_id', 
                         'reason',
                         'covered_under_warranty',
+                        'initial_assessment',
+                        'action_performed',
+                        'escalation_reason',
                     ];
 
     
@@ -34,10 +37,10 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function assignedUser()
-    {
-        return $this->belongsTo(User::class, 'assigned_to');
-    }
+    // public function assignedUser()
+    // {
+    //     return $this->belongsTo(User::class, 'assigned_to');
+    // }
     
     public function users()
     {
@@ -125,6 +128,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Mis::class, 'mis_id');
     }
+   
+    public function assignedUser()
+    {
+        return $this->belongsTo(User::class, 'assigned_user_id');
+    }
     
-
 }

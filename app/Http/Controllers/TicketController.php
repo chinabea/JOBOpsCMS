@@ -491,27 +491,25 @@ public function getAllDetails(Request $request)
         return view('ticket.unassigned', compact('unassignedTickets','userIds'));
     }
     
-
-
-
     public function show($id)
     {
         try {
-            // Retrieve and show the specific item using the provided ID
+            // Retrieve the specific ticket using the provided ID
             $ticket = Ticket::findOrFail($id);
-            
-            $user = Ticket::with('users')->findOrFail($id);
-
-            $userIds = User::whereIn('role', [1, 2])
-                   ->where('is_approved', true)
-                   ->get();
-
-            return view('ticket.show', compact('ticket','user','userIds'));
+    
+            // Retrieve approved users with specific roles
+            // $userIds = User::whereIn('role', [1, 2])
+            //        ->where('is_approved', true)
+            //        ->get();
+    
+            // Pass the ticket and userIds to the view
+            return view('ticket.show', compact('ticket'));
         } catch (Exception $e) {
-            // Handle the exception, you can log it for debugging or display an error message to the user.
+            // Handle the exception, log it, or display an error message to the user
             return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
         }
     }
+    
     public function edit($id)
     {
         try {
@@ -628,6 +626,23 @@ public function getAllDetails(Request $request)
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Users assigned successfully!');
 
+    }
+    
+
+    public function unassign(Request $request, Ticket $ticket)
+    {
+
+        // Get the current authenticated user
+        $user = Auth::user();
+
+        // Unassign the ticket and set the escalation reason
+        $ticket->assigned_user_id = null;
+        $ticket->escalation_reason = $request->input('reason');
+        // $ticket->escalated_by = $user->id;
+        $ticket->save();
+        
+        // Redirect back with a success message
+        return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
     }
     
 

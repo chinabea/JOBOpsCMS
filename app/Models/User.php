@@ -66,18 +66,22 @@ class User extends Authenticatable
         return $this->hasMany(ActivityLog::class);
     }
     
-    public function assignedTickets()
-    {
-        return $this->belongsToMany(Ticket::class);
-    }
+    // public function assignedTickets()
+    // {
+    //     return $this->belongsToMany(Ticket::class);
+    // }
     
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
 
-    public function assignedUser()
+    // public function assignedUser()
+    // {
+    //     return $this->belongsTo(User::class, 'assigned_user_id');
+    // }
+    public function assignedTickets()
     {
-        return $this->belongsTo(User::class, 'assigned_user_id');
+        return $this->hasMany(Ticket::class, 'assigned_user_id');
     }
 }

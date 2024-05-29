@@ -37,14 +37,14 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Requested by <span class="required"></span>
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="first-name" required="required" class="form-control" value="{{ $ticket->user->name }}" disabled>
+                                <input type="text" id="first-name"="required" class="form-control" value="{{ $ticket->user->name }}" disabled>
                               </div>
                             </div>
                             <div class="item form-group">
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Location Service <span class="required"></span>
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="service_location" name="service_location" required="required" class="form-control" value="{{ $ticket->service_location }}">
+                                <input type="text" id="service_location" name="service_location"="required" class="form-control" value="{{ $ticket->service_location }}">
                               </div>
                             </div>
                             <div class="item form-group">
@@ -109,6 +109,7 @@
                                     <textarea class="form-control" type="text" id="action_performed" name="action_performed" value="{{ $ticket->action_performed }}"></textarea>
                                 </div>
                             </div>
+                
                             <div class="ln_solid"></div>
                               <div class="item form-group justify-content-center">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
@@ -117,6 +118,25 @@
                                 </div>
                               </div>
                             </form>
+
+
+                            <p><strong>Assigned To:</strong> {{ $ticket->assignedUser ? $ticket->assignedUser->name : 'Unassigned' }}</p>
+<p><strong>Escalation Reason:</strong> {{ $ticket->escalation_reason ?? 'None' }}</p>
+
+@if ($ticket->assigned_user_id == auth()->id() || auth()->user()->role == 1)
+    <hr>
+    <h4>Unassign Ticket</h4>
+    <form action="{{ route('tickets.unassign', $ticket->id) }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="reason">Escalation Reason:</label>
+            <input type="text" name="reason" id="reason" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-danger">Unassign Myself</button>
+    </form>
+@endif
+
+
                         </div>
                     </div>
                 </div>
