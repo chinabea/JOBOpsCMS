@@ -54,34 +54,36 @@
                                         <td>{{ $ticket->building_number }}, {{ $ticket->office_name }}</td>
                                         <td>{{ $ticket->description }}</td>
                                         <td>
-                                            <!-- @if ($ticket->priority_level === 'High')
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                            <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                document.getElementById('priority_levelSelect-{{ $ticket->id }}').addEventListener('change', function() {
+                                                    const form = document.getElementById('priority_levelForm-{{ $ticket->id }}');
+                                                    form.submit();
+                                                });
+                                            });
+                                            </script>
+
+                                            <form action="{{ route('tickets.updatePriorityLvl', $ticket->id) }}" method="POST" id="priority_levelForm-{{ $ticket->id }}">
+                                                @csrf
+                                                @method('PATCH')
+                                                <select name="priority_level" class="form-control form-control-sm" id="priority_levelSelect-{{ $ticket->id }}">
+                                                    <option value="" selected disabled>Select Priority Level</option>
+                                                    <option value="High" @if ($ticket->priority_level == 'High') selected @endif>High</option>
+                                                    <option value="Mid" @if ($ticket->priority_level == 'Mid') selected @endif>Mid</option>
+                                                    <option value="Low" @if ($ticket->priority_level == 'Low') selected @endif>Low</option>
+                                                </select>
+                                            </form>
+                                        </td>
+                                        @else
+                                            @if ($ticket->priority_level === 'High')
                                             <span class="badge badge-danger">High</span>
                                             @elseif ($ticket->priority_level === 'Mid')
                                             <span class="badge badge-warning">Mid</span>
                                             @elseif ($ticket->priority_level === 'Low')
                                             <span class="badge badge-secondary">Low</span>
-                                            @endif -->
-                                            <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('priority_levelSelect-{{ $ticket->id }}').addEventListener('change', function() {
-        const form = document.getElementById('priority_levelForm-{{ $ticket->id }}');
-        form.submit();
-    });
-});
-</script>
-
-<form action="{{ route('tickets.updatePriorityLvl', $ticket->id) }}" method="POST" id="priority_levelForm-{{ $ticket->id }}">
-    @csrf
-    @method('PATCH')
-    <select name="priority_level" class="form-control form-control-sm" id="priority_levelSelect-{{ $ticket->id }}">
-        <option value="" selected disabled>Select Priority Level</option>
-        <option value="High" @if ($ticket->priority_level == 'High') selected @endif>High</option>
-        <option value="Mid" @if ($ticket->priority_level == 'Mid') selected @endif>Mid</option>
-        <option value="Low" @if ($ticket->priority_level == 'Low') selected @endif>Low</option>
-    </select>
-</form>
-
-                                        </td>
+                                            @endif
+                                        @endif
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
