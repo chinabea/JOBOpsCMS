@@ -25,6 +25,7 @@ use App\Http\Controllers\ICTRAM\ProblemController;
 use App\Http\Controllers\ICTRAM\AssignController;
 use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\PriorityLevelController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -264,12 +265,11 @@ Route::get('/units', [UnitController::class, 'index'])->name('units');
 Route::post('/webhook', [App\Http\Controllers\MessengerController::class, 'handleWebhook']);
 Route::get('/webhook', [App\Http\Controllers\MessengerController::class, 'verifyWebhook']);
 
-
-
-
-
-
 Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
+
+// Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
+Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
+
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
