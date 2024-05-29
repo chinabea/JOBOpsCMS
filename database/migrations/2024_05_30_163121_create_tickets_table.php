@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('reason')->nullable();
             $table->unsignedBigInteger('serial_number')->nullable();
             $table->boolean('covered_under_warranty')->default(false);
-            
+            $table->enum('initial_assessment', ['On-Site', 'Shipped at Office'])->nullable();
+            $table->string('action_performed')->nullable();
+
             $table->unsignedBigInteger('ictram_id')->nullable();
             $table->unsignedBigInteger('nicmu_id')->nullable();
             $table->unsignedBigInteger('mis_id')->nullable();

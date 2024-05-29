@@ -90,6 +90,25 @@
                                 <input id="file_path" class="form-control" type="file" name="file_path">
                               </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Initial Assessment</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="on_site" name="initial_assessment" value="On-Site" {{ $ticket->initial_assessment == 'On-Site' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="on_site">On-Site</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="shipped_at_office" name="initial_assessment" value="Shipped at Office" {{ $ticket->initial_assessment == 'Shipped at Office' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="shipped_at_office">Shipped at Office</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Action Taken</label>
+                                <div class="col-md-6 col-sm-6">
+                                    <textarea class="form-control" type="text" id="action_performed" name="action_performed" value="{{ $ticket->action_performed }}"></textarea>
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                               <div class="item form-group justify-content-center">
                                 <div class="col-md-6 col-sm-6 offset-md-3">

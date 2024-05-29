@@ -512,16 +512,13 @@ public function getAllDetails(Request $request)
             return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
         }
     }
-    
     public function edit($id)
     {
         try {
             $ticket = Ticket::findOrFail($id);
-            $priority_level = $ticket->priority_level; 
-            $status = $ticket->status; 
             $userIds = User::where('role', 2)->where('is_approved', true)->get();  
             
-            return view('ticket.edit', compact('ticket','priority_level','status','userIds'))->with('error', 'An error occurred');
+            return view('ticket.edit', compact('ticket', 'userIds'))->with('error', 'An error occurred');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -531,18 +528,54 @@ public function getAllDetails(Request $request)
     {
         try {
             $ticket = Ticket::findOrFail($id);
-            $ticket->update($request->all());
+            $ticket->update($request->except(['initial_assessment', 'action_performed']));
+            $ticket->initial_assessment = $request->initial_assessment;
+            $ticket->action_performed = $request->action_performed;
+            $ticket->save();
             
-
             // Log activity
             ActivityLogger::log('Updated', $ticket, 'Ticket updated');
             
             return redirect()->route('tickets')->with('success', 'Ticket Successfully Updated!');
-
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
+    // public function edit($id)
+    // {
+    //     try {
+    //         $ticket = Ticket::findOrFail($id);
+    //         $priority_level = $ticket->priority_level; 
+    //         $status = $ticket->status; 
+    //         $userIds = User::where('role', 2)->where('is_approved', true)->get();  
+            
+    //         return view('ticket.edit', compact('ticket','priority_level','status','userIds'))->with('error', 'An error occurred');
+    //     } catch (Exception $e) {
+    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+    //     }
+    // }
+
+    // public function update(Request $request, $id)
+    // {
+    //     try {
+    //         $ticket = Ticket::findOrFail($id);
+    //         $ticket->update($request->all());
+    //         $ticket->initial_assessment = $request->initial_assessment;
+    //         $ticket->action_performed = $request->action_performed;
+    //         $ticket->save();
+            
+            
+
+    //         // Log activity
+    //         ActivityLogger::log('Updated', $ticket, 'Ticket updated');
+            
+    //         return redirect()->route('tickets')->with('success', 'Ticket Successfully Updated!');
+
+    //     } catch (Exception $e) {
+    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+    //     }
+    // }
 
     public function destroy($id)
     {
