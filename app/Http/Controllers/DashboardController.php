@@ -58,7 +58,7 @@ class DashboardController extends Controller
         $totalLowLevelTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalLowLevelTicketsPercentageChange = $totalLowLevelTicketsLastWeek > 0 ? (($totalLowLevelTickets - $totalLowLevelTicketsLastWeek) / $totalLowLevelTicketsLastWeek) * 100 : 0; 
 
-        $totalUnassignedTickets = Ticket::doesntHave('users')->count();
+        $totalUnassignedTickets = Ticket::whereNull('assigned_user_id')->count();
         $totalUnassignedTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalUnassignedTicketsPercentageChange = $totalUnassignedTicketsLastWeek > 0 ? (($totalUnassignedTickets - $totalUnassignedTicketsLastWeek) / $totalUnassignedTicketsLastWeek) * 100 : 0;  
 
@@ -67,13 +67,9 @@ class DashboardController extends Controller
         $totalPendingApprovalofUsersPercentageChange = $totalPendingApprovalofUsersLastWeek > 0 ? (($totalPendingApprovalofUsers - $totalPendingApprovalofUsersLastWeek) / $totalPendingApprovalofUsersLastWeek) * 100 : 0; 
         
         $userId = auth()->id();
-    
+
         // Fetch tickets where the user is assigned
-        $totalAssignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
-            $query->where('users.id', $userId);
-        })
-        ->with('user', 'users') // Load relationships
-        ->count();
+        $totalAssignedTickets = Ticket::where('assigned_user_id', $userId)->count();
         $totalAssignedTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalAssignedTicketsPercentageChange = $totalAssignedTicketsLastWeek > 0 ? (($totalAssignedTickets - $totalAssignedTicketsLastWeek) / $totalAssignedTicketsLastWeek) * 100 : 0; 
         

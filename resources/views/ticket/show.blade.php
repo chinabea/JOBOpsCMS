@@ -19,22 +19,20 @@
 									Assign to<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6">
-									@if(isset($userIds) && $userIds->isNotEmpty())
-										<select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
-											@foreach($userIds as $user)
-												<option value="{{ $user->id }}" 
-													@foreach($ticket->users as $assigned_user)
-														{{ $assigned_user->id == $user->id ? 'selected' : '' }}
-													@endforeach>
-													<span class='text-black'>
-														<strong>{{ $user->name }}</strong><br>
-														<small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
-														<small>Assigned to Tickets: {{ $user->tickets->count() }}</small><br>
-													</span>
-												</option>
-											@endforeach
-										</select>
-									@endif
+								@if(isset($userIds) && $userIds->isNotEmpty())
+									<select class="selectpicker form-control" id="assigned_to" name="assigned_to" data-live-search="true">
+										@foreach($userIds as $user)
+											<option value="{{ $user->id }}"
+												{{ $ticket->assigned_user_id == $user->id ? 'selected' : '' }}>
+												<span class='text-black'>
+													<strong>{{ $user->name }}</strong><br>
+													<small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
+													<small>Assigned to Tickets: {{ $user->assignedTickets->count() }}</small><br>
+												</span>
+											</option>
+										@endforeach
+									</select>
+								@endif
 								</div>
 							</div>
 							<div class="item form-group">
@@ -94,6 +92,11 @@
 									<textarea id="description" class="form-control" type="text" name="description" value="{{ $ticket->description }}"></textarea>
 								</div>
 							</div>
+							@if ($ticket->file_path)
+                <p><strong>File:</strong> <a href="{{ Storage::url($ticket->file_path) }}" target="_blank">Download</a></p>
+            @endif
+         
+
 							<div class="ln_solid"></div>
 							<div class="item form-group justify-content-center">
 								<div class="col-md-6 col-sm-6 offset-md-3">
