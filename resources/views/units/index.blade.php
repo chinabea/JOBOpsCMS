@@ -62,7 +62,7 @@
                             <div class="card card-widget widget-user shadow">
                             <div class="widget-user-header bg-warning">
                                 <h3 class="widget-user-username"></h3>
-                                <h4 class="widget-user-desc">Management Information System Unit</h4>
+                                <h4 class="widget-user-desc">Network Internet and Communicationations Management   </h4>
                             </div>
                             <a href="{{ route('nicmus.index') }}">
                                 <div class="widget-user-image">
@@ -102,7 +102,7 @@
                         <div class="col-md-4">
                             <div class="card card-widget widget-user shadow">
                             <div class="widget-user-header bg-danger">
-                                <h4 class="widget-user-desc">Network Internet and Communicationations Management</h4>
+                                <h4 class="widget-user-desc">Management Information System Unit</h4>
                             </div>
                             <a href="{{ route('mises.index') }}">
                                 <div class="widget-user-image">
