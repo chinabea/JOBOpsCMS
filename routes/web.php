@@ -253,19 +253,16 @@ Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ict
 Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
-
 Route::get('/units', [UnitController::class, 'index'])->name('units');
-// Messaging
+
 // Route::get('/webhook', [MessengerController::class, 'webhook']);
 Route::post('/webhook', [App\Http\Controllers\MessengerController::class, 'handleWebhook']);
 Route::get('/webhook', [App\Http\Controllers\MessengerController::class, 'verifyWebhook']);
 
 Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
-
-// Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
 Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
-Route::post('/tickets/{ticket}/unassign', [TicketController::class, 'unassign'])->name('tickets.unassign');
 Route::post('/non-compliance-escalation', [TicketController::class, 'nonComplianceEscalation'])->name('nonComplianceEscalation');
+Route::post('/tickets/{ticket}/unassign', [TicketController::class, 'unassign'])->name('tickets.unassign');
 
 
 
