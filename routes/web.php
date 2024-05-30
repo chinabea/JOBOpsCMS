@@ -256,8 +256,8 @@ Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.
 Route::get('/units', [UnitController::class, 'index'])->name('units');
 
 // Route::get('/webhook', [MessengerController::class, 'webhook']);
-Route::post('/webhook', [App\Http\Controllers\MessengerController::class, 'handleWebhook']);
-Route::get('/webhook', [App\Http\Controllers\MessengerController::class, 'verifyWebhook']);
+Route::post('/webhook', [MessengerController::class, 'handleWebhook']);
+Route::get('/webhook', [MessengerController::class, 'verifyWebhook']);
 
 Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
 Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');

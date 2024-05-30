@@ -97,7 +97,34 @@
 </div>
 
 <!-- Your existing content here -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get reference to the chat box container
+        var chatBoxContainer = document.getElementById("chatBoxContainer");
 
+        // Function to toggle chat box visibility
+        function toggleChatBox() {
+            if (chatBoxContainer.style.display === "none") {
+                // Show the chat box
+                chatBoxContainer.style.display = "block";
+            } else {
+                // Hide the chat box
+                chatBoxContainer.style.display = "none";
+            }
+        }
+
+        // Attach event listener to the link
+        var chatLink = document.querySelector('a[href="https://m.me/332081713319212?ref=homepage"]');
+        if (chatLink) {
+            chatLink.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default link behavior
+                toggleChatBox();
+            });
+        }
+    });
+</script>
+
+<!-- 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Get references to the button and chat box container
@@ -115,4 +142,4 @@
             }
         });
     });
-</script>
+</script> -->

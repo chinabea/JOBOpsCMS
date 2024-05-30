@@ -1,3 +1,8 @@
+<!-- <li class="nav-item">
+    <a href="https://m.me/332081713319212?ref=homepage" id="openChatButton" class="nav-link">
+        <i class="far fa-circle nav-icon text-danger"></i>
+    </a>
+</li> -->
 
         
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -12,7 +17,7 @@
 
 
     <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" id="openChatButton">
+        <a class="nav-link" data-toggle="dropdown" href="https://m.me/332081713319212?ref=homepage" id="openChatButton">
           <i class="far fa-comments"></i>
           <span class="badge badge-danger navbar-badge"></span>
         </a>
