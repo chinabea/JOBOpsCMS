@@ -20,62 +20,58 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card px-3 pt-3 pb-1">
-                        @include('units.nicmu.modal.create-jobType')
-                        @include('units.nicmu.modal.create-equipment')
-                        @include('units.nicmu.modal.create-problem')
                         <form id="jobForm" action="{{ route('nicmu.add-relation') }}" method="POST">
                                 @csrf
                             <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
                             <div class="mx-2 w-100">
-                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                <div class="d-flex align-items-center mb-1 mt-2">
                                     <label for="jobType">Job Type</label>
-                                    <div>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateJobTypeModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                    </div>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="nicmu_job_type_id" id="nicmu_job_type_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="nicmu_job_type_id" id="nicmu_job_type_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div1')"required>
                                     <option value="" disabled selected>Select Job Type</option>
                                         @foreach($jobTypes as $jobType)
                                             <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="jobType">Other Sources</option></div>
                                     </select>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div1"></div>
+                                    </div>
                                 </div>
                             </div>
                             
                             <div class="mx-2 w-100">
-                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                <div class="d-flex align-items-center mb-1 mt-2">
                                     <label for="equipment">Equipment</label>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateEquipmentModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="nicmu_equipment_id" id="nicmu_equipment_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="nicmu_equipment_id" id="nicmu_equipment_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div2')" required>
                                         <option value="" disabled selected>Select Equipment</option>
                                         @foreach($equipments as $equipment)
                                             <option value="{{ $equipment->id }}">{{ $equipment->equipment_name }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="equipment">Other Sources</option></div>
                                     </select>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div2"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="mx-2 w-100">
-                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                <div class="d-flex align-items-center mb-1 mt-2">
                                     <label for="jobType">Problem</label>
-                                    <div>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#nicmuCreateProblemModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                    </div>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="nicmu_problem_ids[]" id="nicmu_problem_id" class="selectpicker form-control" data-live-search="true" multiple required>
+                                    <select name="nicmu_problem_ids[]" id="nicmu_problem_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div3')" multiple required>
                                         @foreach ($problems as $problem)
                                         <option value="{{ $problem->id }}">{{ $problem->problem_description }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="problem">Other Sources</option></div>
                                     </select>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div3"></div>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -125,67 +121,23 @@
     }
 </style>
 
-<script>
-function toggleDropdown(menuId) {
-    var dropdownMenus = document.querySelectorAll('.dropdown-menu');
-    dropdownMenus.forEach(function(menu) {
-        if(menu.id !== menuId){
-        menu.classList.remove("show");
-        }
-    });
-    var dropdownMenu = document.getElementById(menuId);
-    dropdownMenu.classList.toggle("show");
-}
-function selectItemJobType(item1, item, displayId, hiddenId, menuId) {
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
-    toggleDropdown(displayId.replace("displayFieldJobType", "dropdownMenuJobType"));
-}
-function selectItemEquipment(item1, item, displayId, hiddenId, menuId) {
-    console.log("selectItemEquipment", item1);
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
-    toggleDropdown(displayId.replace("displayFieldEquipment", "dropdownMenuEquipment"));
-}
-function selectItemProblem(item1, item, displayId, hiddenId, menuId) {
-    document.getElementById(displayId).value = item;
-    document.getElementById(hiddenId).value = item1;
+<script type="text/javascript">
+    function showfield(name, divId){
+        var divElement = document.getElementById(divId);
+        var selectElement = document.getElementById('nicmu_problem_id');
+        var selectedValues = Array.from(selectElement.selectedOptions).map(option => option.value);
 
-    toggleDropdown(displayId.replace("displayFieldProblem", "dropdownMenuProblem"));
-}
-
-function filterDropdown(menuId) {
-    var input, filter, dropdownItems, items, i;
-    input = document.querySelector("#" + menuId + " .search-input");
-    filter = input.value.toUpperCase();
-    dropdownItems = document.querySelectorAll("#" + menuId + " .dropdown-item");
-    for (i = 0; i < dropdownItems.length; i++) {
-        items = dropdownItems[i].innerText;
-        if (items.toUpperCase().indexOf(filter) > -1) {
-            dropdownItems[i].style.display = "";
+        if (name === 'jobType') {
+            divElement.innerHTML = 'Other: <input class="form-control" type="text" name="jobType_other" placeholder="Please Specify JobType" required/>';
+        } else if (name === 'equipment') {
+            divElement.innerHTML = 'Other: <input class="form-control" type="text" name="equipment_other" placeholder="Please Specify Equipment" required/>';
+        } else if (selectedValues.includes('problem')) {
+            selectElement.value = 'problem';
+            divElement.innerHTML = 'Other: <input class="form-control" type="text" name="problem_other" placeholder="Please Specify Problem" required/>';
+            // divElement.removeAttribute("multiple");
+            divElement.click();
         } else {
-            dropdownItems[i].style.display = "none";
+            divElement.innerHTML = '';
         }
     }
-}
-function validateForm() {
-    var jobTypeField = document.getElementById("displayFieldJobType").value.trim();
-    var EquipmentField = document.getElementById("displayFieldEquipment").value.trim();
-    var ProblemField = document.getElementById("displayFieldProblem").value.trim();
-    if (jobTypeField === "") {
-        document.getElementById("jobTypeValidationMessage").style.display = "block";
-        return false;
-    } else if (EquipmentField === ""){
-        document.getElementById("EquipmentValidationMessage").style.display = "block";
-        document.getElementById("jobTypeValidationMessage").style.display = "none";
-        return false;
-    } else if (ProblemField === ""){
-        document.getElementById("ProblemValidationMessage").style.display = "block";
-        document.getElementById("EquipmentValidationMessage").style.display = "none";
-        return false;
-    }
-    // Add validation for other fields similarly
-    
-    return true;
-}
 </script>
