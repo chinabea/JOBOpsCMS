@@ -55,11 +55,11 @@
                                         <td>
                                             <!-- {{ $ticket->description }} -->
                                             
-                    @if($ticket->ictram)
-                        {{ $ticket->ictram->jobType->jobType_name }}
-                        {{ $ticket->ictram->equipment->equipment_name }}
-                        {{ $ticket->ictram->problem->problem_description }}
-                    @endif
+                                            @if($ticket->ictram)
+                                                {{ $ticket->ictram->jobType->jobType_name }}
+                                                {{ $ticket->ictram->equipment->equipment_name }}
+                                                {{ $ticket->ictram->problem->problem_description }}
+                                            @endif
                                         </td>
                                         <td>
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))

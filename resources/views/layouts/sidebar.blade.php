@@ -303,7 +303,7 @@
                 
                 <!-- <br> -->
                 <li class="nav-header">OTHERS</li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="https://m.me/332081713319212" class="nav-link">
                         <i class="far fa-circle nav-icon text-danger"></i>
                         <p>Messages 1</p>
@@ -314,7 +314,7 @@
                         <i class="far fa-circle nav-icon text-danger"></i>
                         <p>Messages 2</p>
                     </a>
-                </li> -->
+                </li>
                 <li class="nav-item">
                             <a href="{{ route('tickets.report') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.report' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
