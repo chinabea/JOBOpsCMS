@@ -23,38 +23,56 @@ class NicmuController extends Controller
         return view('units.nicmu.index', compact('nicmus', 'jobTypes', 'equipments', 'problems', 'sortedNicmus'));
     }
 
-        public function storeWithRelationShip(Request $request)
+ public function storeWithRelationShip(Request $request)
     {   
-            $validator = Validator::make($request->all(), [
-                'nicmus_job_type_id' => 'required',
-                'nicmus_equipment_id' => 'required',
-                'nicmus_problem_id' => 'required',
-                'nicmus_job_type_id' => 'unique:nicmus,nicmus_job_type_id,NULL,id,nicmus_equipment_id,' . $request->input('nicmus_equipment_id') . ',ictram_problem_id,' . $request->input('ictram_problem_id'),
+        //Job type Other
+        if ($request->has('jobType_other')) {
+
+            $jobType = NicmuJobType::create([
+                'jobType_name' => $request->input('jobType_other'),
+            ]);
+        } else {
+            $nicmu_job_type_id = $request->input('nicmu_job_type_id');
+            
+            $jobType = NicmuJobType::findOrFail($nicmu_job_type_id);
+        }
+        //Equipment Other
+        if ($request->has('equipment_other')) {
+
+            $equipment = NicmuEquipment::create([
+                'equipment_name' => $request->input('equipment_other'),
+            ]);
+        } else {
+            $nicmu_equipment_id = $request->input('nicmu_equipment_id');
+            
+            $equipment = NicmuEquipment::findOrFail($nicmu_equipment_id);
+
+        }
+
+            //Problem Other
+        if ($request->has('problem_other')) {
+
+            $problemIds[] = NicmuProblem::create([
+                'problem_description' => $request->input('problem_other'),
             ]);
 
-            // if ($validator->fails()) {
-            //     return redirect()->back()
-            //                 ->withErrors($validator)
-            //                 ->withInput()
-            //                 ->with('success', 'The data you choose is existing.');
-            // }
 
-        $jobTypeId = $request->input('nicmu_job_type_id');
-        $equipmentId = $request->input('nicmu_equipment_id');
-        $problemIds = $request->input('nicmu_problem_ids');
+        } else {
+            $nicmu_problem_ids = $request->input('nicmu_problem_ids');
+            
+            $problemIds = NicmuProblem::findOrFail($nicmu_problem_ids);
+        }
 
         foreach ($problemIds as $problemId) {
             Nicmu::create([
-                'nicmu_job_type_id' => $jobTypeId,
-                'nicmu_equipment_id' => $equipmentId,
-                'nicmu_problem_id' => $problemId,
+                'nicmu_job_type_id' => $jobType->id,
+                'nicmu_equipment_id' => $equipment->id,
+                'nicmu_problem_id' => $problemId->id,
             ]);
         }
-        
 
-        return redirect()->route('nicmus.index')->with('success', 'NICMU Saved successfully.');
+        return redirect()->back()->with('success', 'NICMU Saved successfully.');
     }
-
         public function storeJobType(Request $request)
     {
 
