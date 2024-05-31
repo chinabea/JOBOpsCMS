@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Crypt;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
             $profilePictureUrl = session('profilePictureUrl');
             $view->with('profilePictureUrl', $profilePictureUrl);
         });
+
+        // Check for the .authorized file
+        if (!file_exists(base_path('.authorized'))) {
+            abort(403, 'Unauthorized access.');
+        }
         
     }
 }
