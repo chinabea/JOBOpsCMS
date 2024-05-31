@@ -16,9 +16,9 @@ class IctramController extends Controller
     public function offices()
     {
         // Query to get the top requested equipment
-        $topRequestedEquipment = Ticket::select('office_name', 'ictram_equipment_id', DB::raw('count(*) as request_count'))
+        $topRequestedEquipment = Ticket::select('office_name', 'ictram_id', DB::raw('count(*) as request_count'))
             ->with('ictramEquipment')
-            ->groupBy('office_name', 'ictram_equipment_id')
+            ->groupBy('office_name', 'ictram_id')
             ->orderBy('request_count', 'desc')
             ->get();
 
