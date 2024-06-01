@@ -24,22 +24,54 @@ class MisController extends Controller
 
     public function storeWithRelationShip(Request $request)
     {   
-        // Extract the data from the request without validation
-        $misRequestTypeId = $request->input('mis_request_type_id');
-        $misJobTypeId = $request->input('mis_job_type_id');
-        $misAsNameId = $request->input('mis_asName_id');
-
-        // Process the data (for example, save it to the database)
-        // Assuming you have a model that represents the relation
-        $relation = new Mis();
-        $relation->mis_request_type_id = $misRequestTypeId;
-        $relation->mis_job_type_id = $misJobTypeId;
-        $relation->mis_asName_id = $misAsNameId;
-        $relation->save();
-
         
+    //Request type Other
+    if ($request->has('requestType_other')) {
 
-        return redirect()->route('mises.index')->with('success', 'MIS Saved successfully.');
+        $requestType = MisRequestType::create([
+            'requestType_name' => $request->input('requestType_other'),
+        ]);
+    } else {
+        $mis_request_type_id = $request->input('mis_request_type_id');
+        
+        $requestType = MisRequestType::findOrFail($mis_request_type_id);
+    }
+    //Job Type Other
+    if ($request->has('jobType_other')) {
+
+        $jobType = MisJobType::create([
+            'jobType_name' => $request->input('jobType_other'),
+        ]);
+    } else {
+        $mis_job_type_id = $request->input('mis_job_type_id');
+        
+        $jobType = MisJobType::findOrFail($mis_job_type_id);
+
+    }
+
+    //AsName Other
+    if ($request->has('asName_other')) {
+
+        $asNameIds[] = MisAsname::create([
+            'name' => $request->input('asName_other'),
+        ]);
+
+
+    } else {
+        $mis_asName_id = $request->input('mis_asName_id');
+        
+        $asNameIds = MisAsname::findOrFail($mis_asName_id);
+    }
+
+        foreach ($asNameIds as $asNameId) {
+            Mis::create([
+                'mis_request_type_id' => $requestType->id,
+                'mis_job_type_id' => $jobType->id,
+                'mis_asname_id' => $asNameId->id,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'MIS Saved successfully.');
     }
 
 
