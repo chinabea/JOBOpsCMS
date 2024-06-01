@@ -614,6 +614,56 @@ public function getAllDetails(Request $request)
         return redirect()->route('tickets')->with('success', 'Ticket status updated successfully.');
     }
     
+    // public function updateUsers(Request $request, $ticketId)
+    // {
+    //     $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
+    //     $userId = $request->input('assigned_user_id'); // Get the assigned user ID
+
+    //     // Assign the user to the ticket
+    //     $ticket->assigned_user_id = $userId;
+    //     $ticket->save();
+
+    //     // Redirect back with a success message
+    //     return redirect()->back()->with('success', 'User assigned successfully!');
+    // }
+
+    
+    // public function updateUsers(Request $request, $ticketId)
+    // {
+    //     $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
+    //     $userIds = $request->input('assigned_user_id'); // Corrected from user_ids to assigned_user_id
+    
+    //     // Sync the users to the ticket
+    //     $ticket->users()->sync($userIds);
+    
+    //     // Redirect back with a success message
+    //     return redirect()->back()->with('success', 'Users assigned successfully!');
+
+    // }    
+    // public function updateUsers(Request $request, $ticketId)
+    // {
+    //     $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
+    //     $userIds = $request->input('assigned_user_id'); // Corrected from user_ids to assigned_user_id
+    
+    //     // Sync the users to the ticket
+    //     $ticket->users()->sync($userIds);
+        
+    //     // Create an empty collection for userIds initially
+    //     $userIds = collect();
+    
+    //     // Loop through tickets and fetch users based on ticket type
+    //     if ($ticket->ictram) {
+    //         $userIds = User::whereIn('role', [2, 7])->where('is_approved', true)->get();
+    //     } elseif ($ticket->nicmu) {
+    //         $userIds = User::whereIn('role', [3, 8])->where('is_approved', true)->get();
+    //     } elseif ($ticket->mis) {
+    //         $userIds = User::whereIn('role', [9, 4])->where('is_approved', true)->get();
+    //     }
+    
+    //     // Redirect back with a success message
+    //     return redirect()->back()->with('success', 'Users assigned successfully!');
+    // }
+    
     public function updateUsers(Request $request, $ticketId)
     {
         $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists

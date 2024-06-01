@@ -44,13 +44,6 @@ class Ticket extends Model
     // {
     //     return $this->belongsTo(User::class, 'assigned_to');
     // }
-    
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'ticket_user')
-                    ->withTimestamps();
-    }
-    
 
     public function unit()
     {
@@ -136,10 +129,18 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'assigned_user_id');
     }
-
     public function escalatedBy()
     {
         return $this->belongsTo(User::class, 'escalatedBy_for_workloadLimitReached');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class);
+    // }
     
 }
