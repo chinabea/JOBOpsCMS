@@ -20,62 +20,58 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card px-3 pt-3 pb-1">
-                        @include('units.mis.modal.create-jobType')
-                        @include('units.mis.modal.create-request-type')
-                        @include('units.mis.modal.create-asName')
                         <form id="jobForm" action="{{ route('mises.add-relation') }}" method="POST">
                                 @csrf
                             <div class="d-md-flex flex-md-row flex-column justify-content-between gap-3">
                             <div class="mx-2 w-100">
-                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
+                                <div class="d-flex align-items-center mb-1 mt-2">
                                     <label for="requestType">Request Type</label>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#misCreateRequestTypeModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="mis_request_type_id" id="mis_request_type_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="mis_request_type_id" id="mis_request_type_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div1')" required>
                                     <option value="" disabled selected>Select Request Type</option>
                                         @foreach($requestTypes as $requestType)
                                             <option value="{{ $requestType->id }}">{{ $requestType->requestType_name }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="requestType">Other Sources</option></div>
                                     </select>
-                                </div>
-                            </div>
-                                                        <div class="mx-2 w-100">
-                                <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
-                                    <label for="jobType">Job Type</label>
-                                    <div>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#misCreateJobTypeModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div1"></div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="mx-2 w-100">
+                                <div class="d-flex align-items-center mb-1 mt-2">
+                                    <label for="jobType">Job Type</label>
+                                </div>
                                 <div class="dropdown">
-                                    <select name="mis_job_type_id" id="mis_job_type_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="mis_job_type_id" id="mis_job_type_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div2')" required>
                                     <option value="" disabled selected>Select Job Type</option>
                                         @foreach($jobTypes as $jobType)
                                             <option value="{{ $jobType->id }}">{{ $jobType->jobType_name }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="jobType">Other Sources</option></div>
                                     </select>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div2"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="mx-2 w-100">
                                 <div class="d-flex flex-row justify-content-between align-items-center mb-1 mt-2">
                                     <label for="asName">Account Name</label>
-                                    <div>
-                                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#misCreateAsNameModal">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                    </div>
                                 </div>
                                 <div class="dropdown">
-                                    <select name="mis_asName_id" id="mis_asName_id" class="selectpicker form-control" data-live-search="true" required>
+                                    <select name="mis_asName_id" id="mis_asName_id" class="selectpicker form-control" data-live-search="true" onchange="showfield(this.value, 'div3')" required>
                                     <option value="" disabled selected>Select Account Name</option>
                                         @foreach($asNames as $asName)
                                             <option value="{{ $asName->id }}">{{ $asName->name }}</option>
                                         @endforeach
+                                        <div class="fixed"><option value="asName">Other Sources</option></div>
                                     </select>
+                                    <div class="form-group">
+                                        <div class="w-100" id="div3"></div>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -124,3 +120,23 @@
         overflow-y: auto;
     }
 </style>
+<script type="text/javascript">
+function showfield(name, divId){
+    var divElement = document.getElementById(divId);
+    var selectElement = document.getElementById('mis_asName_id');
+    var selectedValues = Array.from(selectElement.selectedOptions).map(option => option.value);
+
+    if (name === 'requestType') {
+        divElement.innerHTML = 'Other: <input class="form-control" type="text" name="requestType_other" placeholder="Please Specify Request Type" required/>';
+    } else if (name === 'jobType') {
+        divElement.innerHTML = 'Other: <input class="form-control" type="text" name="jobType_other" placeholder="Please Specify Job Type" required/>';
+    } else if (selectedValues.includes('asName')) {
+        selectElement.value = 'asName';
+        divElement.innerHTML = 'Other: <input class="form-control" type="text" name="asName_other" placeholder="Please Specify Account Name" required/>';
+        // divElement.removeAttribute("multiple");
+        divElement.click();
+    } else {
+        divElement.innerHTML = '';
+    }
+}
+</script>
