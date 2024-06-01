@@ -33,16 +33,19 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Requester</th>
-                                        <th>Location</th>
-                                        <th>Description</th>
+                                        <th>Requesitor</th>
+                                        <th>Assigned to</th>
+                                        <th>Building Number</th>
+                                        <th>Office Name</th>
+                                        <th>Request</th>
                                         <th>Priority Level</th>
                                         <th>Status</th>
                                         <th>Age</th>
-                                        <th>Created at</th>
+                                        <th>Created At</th>
                                         @if(auth()->user()->role == 1)
                                         <th>Action(s)</th>
                                         @endif
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,17 +54,74 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
-                                        <td>{{ $ticket->building_number }}, {{ $ticket->office_name }}</td>
                                         <td>
-                                            <!-- {{ $ticket->description }} -->
+                                            <!-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" 
+                                                data-backdrop="static" data-keyboard="false"> Assign User </button>
+                                            @include('modals.assign-user') -->
                                             
+                                            <!-- {{ optional($ticket->assignedUser)->name }} -->
+                                            @if(is_null($ticket->assigned_user_id))
+    <!-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false"> Assign User </button> -->
+    <div class="modal fade" id="assignUserModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel{{ $ticket->id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignUserModalLabel{{ $ticket->id }}">Assign User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('tickets.updateUsers', $ticket->id) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <select class="selectpicker form-control" id="assigned_user_id{{ $ticket->id }}" name="assigned_user_id[]" data-live-search="true" multiple required>
+                                @foreach($userIds as $user)
+                                    <option value="{{ $user->id }}" data-content="
+                                        <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+                                        <small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
+                                        <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                <!-- </div> -->
+                <!-- <div class="modal-footer"> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                <!-- </div> -->
+                </form>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+@else
+    <div class="dropdown">
+        <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> View Users </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
+            @foreach ($ticket->users as $assigned_user)
+                <a class="dropdown-item">
+                    <strong>{{ $assigned_user->name }}</strong><br>
+                    <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
+                    <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                </a>
+            @endforeach
+        </div>
+    </div>
+@endif
+
+                                        </td>
+                                        <td>{{ $ticket->building_number }}</td>
+                                        <td>{{ $ticket->office_name }}</td>
+                                        <td>
                                             @if($ticket->ictram)
                                                 {{ $ticket->ictram->jobType->jobType_name }}
                                                 {{ $ticket->ictram->equipment->equipment_name }}
                                                 {{ $ticket->ictram->problem->problem_description }}
                                             @endif
                                         </td>
-                                        <td>
+                                        <td> 
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                             <script>
                                             document.addEventListener('DOMContentLoaded', function() {
@@ -76,7 +136,7 @@
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="priority_level" class="form-control form-control-sm" id="priority_levelSelect-{{ $ticket->id }}">
-                                                    <option value="" selected disabled>Select Priority Level</option>
+                                                    <option value="" selected disabled>Select</option>
                                                     <option value="High" @if ($ticket->priority_level == 'High') selected @endif>High</option>
                                                     <option value="Mid" @if ($ticket->priority_level == 'Mid') selected @endif>Mid</option>
                                                     <option value="Low" @if ($ticket->priority_level == 'Low') selected @endif>Low</option>

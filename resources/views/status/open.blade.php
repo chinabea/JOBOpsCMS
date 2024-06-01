@@ -49,7 +49,8 @@
                                         <td class="align-middle">{{ $ticket->service_location }}</td>
                                         <td class="align-middle">{{ $ticket->unit }}</td>
                                         <td class="align-middle">{{ $ticket->request }}</td>
-                                        <td> @if($ticket->users->isEmpty())
+                                        <td> 
+                                            @if(is_null($ticket->assigned_user_id))
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false"> Assign User </button>
                                             <!-- Modal -->
@@ -79,14 +80,20 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div> @else <div class="dropdown">
+                                            </div> 
+                                            @else 
+                                            <div class="dropdown">
                                                 <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> View Users </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}"> @foreach ($ticket->users as $assigned_user) <a class="dropdown-item">
-                                                        <strong>{{ $assigned_user->name }}</strong><br>
-                                                        <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
-                                                        <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
-                                                    </a> @endforeach </div>
-                                            </div> @endif
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
+                                                    @if($ticket->assignedUser)
+                                                        <a class="dropdown-item">
+                                                            <strong>{{ $ticket->assignedUser->name }}</strong>
+                                                        </a>
+                                                    @else
+                                                        <span class="dropdown-item">No user assigned</span>
+                                                    @endif
+                                                </div>
+                                            @endif
                                         </td>
                                         <td class="align-middle">{{ $ticket->priority_level }}</td> @if(auth()->user()->role == 1 || (auth()->user()->role == 2)) <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST"> @csrf @method('PATCH') <select name="status" class="form-control form-control-sm" onchange="this.form.submit()">
