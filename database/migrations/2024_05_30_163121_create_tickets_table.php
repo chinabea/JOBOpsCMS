@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('assigned_user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable(); // requesitor
+            $table->unsignedBigInteger('assigned_user_id')->nullable(); // assigned user to the ticket
 
             $table->string('building_number')->nullable();
             $table->string('office_name')->nullable();
