@@ -34,26 +34,55 @@ class TicketController extends Controller
     public function index()
     {
         try {
-            // $tickets = Ticket::whereBetween('created_at', [$start_date, $end_date])->get();
+            // Retrieve all tickets with their associated users.
+            $tickets = Ticket::with('users')->orderBy('created_at', 'desc')->get();
+            
+            // Retrieve necessary related data.
             $ictram = Ictram::all();
             $nicmu = Nicmu::all();
             $mis = Mis::all();
-            // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
-            // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
-            $tickets = Ticket::orderBy('created_at', 'desc')->get();
-            $userIds = User::where('is_approved', true)->get();  // Specific user with conditions
+            
+            // Retrieve approved users.
+            // $userIds = User::where('is_approved', true)->get();
+            $userIds = User::where('is_approved', true)
+            ->whereIn('role', [2, 7, 3, 8, 4, 9])
+            ->get();
 
-            // Calculate age for each ticket
+            // Calculate age for each ticket.
             $tickets->each(function ($ticket) {
                 $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
             });
 
-            
             return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
+
+    // public function index()
+    // {
+    //     try {
+    //         // $tickets = Ticket::whereBetween('created_at', [$start_date, $end_date])->get();
+    //         $ictram = Ictram::all();
+    //         $nicmu = Nicmu::all();
+    //         $mis = Mis::all();
+    //         // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
+    //         // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
+    //         $tickets = Ticket::orderBy('created_at', 'desc')->get();
+    //         $userIds = User::where('is_approved', true)->get();  // Specific user with conditions
+
+    //         // Calculate age for each ticket
+    //         $tickets->each(function ($ticket) {
+    //             $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
+    //         });
+
+            
+    //         return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis'));
+    //     } catch (Exception $e) {
+    //         return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+    //     }
+    // }
     
 
     // ---------------------------------------------------------------------------------------------------------------------
@@ -572,7 +601,8 @@ public function getAllDetails(Request $request)
     {
         try {
             // Retrieve the specific ticket using the provided ID
-            $ticket = Ticket::findOrFail($id);
+            // $ticket = Ticket::findOrFail($id);
+            $ticket = Ticket::with('assignedUsers')->findOrFail($id);
     
             // Retrieve approved users with specific roles
             // $userIds = User::whereIn('role', [1, 2])
@@ -774,24 +804,54 @@ public function getAllDetails(Request $request)
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Users assigned successfully!');
     }
-
-    
     public function unassign(Request $request, Ticket $ticket)
     {
         // Get the current authenticated user
         $user = Auth::user();
-
-        // Store the current assigned user ID in the escalatedBy_for_workloadLimitReached field
-        $ticket->escalatedBy_for_workloadLimitReached = $ticket->assigned_user_id;
-
-        // Unassign the ticket and set the escalation reason
-        $ticket->assigned_user_id = null;
-        $ticket->escalationReason_for_workloadLimitReached = $request->input('reason');
-        $ticket->save();
-        
+    
+        // Get the reason from the request
+        $reason = $request->input('reason');
+    
+        // Get the assigned users for the ticket
+        $assignedUsers = $ticket->users;
+    
+        // If there are assigned users, remove them
+        if ($assignedUsers->isNotEmpty()) {
+            foreach ($assignedUsers as $assignedUser) {
+                // Remove the user assignment
+                $ticket->users()->detach($assignedUser->id);
+            
+                // Attach the user with additional pivot data (including the reason)
+                $ticket->users()->attach($assignedUser->id, [
+                    'escalatedBy_for_workloadLimitReached' => $user->id,
+                    'escalationReason_for_workloadLimitReached' => $reason
+                ]);
+            }
+            
+        }
+    
         // Redirect back with a success message
         return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
     }
+    
+
+
+    // public function unassign(Request $request, Ticket $ticket)
+    // {
+    //     // Get the current authenticated user
+    //     $user = Auth::user();
+
+    //     // Store the current assigned user ID in the escalatedBy_for_workloadLimitReached field
+    //     $ticket->escalatedBy_for_workloadLimitReached = $ticket->assigned_user_id;
+
+    //     // Unassign the ticket and set the escalation reason
+    //     $ticket->assigned_user_id = null;
+    //     $ticket->escalationReason_for_workloadLimitReached = $request->input('reason');
+    //     $ticket->save();
+        
+    //     // Redirect back with a success message
+    //     return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
+    // }
 
     public function nonComplianceEscalation(Request $request)
     {
@@ -807,6 +867,25 @@ public function getAllDetails(Request $request)
 
         return redirect()->back()->with('success', 'Form submitted successfully!');
     }
+
+    public function assignUserToTicket(Request $request, $ticketId)
+    {
+        $ticket = Ticket::findOrFail($ticketId);
+        $userId = $request->input('user_id');
+
+        // Additional pivot data
+        $pivotData = [
+            'escalationReason_for_workloadLimitReached' => $request->input('escalationReason_for_workloadLimitReached'),
+            'escalatedBy_for_workloadLimitReached' => $request->input('escalatedBy_for_workloadLimitReached'),
+            'escalationReasonDue_to_clientNoncompliance' => $request->input('escalationReasonDue_to_clientNoncompliance'),
+            'clientNoncomplianceFile' => $request->input('clientNoncomplianceFile'),
+        ];
+
+        $ticket->assignedUsers()->attach($userId, $pivotData);
+
+        return redirect()->route('tickets.show', $ticketId);
+    }
+
 
     
 
