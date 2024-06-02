@@ -26,6 +26,7 @@ use App\Http\Controllers\ICTRAM\AssignController;
 use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\PriorityLevelController;
+use App\Http\Controllers\TicketUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -261,8 +262,8 @@ Route::get('/webhook', [MessengerController::class, 'verifyWebhook']);
 
 Route::get('/tickets-report', [ReportController::class, 'ticketReport'])->name('tickets.report');
 Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updatePriorityLvl'])->name('tickets.updatePriorityLvl');
-Route::post('/non-compliance-escalation', [TicketController::class, 'nonComplianceEscalation'])->name('nonComplianceEscalation');
-Route::post('/tickets/{ticket}/unassign', [TicketController::class, 'unassign'])->name('tickets.unassign');
+Route::post('/tickets/{ticket}/unassign', [TicketUserController::class, 'unassign'])->name('tickets.unassign');
+Route::post('/ticket/{ticketId}/non-compliance-escalation', [TicketUserController::class, 'nonComplianceEscalation'])->name('nonComplianceEscalation');
 
 
 
