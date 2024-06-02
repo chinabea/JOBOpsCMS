@@ -121,8 +121,6 @@
                 @endif
                 <hr>
                 <h4>Escalation Reason Due to Client Noncompliance</h4>
-
-
                 <form action="{{ route('nonComplianceEscalation', $ticket->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

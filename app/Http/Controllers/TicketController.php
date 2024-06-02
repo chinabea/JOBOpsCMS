@@ -804,37 +804,7 @@ public function getAllDetails(Request $request)
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Users assigned successfully!');
     }
-    public function unassign(Request $request, Ticket $ticket)
-    {
-        // Get the current authenticated user
-        $user = Auth::user();
     
-        // Get the reason from the request
-        $reason = $request->input('reason');
-    
-        // Get the assigned users for the ticket
-        $assignedUsers = $ticket->users;
-    
-        // If there are assigned users, remove them
-        if ($assignedUsers->isNotEmpty()) {
-            foreach ($assignedUsers as $assignedUser) {
-                // Remove the user assignment
-                $ticket->users()->detach($assignedUser->id);
-            
-                // Attach the user with additional pivot data (including the reason)
-                $ticket->users()->attach($assignedUser->id, [
-                    'escalatedBy_for_workloadLimitReached' => $user->id,
-                    'escalationReason_for_workloadLimitReached' => $reason
-                ]);
-            }
-            
-        }
-    
-        // Redirect back with a success message
-        return redirect()->route('tickets')->with('success', 'You have successfully unassigned the ticket with a reason for escalation.');
-    }
-    
-
 
     // public function unassign(Request $request, Ticket $ticket)
     // {
