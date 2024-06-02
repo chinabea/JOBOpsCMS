@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(); // requesitor
-            $table->unsignedBigInteger('assigned_user_id')->nullable(); // assigned user to the ticket
+            // $table->unsignedBigInteger('assigned_user_id')->nullable(); // assigned user to the ticket
 
             $table->string('building_number')->nullable();
             $table->string('office_name')->nullable();
@@ -27,10 +27,6 @@ return new class extends Migration
             $table->boolean('covered_under_warranty')->default(false);
             $table->enum('initial_assessment', ['On-Site', 'Shipped at Office'])->nullable();
             $table->string('action_performed')->nullable();
-            $table->string('escalationReason_for_workloadLimitReached')->nullable();
-            $table->unsignedBigInteger('escalatedBy_for_workloadLimitReached')->nullable();
-            $table->string('escalationReasonDue_to_clientNoncompliance')->nullable();
-            $table->string('clientNoncomplianceFile')->nullable();
 
             $table->unsignedBigInteger('ictram_id')->nullable();
             $table->unsignedBigInteger('nicmu_id')->nullable();
@@ -41,8 +37,7 @@ return new class extends Migration
             $table->foreign('ictram_id')->references('id')->on('ictram')->onDelete('cascade');
             $table->foreign('nicmu_id')->references('id')->on('nicmu')->onDelete('cascade');
             $table->foreign('mis_id')->references('id')->on('mis')->onDelete('cascade');
-            $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('escalatedBy_for_workloadLimitReached')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
             
              
         });
