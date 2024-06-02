@@ -34,10 +34,13 @@ class TicketController extends Controller
     public function index()
     {
         try {
+            $ictram = Ictram::all();
+            $nicmu = Nicmu::all();
+            $mis = Mis::all();
             // Retrieve all tickets with their associated user (who created the ticket) and the assigned users.
             // Including 'user' in the with clause assumes you have a separate relationship defined in Ticket model to fetch the creator of the ticket
             $tickets = Ticket::orderBy('created_at', 'desc')->get();
-            $userIds = User::where('role', 2)->where('is_approved', true)->get();  // Specific user with conditions
+            $userIds = User::where('is_approved', true)->get();  // Specific user with conditions
 
             // Calculate age for each ticket
             $tickets->each(function ($ticket) {
@@ -45,7 +48,7 @@ class TicketController extends Controller
             });
 
             
-            return view('ticket.index', compact('tickets','userIds'));
+            return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -53,7 +56,6 @@ class TicketController extends Controller
     
 
     // ---------------------------------------------------------------------------------------------------------------------
-
     public function store(Request $request)
     {
         // Handle file upload
@@ -92,12 +94,13 @@ class TicketController extends Controller
             return $user->tickets->count();
         })->first();
     
-        // Assign the ticket to that user
-        if ($userWithLeastTickets) {
-            $ticket->assigned_user_id = $userWithLeastTickets->id;
-        }
-    
+        // Save the ticket first to get its ID
         $ticket->save();
+    
+        // Attach the ticket to the user with the least tickets
+        if ($userWithLeastTickets) {
+            $ticket->users()->attach($userWithLeastTickets->id);
+        }
     
         // Authentication user is the requestor
         $authUser = auth()->user(); 
@@ -126,6 +129,79 @@ class TicketController extends Controller
         // Redirect back or to a success page
         return redirect()->route('tickets')->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
     }
+    
+    // public function store(Request $request)
+    // {
+    //     // Handle file upload
+    //     $filePath = $request->hasFile('file_path') ? $request->file('file_path')->store('uploads') : null;
+    
+    //     // Create a new ticket instance
+    //     $ticket = new Ticket([
+    //         'building_number' => $request->input('building_number'),
+    //         'office_name' => $request->input('office_name'),
+    //         'description' => $request->input('description'),
+    //         'file_path' => $filePath,
+    //         'serial_number' => $request->input('serial_number'),
+    //         'covered_under_warranty' => $request->input('covered_under_warranty') ? 1 : 0,
+    //         'user_id' => auth()->id(), 
+    //         'ictram_id' => $request->input('ictram_id'),
+    //         'nicmu_id' => $request->input('nicmu_id'),
+    //         'mis_id' => $request->input('mis_id'),
+    //     ]);
+    
+    //     // Determine the appropriate user roles based on request unit
+    //     $roles = [2, 3, 4, 7, 8, 9];
+    
+    //     if ($request->input('ictram_id')) {
+    //         $roles = [2, 7];
+    //     } elseif ($request->input('nicmu_id')) {
+    //         $roles = [3, 8];
+    //     } elseif ($request->input('mis_id')) {
+    //         $roles = [4, 9];
+    //     }
+    
+    //     // Find users with the specified roles
+    //     $users = User::whereIn('role', $roles)->get();
+    
+    //     // Find the user with the least number of assigned tickets
+    //     $userWithLeastTickets = $users->sortBy(function ($user) {
+    //         return $user->tickets->count();
+    //     })->first();
+    
+    //     // Assign the ticket to that user
+    //     if ($userWithLeastTickets) {
+    //         $ticket->assigned_user_id = $userWithLeastTickets->id;
+    //     }
+    
+    //     $ticket->save();
+    
+    //     // Authentication user is the requestor
+    //     $authUser = auth()->user(); 
+    
+    //     // Notify the requestor and admins
+    //     $admins = User::where('role', 1)->get();
+    //     foreach ($admins as $admin) {
+    //         $isSelf = $admin->id === $authUser->id;
+    //         $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf));
+    //     }
+    
+    //     // Notify assigned users if there are any
+    //     if ($request->has('assigned_to')) {
+    //         $ticket->users()->syncWithoutDetaching($request->assigned_to);
+    //         foreach ($request->assigned_to as $userId) {
+    //             $user = User::find($userId);
+    //             if ($user && $user->id !== $authUser->id) {
+    //                 $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
+    //             }
+    //         }
+    //     }
+    
+    //     // Log activity
+    //     ActivityLogger::log('Created', $ticket, 'Ticket created');
+    
+    //     // Redirect back or to a success page
+    //     return redirect()->route('tickets')->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
+    // }
 
     // public function store(Request $request)
     // {
@@ -664,18 +740,40 @@ public function getAllDetails(Request $request)
     //     return redirect()->back()->with('success', 'Users assigned successfully!');
     // }
     
+    // public function updateUsers(Request $request, $ticketId)
+    // {
+    //     $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
+    //     // $userIds = $request->input('assigned_user_id'); // Corrected from user_ids to assigned_user_id
+    //     $userIds = User::where('is_approved', true)->get();  
+    
+    //     // Sync the users to the ticket
+    //     $ticket->users()->sync($userIds);
+    
+    //     // Redirect back with a success message
+    //     return redirect()->back()->with('success', 'Users assigned successfully!');
+
+    // }
+
     public function updateUsers(Request $request, $ticketId)
     {
-        $ticket = Ticket::findOrFail($ticketId); // Ensure the ticket exists
-        $userIds = $request->input('assigned_user_id'); // Corrected from user_ids to assigned_user_id
-    
-        // Sync the users to the ticket
-        $ticket->users()->sync($userIds);
-    
+        // Ensure the ticket exists
+        $ticket = Ticket::findOrFail($ticketId);
+
+        // Get the user IDs from the request input
+        $userIds = $request->input('assigned_user_id'); // This should match the name attribute in your form
+
+        // Ensure user IDs are only those approved and not any random input
+        $approvedUserIds = User::where('is_approved', true)
+                            ->whereIn('id', $userIds)
+                            ->pluck('id');
+
+        // Sync the approved users to the ticket
+        $ticket->users()->sync($approvedUserIds);
+
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Users assigned successfully!');
-
     }
+
     
     public function unassign(Request $request, Ticket $ticket)
     {
