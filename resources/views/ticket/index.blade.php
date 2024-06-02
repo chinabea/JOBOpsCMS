@@ -13,6 +13,10 @@
                         <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
                             <i class="fas fa-plus"></i> Request Ticket
                         </a>
+                        <a href="#" class="btn bg-light text-dark border mr-2" data-widget="control-sidebar" data-slide="true">
+                            <i class="fas fa-filter"></i> Filters <i class="fas fa-angle-right left"></i>
+                        </a>
+                        @include('filters')
                         <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
                             <i class="fas fa-sync-alt"></i>
                         </button>
@@ -29,7 +33,7 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="mb-4"></p>
-                            <table id="example1" class="table table-bordered table-hover text-center table-striped">
+                            <table id="example1" class="table table-bordered table-hover table-sm text-center table-striped">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -87,6 +91,13 @@
                                                                                     <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
                                                                                 </option>
                                                                             @endif
+                                                                            @elseif($ticket->mis && in_array($user->role, [4, 9]))
+                                                                                <option value="{{ $user->id }}" data-content="
+                                                                                    <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
+                                                                                    <small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
+                                                                                    <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
+                                                                                </option>
+                                                                            @endif
                                                                             <!-- <option value="{{ $user->id }}" data-content="
                                                                                 <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
                                                                                 <small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
@@ -118,6 +129,13 @@
                                                                 <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                                             </a>
                                                         @elseif($ticket->nicmu && in_array($assigned_user->role, [3, 8]))
+                                                            <a class="dropdown-item">
+                                                                <strong>{{ $assigned_user->name }}</strong><br>
+                                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
+                                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                                                            </a>
+                                                        @endif
+                                                        @elseif($ticket->mis && in_array($assigned_user->role, [4, 9]))
                                                             <a class="dropdown-item">
                                                                 <strong>{{ $assigned_user->name }}</strong><br>
                                                                 <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
