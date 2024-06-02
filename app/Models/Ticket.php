@@ -40,11 +40,11 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'ticket_user')
-                    ->withTimestamps();
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class, 'ticket_user')
+    //                 ->withTimestamps();
+    // }
 
     // public function assignedUser()
     // {
@@ -65,8 +65,6 @@ class Ticket extends Model
     {
         return $this->belongsTo(ProblemType::class);
     }
-
-    
 
     // ICTRAM relationships
     public function ictramJobType()
@@ -131,14 +129,10 @@ class Ticket extends Model
         return $this->belongsTo(Mis::class, 'mis_id');
     }
    
-    public function assignedUser()
-    {
-        return $this->belongsTo(User::class, 'assigned_user_id');
-    }
-    public function escalatedBy()
-    {
-        return $this->belongsTo(User::class, 'escalatedBy_for_workloadLimitReached');
-    }
+    // public function assignedUser()
+    // {
+    //     return $this->belongsTo(User::class, 'assigned_user_id');
+    // }
     // public function users()
     // {
     //     return $this->belongsToMany(User::class);
@@ -148,5 +142,24 @@ class Ticket extends Model
     // {
     //     return $this->belongsToMany(User::class);
     // }
+    public function escalatedBy()
+    {
+        return $this->belongsTo(User::class, 'escalatedBy_for_workloadLimitReached');
+    }
+    // public function assignedUsers()
+    // {
+    //     return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id');
+    // }
+    public function assignedUsers()
+    {
+        return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id')
+                    ->withPivot('escalationReason_for_workloadLimitReached', 'escalatedBy_for_workloadLimitReached', 'escalationReasonDue_to_clientNoncompliance', 'clientNoncomplianceFile')
+                    ->withTimestamps();
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('escalatedBy_for_workloadLimitReached', 'escalationReason_for_workloadLimitReached');
+    }
     
 }

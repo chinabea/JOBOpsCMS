@@ -71,10 +71,10 @@ class User extends Authenticatable
     //     return $this->belongsToMany(Ticket::class);
     // }
     
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
-    }
+    // public function tickets()
+    // {
+    //     return $this->hasMany(Ticket::class);
+    // }
 
     // public function assignedUser()
     // {
@@ -83,5 +83,15 @@ class User extends Authenticatable
     public function assignedTickets()
     {
         return $this->hasMany(Ticket::class, 'assigned_user_id');
+    }
+    // public function tickets()
+    // {
+    //     return $this->belongsToMany(Ticket::class);
+    // }
+    public function tickets()
+    {
+        return $this->belongsToMany(Ticket::class, 'ticket_user', 'user_id', 'ticket_id')
+                    ->withPivot('escalationReason_for_workloadLimitReached', 'escalatedBy_for_workloadLimitReached', 'escalationReasonDue_to_clientNoncompliance', 'clientNoncomplianceFile')
+                    ->withTimestamps();
     }
 }

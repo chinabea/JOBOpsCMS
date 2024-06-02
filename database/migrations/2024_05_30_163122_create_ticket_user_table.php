@@ -15,9 +15,14 @@ return new class extends Migration
             // $table->id();
             $table->unsignedBigInteger('ticket_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('escalationReason_for_workloadLimitReached')->nullable();
+            $table->unsignedBigInteger('escalatedBy_for_workloadLimitReached')->nullable();
+            $table->string('escalationReasonDue_to_clientNoncompliance')->nullable();
+            $table->string('clientNoncomplianceFile')->nullable();
 
             $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('escalatedBy_for_workloadLimitReached')->references('id')->on('users')->onDelete('cascade');
 
             $table->primary(['ticket_id', 'user_id']); // Composite primary key
             $table->timestamps();
