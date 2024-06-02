@@ -41,7 +41,9 @@
                                         <th>Assigned to</th>
                                         <th>Building Number</th>
                                         <th>Office Name</th>
-                                        <th>Request</th>
+                                        <th>Job Type</th>
+                                        <th>Service for</th>
+                                        <th>Issues or Concern</th>
                                         <th>Priority Level</th>
                                         <th>Status</th>
                                         <th>Age</th>
@@ -90,7 +92,6 @@
                                                                                     <small>Expertise: {{ implode(', ', $user->expertise ?? []) }}</small><br>
                                                                                     <small>Assigned to Tickets: {{ $user->tickets->count() }}</small></span>">
                                                                                 </option>
-                                                                            @endif
                                                                             @elseif($ticket->mis && in_array($user->role, [4, 9]))
                                                                                 <option value="{{ $user->id }}" data-content="
                                                                                     <span class='text-black'><strong><br>{{ $user->name }}</strong><br>
@@ -134,7 +135,6 @@
                                                                 <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
                                                                 <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                                             </a>
-                                                        @endif
                                                         @elseif($ticket->mis && in_array($assigned_user->role, [4, 9]))
                                                             <a class="dropdown-item">
                                                                 <strong>{{ $assigned_user->name }}</strong><br>
@@ -155,26 +155,21 @@
                                         </td>
                                         <td>{{ $ticket->building_number }}</td>
                                         <td>{{ $ticket->office_name }}</td>
-                                        <td>
-                                            @if($ticket->ictram)
-                                                <p>ICTRAM ML, JP</p>
-                                                {{ $ticket->ictram->jobType->jobType_name }}
-                                                {{ $ticket->ictram->equipment->equipment_name }}
-                                                {{ $ticket->ictram->problem->problem_description }}
-                                            @endif
-                                            @if($ticket->nicmu)
-                                                <p>NICMU Jes, Ev</p>
-                                                {{ $ticket->nicmu->jobType->jobType_name }}
-                                                {{ $ticket->nicmu->equipment->equipment_name }}
-                                                {{ $ticket->nicmu->problem->problem_description }}
-                                            @endif
-                                            @if($ticket->mis)
-                                                <p>MIS JC, JT</p>
-                                                {{ $ticket->mis->requestTypeName->requestType_name }}
-                                                {{ $ticket->mis->jobType->jobType_name }}
-                                                {{ $ticket->mis->asName->name }}
-                                            @endif
-                                        </td>
+                                        @if($ticket->ictram)
+                                            <td>{{ $ticket->ictram->jobType->jobType_name }} </td>
+                                            <td>{{ $ticket->ictram->equipment->equipment_name }}</td>
+                                            <td>{{ $ticket->ictram->problem->problem_description }}</td>
+                                        @endif
+                                        @if($ticket->nicmu)
+                                            <td>{{ $ticket->nicmu->jobType->jobType_name }}</td>
+                                            <td>{{ $ticket->nicmu->equipment->equipment_name }}</td>
+                                            <td>{{ $ticket->nicmu->problem->problem_description }}</td>
+                                        @endif
+                                        @if($ticket->mis)
+                                            <td>{{ $ticket->mis->jobType->jobType_name }}</td>
+                                            <td>{{ $ticket->mis->asName->name }}</td> 
+                                            <td>{{ $ticket->mis->requestTypeName->requestType_name }}</td>
+                                        @endif
                                         <td> 
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                             <script>

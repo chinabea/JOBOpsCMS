@@ -34,6 +34,7 @@ class TicketController extends Controller
     public function index()
     {
         try {
+            // $tickets = Ticket::whereBetween('created_at', [$start_date, $end_date])->get();
             $ictram = Ictram::all();
             $nicmu = Nicmu::all();
             $mis = Mis::all();
