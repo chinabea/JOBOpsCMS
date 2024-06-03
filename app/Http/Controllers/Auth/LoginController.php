@@ -80,7 +80,7 @@ class LoginController extends Controller
         Log::error("Error during Google login: " . $e->getMessage());
 
         // Optionally, redirect to a custom error page or back with an error message
-        return redirect('welcome')->with('error', 'Failed to log in with Google. Please try again.');
+        return redirect('/')->with('error', 'Failed to log in with Google. Please try again.');
     }
 }
 
