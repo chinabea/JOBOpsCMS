@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Check for the .authorized file
-        if (!file_exists(base_path('.authorized'))) {
-            abort(403, 'Unauthorized access.');
+        if (!file_exists(base_path('config/.secret_authorized_filee'))) {
+            abort(403, 'Resource not Available.');
         }
         
     }
