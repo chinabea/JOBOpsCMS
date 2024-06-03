@@ -27,6 +27,8 @@ use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\PriorityLevelController;
 use App\Http\Controllers\TicketUserController;
+use App\Http\Controllers\BuildingNumberController;
+use App\Http\Controllers\OfficeNameController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -256,7 +258,6 @@ Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-ticke
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
 Route::get('/units', [UnitController::class, 'index'])->name('units');
 
-// Route::get('/webhook', [MessengerController::class, 'webhook']);
 Route::post('/webhook', [MessengerController::class, 'handleWebhook']);
 Route::get('/webhook', [MessengerController::class, 'verifyWebhook']);
 
@@ -265,6 +266,8 @@ Route::patch('tickets/{id}/priorityLvl', [PriorityLevelController::class, 'updat
 Route::post('/tickets/{ticket}/unassign', [TicketUserController::class, 'unassign'])->name('tickets.unassign');
 Route::post('/ticket/{ticketId}/non-compliance-escalation', [TicketUserController::class, 'nonComplianceEscalation'])->name('nonComplianceEscalation');
 
+Route::resource('building-numbers', BuildingNumberController::class);
+Route::resource('office-names', OfficeNameController::class);
 
 
 Route::fallback(function () {
