@@ -12,7 +12,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
         // Get the start and end dates for the current week
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
@@ -58,7 +57,7 @@ class DashboardController extends Controller
         $totalLowLevelTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalLowLevelTicketsPercentageChange = $totalLowLevelTicketsLastWeek > 0 ? (($totalLowLevelTickets - $totalLowLevelTicketsLastWeek) / $totalLowLevelTicketsLastWeek) * 100 : 0; 
 
-        $totalUnassignedTickets = Ticket::whereNull('assigned_user_id')->count();
+        $totalUnassignedTickets = Ticket::doesntHave('users')->count();
         $totalUnassignedTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalUnassignedTicketsPercentageChange = $totalUnassignedTicketsLastWeek > 0 ? (($totalUnassignedTickets - $totalUnassignedTicketsLastWeek) / $totalUnassignedTicketsLastWeek) * 100 : 0;  
 
@@ -67,9 +66,13 @@ class DashboardController extends Controller
         $totalPendingApprovalofUsersPercentageChange = $totalPendingApprovalofUsersLastWeek > 0 ? (($totalPendingApprovalofUsers - $totalPendingApprovalofUsersLastWeek) / $totalPendingApprovalofUsersLastWeek) * 100 : 0; 
         
         $userId = auth()->id();
-
+    
         // Fetch tickets where the user is assigned
-        $totalAssignedTickets = Ticket::where('assigned_user_id', $userId)->count();
+        $totalAssignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
+            $query->where('users.id', $userId);
+        })
+        ->with('user', 'users') // Load relationships
+        ->count();
         $totalAssignedTicketsLastWeek = Ticket::where('created_at', '<', $lastWeek)->count();
         $totalAssignedTicketsPercentageChange = $totalAssignedTicketsLastWeek > 0 ? (($totalAssignedTickets - $totalAssignedTicketsLastWeek) / $totalAssignedTicketsLastWeek) * 100 : 0; 
         
