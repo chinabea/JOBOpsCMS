@@ -39,6 +39,8 @@ class DatabaseSeeder extends Seeder
             IctramEquipmentsTableSeeder::class,
             IctramProblemsTableSeeder::class,
             UnitTableSeeder::class,
+            BuildingNumbersSeeder::class,
+            OfficeNamesSeeder::class,
             // TicketsTableSeeder::class,
             // Add other seeders here
         ]);
