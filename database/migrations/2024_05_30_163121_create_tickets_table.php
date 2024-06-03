@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('file_path')->nullable();
             $table->enum('status', ['Open', 'In Progress', 'Purchase Parts', 'Closed', 'Completed'])->default('Open')->nullable();
             $table->string('reason')->nullable();
-            $table->string('purchase_part')->nullable();
+            $table->string('purchase_parts')->nullable();
             $table->unsignedBigInteger('serial_number')->nullable();
             $table->boolean('covered_under_warranty')->default(false);
             $table->enum('initial_assessment', ['On-Site', 'Shipped at Office'])->nullable();

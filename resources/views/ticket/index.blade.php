@@ -210,10 +210,10 @@
                                                     <option value="Completed" @if ($ticket->status == 'Completed') selected @endif>Completed</option>
                                                 </select>
                                                 <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
-                                                <input type="hidden" name="purchase_part" id="purchase_partInput-{{ $ticket->id }}" value="">
+                                                <input type="hidden" name="purchase_parts" id="purchase_partsInput-{{ $ticket->id }}" value="">
                                             </form>
                                             @if ($ticket->status == 'Purchase Parts')
-                                            <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->purchase_part }}">
+                                            <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->purchase_parts }}">
                                             <i class="fas fa-dollar-sign nav-icon"></i>
                                             </button>
                                             @endif
@@ -306,9 +306,9 @@
             const currentStatus = this.getAttribute('data-current-status');
 
             if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
-                const purchase_part = prompt("Why is this ticket being marked as 'Purchase Parts'?");
-                if (purchase_part !== null && purchase_part.trim() !== "") {
-                    document.getElementById(`purchase_partInput-${ticketId}`).value = purchase_part;
+                const purchase_parts = prompt("Why is this ticket being marked as 'Purchase Parts'?");
+                if (purchase_parts !== null && purchase_parts.trim() !== "") {
+                    document.getElementById(`purchase_partsInput-${ticketId}`).value = purchase_parts;
                     form.submit();
                 } else {
                     alert("You must provide a purchase parts to mark this ticket as 'Purchase Parts'.");

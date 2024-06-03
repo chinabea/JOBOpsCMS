@@ -768,12 +768,12 @@ public function getAllDetails(Request $request)
     
         // Check if status is being updated to 'Purchase Parts' and was not 'Purchase Parts' before
         if ($request->status == 'Purchase Parts' && $ticket->status != 'Purchase Parts') {
-            $purchase_part = $request->input('purchase_part');
-            $ticket->purchase_part = $purchase_part;
-            // Example: Log the purchase_part
-            Log::info("Ticket {$id} marked as 'Purchase Parts'. purchase_part: {$purchase_part}");
+            $purchase_parts = $request->input('purchase_parts');
+            $ticket->purchase_parts = $purchase_parts;
+            // Example: Log the purchase_parts
+            Log::info("Ticket {$id} marked as 'Purchase Parts'. purchase_parts: {$purchase_parts}");
         } else {
-            $ticket->purchase_part = null; // Clear the purchase_part if not Purchase Parts
+            $ticket->purchase_parts = null; // Clear the purchase_parts if not Purchase Parts
         }
     
         // Update the ticket's status
