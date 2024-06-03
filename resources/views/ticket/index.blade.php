@@ -210,7 +210,13 @@
                                                     <option value="Completed" @if ($ticket->status == 'Completed') selected @endif>Completed</option>
                                                 </select>
                                                 <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
+                                                <input type="hidden" name="purchase_part" id="purchase_partInput-{{ $ticket->id }}" value="">
                                             </form>
+                                            @if ($ticket->status == 'Purchase Parts')
+                                            <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->purchase_part }}">
+                                            <i class="fas fa-dollar-sign nav-icon"></i>
+                                            </button>
+                                            @endif
                                             @if ($ticket->status == 'In Progress')
                                             <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->reason }}">
                                                 <i class="fas fa-comment"></i>
@@ -283,6 +289,29 @@
                     form.submit();
                 } else {
                     alert("You must provide a reason to mark this ticket as 'In Progress'.");
+                    this.value = currentStatus; // Reset to the current status
+                }
+            } else {
+                form.submit();
+            }
+        });
+    });
+
+    
+    document.querySelectorAll('select[id^="statusSelect-"]').forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+            const ticketId = this.id.split('-')[1];
+            const form = document.getElementById(`statusForm-${ticketId}`);
+            const selectedStatus = this.value;
+            const currentStatus = this.getAttribute('data-current-status');
+
+            if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
+                const purchase_part = prompt("Why is this ticket being marked as 'Purchase Parts'?");
+                if (purchase_part !== null && purchase_part.trim() !== "") {
+                    document.getElementById(`purchase_partInput-${ticketId}`).value = purchase_part;
+                    form.submit();
+                } else {
+                    alert("You must provide a purchase parts to mark this ticket as 'Purchase Parts'.");
                     this.value = currentStatus; // Reset to the current status
                 }
             } else {
