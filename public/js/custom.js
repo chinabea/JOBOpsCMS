@@ -314,3 +314,9 @@ function handleImageSubmission() {
       $('#answer').summernote('editor.insertImage', imageUrl);
   }
 }
+
+  // Toastr configuration
+  toastr.options = {
+    "positionClass": "toast-bottom-right",
+  
+};
