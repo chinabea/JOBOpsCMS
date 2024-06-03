@@ -154,9 +154,12 @@ class Ticket extends Model
                     ->withTimestamps();
     }
 
+    // this should be removed
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('escalatedBy_for_workloadLimitReached', 'escalationReason_for_workloadLimitReached');
     }
+    
+    
     
 }

@@ -94,4 +94,5 @@ class User extends Authenticatable
                     ->withPivot('escalationReason_for_workloadLimitReached', 'escalatedBy_for_workloadLimitReached', 'escalationReasonDue_to_clientNoncompliance', 'clientNoncomplianceFile')
                     ->withTimestamps();
     }
+    
 }
