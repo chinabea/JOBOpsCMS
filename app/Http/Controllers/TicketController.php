@@ -57,7 +57,55 @@ class TicketController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
+    }   
+
+    public function assignedToMe()
+    {
+        $userId = auth()->id();
+        
+        // Fetch tickets where the user is assigned and where escalationReason_for_workloadLimitReached is null
+        $assignedTickets = Ticket::whereHas('assignedUsers', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->whereDoesntHave('assignedUsers', function ($query) {
+                $query->whereNotNull('escalationReason_for_workloadLimitReached');
+            })
+            ->with(['assignedUsers', 'user']) // Load the 'assignedUsers' and 'user' relationships
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $userIds = User::where('is_approved', true)
+            ->whereIn('role', [2, 7, 3, 8, 4, 9])
+            ->get();
+
+            // Calculate age for each ticket.
+            $assignedTickets->each(function ($ticket) {
+                $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
+            });
+
+        return view('ticket.assigned', compact('assignedTickets', 'userIds'));
     }
+
+
+    // public function assignedToMe()
+    // {
+    //     $userId = auth()->id();
+        
+    //     // Fetch tickets where the user is assigned
+    //     $assignedTickets = Ticket::whereHas('assignedUsers', function ($query) use ($userId) {
+    //         $query->where('user_id', $userId);
+    //     })
+    //     ->with(['assignedUsers', 'user']) // Load the 'assignedUsers' and 'user' relationships
+    //     ->orderBy('created_at', 'desc')
+    //     ->get();
+
+    //     $userIds = User::where('is_approved', true)
+    //     ->whereIn('role', [2, 7, 3, 8, 4, 9])
+    //     ->get();
+    
+    //     return view('ticket.assigned', compact('assignedTickets', 'userIds'));
+    // }
+    
 
 
     // public function index()
@@ -566,21 +614,26 @@ public function getAllDetails(Request $request)
     }
     
 
-    public function assignedToMe()
-    {
-        $userId = auth()->id();
-    
-        // Fetch tickets where the user is assigned
-        $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
-            $query->where('users.id', $userId);
-        })
-        ->with('user', 'users') // Load relationships
-        ->orderBy('created_at', 'desc')
-        ->get();
     
     
-        return view('ticket.assigned', compact('assignedTickets'));
-    }
+    
+    
+    // public function assignedToMe()
+    // {
+    //     $tickets = Ticket::with('users')->orderBy('created_at', 'desc')->get();
+    //     $userId = auth()->id();
+    
+    //     // Fetch tickets where the user is assigned
+    //     $assignedTickets = Ticket::whereHas('users', function ($query) use ($userId) {
+    //         $query->where('users.id', $userId);
+    //     })
+    //     ->with('user', 'users') // Load relationships
+    //     ->orderBy('created_at', 'desc')
+    //     ->get();
+    
+    
+    //     return view('ticket.assigned', compact('assignedTickets', 'tickets'));
+    // }
     
 
     public function unassigned()
