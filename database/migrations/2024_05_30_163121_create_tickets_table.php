@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(); // requesitor
-            // $table->unsignedBigInteger('assigned_user_id')->nullable(); // assigned user to the ticket
-
-            $table->string('building_number')->nullable();
-            $table->string('office_name')->nullable();
+            
+            $table->unsignedBigInteger('building_number_id')->nullable();
+            $table->unsignedBigInteger('office_name_id')->nullable();
             $table->enum('priority_level', ['High', 'Mid', 'Low'])->nullable();
             $table->string('description')->nullable();
             $table->string('file_path')->nullable();
@@ -38,6 +37,8 @@ return new class extends Migration
             $table->foreign('ictram_id')->references('id')->on('ictram')->onDelete('cascade');
             $table->foreign('nicmu_id')->references('id')->on('nicmu')->onDelete('cascade');
             $table->foreign('mis_id')->references('id')->on('mis')->onDelete('cascade');
+            $table->foreign('building_number_id')->references('id')->on('building_numbers')->onDelete('cascade');
+            $table->foreign('office_name_id')->references('id')->on('office_names')->onDelete('cascade');
             // $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
             
              

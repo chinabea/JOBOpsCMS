@@ -306,12 +306,12 @@
             const currentStatus = this.getAttribute('data-current-status');
 
             if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
-                const purchase_parts = prompt("Why is this ticket being marked as 'Purchase Parts'?");
+                const purchase_parts = prompt("Add parts that you are purchasing for the ticket");
                 if (purchase_parts !== null && purchase_parts.trim() !== "") {
                     document.getElementById(`purchase_partsInput-${ticketId}`).value = purchase_parts;
                     form.submit();
                 } else {
-                    alert("You must provide a purchase parts to mark this ticket as 'Purchase Parts'.");
+                    alert("You must provide a parts to purchase to mark this ticket as 'Purchase Parts'.");
                     this.value = currentStatus; // Reset to the current status
                 }
             } else {
