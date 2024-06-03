@@ -132,6 +132,18 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('building-numbers.index') }}" class="nav-link {{ Route::currentRouteName() == 'building-numbers.index' ? 'active' : '' }}">
+                    <td><i class="fas fa-dollar-sign nav-icon"></i></td>
+                        <p>Building Numbers</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('office-names.index') }}" class="nav-link {{ Route::currentRouteName() == 'office-names.index' ? 'active' : '' }}">
+                    <td><i class="fas fa-dollar-sign nav-icon"></i></td>
+                        <p>Office Names</p>
+                    </a>
+                </li>
                 
                 <!-- <li class="nav-header">ADMINISTRATION</li> -->
                 @if(Auth::user()->role == 1 || Auth::user()->role == 2  || Auth::user()->role == 3 )
