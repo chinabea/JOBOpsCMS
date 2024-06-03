@@ -933,36 +933,18 @@
                         </a>
                     </li>
                 @endif
-                @if(Auth::user()->role == 1)
-                <li class="nav-item">
-                    <a href="{{ route('users') }}" class="nav-link {{ Route::currentRouteName() == 'users' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users mr-2"></i>
-                        <p> Users </p>
-                    </a>
-                </li>
-                @endif
-                @if(Auth::user()->role == 2)
-                <li class="nav-item">
-                    <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> ICTRAM Tickets </p>
-                    </a>
-                </li>
-                @elseif(Auth::user()->role == 3)
-                <li class="nav-item">
-                    <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-university mr-2"></i>
-                        <p> NICMU Tickets </p>
-                    </a>
-                </li>
-                @elseif(Auth::user()->role == 4)
                 <li class="nav-item">
                     <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-university mr-2"></i>
                         <p> MIS Tickets </p>
                     </a>
                 </li>
-                @endif
+                <li class="nav-item">
+                    <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book mr-2"></i>
+                        <p>Assigned Tickets</p>
+                    </a>
+                </li>
 
                
                 @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
