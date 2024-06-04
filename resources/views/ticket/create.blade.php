@@ -23,10 +23,30 @@
                 <div class="card-body">
                     <div class="container mt-5">
                         <div class="form-group">
+                            <label for="building_number_id">Building Number</label>
+                            <select name="building_number_id" class="form-control" required>
+                                <option value="">Select Building Number</option>
+                                @foreach($buildingNumbers as $buildingNumber)
+                                    <option value="{{ $buildingNumber->id }}">{{ $buildingNumber->building_number }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="office_name_id">Office Name</label>
+                            <select name="office_name_id" class="form-control" required>
+                                <option value="">Select Office Name</option>
+                                @foreach($officeNames as $officeName)
+                                    <option value="{{ $officeName->id }}">{{ $officeName->office_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- <div class="form-group">
                             <label for="service-location">Service Location</label>
                             <input type="text" name="building_number" class="form-control" placeholder="Enter Building Number or Name" required><br>
                             <input type="text" name="office_name" class="form-control" placeholder="Enter Office Name" required>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="description">Description</label>
                             <input type="text" name="description" class="form-control" placeholder="Enter Description">
