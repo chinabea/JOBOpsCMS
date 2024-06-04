@@ -39,7 +39,6 @@ return new class extends Migration
             $table->foreign('mis_id')->references('id')->on('mis')->onDelete('cascade');
             $table->foreign('building_number_id')->references('id')->on('building_numbers')->onDelete('cascade');
             $table->foreign('office_name_id')->references('id')->on('office_names')->onDelete('cascade');
-            // $table->foreign('assigned_user_id')->references('id')->on('users')->onDelete('cascade');
             
              
         });

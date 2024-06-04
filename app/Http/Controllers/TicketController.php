@@ -14,6 +14,8 @@ use App\Models\Unit;
 use Carbon\Carbon;
 use App\Models\IctramJobType;
 use App\Models\Ticket;
+use App\Models\BuildingNumber;
+use App\Models\OfficeName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -141,8 +143,8 @@ class TicketController extends Controller
     
         // Create a new ticket instance
         $ticket = new Ticket([
-            'building_number' => $request->input('building_number'),
-            'office_name' => $request->input('office_name'),
+            'building_number_id' => $request->input('building_number_id'),
+            'office_name_id' => $request->input('office_name_id'),
             'description' => $request->input('description'),
             'file_path' => $filePath,
             'serial_number' => $request->input('serial_number'),
@@ -371,7 +373,10 @@ class TicketController extends Controller
         // $nicmus = Nicmu::all();
         // $mis = Mis::all();
 
-        return view('ticket.create');
+        $buildingNumbers = BuildingNumber::all();
+        $officeNames = OfficeName::all();
+
+        return view('ticket.create', compact('buildingNumbers', 'officeNames'));
     }
 
     public function getJobTypes(Request $request)

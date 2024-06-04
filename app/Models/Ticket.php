@@ -11,8 +11,8 @@ class Ticket extends Model
 
     public $primaryKey = 'id';
 
-    public $fillable = ['building_number',
-                        'office_name',
+    public $fillable = ['building_number_id',
+                        'office_name_id',
                         'serial_number', 
                         'priority_level', 
                         'description', 
