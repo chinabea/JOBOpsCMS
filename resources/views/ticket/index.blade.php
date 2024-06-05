@@ -6,13 +6,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Requested Tickets</h1>
+                    <h1 class="m-0">Requested Ticketsss</h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
                             <i class="fas fa-plus"></i> Request Ticket
-                        </a>
+                        </a>    
                         <a href="#" class="btn bg-light text-dark border mr-2" data-widget="control-sidebar" data-slide="true">
                             <i class="fas fa-filter"></i> Filters <i class="fas fa-angle-right left"></i>
                         </a>
