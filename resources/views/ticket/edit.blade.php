@@ -36,10 +36,19 @@
                         </select>
                     </div>
                         @php
-                        dd($ticket)
+                            if (!is_null($ticket['ictram_id'])) {
+                                $type = "ICTRAM";
+                            } elseif (!is_null($ticket['nicmu_id'])) {
+                                $type = "NICMU";
+                            } elseif (!is_null($ticket['mis_id'])) {
+                                $type = "MIS";
+                            } else {
+                                $type = null;
+                            }
+
 
                         @endphp
-                            <div class="form-group" id="app" data-type="{{$type}}">
+                            <div class="form-group" id="app" data-type="{{$type}}" job_type_data-type_ictram="{{$ticket->ictram->jobType->id}}" equipment_data-type_ictram="{{$ticket->ictram->equipment->id}}" problem_data-type_ictram="{{$ticket->ictram->problem->id}}>
                                 <label for="request">Request</label>
                                 <select class="form-control" id="request" v-model="selectedUnit" @change="fetchJobTypeDetails">
                                     @if(!is_null($type))
@@ -253,9 +262,9 @@ createApp({
         const selectedProblemNICMU = ref('');
         const selectedJobTypeNICMU = ref('');
         const selectedEquipmentNICMU = ref('');
-        const selectedJobTypeICTRAM = ref('');
-        const selectedEquipmentICTRAM = ref('');
-        const selectedProblemICTRAM = ref('');
+        const selectedJobTypeICTRAM = ref(document.getElementById('app').getAttribute('job_type_data-type_ictram'));
+        const selectedEquipmentICTRAM = ref(document.getElementById('app').getAttribute('equipment_data-type_ictram'));
+        const selectedProblemICTRAM = ref(document.getElementById('app').getAttribute('problem_data-type_ictram'));
         const selectedRequestType = ref('');
         const selectedJobTypeMIS = ref('');
         const selectedAccountname = ref('');
@@ -263,7 +272,7 @@ createApp({
         const NICMU = ref([]);
         const MIS = ref([]);
         const accountNameMISes = ref([]);
-
+        console.log(selectedEquipmentICTRAM, "testing");
         const uniqueJobTypeDetailsNICMU = computed(() => {
             const uniqueDetails = [];
             const seenIds = new Set();
