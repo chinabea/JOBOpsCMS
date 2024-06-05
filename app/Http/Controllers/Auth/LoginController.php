@@ -50,9 +50,9 @@ class LoginController extends Controller
             return redirect()->route('director.dashboard');
         } elseif ($localUser->role == 2 || $localUser->role == 3 || $localUser->role == 4) {
             return redirect()->route('unit-head.dashboard');
-        } elseif ($localUser->role == 5) {
+        } elseif ($localUser->role == 7 || $localUser->role == 8 || $localUser->role == 9) {
             return redirect()->route('mict-staff.dashboard');
-        } elseif ($localUser->role == 6) {
+        } elseif ($localUser->role == 5) {
             return redirect()->route('staff.dashboard');
         } else {
             return redirect()->route('staff.home');
