@@ -29,6 +29,7 @@ use App\Http\Controllers\PriorityLevelController;
 use App\Http\Controllers\TicketUserController;
 use App\Http\Controllers\BuildingNumberController;
 use App\Http\Controllers\OfficeNameController;
+use App\Http\Controllers\ManageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -256,7 +257,7 @@ Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ict
 Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
-Route::get('/units', [UnitController::class, 'index'])->name('units');
+// Route::get('/units', [UnitController::class, 'index'])->name('units');
 
 Route::post('/webhook', [MessengerController::class, 'handleWebhook']);
 Route::get('/webhook', [MessengerController::class, 'verifyWebhook']);
@@ -268,6 +269,7 @@ Route::post('/ticket/{ticketId}/non-compliance-escalation', [TicketUserControlle
 
 Route::resource('building-numbers', BuildingNumberController::class);
 Route::resource('office-names', OfficeNameController::class);
+Route::get('/manage', [ManageController::class, 'manage'])->name('manage');
 
 
 Route::fallback(function () {
