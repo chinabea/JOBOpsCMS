@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Requested Tickets</h1>
+                    <h1 class="m-0">Office Names</h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
-                            <i class="fas fa-plus"></i> Request Ticket
+                        <a href="{{ route('office-names.create') }}" class="btn btn-info mr-2">
+                            <i class="fas fa-plus"></i> Office Name
                         </a>
                         <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
                             <i class="fas fa-sync-alt"></i>
@@ -29,10 +29,6 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-4">
-                                <h1>Office Names</h1>
-                                <a href="{{ route('office-names.create') }}" class="btn btn-primary">
-                                    <i class="fas fa-plus"></i> Add Office Name
-                                </a>
                             </div>
                             <table id="example1" class="table table-striped">
                                 <thead>
