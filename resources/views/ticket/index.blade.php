@@ -219,35 +219,26 @@
                                             @endif
                                         </td>
                                         <td>
-                                        @php
-                                        $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
-                                        $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
-                                        $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
+                                            @php
+                                                $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
+                                                $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
+                                                $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
 
-                                        $ageInDays = $ticket->created_at->diffInDays(now());
-                                        if ($ageInDays == 0) {
-                                            $progressClass = 'bg-info';
-                                        } elseif ($ageInDays == 1) {
-                                            $progressClass = 'bg-warning';
-                                        } elseif ($ageInDays >= 2) {
-                                            $progressClass = 'bg-danger';
-                                        } else {
-                                            $progressClass = 'bg-success'; // Default if not in the first 3 days
-                                        }
-                                    @endphp
-
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                            <!-- @php
-                                            $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
-                                            $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
-                                            $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
+                                                $ageInDays = $ticket->created_at->diffInDays(now());
+                                                if ($ageInDays == 0) {
+                                                    $progressClass = 'bg-info';
+                                                } elseif ($ageInDays == 1) {
+                                                    $progressClass = 'bg-warning';
+                                                } elseif ($ageInDays >= 2) {
+                                                    $progressClass = 'bg-danger';
+                                                } else {
+                                                    $progressClass = 'bg-success'; // Default if not in the first 3 days
+                                                }
                                             @endphp
+
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div> -->
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </td>
                                         <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @else
