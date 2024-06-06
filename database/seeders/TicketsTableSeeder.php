@@ -136,9 +136,6 @@ class TicketsTableSeeder extends Seeder
                 'created_at' => Carbon::now()->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
-
-
-            
             [
                 'user_id' => 7,
                 'building_number_id' => 3,
