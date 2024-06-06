@@ -14,5 +14,10 @@ class OfficeName extends Model
     public $fillable = [
         'office_name',
     ];
+    
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'office_name_id');
+    }
 
 }
