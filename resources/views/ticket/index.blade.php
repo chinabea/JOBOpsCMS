@@ -13,10 +13,6 @@
                         <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
                             <i class="fas fa-plus"></i> Request Ticket
                         </a>    
-                        <a href="#" class="btn bg-light text-dark border mr-2" data-widget="control-sidebar" data-slide="true">
-                            <i class="fas fa-filter"></i> Filters <i class="fas fa-angle-right left"></i>
-                        </a>
-                        @include('filters')
                         <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
                             <i class="fas fa-sync-alt"></i>
                         </button>
@@ -223,14 +219,35 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @php
+                                        @php
+                                        $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
+                                        $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
+                                        $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
+
+                                        $ageInDays = $ticket->created_at->diffInDays(now());
+                                        if ($ageInDays == 0) {
+                                            $progressClass = 'bg-info';
+                                        } elseif ($ageInDays == 1) {
+                                            $progressClass = 'bg-warning';
+                                        } elseif ($ageInDays >= 2) {
+                                            $progressClass = 'bg-danger';
+                                        } else {
+                                            $progressClass = 'bg-success'; // Default if not in the first 3 days
+                                        }
+                                    @endphp
+
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+
+                                            <!-- @php
                                             $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
                                             $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
                                             $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
                                             @endphp
                                             <div class="progress">
                                                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
+                                            </div> -->
                                         </td>
                                         <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @else
