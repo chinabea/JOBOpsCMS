@@ -59,22 +59,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="sort_by">Sort By</label>
-                    <select class="form-control" name="sort_by" id="sort_by">
-                        <option value="">Select Sort By</option>
-                        <option value="id" {{ request('sort_by') == 'id' ? 'selected' : '' }}>ID</option>
-                        <option value="building_number" {{ request('sort_by') == 'building_number' ? 'selected' : '' }}>Building Number</option>
-                        <option value="office_name" {{ request('sort_by') == 'office_name' ? 'selected' : '' }}>Office Name</option>
-                    </select>
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" class="form-control" name="start_date" id="start_date">
                 </div>
-
                 <div class="form-group">
-                    <label for="sort_order">Sort Order</label>
-                    <select class="form-control" name="sort_order" id="sort_order">
-                        <option value="">Select Sort Order</option>
-                        <option value="asc" {{ request('sort_order') == 'asc' ? 'selected' : '' }}>Ascending</option>
-                        <option value="desc" {{ request('sort_order') == 'desc' ? 'selected' : '' }}>Descending</option>
-                    </select>
+                    <label for="end_date">End Date:</label>
+                    <input type="date" class="form-control" name="end_date" id="end_date">
                 </div>
             </div>
             <div class="form-group d-flex justify-content-between">
