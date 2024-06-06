@@ -19,7 +19,7 @@
               
               <form action="{{ route('store.ticket') }}" method="post" enctype="multipart/form-data">
 
-                @csrf
+                @csrf 
                 <div class="card-body">
                     <div class="container mt-5">
                         <div class="form-group">
