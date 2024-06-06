@@ -34,7 +34,7 @@
                                 </div>
                             </form>
 
-                            <table id="datatable" class="table table-bordered table-hover text-center table-striped table-sm">
+                            <table id="example1" class="table table-bordered table-hover text-center table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th>#</th>

@@ -82,7 +82,7 @@
                             </div>
                         </form>
                     </div>
-            <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+            <table iid="example1" class="table table-bordered table-hover text-center table-sm">
                 <tbody>
                     @foreach ($sortedMises->groupBy('requestTypeName.requestType_name') as $requestTypeName => $mises)
                         <tr>

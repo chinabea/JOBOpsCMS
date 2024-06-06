@@ -82,7 +82,7 @@
                             </div>
                         </form>
                     </div>
-                <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+                <table id="example1" class="table table-bordered table-hover text-center table-sm">
                 <tbody>
                     @foreach ($sortedNicmus->groupBy('jobType.jobType_name') as $jobTypeName => $nicmus)
                         <tr>
