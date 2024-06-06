@@ -43,6 +43,8 @@ class TicketController extends Controller
             $ictram = Ictram::all();
             $nicmu = Nicmu::all();
             $mis = Mis::all();
+            $buildingNumbers = BuildingNumber::all();
+            $officeNames = OfficeName::all(); 
             
             // Retrieve approved users.
             // $userIds = User::where('is_approved', true)->get();
@@ -55,7 +57,7 @@ class TicketController extends Controller
                 $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
             });
 
-            return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis'));
+            return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
