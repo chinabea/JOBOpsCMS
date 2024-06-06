@@ -143,18 +143,8 @@
                                             </div>
                                         @endif
                                         </td>
-<td>{{ $ticket->buildingNumber->building_number ?? 'N/A' }}</td>
-<td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
-                                       
-        <!-- @foreach($buildingNumbers as $buildingNumber)
-        <td><option value="{{ $buildingNumber->id }}" {{ $ticket->building_number == $buildingNumber->id ? 'selected' : '' }}>
-                {{ $buildingNumber->building_number }}
-            </option></td>
-        @endforeach -->
-                                            
-                                        
-                                        
-                                        <td>{{ $ticket->office_name }}</td>
+                                        <td>{{ $ticket->buildingNumber->building_number ?? 'N/A' }}</td>
+                                        <td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
                                         @if($ticket->ictram)
                                             <td>ICTRAM</td>
                                             <td>{{ $ticket->ictram->jobType->jobType_name }} </td>
