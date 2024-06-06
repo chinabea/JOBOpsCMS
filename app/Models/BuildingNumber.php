@@ -14,5 +14,10 @@ class BuildingNumber extends Model
     public $fillable = [
         'building_number',
     ];
+    
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'building_number_id');
+    }
 
 }
