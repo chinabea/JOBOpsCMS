@@ -52,7 +52,6 @@
                                         @if(auth()->user()->role == 1)
                                         <th>Action(s)</th>
                                         @endif
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,7 +143,17 @@
                                             </div>
                                         @endif
                                         </td>
-                                        <td>{{ $ticket->building_number }}</td>
+<td>{{ $ticket->buildingNumber->building_number ?? 'N/A' }}</td>
+<td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
+                                       
+        <!-- @foreach($buildingNumbers as $buildingNumber)
+        <td><option value="{{ $buildingNumber->id }}" {{ $ticket->building_number == $buildingNumber->id ? 'selected' : '' }}>
+                {{ $buildingNumber->building_number }}
+            </option></td>
+        @endforeach -->
+                                            
+                                        
+                                        
                                         <td>{{ $ticket->office_name }}</td>
                                         @if($ticket->ictram)
                                             <td>ICTRAM</td>
