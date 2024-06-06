@@ -36,18 +36,6 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
     
-    
-    // public function users()
-    // {
-    //     return $this->belongsToMany(User::class, 'ticket_user')
-    //                 ->withTimestamps();
-    // }
-
-    // public function assignedUser()
-    // {
-    //     return $this->belongsTo(User::class, 'assigned_to');
-    // }
-
     public function unit()
     {
         return $this->belongsTo(Unit::class);
@@ -125,28 +113,12 @@ class Ticket extends Model
     {
         return $this->belongsTo(Mis::class, 'mis_id');
     }
-   
-    // public function assignedUser()
-    // {
-    //     return $this->belongsTo(User::class, 'assigned_user_id');
-    // }
-    // public function users()
-    // {
-    //     return $this->belongsToMany(User::class);
-    // }
     
-    // public function users()
-    // {
-    //     return $this->belongsToMany(User::class);
-    // }
     public function escalatedBy()
     {
         return $this->belongsTo(User::class, 'escalatedBy_for_workloadLimitReached');
     }
-    // public function assignedUsers()
-    // {
-    //     return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id');
-    // }
+    
     public function assignedUsers()
     {
         return $this->belongsToMany(User::class, 'ticket_user', 'ticket_id', 'user_id')
@@ -158,6 +130,22 @@ class Ticket extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('escalatedBy_for_workloadLimitReached', 'escalationReason_for_workloadLimitReached');
+    }
+
+    /**
+     * Get the building number associated with the ticket.
+     */
+    public function buildingNumber()
+    {
+        return $this->belongsTo(BuildingNumber::class, 'building_number_id');
+    }
+
+    /**
+     * Get the office name associated with the ticket.
+     */
+    public function officeName()
+    {
+        return $this->belongsTo(OfficeName::class, 'office_name_id');
     }
     
     
