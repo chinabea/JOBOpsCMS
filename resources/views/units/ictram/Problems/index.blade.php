@@ -28,7 +28,7 @@
                             </button>
                             </div>
                                 <div class="mb-4">
-                                    <table class="table table-bordered table-sm text-center">
+                                    <table id="example1" class="table table-bordered table-sm text-center">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>Problem Description</th>

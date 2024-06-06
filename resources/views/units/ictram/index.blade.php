@@ -84,7 +84,7 @@
                             </div>
                         </form>
                     </div>
-            <table id="datatable-responsive" class="table table-bordered table-hover text-center table-sm">
+            <table id="example1" class="table table-bordered table-hover text-center table-sm">
                 <tbody>
                     @foreach ($sortedIctrams->groupBy('jobType.jobType_name') as $jobTypeName => $ictrams)
                         <tr>
