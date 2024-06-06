@@ -103,7 +103,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
@@ -175,7 +175,7 @@
                         <li class="nav-item">
                             <a href="{{ route('ictrams.Equipments') }}" class="nav-link {{ Route::currentRouteName() == 'ictrams.Equipments' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
-                                <p>Equipments</p>
+                                <p>Top Equipments</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -210,7 +210,7 @@
                         <li class="nav-item">
                             <a href="{{ route('nicmus.Equipments') }}" class="nav-link {{ Route::currentRouteName() == 'nicmus.Equipments' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
-                                <p>Equipments</p>
+                                <p>Top Equipments</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -427,7 +427,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
@@ -656,7 +656,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
@@ -886,7 +886,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
@@ -1097,7 +1097,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
@@ -1324,7 +1324,7 @@
                     <li class="nav-item">
                         <a href="{{ route('unit.purchased') }}" class="nav-link {{ Route::currentRouteName() == 'unit.purchased' ? 'active' : '' }}">
                         <td><i class="fas fa-dollar-sign nav-icon"></i></td>
-                            <p>Equipments</p>
+                            <p>Top Equipments</p>
                         </a>
                     </li>
                 @endif
