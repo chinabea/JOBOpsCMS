@@ -1,1 +1,1 @@
-# A technical ticketing system for CSPC MICT 🛠️
+# A centralized system for ICTU that provides user-specific access, efficient ticket creation, workload management, task tracking, API-based notifications, detailed reporting, and a knowledge base for instructional content, boosting efficiency and communication.
