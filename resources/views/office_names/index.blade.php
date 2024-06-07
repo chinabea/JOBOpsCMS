@@ -39,7 +39,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($officeNames as $officeName)
+                                    @foreach($officeNames as $officeName)
                                     <tr>
                                         <td>{{ $officeName->id }}</td>
                                         <td>{{ $officeName->office_name }}</td>

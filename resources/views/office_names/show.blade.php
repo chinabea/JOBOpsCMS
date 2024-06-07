@@ -33,9 +33,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h2>Office Details</h2>
+                            <div class="my-4"></div>
                             <div class="mb-4">
                                 <h5>Building Name</h5>
-                                <p class="my-4 font-weight-bold">{{ $officeName->office_name }}</p>
+                                <p class="font-weight-bold">{{ $officeName->office_name }}</p>
                             </div>
                             <div class="mb-2">
                                 <h5>Created at:</h5>
