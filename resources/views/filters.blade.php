@@ -60,11 +60,11 @@
 
                 <div class="form-group">
                     <label for="start_date">Start Date:</label>
-                    <input type="date" class="form-control" name="start_date" id="start_date">
+                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ request('start_date') }}">
                 </div>
                 <div class="form-group">
                     <label for="end_date">End Date:</label>
-                    <input type="date" class="form-control" name="end_date" id="end_date">
+                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ request('end_date') }}">
                 </div>
             </div>
             <div class="form-group d-flex justify-content-between">
