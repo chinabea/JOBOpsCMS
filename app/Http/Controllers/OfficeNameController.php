@@ -11,7 +11,7 @@ class OfficeNameController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    { 
         $officeNames = OfficeName::all();
         return view('office_names.index', compact('officeNames'));
     }
