@@ -27,10 +27,7 @@ class ReportController extends Controller
     public function ticketReport(Request $request){
 
         $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
-    //     $tickets = Ticket::all();
-    // $tickets = Ticket::with(['user', 'ictram.job_type', 'ictram.equipment', 'ictram.problem', 'nicmu.job_type', 'nicmu.equipment', 'nicmu.problem', 'mis.request_type', 'mis.job_type', 'mis.asname'])
-    //     ->where('building_number', $building_number)
-    //     ->get();
+        
         $userIds = User::where('role', 2)->where('is_approved', true)->get();
         $query = Ticket::query();
     
@@ -57,11 +54,16 @@ class ReportController extends Controller
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
-    
-        // Apply sorting
-        if ($request->filled('sort_by') && $request->filled('sort_order')) {
-            $query->orderBy($request->sort_by, $request->sort_order);
+
+        // Apply date filters
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
         }
+    
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+        
     
         // Check for export requests
         if ($request->has('export')) {
