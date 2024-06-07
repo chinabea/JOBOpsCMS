@@ -208,7 +208,6 @@ Route::put('/mises/{id}/edit-job-type', [MisController::class, 'jobTypeEdit'])->
 Route::put('/mises/{id}/edit-equipment', [MisController::class, 'requestTypeEdit'])->name('mises.editRequestType');
 Route::put('/mises/{id}/edit-problem', [MisController::class, 'asNameEdit'])->name('mises.editAsName');
 
-
 Route::delete('/mises/{id}', [MisController::class, 'destroy'])->name('mises.destroyMis');
 Route::delete('/mises/delete-job-type/{id}', [MisController::class, 'destroyJobType'])->name('mises.destroyJobType');
 Route::delete('/mises/delete-equipment/{id}', [MisController::class, 'destroyRequestType'])->name('mises.destroyRequestType');
@@ -240,7 +239,6 @@ Route::delete('/ictrams/delete-job-type/{id}', [ICTRAMController::class, 'destro
 Route::delete('/ictrams/delete-equipment/{id}', [ICTRAMController::class, 'destroyEquipment'])->name('ictrams.destroyEquipment');
 Route::delete('/ictrams/delete-problem/{id}', [ICTRAMController::class, 'destroyProblem'])->name('ictrams.destroyProblem');
 Route::delete('/ictrams/delete-relation/{id}', [AssignController::class, 'destroy'])->name('ictrams.destroyIctram');
-
 Route::get('/api/equipments/{jobType}', [ICTRAMController::class, 'getEquipmentsByJobType'])->name('equipments.byJobType');
 
 // Routes for ICTRAM for Client side
@@ -257,7 +255,6 @@ Route::get('/ictram-tickets', [UnitController::class, 'ictramIndex'])->name('ict
 Route::get('/nicmu-tickets', [UnitController::class, 'nicmuIndex'])->name('nicmu-tickets');
 Route::get('/mis-tickets', [UnitController::class, 'misIndex'])->name('mis-tickets');
 Route::get('/unit/purchased', [UnitController::class, 'purchased'])->name('unit.purchased');
-// Route::get('/units', [UnitController::class, 'index'])->name('units');
 
 Route::post('/webhook', [MessengerController::class, 'handleWebhook']);
 Route::get('/webhook', [MessengerController::class, 'verifyWebhook']);
