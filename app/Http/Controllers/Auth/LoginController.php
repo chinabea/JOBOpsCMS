@@ -39,9 +39,10 @@ class LoginController extends Controller
         // Automatically log in the user and "remember" them
         Auth::login($localUser, true);
         
-        if (is_null($localUser->expertise)) {
+        if (is_null($localUser->email)) {
             return redirect()->route('user.setupProfile');
-        } elseif ($localUser->expertise && !$localUser->is_approved) {
+        // } elseif ($localUser->expertise && !$localUser->is_approved) {
+        } elseif (!$localUser->is_approved) {
             return redirect()->route('account.pending');
         } 
         
@@ -54,6 +55,8 @@ class LoginController extends Controller
             return redirect()->route('mict-staff.dashboard');
         } elseif ($localUser->role == 5) {
             return redirect()->route('staff.dashboard');
+        } elseif ($localUser->role == 6) {
+            return redirect()->route('student.dashboard');
         } else {
             return redirect()->route('staff.home');
         }
