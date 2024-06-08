@@ -48,6 +48,7 @@
 
 
                         @endphp
+                        @if(!is_null($ticket['ictram_id'])) 
                             <div class="form-group" id="app" data-type="{{$type}}" job_type_data-type_ictram="{{$ticket->ictram->jobType->id}}" equipment_data-type_ictram="{{$ticket->ictram->equipment->id}}" problem_data-type_ictram="{{$ticket->ictram->problem->id}}>
                                 <label for="request">Request</label>
                                 <select class="form-control" id="request" v-model="selectedUnit" @change="fetchJobTypeDetails">
@@ -87,8 +88,9 @@
                                     </select>
                                 </div>
                             </div>
-
+                            @endif
                             <!-- NICMUS Details -->
+                            @if(!is_null($ticket['nicmu_id']))
                             <div class="form-group" v-if="equipmentDetailsNICMU.length > 0">
                                 <div class="form-group">
                                     <label for="job_type">Select Job Type Details:</label>
@@ -118,8 +120,9 @@
                                     </select>
                                 </div>
                             </div>
-
+                            @endif
                             <!-- MIS Details -->
+                            @if(!is_null($ticket['mis_id']))
                             <div class="form-group" v-if="equipmentDetailsMIS.length > 0">
                                 <label for="request_type_name">Request Type Name:</label>
                                 <select class="form-control" name="mis_id" v-model="selectedRequestType" @change="fetchRequestTypeDetailsMIS(selectedRequestType)">
@@ -143,6 +146,7 @@
                                     </option>
                                 </select>
                             </div>
+                            @endif
                     </div>
                     <div class="form-group">
                         <label for="priority_level">Priority</label>
