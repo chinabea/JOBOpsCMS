@@ -136,8 +136,6 @@ class TicketController extends Controller
     //     }
     // }
     
-
-    // ---------------------------------------------------------------------------------------------------------------------
     public function store(Request $request)
     {
         // Handle file upload
@@ -193,17 +191,32 @@ class TicketController extends Controller
             $isSelf = $admin->id === $authUser->id;
             $admin->notify(new TicketCreatedNotification($admin, $ticket, $authUser, $isSelf));
         }
-    
+        
         // Notify assigned users if there are any
         if ($request->has('assigned_to')) {
+            // Sync users without detaching others
             $ticket->users()->syncWithoutDetaching($request->assigned_to);
+            
             foreach ($request->assigned_to as $userId) {
                 $user = User::find($userId);
+                
                 if ($user && $user->id !== $authUser->id) {
                     $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
                 }
             }
         }
+
+    
+        // Notify assigned users if there are any
+        // if ($request->has('assigned_to')) {
+        //     $ticket->users()->syncWithoutDetaching($request->assigned_to);
+        //     foreach ($request->assigned_to as $userId) {
+        //         $user = User::find($userId);
+        //         if ($user && $user->id !== $authUser->id) {
+        //             $user->notify(new TicketAssignedNotification($ticket, $user, $authUser));
+        //         }
+        //     }
+        // }
     
         // Log activity
         ActivityLogger::log('Created', $ticket, 'Ticket created');
