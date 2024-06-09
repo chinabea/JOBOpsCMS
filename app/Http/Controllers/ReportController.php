@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\Report; 
+use App\Models\BuildingNumber; 
 use App\Services\ReportService;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -24,11 +25,13 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function ticketReport(Request $request){
+    public function ticketReport(Request $request)
+    {
 
         $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
-        
         $userIds = User::where('role', 2)->where('is_approved', true)->get();
+        $buildingNumbers = BuildingNumber::all(); // Assuming you have a Building model
+
         $query = Ticket::query();
     
         // Apply search filter
@@ -39,7 +42,8 @@ class ReportController extends Controller
                 ->orWhere('status', 'like', '%' . $request->search . '%');
             });
         }
-    
+    //     $buildingNumbers = Building::all(); 
+    // $tickets = Ticket::all(); 
         // Apply building number filter
         if ($request->filled('building_number')) {
             $query->where('building_number', $request->building_number);
@@ -77,7 +81,7 @@ class ReportController extends Controller
         // Get the filtered and sorted tickets
         $tickets = $query->get();
     
-        return view('reports.ticket', compact('tickets', 'userIds'));
+        return view('reports.ticket', compact('tickets', 'userIds', 'buildingNumbers'));
         
     }
 
