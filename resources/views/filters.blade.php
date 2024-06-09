@@ -28,11 +28,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="building_number">Building Number</label>
-                    <select class="form-control" name="building_number" id="building_number">
+                    <label for="building_number_id">Building Number</label>
+                    <select name="building_number_id" class="form-control" required>
                         <option value="">Select Building Number</option>
-                        @foreach($tickets->unique('building_number') as $ticket)
-                            <option value="{{ $ticket->building_number }}">{{ $ticket->building_number }}</option>
+                        @foreach($buildingNumbers as $buildingNumber)
+                            <option value="{{ $buildingNumber->id }}">{{ $buildingNumber->building_number }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -41,9 +41,9 @@
                     <label for="priority_level">Priority Level</label>
                     <select class="form-control" name="priority_level" id="priority_level">
                         <option value="">Select Priority Level</option>
-                        @foreach($tickets as $ticket)
-                            <option value="{{ $ticket->priority_level }}">{{ $ticket->priority_level }}</option>
-                        @endforeach
+                            <option value="High" {{ request('priority_level') == 'High' ? 'selected' : '' }}>High</option>
+                            <option value="Mid" {{ request('priority_level') == 'Mid' ? 'selected' : '' }}>Mid</option>
+                            <option value="Low" {{ request('priority_level') == 'Low' ? 'selected' : '' }}>Low</option>
                     </select>
                 </div>
 
@@ -53,6 +53,7 @@
                         <option value="">Select Status</option>
                         <option value="Open" {{ request('status') == 'Open' ? 'selected' : '' }}>Open</option>
                         <option value="In Progress" {{ request('status') == 'In Progress' ? 'selected' : '' }}>In Progress</option>
+                        <option value="Purchase Parts" {{ request('status') == 'Purchase Parts' ? 'selected' : '' }}>Purchase Parts</option>
                         <option value="Closed" {{ request('status') == 'Closed' ? 'selected' : '' }}>Closed</option>
                         <option value="Completed" {{ request('status') == 'Completed' ? 'selected' : '' }}>Completed</option>
                     </select>
