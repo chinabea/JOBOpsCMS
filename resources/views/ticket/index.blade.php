@@ -143,7 +143,7 @@
                                         <td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
                                         @if($ticket->ictram)
                                             <td>ICTRAM</td>
-                                            <td>{{ $ticket->ictram->jobType->jobType_name }} </td>
+                                            <td>{{ $ticket->ictram->jobType->jobType_name }}</td>
                                             <td>{{ $ticket->ictram->equipment->equipment_name }}</td>
                                             <td>{{ $ticket->ictram->problem->problem_description }}</td>
                                         @endif
@@ -253,11 +253,11 @@
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
