@@ -70,6 +70,13 @@
     .float-button button {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 3); /* Example shadow effect */
     }
+
+    /* landing page */
+    /* #hero {
+        background: url('../landing/assets/img/2021-07-14.jpg') no-repeat center center;
+        background-size: cover;
+    } */
+
     
     
             
