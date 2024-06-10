@@ -15,6 +15,10 @@ class TicketsTableSeeder extends Seeder
      */
     public function run()
     {
+        // Within the year 2024
+        $startDate = Carbon::create(2024, 1, 1, 0, 0, 0); // Start of 2024
+        $endDate = Carbon::now(); // Current date in 2024
+
         DB::table('tickets')->insert([
             [
                 'user_id' => 1,
@@ -33,8 +37,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 2,
@@ -53,8 +57,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 2,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 3,
@@ -73,8 +77,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 2,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 4,
@@ -93,8 +97,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 3,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(3)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 5,
@@ -113,8 +117,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subMonths(4)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 6,
@@ -133,8 +137,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 3,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(4)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 7,
@@ -153,8 +157,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 4,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 8,
@@ -173,8 +177,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 2,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 9,
@@ -193,8 +197,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 2,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(3)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 1,
@@ -213,8 +217,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 3,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 2,
@@ -233,8 +237,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
             [
                 'user_id' => 3,
@@ -253,8 +257,8 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 3,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
+                'updated_at' => $startDate->copy()->addDays(rand(0, $endDate->diffInDays($startDate))),
             ],
         ]);
 

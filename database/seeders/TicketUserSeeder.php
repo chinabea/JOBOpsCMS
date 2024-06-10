@@ -23,8 +23,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 2,
                 'escalationReasonDue_to_clientNoncompliance' => null,
                 'clientNoncomplianceFile' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 2,
@@ -33,8 +33,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => null,
                 'escalationReasonDue_to_clientNoncompliance' => 'Non-payment',
                 'clientNoncomplianceFile' => 'nonpayment_evidence.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 3,
@@ -43,8 +43,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 4,
                 'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
                 'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 4,
@@ -53,8 +53,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 2,
                 'escalationReasonDue_to_clientNoncompliance' => null,
                 'clientNoncomplianceFile' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 5,
@@ -63,8 +63,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => null,
                 'escalationReasonDue_to_clientNoncompliance' => 'Non-payment',
                 'clientNoncomplianceFile' => 'nonpayment_evidence.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 6,
@@ -73,8 +73,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 4,
                 'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
                 'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 7,
@@ -83,8 +83,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 2,
                 'escalationReasonDue_to_clientNoncompliance' => null,
                 'clientNoncomplianceFile' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 8,
@@ -93,8 +93,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => null,
                 'escalationReasonDue_to_clientNoncompliance' => 'Non-payment',
                 'clientNoncomplianceFile' => 'nonpayment_evidence.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'ticket_id' => 9,
@@ -103,8 +103,8 @@ class TicketUserSeeder extends Seeder
                 'escalatedBy_for_workloadLimitReached' => 4,
                 'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
                 'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
-                'updated_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => now(),
+                'updated_at' => now()
             ],
         ]);
     }
