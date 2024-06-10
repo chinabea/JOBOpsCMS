@@ -33,7 +33,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -53,7 +53,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 2,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -73,7 +73,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 2,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -93,7 +93,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 3,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(3)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -113,7 +113,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(4)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -133,7 +133,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 3,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(4)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -153,7 +153,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 4,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -173,7 +173,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 2,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -193,7 +193,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 2,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(3)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -213,7 +213,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => 3,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -233,7 +233,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => null,
                 'nicmu_id' => null,
                 'mis_id' => 1,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(2)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
             [
@@ -253,7 +253,7 @@ class TicketsTableSeeder extends Seeder
                 'ictram_id' => 3,
                 'nicmu_id' => null,
                 'mis_id' => null,
-                'created_at' => Carbon::now()->subDays(rand(1, 14)),
+                'created_at' => Carbon::now()->subMonths(1)->subDays(rand(1, 14)),
                 'updated_at' => Carbon::now()->subDays(rand(1, 14)),
             ],
         ]);
