@@ -154,9 +154,7 @@
                 <span class="info-box-number">{{ $totalPendingApprovalofUsers }}</span>
                 <small>{{ number_format($totalPendingApprovalofUsersPercentageChange, 2) }}% From last Week</small>
               </div>
-              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box -->
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
@@ -202,7 +200,7 @@
         <div class="col-md-9 col-sm-9 ">
           <canvas id="ticketsChart" width="400" height="150"  style="height:280px"></canvas>
         </div>
-        <div class="col-md-3 col-sm-3 bg-white">
+        <div class="col-md-3 col-sm-3">
           <div>
             <div class="align-items-center">
               <h6><i class="fa fa-users"></i> Pending User Approvals</h6>
@@ -241,7 +239,7 @@
               @endforelse
             </ul>
           </div>
-          </div>
+        </div>
         <div class="clearfix"></div>
       </div>
     </div>
