@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<div class="modal fade" id="showTicketModal" tabindex="-1" role="dialog" aria-labelledby="showTicketModalLabel" aria-hidden="true">
+<div class="modal fade" id="showTicketModal-{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="showTicketModalLabel-{{ $ticket->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,20 +14,70 @@
                 <h5 class="mt-3">Ticket Details</h5>
                 <div class="form-group">
                     <label for="requested_by">Requested by</label>
-                    <input type="text" class="form-control" id="requested_by" value="{{ $ticket->user->name }}" disabled>
+                    <input type="text" class="form-control" id="user_id" value="{{ $ticket->user->name }}" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="service_location">Location Service</label>
-                    <input type="text" class="form-control" id="service_location" value="{{ $ticket->service_location }}" disabled>
+                    <label for="service_location">Building</label>
+                    <input type="text" class="form-control" id="buildingNumber" value="{{ $ticket->buildingNumber->building_number ?? 'N/A' }}" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="unit">Unit</label>
-                    <input type="text" class="form-control" id="unit" value="{{ $ticket->unit }}" disabled>
+                    <label for="service_location">Office</label>
+                    <input type="text" class="form-control" id="buildingNumber" value="{{ $ticket->officeName->office_name ?? 'N/A' }}" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="request">Request</label>
-                    <input type="text" class="form-control" id="request" value="{{ $ticket->request }}" disabled>
+                    <label for="service_location">Unit Request</label>
+                    @if($ticket->ictram)
+                        <input type="text" class="form-control" value="ICTRAM" disabled>
+                    @endif
+                    @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="NICMU" disabled>
+                    @endif
+                    @if($ticket->mis)
+                        <input type="text" class="form-control" value="MIS" disabled>
+                    @endif
                 </div>
+
+
+
+                    
+                    <div class="form-group">
+                        <label for="service_location">Job Type</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->jobType->jobType_name }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->jobType->jobType_name }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->jobType->jobType_name }}" disabled>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="service_location">Service for</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->equipment->equipment_name }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->equipment->equipment_name }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->asName->name }}" disabled>
+                        @endif
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="service_location">Issues or Concern</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->problem->problem_description }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->problem->problem_description }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->requestTypeName->requestType_name }}" disabled>
+                        @endif
+                    </div>
+                    
                 <div class="form-group">
                     <label for="priority_level">Priority</label>
                     <input type="text" class="form-control" id="priority_level" value="{{ $ticket->priority_level }}" disabled>
@@ -52,10 +102,6 @@
 								Client Noncompliance File: {{ $user->pivot->clientNoncomplianceFile }}
 							</li>
 						@endforeach
-
-                        <!-- @foreach($ticket->assignedUsers as $user)
-                            <li>{{ $user->name }} - Expertise: {{ implode(', ', $user->expertise ?? ['No Expertise']) }} - Assigned to Tickets: {{ $user->tickets->count() }}</li>
-                        @endforeach -->
                     </ul>
                 </div>
 
