@@ -61,7 +61,21 @@ class TicketController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
-    }   
+    }  
+    
+    public function show($id)
+    {
+        try {
+            // Include the 'user' relationship to fetch the user who requested the ticket
+            $ticket = Ticket::with(['assignedUsers', 'user'])->findOrFail($id);
+            
+            // Pass the ticket and userIds to the view
+            return view('ticket.show', compact('ticket'));
+        } catch (Exception $e) {
+            // Handle the exception, log it, or display an error message to the user
+            return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
+        }
+    } 
 
     public function assignedToMe()
     {
@@ -668,26 +682,6 @@ public function getAllDetails(Request $request)
 
         // Return the view with the unassigned tickets data
         return view('ticket.unassigned', compact('unassignedTickets','userIds'));
-    }
-    
-    public function show($id)
-    {
-        try {
-            // Retrieve the specific ticket using the provided ID
-            // $ticket = Ticket::findOrFail($id);
-            $ticket = Ticket::with('assignedUsers')->findOrFail($id);
-    
-            // Retrieve approved users with specific roles
-            // $userIds = User::whereIn('role', [1, 2])
-            //        ->where('is_approved', true)
-            //        ->get();
-    
-            // Pass the ticket and userIds to the view
-            return view('ticket.show', compact('ticket'));
-        } catch (Exception $e) {
-            // Handle the exception, log it, or display an error message to the user
-            return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
-        }
     }
     
     public function edit($id)
