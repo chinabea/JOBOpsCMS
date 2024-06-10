@@ -12,13 +12,8 @@
                     <label for="question">Question</label>
                     <input type="text" class="form-control" id="question" value="{{ $faq->question }}" readonly>
                 </div>
-                
-                <div class="form-group">
-                    <label for="answer">Answer</label>
-                    <textarea id="answer" class="form-control" readonly>{!! $faq->answer !!}</textarea>
-                </div>
-
-                
+                <label for="answer">Answer</label>
+                <div class="form-control" style="height: auto;" readonly>{{ strip_tags($faq->answer) }}</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

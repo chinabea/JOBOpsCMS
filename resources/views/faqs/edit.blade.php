@@ -16,8 +16,9 @@
                     <input class="form-control" name="question" id="question" value="{{ $faq->question }}" ></input><br>
 
                     <div class="form-group">
-                        <label for="answer">Answer</label> <div id="answer" class="form-control" style="height: auto;">{!! htmlspecialchars_decode($faq->answer) !!}</div>
-                    </div>
+                    <label for="answer">Answer</label>
+                    <textarea id="answer" class="form-control">{!! $faq->answer !!}</textarea>
+                </div>
                     
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
