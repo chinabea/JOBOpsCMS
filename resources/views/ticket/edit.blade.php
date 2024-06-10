@@ -1,7 +1,7 @@
 <!-- Modal -->
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"></script>
-<div class="modal fade" id="editTicketModal" tabindex="-1" role="dialog" aria-labelledby="editTicketModalLabel" aria-hidden="true">
+<div class="modal fade" id="editTicketModal-{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="editTicketModalLabel-{{ $ticket->id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,12 +15,14 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <!-- This should be the requested user -->
+                    <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{ $ticket->user->name }}" disabled>
 
                     <!-- Ticket Details -->
                     <h5 class="mt-3">Ticket Details</h5>
                     <div class="form-group">
-                        <label for="requested_by">Requested by</label>
-                        <input type="text" class="form-control" id="requested_by" value="{{ $ticket->user->name }}" disabled>
+                        <label for="user_id">Requested by</label>
+                        <input type="text" class="form-control" id="user_id" value="{{ $ticket->user->name }}" disabled>
                     </div>
                     <div class="form-group">
                         <label for="service_location">Location Service</label>
