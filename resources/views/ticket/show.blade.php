@@ -90,6 +90,7 @@
                             @php
                                 $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
                             @endphp
+                            Escalated By: {{ $escalatedByUser ? $escalatedByUser->name : 'N/A' }} - <br>
                         @endforeach
                     </div>
 
