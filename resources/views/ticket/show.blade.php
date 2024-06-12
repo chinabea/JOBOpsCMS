@@ -86,6 +86,10 @@
                         @foreach($ticket->assignedUsers as $user)
                             {{ $user->name }} <br>
                             Assigned to Tickets: {{ $user->tickets->count() }} - <br>
+                            Escalation Reason for Workload Limit Reached: {{ $user->pivot->escalationReason_for_workloadLimitReached }} - <br>
+                            @php
+                                $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
+                            @endphp
                         @endforeach
                     </div>
 
