@@ -36,10 +36,6 @@
                         <input type="text" class="form-control" value="MIS" disabled>
                     @endif
                 </div>
-
-
-
-                    
                     <div class="form-group">
                         <label for="service_location">Job Type</label>
                         @if($ticket->ictram)
@@ -77,33 +73,21 @@
                         <input type="text" class="form-control" value="{{ $ticket->mis->requestTypeName->requestType_name }}" disabled>
                         @endif
                     </div>
-                    
-                <div class="form-group">
-                    <label for="priority_level">Priority</label>
-                    <input type="text" class="form-control" id="priority_level" value="{{ $ticket->priority_level }}" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <input type="text" class="form-control" id="status" value="{{ $ticket->status }}" disabled>
-                </div>
-
-                <!-- Assign To -->
-                <h5 class="mt-3">Assign To</h5>
-                <div class="form-group">
-                    <label for="assigned_to">Assigned to</label>
-                    <ul>
-						@foreach($ticket->assignedUsers as $user)
-							<li>{{ $user->name }} - 
-								Expertise: {{ implode(', ', $user->expertise ?? ['No Expertise']) }} - 
-								Assigned to Tickets: {{ $user->tickets->count() }} - 
-								Escalation Reason for Workload Limit Reached: {{ $user->pivot->escalationReason_for_workloadLimitReached }} - 
-								Escalated By: {{ $user->pivot->escalatedBy_for_workloadLimitReached }} - 
-								Escalation Reason Due to Client Noncompliance: {{ $user->pivot->escalationReasonDue_to_clientNoncompliance }} - 
-								Client Noncompliance File: {{ $user->pivot->clientNoncomplianceFile }}
-							</li>
-						@endforeach
-                    </ul>
-                </div>
+                    <div class="form-group">
+                        <label for="priority_level">Priority</label>
+                        <input type="text" class="form-control" id="priority_level" value="{{ $ticket->priority_level }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input type="text" class="form-control" id="status" value="{{ $ticket->status }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="assigned_to">Assigned to</label><br>
+                        @foreach($ticket->assignedUsers as $user)
+                            {{ $user->name }} <br>
+                            Assigned to Tickets: {{ $user->tickets->count() }} - <br>
+                        @endforeach
+                    </div>
 
                 <!-- Assessment and Action -->
                 <h5 class="mt-3">Assessment and Action</h5>
@@ -115,7 +99,6 @@
                     <label for="action_performed">Action Taken</label>
                     <textarea class="form-control" id="action_performed" disabled>{{ $ticket->action_performed }}</textarea>
                 </div>
-
                 <!-- Upload File -->
                 <div class="form-group">
                     <label for="file_path">Uploaded File</label>
