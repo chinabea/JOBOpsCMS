@@ -91,6 +91,8 @@
                                 $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
                             @endphp
                             Escalated By: {{ $escalatedByUser ? $escalatedByUser->name : 'N/A' }} - <br>
+                            Escalation Reason Due to Client Noncompliance: {{ $user->pivot->escalationReasonDue_to_clientNoncompliance }} - <br>
+                            Client Noncompliance File: {{ $user->pivot->clientNoncomplianceFile }}
                         @endforeach
                     </div>
 
