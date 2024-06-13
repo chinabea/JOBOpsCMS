@@ -78,6 +78,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="#" class="nav-link {{ Route::currentRouteName() == '#' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Purchase Parts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('status.in-progress') }}" class="nav-link {{ Route::currentRouteName() == 'status.in-progress' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
                                 <p>In Progress</p>
