@@ -345,25 +345,48 @@ function handleImageSubmission() {
         });
     });
 
-    
     document.querySelectorAll('select[id^="statusSelect-"]').forEach(function(selectElement) {
-        selectElement.addEventListener('change', function() {
-            const ticketId = this.id.split('-')[1];
-            const form = document.getElementById(`statusForm-${ticketId}`);
-            const selectedStatus = this.value;
-            const currentStatus = this.getAttribute('data-current-status');
+      selectElement.addEventListener('change', function() {
+          const ticketId = this.id.split('-')[1];
+          const form = document.getElementById(`statusForm-${ticketId}`);
+          const selectedStatus = this.value;
+          const currentStatus = this.getAttribute('data-current-status');
+  
+          if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
+              const purchasePartsInput = prompt("Add parts that you are purchasing for the ticket (separate multiple parts with commas)");
+              if (purchasePartsInput !== null && purchasePartsInput.trim() !== "") {
+                  document.getElementById(`purchase_partsInput-${ticketId}`).value = purchasePartsInput.split(',').map(part => part.trim()).join(','); // Store as a comma-separated string
+                  form.submit();
+              } else {
+                  alert("You must provide parts to purchase to mark this ticket as 'Purchase Parts'.");
+                  this.value = currentStatus; // Reset to the current status
+              }
+          } else {
+              form.submit();
+          }
+      });
+  });
+  
+    // document.querySelectorAll('select[id^="statusSelect-"]').forEach(function(selectElement) {
+    //     selectElement.addEventListener('change', function() {
+    //         const ticketId = this.id.split('-')[1];
+    //         const form = document.getElementById(`statusForm-${ticketId}`);
+    //         const selectedStatus = this.value;
+    //         const currentStatus = this.getAttribute('data-current-status');
 
-            if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
-                const purchase_parts = prompt("Add parts that you are purchasing for the ticket");
-                if (purchase_parts !== null && purchase_parts.trim() !== "") {
-                    document.getElementById(`purchase_partsInput-${ticketId}`).value = purchase_parts;
-                    form.submit();
-                } else {
-                    alert("You must provide a parts to purchase to mark this ticket as 'Purchase Parts'.");
-                    this.value = currentStatus; // Reset to the current status
-                }
-            } else {
-                form.submit();
-            }
-        });
-    });
+    //         if (selectedStatus === 'Purchase Parts' && currentStatus !== 'Purchase Parts') {
+    //             const purchase_parts = prompt("Add parts that you are purchasing for the ticket");
+    //             if (purchase_parts !== null && purchase_parts.trim() !== "") {
+    //                 document.getElementById(`purchase_partsInput-${ticketId}`).value = purchase_parts;
+    //                 form.submit();
+    //             } else {
+    //                 alert("You must provide a parts to purchase to mark this ticket as 'Purchase Parts'.");
+    //                 this.value = currentStatus; // Reset to the current status
+    //             }
+    //         } else {
+    //             form.submit();
+    //         }
+    //     });
+    // });
+
+    
