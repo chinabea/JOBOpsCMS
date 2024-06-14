@@ -25,65 +25,107 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    // public function ticketReport(Request $request)
+    // {
+
+    //     $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
+    //     $userIds = User::where('role', 2)->where('is_approved', true)->get();
+    //     $buildingNumbers = BuildingNumber::all(); // Assuming you have a Building model
+
+    //     $query = Ticket::query();
+
+    //     // Apply search filter
+    //     if ($request->filled('search')) {
+    //         $query->where(function($q) use ($request) {
+    //             $q->where('priority_level', 'like', '%' . $request->search . '%')
+    //               ->orWhere('status', 'like', '%' . $request->search . '%');
+    //         });
+    //     }
+        
+    //     // Apply building number filter
+    //     if ($request->filled('buildingNumbers')) {
+    //         $buildingNumberId = $request->buildingNumbers; // Assuming buildingNumbers is an ID
+    //         $query->where('building_number_id', $buildingNumberId);
+    //     }
+    
+    //     // Apply search filter
+    //     // if ($request->filled('search')) {
+    //     //     $query->where(function($q) use ($request) {
+    //     //         $q->where('buildingNumbers', 'like', '%' . $request->search . '%')
+    //     //         ->orWhere('priority_level', 'like', '%' . $request->search . '%')
+    //     //         ->orWhere('status', 'like', '%' . $request->search . '%');
+    //     //     });
+    //     // }
+        
+    //     // Apply building number filter
+    //     if ($request->filled('buildingNumbers')) {
+    //         $query->where('buildingNumbers', $request->buildingNumbers);
+    //     }
+    
+    //     // Apply priority level filter
+    //     if ($request->filled('priority_level')) {
+    //         $query->where('priority_level', $request->priority_level);
+    //     }
+    
+    //     // Apply status filter
+    //     if ($request->filled('status')) {
+    //         $query->where('status', $request->status);
+    //     }
+
+    //     // Apply date filters
+    //     if ($request->filled('start_date')) {
+    //         $query->whereDate('created_at', '>=', $request->start_date);
+    //     }
+    
+    //     if ($request->filled('end_date')) {
+    //         $query->whereDate('created_at', '<=', $request->end_date);
+    //     }
+        
+    
+    //     // Check for export requests
+    //     if ($request->has('export')) {
+    //         if ($request->export == 'excel') {
+    //             return $this->exportExcel($request);
+    //         } elseif ($request->export == 'pdf') {
+    //             return $this->exportPdf($request);
+    //         }
+    //     }
+    
+    //     // Get the filtered and sorted tickets
+    //     // $tickets = $query->get();
+    //     $results = $query->get();
+
+    
+    //     return view('reports.ticket', compact('tickets', 'userIds', 'buildingNumbers'));
+        
+    // }
+
     public function ticketReport(Request $request)
     {
+        $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])
+            ->when($request->filled('building_number_id'), function($query) use ($request) {
+                $query->where('building_number_id', $request->building_number_id);
+            })
+            ->when($request->filled('priority_level'), function($query) use ($request) {
+                $query->where('priority_level', $request->priority_level);
+            })
+            ->when($request->filled('status'), function($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->when($request->filled('start_date'), function($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            })
+            ->when($request->filled('end_date'), function($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            })
+            ->get();
 
-        $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
         $userIds = User::where('role', 2)->where('is_approved', true)->get();
-        $buildingNumbers = BuildingNumber::all(); // Assuming you have a Building model
+        $buildingNumbers = BuildingNumber::all();
 
-        $query = Ticket::query();
-    
-        // Apply search filter
-        if ($request->filled('search')) {
-            $query->where(function($q) use ($request) {
-                $q->where('building_number', 'like', '%' . $request->search . '%')
-                ->orWhere('priority_level', 'like', '%' . $request->search . '%')
-                ->orWhere('status', 'like', '%' . $request->search . '%');
-            });
-        }
-    //     $buildingNumbers = Building::all(); 
-    // $tickets = Ticket::all(); 
-        // Apply building number filter
-        if ($request->filled('building_number')) {
-            $query->where('building_number', $request->building_number);
-        }
-    
-        // Apply priority level filter
-        if ($request->filled('priority_level')) {
-            $query->where('priority_level', $request->priority_level);
-        }
-    
-        // Apply status filter
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        // Apply date filters
-        if ($request->filled('start_date')) {
-            $query->whereDate('created_at', '>=', $request->start_date);
-        }
-    
-        if ($request->filled('end_date')) {
-            $query->whereDate('created_at', '<=', $request->end_date);
-        }
-        
-    
-        // Check for export requests
-        if ($request->has('export')) {
-            if ($request->export == 'excel') {
-                return $this->exportExcel($request);
-            } elseif ($request->export == 'pdf') {
-                return $this->exportPdf($request);
-            }
-        }
-    
-        // Get the filtered and sorted tickets
-        $tickets = $query->get();
-    
         return view('reports.ticket', compact('tickets', 'userIds', 'buildingNumbers'));
-        
     }
+
 
     public function filteredTickets(Request $request)
     {
