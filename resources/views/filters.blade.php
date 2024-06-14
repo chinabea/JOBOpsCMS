@@ -26,7 +26,6 @@
                     <label for="search">Search</label>
                     <input type="text" class="form-control" id="search" name="search" placeholder="Search">
                 </div>
-
                 <div class="form-group">
                     <label for="building_number_id">Building Number</label>
                     <select name="building_number_id" class="form-control" required>
@@ -36,14 +35,24 @@
                         @endforeach
                     </select>
                 </div>
+                
+                <!-- <div class="form-group">
+                    <label for="building_number_id">Building Number</label>
+                    <select name="building_number_id" class="form-control" required>
+                        <option value="">Select Building Number</option>
+                        @foreach($buildingNumbers as $buildingNumber)
+                            <option value="{{ $buildingNumber->id }}">{{ $buildingNumber->building_number }}</option>
+                        @endforeach
+                    </select>
+                </div> -->
 
                 <div class="form-group">
                     <label for="priority_level">Priority Level</label>
                     <select class="form-control" name="priority_level" id="priority_level">
                         <option value="">Select Priority Level</option>
-                            <option value="High" {{ request('priority_level') == 'High' ? 'selected' : '' }}>High</option>
-                            <option value="Mid" {{ request('priority_level') == 'Mid' ? 'selected' : '' }}>Mid</option>
-                            <option value="Low" {{ request('priority_level') == 'Low' ? 'selected' : '' }}>Low</option>
+                        <option value="High" {{ request('priority_level') == 'High' ? 'selected' : '' }}>High</option>
+                        <option value="Mid" {{ request('priority_level') == 'Mid' ? 'selected' : '' }}>Mid</option>
+                        <option value="Low" {{ request('priority_level') == 'Low' ? 'selected' : '' }}>Low</option>
                     </select>
                 </div>
 
