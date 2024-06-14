@@ -41,8 +41,8 @@
                                         <th>#</th>
                                         <th>Requesitor</th>
                                         <th>Assigned to</th>
-                                        <th>Building Number</th>
-                                        <th>Office Name</th>
+                                        <th>Building</th>
+                                        <th>Office</th>
                                         <th>Unit Request</th>
                                         <th>Job Type</th>
                                         <th>Service for</th>
