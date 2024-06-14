@@ -13,7 +13,7 @@
                     <input type="text" class="form-control" id="question" value="{{ $faq->question }}" readonly>
                 </div>
                 <label for="answer">Answer</label>
-                <div class="form-control" style="height: auto;" readonly>{{ strip_tags($faq->answer) }}</div>
+                <div class="form-control" style="height: auto;" readonly>{!! $faq->answer !!}</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
