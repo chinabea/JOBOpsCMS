@@ -321,15 +321,15 @@ function initializeSummernoteEditor(editorId) {
   });
 }
 
-function handleImageSubmission(editorId) {
-  // Perform actions for image submission
-  var imageUrl = prompt("Enter the URL of the image:");
+// function handleImageSubmission(editorId) {
+//   // Perform actions for image submission
+//   var imageUrl = prompt("Enter the URL of the image:");
 
-  if (imageUrl) {
-      // Insert the image into the Summernote editor
-      $(editorId).summernote('editor.insertImage', imageUrl);
-  }
-}
+//   if (imageUrl) {
+//       // Insert the image into the Summernote editor
+//       $(editorId).summernote('editor.insertImage', imageUrl);
+//   }
+// }
 
 
 // ORIGINAL
@@ -351,15 +351,15 @@ $(document).ready(function () {
   });
 });
 
-function handleImageSubmission() {
-  // Perform actions for image submission
-  var imageUrl = prompt("Enter the URL of the image:");
+// function handleImageSubmission() {
+//   // Perform actions for image submission
+//   var imageUrl = prompt("Enter the URL of the image:");
   
-  if (imageUrl) {
-      // Insert the image into the Summernote editor
-      $('#answer').summernote('editor.insertImage', imageUrl);
-  }
-}
+//   if (imageUrl) {
+//       // Insert the image into the Summernote editor
+//       $('#answer').summernote('editor.insertImage', imageUrl);
+//   }
+// }
 
   // Toastr configuration
   toastr.options = {

@@ -98,27 +98,47 @@ class FaqsController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
-
     public function update(Request $request, $id)
     {
+        // Fetch the existing FAQ record by ID
+        $faq = FAQs::findOrFail($id);
+    
         // Extract YouTube link from the textarea
         $answer = $request->input('answer');
         $youtubeLink = $this->extractYouTubeLink($answer);
-
-        // Retrieve the existing FAQ instance from the database
-        $faq = FAQs::findOrFail($id);
-
-        // Update the properties of the FAQ instance
+    
+        // Update the FAQ record with new values
         $faq->question = $request->question;
         $faq->answer = $request->answer;
         $faq->youtube_link = $youtubeLink;
-
-        // Save the changes
+    
+        // Save the updated FAQ record
         $faq->save();
-        
+    
+        // Redirect back to the FAQs list with a success message
         return redirect()->route('faqs')->with('success', 'FAQ updated successfully');
-      
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     // Extract YouTube link from the textarea
+    //     $answer = $request->input('answer');
+    //     $youtubeLink = $this->extractYouTubeLink($answer);
+
+    //     // Retrieve the existing FAQ instance from the database
+    //     $faq = FAQs::findOrFail($id);
+
+    //     // Update the properties of the FAQ instance
+    //     $faq->question = $request->question;
+    //     $faq->answer = $request->answer;
+    //     $faq->youtube_link = $youtubeLink;
+
+    //     // Save the changes
+    //     $faq->save();
+        
+    //     return redirect()->route('faqs')->with('success', 'FAQ updated successfully');
+      
+    // }
     
 
     public function destroy($id)
