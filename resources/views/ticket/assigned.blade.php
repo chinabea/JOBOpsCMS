@@ -136,8 +136,8 @@
                                             </div>
                                         @endif
                                         </td>
-                                        <td>{{ $ticket->building_number }}</td>
-                                        <td>{{ $ticket->office_name }}</td>
+                                        <td>{{ $ticket->buildingNumber->building_number ?? 'N/A' }}</td>
+                                        <td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
                                         @if($ticket->ictram)
                                             <td>ICTRAM</td>
                                             <td>{{ $ticket->ictram->jobType->jobType_name }} </td>
@@ -187,7 +187,7 @@
                                             <span class="badge badge-secondary">Low</span>
                                             @endif
                                         @endif
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
@@ -215,17 +215,18 @@
                                                 {{ $ticket->status }}
                                             </small>
                                         </td>
-                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @endif
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         <td>
-                                            <div class="item form-group">
+                                            
+                                        <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
