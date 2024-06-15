@@ -45,9 +45,7 @@
                                         <th>Status</th>
                                         <th>Age</th>
                                         <th>Created At</th>
-                                        @if(auth()->user()->role == 1)
                                         <th>Action(s)</th>
-                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -190,7 +188,7 @@
                                             <span class="badge badge-secondary">Low</span>
                                             @endif
                                         @endif
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3))
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
@@ -248,7 +246,6 @@
                                             </small>
                                         </td>
                                         @endif
-                                        @if(auth()->user()->role == 1)
                                         <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
@@ -268,7 +265,6 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        @endif
                                     </tr>
                                     @endif
                                     @endforeach
