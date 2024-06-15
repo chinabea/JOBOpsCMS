@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class MICTStaff
 {
@@ -22,7 +22,7 @@ class MICTStaff
 
         $user = Auth::user();
         
-        if($user->role == 7){
+        if($user->role == 7 || $user->role == 8 || $user->role == 9){
             return $next($request);
         } else {
             return redirect()->route('mict-staff.dashboard');
