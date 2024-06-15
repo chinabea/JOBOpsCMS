@@ -24,7 +24,7 @@
                     <label for="service_location">Office</label>
                     <input type="text" class="form-control" id="buildingNumber" value="{{ $ticket->officeName->office_name ?? 'N/A' }}" disabled>
                 </div>
-                <div class="form-group">
+                <div class="form-group"> 
                     <label for="service_location">Unit Request</label>
                     @if($ticket->ictram)
                         <input type="text" class="form-control" value="ICTRAM" disabled>

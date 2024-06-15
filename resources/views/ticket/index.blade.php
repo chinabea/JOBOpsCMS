@@ -188,7 +188,7 @@
                                             <span class="badge badge-secondary">Low</span>
                                             @endif
                                         @endif
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3))
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
