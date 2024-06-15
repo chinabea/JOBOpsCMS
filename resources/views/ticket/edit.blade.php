@@ -25,10 +25,130 @@
                         <input type="text" class="form-control" id="user_id" value="{{ $ticket->user->name }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="service_location">Location Service</label>
-                        <input type="text" class="form-control" id="service_location" name="service_location" value="{{ $ticket->service_location }}">
+                        <label for="service_location">Building</label>
+                        <input type="text" class="form-control" id="buildingNumber" value="{{ $ticket->buildingNumber->building_number ?? 'N/A' }}" disabled>
                     </div>
                     <div class="form-group">
+                        <label for="service_location">Office</label>
+                        <input type="text" class="form-control" id="buildingNumber" value="{{ $ticket->officeName->office_name ?? 'N/A' }}" disabled>
+                    </div>
+                <div class="form-group"> 
+                    <label for="service_location">Unit Request</label>
+                    @if($ticket->ictram)
+                        <input type="text" class="form-control" value="ICTRAM" disabled>
+                    @endif
+                    @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="NICMU" disabled>
+                    @endif
+                    @if($ticket->mis)
+                        <input type="text" class="form-control" value="MIS" disabled>
+                    @endif
+                </div>
+                    <div class="form-group">
+                        <label for="service_location">Job Type</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->jobType->jobType_name }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->jobType->jobType_name }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->jobType->jobType_name }}" disabled>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="service_location">Service for</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->equipment->equipment_name }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->equipment->equipment_name }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->asName->name }}" disabled>
+                        @endif
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="service_location">Issues or Concern</label>
+                        @if($ticket->ictram)
+                        <input type="text" class="form-control" value="{{ $ticket->ictram->problem->problem_description }}" disabled>
+                        @endif
+                        @if($ticket->nicmu)
+                        <input type="text" class="form-control" value="{{ $ticket->nicmu->problem->problem_description }}" disabled>
+                        @endif
+                        @if($ticket->mis)
+                        <input type="text" class="form-control" value="{{ $ticket->mis->requestTypeName->requestType_name }}" disabled>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="assigned_to">ASSIGNED TO</label>
+                        @foreach($ticket->assignedUsers as $user)
+                            @php
+                                $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
+                            @endphp
+                            <div class="user-info">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" value="{{ $user->name }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Assigned to Tickets</label>
+                                    <input type="text" class="form-control" value="{{ $user->tickets->count() }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Escalation Reason for Workload Limit Reached</label>
+                                    <input type="text" class="form-control" value="{{ $user->pivot->escalationReason_for_workloadLimitReached ?? 'N/A' }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Escalated By</label>
+                                    <input type="text" class="form-control" value="{{ $escalatedByUser ? $escalatedByUser->name : 'N/A' }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Escalation Reason Due to Client Noncompliance</label>
+                                    <input type="text" class="form-control" value="{{ $user->pivot->escalationReasonDue_to_clientNoncompliance ?? 'N/A' }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Client Noncompliance File</label>
+                                    <input type="text" class="form-control" value="{{ $user->pivot->clientNoncomplianceFile ?? 'N/A' }}" disabled>
+                                </div>
+                            </div>
+                        @endforeach
+
+
+
+
+
+
+
+                        <!-- @foreach($ticket->assignedUsers as $user)
+                            <input type="text" class="form-control" value="{{ $user->name }} <br>
+                            Assigned to Tickets: {{ $user->tickets->count() }} - <br>
+                            Escalation Reason for Workload Limit Reached: {{ $user->pivot->escalationReason_for_workloadLimitReached ?? 'N/A' }} - <br>
+                            @php
+                                $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
+                            @endphp
+                            Escalated By: {{ $escalatedByUser ? $escalatedByUser->name : 'N/A' }} - <br>
+                            Escalation Reason Due to Client Noncompliance: {{ $user->pivot->escalationReasonDue_to_clientNoncompliance ?? 'N/A' }} - <br>
+                            Client Noncompliance File: {{ $user->pivot->clientNoncomplianceFile ?? 'N/A' }}" disabled>
+                        @endforeach -->
+
+                        <!-- @foreach($ticket->assignedUsers as $user)
+                            {{ $user->name }} <br>
+                            Assigned to Tickets: {{ $user->tickets->count() }} - <br>
+                            Escalation Reason for Workload Limit Reached: {{ $user->pivot->escalationReason_for_workloadLimitReached }} - <br>
+                            @php
+                                $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
+                            @endphp
+                            Escalated By: {{ $escalatedByUser ? $escalatedByUser->name : 'N/A' }} - <br>
+                            Escalation Reason Due to Client Noncompliance: {{ $user->pivot->escalationReasonDue_to_clientNoncompliance }} - <br>
+                            Client Noncompliance File: {{ $user->pivot->clientNoncomplianceFile }}
+                        @endforeach -->
+                    </div>
+
+
+
+                    <!-- <div class="form-group">
                         <label for="unit">Unit</label>
                         <select id="unit" class="form-control" name="unit">
                             <option value="MICT" {{ $ticket->unit == 'MICT' ? 'selected' : '' }}>MICT</option>
@@ -47,11 +167,9 @@
                             } else {
                                 $type = null;
                             }
-
-
-                        @endphp
-                        @if(!is_null($ticket['ictram_id'])) 
-                            <div class="form-group" id="app" data-type="{{$type}}" job_type_data-type_ictram="{{$ticket->ictram->jobType->id}}" equipment_data-type_ictram="{{$ticket->ictram->equipment->id}}" problem_data-type_ictram="{{$ticket->ictram->problem->id}}>
+                        @endphp -->
+                        <!-- @if(!is_null($ticket['ictram_id']))  -->
+                            <!-- <div class="form-group" id="app" data-type="{{$type}}" job_type_data-type_ictram="{{$ticket->ictram->jobType->id}}" equipment_data-type_ictram="{{$ticket->ictram->equipment->id}}" problem_data-type_ictram="{{$ticket->ictram->problem->id}}>
                                 <label for="request">Request</label>
                                 <select class="form-control" id="request" v-model="selectedUnit" @change="fetchJobTypeDetails">
                                     @if(!is_null($type))
@@ -90,9 +208,9 @@
                                     </select>
                                 </div>
                             </div>
-                            @endif
+                            @endif -->
                             <!-- NICMUS Details -->
-                            @if(!is_null($ticket['nicmu_id']))
+                            <!-- @if(!is_null($ticket['nicmu_id']))
                             <div class="form-group" v-if="equipmentDetailsNICMU.length > 0">
                                 <div class="form-group">
                                     <label for="job_type">Select Job Type Details:</label>
@@ -122,9 +240,9 @@
                                     </select>
                                 </div>
                             </div>
-                            @endif
+                            @endif -->
                             <!-- MIS Details -->
-                            @if(!is_null($ticket['mis_id']))
+                            <!-- @if(!is_null($ticket['mis_id']))
                             <div class="form-group" v-if="equipmentDetailsMIS.length > 0">
                                 <label for="request_type_name">Request Type Name:</label>
                                 <select class="form-control" name="mis_id" v-model="selectedRequestType" @change="fetchRequestTypeDetailsMIS(selectedRequestType)">
@@ -149,7 +267,12 @@
                                 </select>
                             </div>
                             @endif
-                    </div>
+                    </div> -->
+
+
+
+
+                    
                     <div class="form-group">
                         <label for="priority_level">Priority</label>
                         <select id="priority_level" class="form-control" name="priority_level">
@@ -168,7 +291,7 @@
                     </div>
 
                     <!-- Assign To -->
-                    <h5 class="mt-3">Assign To</h5>
+                    <!-- <h5 class="mt-3">Assign To</h5>
                     <div class="form-group" >
                         <label for="assigned_to">Assign to<span class="required">*</span></label>
                         <select class="selectpicker form-control" id="assigned_to" name="assigned_to[]" data-live-search="true" multiple>
@@ -180,9 +303,10 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> -->
 
                     <!-- Assessment and Action -->
+                    <hr>
                     <h5 class="mt-3">Assessment and Action</h5>
                     <div class="form-group">
                         <label>Initial Assessment</label>
@@ -433,7 +557,7 @@ createApp({
         const fetchProblemDetails = (id) => {
             problemDetails.value = NICMU.value.filter(detail => detail.nicmu_equipment_id === id);
         };
-
+ 
         return {
             selectedUnit,
             selectedICTRAMDetail,
