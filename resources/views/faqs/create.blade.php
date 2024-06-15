@@ -17,7 +17,7 @@
                     
                     <div class="form-group">
                         <label for="answer">Answer</label>
-                        <textarea  id="answer" name="answer" class="form-control"></textarea>
+                        <textarea id="create_answer" name="answer" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -15,9 +15,9 @@
                     <label for="">Questions</label> <br>
                     <input class="form-control" name="question" id="question" value="{{ $faq->question }}" ></input><br>
 
-                    <div class="form-group">
+                <div class="form-group">
                     <label for="answer">Answer</label>
-                    <textarea id="answer" class="form-control">{!! $faq->answer !!}</textarea>
+                    <textarea id="edit_answer_{{ $faq->id }}" name="answer" class="form-control">{!! $faq->answer !!}</textarea>
                 </div>
                     
                     <div class="modal-footer justify-content-between">

@@ -286,10 +286,56 @@ $(function () {
           }
       });
   });
+// FOR EDIT FAQs
+$(document).ready(function () {
+  // Toastr configuration
+  toastr.options = {
+      "positionClass": "toast-bottom-right"
+  };
 
+  // Initialize Summernote editors dynamically
+  $('textarea[id^="edit_answer_"]').each(function () {
+      var editorId = '#' + $(this).attr('id');
+      conditionalInitializeSummernoteEditor(editorId);
+  });
+});
+
+function conditionalInitializeSummernoteEditor(editorId) {
+  var content = $(editorId).val();
+
+  if (content.trim() !== '' || editorId === '#create_answer') {
+      initializeSummernoteEditor(editorId);
+  }
+}
+
+function initializeSummernoteEditor(editorId) {
+  $(editorId).summernote({
+      callbacks: {
+          onInit: function () {
+              // Attach an event listener to the image button
+              $(editorId).next('.note-editor').find('.note-icon-picture').on('click', function () {
+                  handleImageSubmission(editorId);
+              });
+          }
+      }
+  });
+}
+
+function handleImageSubmission(editorId) {
+  // Perform actions for image submission
+  var imageUrl = prompt("Enter the URL of the image:");
+
+  if (imageUrl) {
+      // Insert the image into the Summernote editor
+      $(editorId).summernote('editor.insertImage', imageUrl);
+  }
+}
+
+
+// ORIGINAL
 // IMAGE SUBMISSION
 $(document).ready(function () {
-  $('#answer').summernote({
+  $('#create_answer').summernote({
       callbacks: {
           onInit: function () {
               // Get the Summernote editor instance
