@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="card-title font-weight-bold">Equipments</h1>
+                            <h1 class="card-title font-weight-bold">Top Offices Requested Ticket</h1>
                             <div class="mb-5"></div>
                             <table id="example1" class="table table-bordered table-sm text-center">
                                 <thead class="thead-light">
