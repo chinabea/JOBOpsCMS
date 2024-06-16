@@ -115,112 +115,111 @@ class ReportController extends Controller
 
     public function exportExcel(Collection $tickets)
     {
-            // $tickets = $this->filteredTickets($request);
     
-            // Create a new spreadsheet
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
-    
-            // Merge cells for the header
-            $sheet->mergeCells('A1:J1');
-            $sheet->mergeCells('A2:J2');
-            $sheet->mergeCells('A3:J3');
-            $sheet->mergeCells('A4:J4');
-            $sheet->mergeCells('A5:J5');
-            $sheet->mergeCells('A6:J6');
-            $sheet->mergeCells('A7:J7');
-    
-            // Set the header text
-            $sheet->setCellValue('A1', "Republic of the Philippines");
-            $sheet->setCellValue('A2', "CAMARINES SUR POLYTECHNIC COLLEGES");
-            $sheet->setCellValue('A3', "Nabua, Camarines Sur");
-            $sheet->setCellValue('A5', "MANAGEMENT INFORMATION AND COMMUNICATIONS TECHNOLOGY");
-            $sheet->setCellValue('A6', "SUMMARY LIST OF JOB ORDER REQUEST FORM");
-            $sheet->setCellValue('A7', "ICT REPAIR AND INSTALLATION\nfor the Month of January 2024");
-    
-            // Load the logo image
-            $drawing = new Drawing();
-            $drawing->setName('Logo');
-            $drawing->setDescription('This is my logo');
-            $drawing->setPath(public_path('dist/img/CSPC-Logo.jpg')); 
-            $drawing->setHeight(50);
-            $drawing->setCoordinates('A1');
-            $drawing->setOffsetX(1000); // Adjust the offset to center the logo
-            $drawing->setWorksheet($sheet);
-    
-            // Format the header
-            $headerStyle = [
-                'font' => [
-                    'bold' => true,
-                    'size' => 14,
+        // Create a new spreadsheet
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Merge cells for the header
+        $sheet->mergeCells('A1:J1');
+        $sheet->mergeCells('A2:J2');
+        $sheet->mergeCells('A3:J3');
+        $sheet->mergeCells('A4:J4');
+        $sheet->mergeCells('A5:J5');
+        $sheet->mergeCells('A6:J6');
+        $sheet->mergeCells('A7:J7');
+
+        // Set the header text
+        $sheet->setCellValue('A1', "Republic of the Philippines");
+        $sheet->setCellValue('A2', "CAMARINES SUR POLYTECHNIC COLLEGES");
+        $sheet->setCellValue('A3', "Nabua, Camarines Sur");
+        $sheet->setCellValue('A5', "MANAGEMENT INFORMATION AND COMMUNICATIONS TECHNOLOGY");
+        $sheet->setCellValue('A6', "SUMMARY LIST OF JOB ORDER REQUEST FORM");
+        $sheet->setCellValue('A7', "ICT REPAIR AND INSTALLATION\nfor the Month of January 2024");
+
+        // Load the logo image
+        $drawing = new Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('This is my logo');
+        $drawing->setPath(public_path('dist/img/CSPC-Logo.jpg')); 
+        $drawing->setHeight(50);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX(1000); // Adjust the offset to center the logo
+        $drawing->setWorksheet($sheet);
+
+        // Format the header
+        $headerStyle = [
+            'font' => [
+                'bold' => true,
+                'size' => 14,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ];
+        $sheet->getStyle('A1:J7')->applyFromArray($headerStyle);
+
+        // Add column headers
+        $sheet->setCellValue('A8', 'No.');
+        $sheet->setCellValue('B8', 'REQUESITOR');
+        $sheet->setCellValue('C8', 'Building Number');
+        $sheet->setCellValue('D8', 'Office');
+        $sheet->setCellValue('E8', 'Priority Level');
+        $sheet->setCellValue('F8', 'Description');
+        $sheet->setCellValue('G8', 'Status');
+        $sheet->setCellValue('H8', 'Serial Number');
+        $sheet->setCellValue('I8', 'Warranty Number');
+        $sheet->setCellValue('J8', 'Date Requested');
+
+        // Format column headers
+        $columnHeaderStyle = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
                 ],
-                'alignment' => [
-                    'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                    'wrapText' => true,
-                ],
-            ];
-            $sheet->getStyle('A1:J7')->applyFromArray($headerStyle);
-    
-            // Add column headers
-            $sheet->setCellValue('A8', 'No.');
-            $sheet->setCellValue('B8', 'REQUESITOR');
-            $sheet->setCellValue('C8', 'Building Number');
-            $sheet->setCellValue('D8', 'Office');
-            $sheet->setCellValue('E8', 'Priority Level');
-            $sheet->setCellValue('F8', 'Description');
-            $sheet->setCellValue('G8', 'Status');
-            $sheet->setCellValue('H8', 'Serial Number');
-            $sheet->setCellValue('I8', 'Warranty Number');
-            $sheet->setCellValue('J8', 'Date Requested');
-    
-            // Format column headers
-            $columnHeaderStyle = [
-                'font' => [
-                    'bold' => true,
-                ],
-                'alignment' => [
-                    'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical' => Alignment::VERTICAL_CENTER,
-                ],
-                'borders' => [
-                    'allBorders' => [
-                        'borderStyle' => Border::BORDER_THIN,
-                    ],
-                ],
-            ];
-            $sheet->getStyle('A8:J8')->applyFromArray($columnHeaderStyle);
-    
-            // Populate the spreadsheet with data
-            $row = 9;
-            $index = 1;
-            foreach ($tickets as $ticket) {
-                $sheet->setCellValue('A' . $row, $index);
-                $sheet->setCellValue('B' . $row, $ticket->user_id);
-                $sheet->setCellValue('C' . $row, $ticket->building_number);
-                $sheet->setCellValue('D' . $row, $ticket->office_name);
-                $sheet->setCellValue('E' . $row, $ticket->priority_level);
-                $sheet->setCellValue('F' . $row, $ticket->description);
-                $sheet->setCellValue('G' . $row, $ticket->status);
-                $sheet->setCellValue('H' . $row, $ticket->serial_number);
-                $sheet->setCellValue('I' . $row, $ticket->covered_under_warranty ? 'Yes' : 'No');
-                $sheet->setCellValue('J' . $row, $ticket->created_at);
-                $row++;
-                $index++;
-            }
-    
-            // Adjust column widths
-            foreach (range('A', 'J') as $columnID) {
-                $sheet->getColumnDimension($columnID)->setAutoSize(true);
-            }
-    
-            // Generate and save the spreadsheet to a file
-            $writer = new Xlsx($spreadsheet);
-            $filePath = storage_path('app/public/tickets.xlsx');
-            $writer->save($filePath);
-    
-            // Return the file as a response to the user
-            return response()->download($filePath)->deleteFileAfterSend(true);
+            ],
+        ];
+        $sheet->getStyle('A8:J8')->applyFromArray($columnHeaderStyle);
+
+        // Populate the spreadsheet with data
+        $row = 9;
+        $index = 1;
+        foreach ($tickets as $ticket) {
+            $sheet->setCellValue('A' . $row, $index);
+            $sheet->setCellValue('B' . $row, $ticket->user_id);
+            $sheet->setCellValue('C' . $row, $ticket->building_number);
+            $sheet->setCellValue('D' . $row, $ticket->office_name);
+            $sheet->setCellValue('E' . $row, $ticket->priority_level);
+            $sheet->setCellValue('F' . $row, $ticket->description);
+            $sheet->setCellValue('G' . $row, $ticket->status);
+            $sheet->setCellValue('H' . $row, $ticket->serial_number);
+            $sheet->setCellValue('I' . $row, $ticket->covered_under_warranty ? 'Yes' : 'No');
+            $sheet->setCellValue('J' . $row, $ticket->created_at);
+            $row++;
+            $index++;
+        }
+
+        // Adjust column widths
+        foreach (range('A', 'J') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
+        // Generate and save the spreadsheet to a file
+        $writer = new Xlsx($spreadsheet);
+        $filePath = storage_path('app/public/tickets.xlsx');
+        $writer->save($filePath);
+
+        // Return the file as a response to the user
+        return response()->download($filePath)->deleteFileAfterSend(true);
     }
 
     public function exportPdf(Collection $tickets)
