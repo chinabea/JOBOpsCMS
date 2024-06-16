@@ -16,6 +16,8 @@ use App\Models\NicmuProblem;
 use App\Models\MisRequestType;
 use App\Models\MisAsname;
 use App\Models\MisJobType;
+use Illuminate\Support\Facades\DB;
+
 
 class UnitController extends Controller
 {
@@ -46,14 +48,50 @@ class UnitController extends Controller
     //     return view('units.ictram.JobTypes.index', compact('countJobTypes'));
     // }
 
-
-
-
     public function purchased()
     {
+        // Retrieve tickets with the status 'Purchase Parts'
+        $purchasedParts = Ticket::where('status', 'Purchase Parts')
+            ->select('purchase_parts', DB::raw('COUNT(*) as number_of_parts'))
+            ->groupBy('purchase_parts')
+            ->get();
+
+        // Process the purchased parts
+        $separatedParts = [];
+        foreach ($purchasedParts as $part) {
+            $parts = explode(',', $part->purchase_parts);
+            foreach ($parts as $item) {
+                $item = trim($item); // Trim any whitespace
+                if (!isset($separatedParts[$item])) {
+                    $separatedParts[$item] = 0;
+                }
+                $separatedParts[$item] += $part->number_of_parts;
+            }
+        }
+
+        // Convert associative array to a collection of objects for easier handling in the view
+        $separatedParts = collect($separatedParts)->map(function ($count, $item) {
+            return (object) ['item' => $item, 'count' => $count];
+        });
+
+        // Sort the collection by count in descending order
+        $separatedParts = $separatedParts->sortByDesc('count');
+
         // Pass the data to the view
-        return view('units.purchased');
+        return view('units.purchased', compact('separatedParts'));
     }
+    
+    // public function purchased()
+    // {
+    //     // Retrieve tickets with the status 'Purchase Parts'
+    //     $purchasedParts = Ticket::where('status', 'Purchase Parts')
+    //         ->select('purchase_parts', DB::raw('COUNT(*) as number_of_parts'))
+    //         ->groupBy('purchase_parts')
+    //         ->get();
+
+    //     // Pass the data to the view
+    //     return view('units.purchased', compact('purchasedParts'));
+    // }
     
     public function ictramIndex()
     {
