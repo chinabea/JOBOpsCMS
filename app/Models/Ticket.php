@@ -56,10 +56,10 @@ class Ticket extends Model
         return $this->belongsTo(IctramJobType::class);
     }
 
-    public function ictramEquipment()
-    {
-        return $this->belongsTo(IctramEquipment::class);
-    }
+    // public function ictramEquipment()
+    // {
+    //     return $this->belongsTo(IctramEquipment::class);
+    // }
 
     public function ictramProblem()
     {
@@ -147,6 +147,10 @@ class Ticket extends Model
         return $this->belongsTo(OfficeName::class, 'office_name_id');
     }
     
+    public function ictramEquipment()
+    {
+        return $this->belongsTo(IctramEquipment::class, 'ictram_id');
+    }
     
     
 }
