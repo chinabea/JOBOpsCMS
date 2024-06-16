@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ Route::currentRouteName() == '#' ? 'active' : '' }}">
+                            <a href="{{ route('status.purchaseParts') }}" class="nav-link {{ Route::currentRouteName() == 'status.purchaseParts' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
                                 <p>Purchase Parts</p>
                             </a>
