@@ -9,6 +9,18 @@ use App\Models\User;
 class StatusController extends Controller
 {
 
+    public function purchaseParts()
+    {
+        try {
+            $tickets = Ticket::where('status', 'Purchase Parts')->orderBy('created_at', 'desc')->get();
+            $userIds = User::where('is_approved', true)->get(); 
+
+            return view('status.purchase-parts', compact('tickets','userIds'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
     public function completed()
     {
         try {
