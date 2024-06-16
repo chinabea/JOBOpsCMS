@@ -1,5 +1,6 @@
+@extends('layouts.template')
 
-@extends('layouts.template') @section('content') 
+@section('content')
 <div class="content-wrapper">
     <section class="content-header">
     </section>
@@ -17,12 +18,14 @@
                                         <th>Equipment</th>
                                         <th>Number of Equipment</th>
                                     </tr>
-                                </thead>
+                                </thead> 
                                 <tbody>
+                                    @foreach ($separatedParts as $part)
                                     <tr>
-                                        <td>Equipments</td>
-                                        <td>300</td>
+                                        <td>{{ $part->item }}</td>
+                                        <td>{{ $part->count }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -31,6 +34,5 @@
             </div>
         </div>
     </section>
-</div> 
-
+</div>
 @endsection
