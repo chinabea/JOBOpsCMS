@@ -13,17 +13,19 @@ use App\Models\Ticket;
 
 class IctramController extends Controller
 {
+    
     public function offices()
     {
-        // Query to get the top requested equipment
-        $topRequestedEquipment = Ticket::select('office_name', 'ictram_id', DB::raw('count(*) as request_count'))
+        // Query to get the offices with the most requested tickets
+        $topRequestedOffices = Ticket::select('office_names.office_name as office_name', 'tickets.ictram_id', DB::raw('count(*) as request_count'))
+            ->join('office_names', 'tickets.office_name_id', '=', 'office_names.id')
             ->with('ictramEquipment')
-            ->groupBy('office_name', 'ictram_id')
+            ->groupBy('office_names.office_name', 'tickets.ictram_id')
             ->orderBy('request_count', 'desc')
             ->get();
 
         // Pass the data to the view
-        return view('units.ictram.office-equipments', compact('topRequestedEquipment'));
+        return view('units.ictram.office-equipments', compact('topRequestedOffices'));
     }
 
     public function create()
