@@ -20,7 +20,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($topRequestedEquipment as $equipment)
+                                    @foreach($topRequestedOffices as $equipment)
                                         @if($equipment->ictramEquipment && $equipment->ictramEquipment->equipment_name !== 'N/A')
                                             <tr>
                                                 <td>{{ $equipment->office_name }}</td>
