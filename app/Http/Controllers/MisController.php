@@ -24,55 +24,104 @@ class MisController extends Controller
 
     public function storeWithRelationShip(Request $request)
     {   
-        
-    //Request type Other
-    if ($request->has('requestType_other')) {
+        // Handle Request Type
+        if ($request->has('requestType_other')) {
+            $requestType = MisRequestType::create([
+                'requestType_name' => $request->input('requestType_other'),
+            ]);
+        } else {
+            $mis_request_type_id = $request->input('mis_request_type_id');
+            $requestType = MisRequestType::findOrFail($mis_request_type_id);
+        }
 
-        $requestType = MisRequestType::create([
-            'requestType_name' => $request->input('requestType_other'),
-        ]);
-    } else {
-        $mis_request_type_id = $request->input('mis_request_type_id');
-        
-        $requestType = MisRequestType::findOrFail($mis_request_type_id);
-    }
-    //Job Type Other
-    if ($request->has('jobType_other')) {
+        // Handle Job Type
+        if ($request->has('jobType_other')) {
+            $jobType = MisJobType::create([
+                'jobType_name' => $request->input('jobType_other'),
+            ]);
+        } else {
+            $mis_job_type_id = $request->input('mis_job_type_id');
+            $jobType = MisJobType::findOrFail($mis_job_type_id);
+        }
 
-        $jobType = MisJobType::create([
-            'jobType_name' => $request->input('jobType_other'),
-        ]);
-    } else {
-        $mis_job_type_id = $request->input('mis_job_type_id');
-        
-        $jobType = MisJobType::findOrFail($mis_job_type_id);
+        // Handle AsName
+        if ($request->has('asName_other')) {
+            // Create a single MisAsname and store its ID
+            $asName = MisAsname::create([
+                'name' => $request->input('asName_other'),
+            ]);
+            $asNameIds[] = $asName->id;
+        } else {
+            // Find the MisAsname by ID and store its ID
+            $mis_asName_id = $request->input('mis_asName_id');
+            $asName = MisAsname::findOrFail($mis_asName_id);
+            $asNameIds[] = $asName->id;
+        }
 
-    }
-
-    //AsName Other
-    if ($request->has('asName_other')) {
-
-        $asNameIds[] = MisAsname::create([
-            'name' => $request->input('asName_other'),
-        ]);
-
-
-    } else {
-        $mis_asName_id = $request->input('mis_asName_id');
-        
-        $asNameIds = MisAsname::findOrFail($mis_asName_id);
-    }
-
+        // Create Mis records for each asNameId
         foreach ($asNameIds as $asNameId) {
             Mis::create([
                 'mis_request_type_id' => $requestType->id,
                 'mis_job_type_id' => $jobType->id,
-                'mis_asname_id' => $asNameId->id,
+                'mis_asname_id' => $asNameId,
             ]);
         }
 
         return redirect()->back()->with('success', 'MIS Saved successfully.');
     }
+
+
+    // public function storeWithRelationShip(Request $request)
+    // {   
+        
+    // //Request type Other
+    // if ($request->has('requestType_other')) {
+
+    //     $requestType = MisRequestType::create([
+    //         'requestType_name' => $request->input('requestType_other'),
+    //     ]);
+    // } else {
+    //     $mis_request_type_id = $request->input('mis_request_type_id');
+        
+    //     $requestType = MisRequestType::findOrFail($mis_request_type_id);
+    // }
+    // //Job Type Other
+    // if ($request->has('jobType_other')) {
+
+    //     $jobType = MisJobType::create([
+    //         'jobType_name' => $request->input('jobType_other'),
+    //     ]);
+    // } else {
+    //     $mis_job_type_id = $request->input('mis_job_type_id');
+        
+    //     $jobType = MisJobType::findOrFail($mis_job_type_id);
+
+    // }
+
+    // //AsName Other
+    // if ($request->has('asName_other')) {
+
+    //     $asNameIds[] = MisAsname::create([
+    //         'name' => $request->input('asName_other'),
+    //     ]);
+
+
+    // } else {
+    //     $mis_asName_id = $request->input('mis_asName_id');
+        
+    //     $asNameIds = MisAsname::findOrFail($mis_asName_id);
+    // }
+
+    //     foreach ($asNameIds as $asNameId) {
+    //         Mis::create([
+    //             'mis_request_type_id' => $requestType->id,
+    //             'mis_job_type_id' => $jobType->id,
+    //             'mis_asname_id' => $asNameId->id,
+    //         ]);
+    //     }
+
+    //     return redirect()->back()->with('success', 'MIS Saved successfully.');
+    // }
 
 
     public function jobType_index()
