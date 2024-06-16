@@ -20,112 +20,67 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Storage;
+use Illuminate\Support\Collection;
 
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    // public function ticketReport(Request $request)
-    // {
-
-    //     $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])->get();
-    //     $userIds = User::where('role', 2)->where('is_approved', true)->get();
-    //     $buildingNumbers = BuildingNumber::all(); // Assuming you have a Building model
-
-    //     $query = Ticket::query();
-
-    //     // Apply search filter
-    //     if ($request->filled('search')) {
-    //         $query->where(function($q) use ($request) {
-    //             $q->where('priority_level', 'like', '%' . $request->search . '%')
-    //               ->orWhere('status', 'like', '%' . $request->search . '%');
-    //         });
-    //     }
-        
-    //     // Apply building number filter
-    //     if ($request->filled('buildingNumbers')) {
-    //         $buildingNumberId = $request->buildingNumbers; // Assuming buildingNumbers is an ID
-    //         $query->where('building_number_id', $buildingNumberId);
-    //     }
-    
-    //     // Apply search filter
-    //     // if ($request->filled('search')) {
-    //     //     $query->where(function($q) use ($request) {
-    //     //         $q->where('buildingNumbers', 'like', '%' . $request->search . '%')
-    //     //         ->orWhere('priority_level', 'like', '%' . $request->search . '%')
-    //     //         ->orWhere('status', 'like', '%' . $request->search . '%');
-    //     //     });
-    //     // }
-        
-    //     // Apply building number filter
-    //     if ($request->filled('buildingNumbers')) {
-    //         $query->where('buildingNumbers', $request->buildingNumbers);
-    //     }
-    
-    //     // Apply priority level filter
-    //     if ($request->filled('priority_level')) {
-    //         $query->where('priority_level', $request->priority_level);
-    //     }
-    
-    //     // Apply status filter
-    //     if ($request->filled('status')) {
-    //         $query->where('status', $request->status);
-    //     }
-
-    //     // Apply date filters
-    //     if ($request->filled('start_date')) {
-    //         $query->whereDate('created_at', '>=', $request->start_date);
-    //     }
-    
-    //     if ($request->filled('end_date')) {
-    //         $query->whereDate('created_at', '<=', $request->end_date);
-    //     }
-        
-    
-    //     // Check for export requests
-    //     if ($request->has('export')) {
-    //         if ($request->export == 'excel') {
-    //             return $this->exportExcel($request);
-    //         } elseif ($request->export == 'pdf') {
-    //             return $this->exportPdf($request);
-    //         }
-    //     }
-    
-    //     // Get the filtered and sorted tickets
-    //     // $tickets = $query->get();
-    //     $results = $query->get();
-
-    
-    //     return view('reports.ticket', compact('tickets', 'userIds', 'buildingNumbers'));
-        
-    // }
-
     public function ticketReport(Request $request)
     {
-        $tickets = Ticket::with(['ictram', 'nicmu', 'mis'])
-            ->when($request->filled('building_number_id'), function($query) use ($request) {
-                $query->where('building_number_id', $request->building_number_id);
-            })
-            ->when($request->filled('priority_level'), function($query) use ($request) {
-                $query->where('priority_level', $request->priority_level);
-            })
-            ->when($request->filled('status'), function($query) use ($request) {
-                $query->where('status', $request->status);
-            })
-            ->when($request->filled('start_date'), function($query) use ($request) {
-                $query->whereDate('created_at', '>=', $request->start_date);
-            })
-            ->when($request->filled('end_date'), function($query) use ($request) {
-                $query->whereDate('created_at', '<=', $request->end_date);
-            })
-            ->get();
+        // Eager load relationships: 'ictram', 'nicmu', 'mis'
+        $tickets = Ticket::with(['ictram', 'nicmu', 'mis']);
 
-        $userIds = User::where('role', 2)->where('is_approved', true)->get();
+        // Apply search filter
+        if ($request->filled('search')) {
+            $tickets->where(function($query) use ($request) {
+                $query->where('priority_level', 'like', '%' . $request->search . '%')
+                    ->orWhere('status', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Apply building number filter
+        if ($request->filled('building_number_id')) {
+            $tickets->where('building_number_id', $request->building_number_id);
+        }
+
+        // Apply priority level filter
+        if ($request->filled('priority_level')) {
+            $tickets->where('priority_level', $request->priority_level);
+        }
+
+        // Apply status filter
+        if ($request->filled('status')) {
+            $tickets->where('status', $request->status);
+        }
+
+        // Apply date filters
+        if ($request->filled('start_date')) {
+            $tickets->whereDate('created_at', '>=', $request->start_date);
+        }
+
+        if ($request->filled('end_date')) {
+            $tickets->whereDate('created_at', '<=', $request->end_date);
+        }
+
+        // Get the filtered and sorted tickets
+        $tickets = $tickets->get();
+
+        // Additional data you may want to load
+        $userIds = User::where('role', 2)->where('is_approved', true)->pluck('id', 'name');
         $buildingNumbers = BuildingNumber::all();
+
+        // Check for export requests
+        if ($request->has('export')) {
+            if ($request->export == 'excel') {
+                return $this->exportExcel($tickets); // Assuming exportExcel method handles exporting tickets to Excel
+            } elseif ($request->export == 'pdf') {
+                return $this->exportPdf($tickets); // Assuming exportPdf method handles exporting tickets to PDF
+            }
+        }
 
         return view('reports.ticket', compact('tickets', 'userIds', 'buildingNumbers'));
     }
-
 
     public function filteredTickets(Request $request)
     {
@@ -134,16 +89,15 @@ class ReportController extends Controller
         // Apply filters
         if ($request->filled('search')) {
             $query->where(function($q) use ($request) {
-                $q->where('building_number', 'like', '%' . $request->search . '%')
-                ->orWhere('priority_level', 'like', '%' . $request->search . '%')
+                // $q->where('building_number', 'like', '%' . $request->search . '%')
+                $q->Where('priority_level', 'like', '%' . $request->search . '%')
                 ->orWhere('status', 'like', '%' . $request->search . '%');
             });
         }
-
-        if ($request->filled('building_number')) {
-            $query->where('building_number', $request->building_number);
+        // Apply building number filter
+        if ($request->filled('building_number_id')) {
+            $tickets->where('building_number_id', $request->building_number_id);
         }
-
         if ($request->filled('priority_level')) {
             $query->where('priority_level', $request->priority_level);
         }
@@ -159,9 +113,9 @@ class ReportController extends Controller
         return $query->get();
     }
 
-    public function exportExcel(Request $request)
+    public function exportExcel(Collection $tickets)
     {
-            $tickets = $this->filteredTickets($request);
+            // $tickets = $this->filteredTickets($request);
     
             // Create a new spreadsheet
             $spreadsheet = new Spreadsheet();
@@ -269,32 +223,32 @@ class ReportController extends Controller
             return response()->download($filePath)->deleteFileAfterSend(true);
     }
 
-    public function exportPdf(Request $request)
+    public function exportPdf(Collection $tickets)
     {
-        // Get the filtered tickets
-        $tickets = $this->filteredTickets($request);
-
         // Generate the HTML content for the PDF
         $html = view('reports.report-pdf', compact('tickets'))->render();
-
-        // Configure Dompdf options
-        $options = new Options();
-        $options->set('defaultFont', 'Arial');
-        $options->set('isHtml5ParserEnabled', true);
-        $options->set('isRemoteEnabled', true); // Enable remote file access (for images, etc.)
-
+    
+        // Configure Dompdf options as an array
+        $options = [
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true, // Enable remote file access (for images, etc.)
+        ];
+    
         // Initialize Dompdf with the options
-        $dompdf = new Dompdf($options);
-        $dompdf->loadHtml($html);
+        PDF::setOptions($options);
+    
+        // Load HTML into Dompdf
+        $dompdf = PDF::loadHTML($html);
+    
+        // Set paper size and orientation if needed
         $dompdf->setPaper('A4', 'landscape');
+    
+        // Render PDF (important for fonts and styles to be applied)
         $dompdf->render();
-
-        // Stream the generated PDF
-        return $dompdf->stream('tickets.pdf', [
-            'Attachment' => false // Set to true to force download
-        ]);
+    
+        // Return the PDF as a download response
+        return $dompdf->stream('tickets.pdf');
     }
-
 
 
 
