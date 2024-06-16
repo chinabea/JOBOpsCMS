@@ -138,6 +138,7 @@ Route::get('/status/open', [StatusController::class, 'open'])->name('status.open
 Route::get('/status/in-progress', [StatusController::class, 'inProgress'])->name('status.in-progress');
 Route::get('/status/closed', [StatusController::class, 'closed'])->name('status.closed');
 Route::get('/status/completed', [StatusController::class, 'completed'])->name('status.completed');
+Route::get('/status/purchaseParts', [StatusController::class, 'purchaseParts'])->name('status.purchaseParts');
 
 Route::get('/priority-level/high', [PriorityController::class, 'high'])->name('priority-level.high');
 Route::get('/priority-level/mid', [PriorityController::class, 'mid'])->name('priority-level.mid');
