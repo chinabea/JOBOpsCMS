@@ -27,6 +27,20 @@ class IctramController extends Controller
         // Pass the data to the view
         return view('units.ictram.office-equipments', compact('topRequestedOffices'));
     }
+    
+    
+    // public function offices()
+    // {
+    //     // Query to get the top requested equipment
+    //     $topRequestedEquipment = Ticket::select('office_name', 'ictram_id', DB::raw('count(*) as request_count'))
+    //         ->with('ictramEquipment')
+    //         ->groupBy('office_name', 'ictram_id')
+    //         ->orderBy('request_count', 'desc')
+    //         ->get();
+
+    //     // Pass the data to the view
+    //     return view('units.ictram.office-equipments', compact('topRequestedEquipment'));
+    // }
 
     public function create()
     {
