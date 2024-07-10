@@ -104,7 +104,8 @@
                                     <select class="form-control" name="ictram_problem_id" v-model="selectedProblemICTRAM">
                                         <option value="" disabled>Select Problem</option>
                                         <option v-for="detail in uniqueProblemDetailsICTRAM" :key="detail.problem.id" :value="detail.problem.id">
-                                        ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
+                                        <!-- ID: @{{ detail.problem.id }} -  -->
+                                        @{{ detail.problem.problem_description }}
                                         </option>
                                     </select>
                                 </div>
@@ -150,21 +151,24 @@
                                 <select class="form-control" name="mis_id" v-model="selectedRequestType" @change="fetchRequestTypeDetailsMIS(selectedRequestType)">
                                     <option value="" disabled>Select Request Type</option>
                                     <option v-for="detail in uniqueRequestTypeMIS" :key="detail.request_type_name.id" :value="detail.request_type_name.id">
-                                    ID: @{{ detail.request_type_name.id }} - @{{ detail.request_type_name.requestType_name }}
+                                    <!-- ID: @{{ detail.request_type_name.id }} -  -->
+                                    @{{ detail.request_type_name.requestType_name }}
                                     </option>
                                 </select>
                                 <label for="job_type">Select Job Type:</label>
                                 <select class="form-control" name="mis_job_type_id" v-model="selectedJobTypeMIS" @change="fetchAccountNameMIS(selectedJobTypeMIS)">
                                     <option value="" disabled>Select Job Type</option>
                                     <option v-for="detail in uniqueJobTypeDetailsMIS" :key="detail.job_type.id" :value="detail.job_type.id">
-                                    ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
+                                    <!-- ID: @{{ detail.job_type.id }} -  -->
+                                    @{{ detail.job_type.jobType_name }}
                                     </option>
                                 </select>
                                 <label for="account_name">Select Account Name:</label>
                                 <select class="form-control" name="mis_asname_id" v-model="selectedAccountname">
                                     <option value="" disabled>Select Account Name</option>
                                     <option v-for="detail in accountNameMISes" :key="detail.as_name.id" :value="detail.as_name.id">
-                                    ID: @{{ detail.as_name.id }} - @{{ detail.as_name.name }}
+                                    <!-- ID: @{{ detail.as_name.id }} -  -->
+                                    @{{ detail.as_name.name }}
                                     </option>
                                 </select>
                             </div>
