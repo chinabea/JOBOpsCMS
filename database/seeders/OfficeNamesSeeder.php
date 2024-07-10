@@ -17,7 +17,6 @@ class OfficeNamesSeeder extends Seeder
             ['office_name' => 'Records Office', 'created_at' => now(), 'updated_at' => now()],
             ['office_name' => 'CRD', 'created_at' => now(), 'updated_at' => now()],
             ['office_name' => 'SRRO', 'created_at' => now(), 'updated_at' => now()],
-            ['office_name' => 'Records Office', 'created_at' => now(), 'updated_at' => now()],
             ['office_name' => 'CEA Deans Office', 'created_at' => now(), 'updated_at' => now()],
             ['office_name' => 'Cashier', 'created_at' => now(), 'updated_at' => now()],
             ['office_name' => 'CIRL', 'created_at' => now(), 'updated_at' => now()],
