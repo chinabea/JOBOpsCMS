@@ -19,7 +19,6 @@ class NicmuJobTypesTableSeeder extends Seeder
             ['jobType_name' => 'New Connection', 'created_at' => now(), 'updated_at' => now()],
             ['jobType_name' => 'Repair', 'created_at' => now(), 'updated_at' => now()],
             ['jobType_name' => 'Repair Connection', 'created_at' => now(), 'updated_at' => now()],
-            
         ];
 
         // Insert the data into the database
