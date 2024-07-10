@@ -327,7 +327,7 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a href="https://m.me/332081713319212?ref=homepage" class="nav-link">
+                    <a href="https://m.me/332081713319212?ref=homepage" class="nav-link" target="_blank">
                         <i class="nav-icon far fa-comments"></i>
                         <p>Messages</p>
                     </a>
