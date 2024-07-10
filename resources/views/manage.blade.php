@@ -141,9 +141,8 @@
                         </div>
                     </div>
                     <hr>
-                    <!-- <h2 class="mb-2 mt-4">Datas</h2> -->
                     <div class="row">
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>{{ $OfficeName }}</h3>
@@ -151,14 +150,14 @@
                                     <p>Office Names</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i class="fas fa-university"></i>
                                 </div>
                                 <a href="{{ route('office-names.index') }}" class="small-box-footer">
                                     More info <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $buildingNumber }}</h3>
