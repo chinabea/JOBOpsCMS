@@ -76,7 +76,10 @@ class UserController extends Controller
             // Directly use $user->expertise as an array
             $existingExpertise = $user->expertise ?? [];
 
-            $roles = [1 => 'Admin', 2 => 'MICT Staff', 3 => 'Staff'];
+            $roles = [1 => 'Director', 2 => 'ICTRAM Head', 3 => 'NICMU Head', 
+            4 => 'MIS Head', 5 => 'Staff', 6 => 'Student', 7 => 'ICTRAM Staff',
+            8 => 'NICMU Staff', 9 => 'MIS Staff',];
+            
             $expertiseOptions = ['Web Development', 'Graphic Design', 'Data Analysis', 'Project Management'];
 
             $assignedTickets = Ticket::whereHas('users', function ($query) use ($user) {
