@@ -44,33 +44,6 @@ class DatabaseSeeder extends Seeder
             // TicketsTableSeeder::class,
             // TicketUserSeeder::class,
         ]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         
         // $tickets = [
         //     [
