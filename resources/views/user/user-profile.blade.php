@@ -24,57 +24,8 @@
 
                 <p class="text-muted text-center"><i class="fa fa-briefcase user-profile-icon"></i> {{ $user->job_position }}</p>
                 <p class="text-muted text-center"><i class="fa fa-phone"></i> {{ $user->phone_number }}</p>
-
-                <!-- <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
-                  </li>
-                </ul> -->
               </div>
             </div>
-            <!-- About Me Box -->
-            <!-- <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">About Me</h3>
-              </div>
-              <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                <p class="text-muted">Malibu, California</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
-
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-              </div>
-            </div> -->
           </div>
           <div class="col-md-9">
             
@@ -95,7 +46,6 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                  <!-- <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> -->
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                 </ul>
               </div>
@@ -126,9 +76,9 @@
                               <td>{{ $ticket->unit }}</td>
                               <td>{{ $ticket->request }}</td>
                               <td>
-                                          @foreach ($ticket->users as $assigned_user)
-                                              <small>{{ $assigned_user->name }}</small>    
-                                          @endforeach
+                                @foreach ($ticket->users as $assigned_user)
+                                    <small>{{ $assigned_user->name }}</small>    
+                                @endforeach
                               </td>
                               <td>
                                 @if ($ticket->priority_level === 'High')
@@ -261,10 +211,6 @@
         ]);
 
         var options = {
-            // chart: {
-            //     title: 'Monthly Tickets',
-            //     subtitle: 'Ticket submissions per month',
-            // },
             bars: 'vertical',
             vAxis: {format: 'decimal'},
             height: 280,
