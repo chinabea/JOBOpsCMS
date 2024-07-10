@@ -238,7 +238,6 @@
                                                 <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </td>
-                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @else
                                         <td class="align-middle">
                                             <small class="badge badge-warning">
@@ -246,6 +245,7 @@
                                             </small>
                                         </td>
                                         @endif
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
