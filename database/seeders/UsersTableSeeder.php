@@ -111,17 +111,6 @@ class UsersTableSeeder extends Seeder
                 'expertise' => ['Networking'],
                 
             ],
-            [
-                'name' => 'Rica Theresa Adante',
-                'email' => 'ricadante@my.cspc.edu.ph',
-                'role' => null, // MICT Staff
-                'avatar' => 'https://lh3.googleusercontent.com/a/ACg8ocLDuPOe6NaSoJcu5ATbEJsn3ptMJlkAgp3awFZQCY8cqCl4bA=s96-c',
-                'is_approved' => false,
-                'phone_number' => null,
-                'job_position' => 'MICT Staff',
-                'expertise' => null,
-                
-            ],
         ];
 
         foreach ($users as $userData) {
