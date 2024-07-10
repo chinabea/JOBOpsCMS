@@ -73,7 +73,7 @@
                             <select class="form-control" v-model="selectedUnit" @change="fetchJobTypeDetails">
                                 <option value="" disabled>Select Request</option>
                                 <option value="ICTRAM">ICTRAM</option>
-                                <option value="NICMUS">NICMUS</option>
+                                <option value="NICMUS">NICMU</option>
                                 <option value="MIS">MIS</option>
                             </select>
 
@@ -84,7 +84,8 @@
                                     <select class="form-control" name="ictram_id" v-model="selectedJobTypeICTRAM" @change="fetchEquipmentDetailsICTRAM(selectedJobTypeICTRAM)">
                                         <option value="" disabled>Select Job Type</option>
                                         <option v-for="detail in uniqueJobTypeDetailsICTRAM" :key="detail.job_type.id" :value="detail.job_type.id">
-                                            ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
+                                            <!-- ID: @{{ detail.job_type.id }} -  -->
+                                            @{{ detail.job_type.jobType_name }}
                                         </option>
                                     </select>
                                 </div>
@@ -93,7 +94,8 @@
                                     <select class="form-control" name="ictram_equipment_id" v-model="selectedEquipmentICTRAM" @change="fetchProblemDetailsICTRAM(selectedEquipmentICTRAM)">
                                         <option value="" disabled>Select Equipment</option>
                                         <option v-for="detail in uniqueEquipmentDetailsICTRAM" :key="detail.equipment.id" :value="detail.equipment.id">
-                                            ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
+                                            <!-- ID: @{{ detail.equipment.id }} -  -->
+                                            @{{ detail.equipment.equipment_name }}
                                         </option>
                                     </select>
                                 </div>
@@ -115,7 +117,8 @@
                                     <select class="form-control" name="nicmu_id" v-model="selectedJobTypeNICMU" @change="fetchEquipmentDetails(selectedJobTypeNICMU)">
                                         <option value="" disabled>Select Job Type</option>
                                         <option v-for="detail in uniqueJobTypeDetailsNICMU" :key="detail.job_type.id" :value="detail.job_type.id">
-                                            ID: @{{ detail.job_type.id }} - @{{ detail.job_type.jobType_name }}
+                                            <!-- ID: @{{ detail.job_type.id }} -  -->
+                                            @{{ detail.job_type.jobType_name }}
                                         </option>
                                     </select>
                                 </div>
@@ -124,7 +127,8 @@
                                     <select class="form-control" name="nicmu_equipment_id" v-model="selectedEquipmentNICMU" @change="fetchProblemDetails(selectedEquipmentNICMU)">
                                         <option value="" disabled>Select Equipment</option>
                                         <option v-for="detail in uniqueEquipmentDetailsNICMU" :key="detail.equipment.id" :value="detail.equipment.id">
-                                        ID: @{{ detail.equipment.id }} - @{{ detail.equipment.equipment_name }}
+                                        <!-- ID: @{{ detail.equipment.id }} -  -->
+                                        @{{ detail.equipment.equipment_name }}
                                         </option>
                                     </select>
                                 </div>
@@ -133,7 +137,8 @@
                                     <select class="form-control" name="nicmu_problem_id" v-model="selectedProblemNICMU">
                                         <option value="" disabled>Select Problem</option>
                                         <option v-for="detail in uniqueProblemDetailsNICMU" :key="detail.problem.id" :value="detail.problem.id">
-                                        ID: @{{ detail.problem.id }} - @{{ detail.problem.problem_description }}
+                                        <!-- ID: @{{ detail.problem.id }} -  -->
+                                        @{{ detail.problem.problem_description }}
                                         </option>
                                     </select>
                                 </div>
