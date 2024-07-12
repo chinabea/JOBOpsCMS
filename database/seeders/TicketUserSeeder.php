@@ -96,16 +96,26 @@ class TicketUserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            [
-                'ticket_id' => 9,
-                'user_id' => 9,
-                'escalationReason_for_workloadLimitReached' => 'Resource shortage',
-                'escalatedBy_for_workloadLimitReached' => 4,
-                'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
-                'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
+            // [
+            //     'ticket_id' => 9,
+            //     'user_id' => 9,
+            //     'escalationReason_for_workloadLimitReached' => 'Resource shortage',
+            //     'escalatedBy_for_workloadLimitReached' => 4,
+            //     'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
+            //     'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
+            //     'created_at' => now(),
+            //     'updated_at' => now()
+            // ],
+            // [
+            //     'ticket_id' => 12,
+            //     'user_id' => 9,
+            //     'escalationReason_for_workloadLimitReached' => 'Resource shortage',
+            //     'escalatedBy_for_workloadLimitReached' => 4,
+            //     'escalationReasonDue_to_clientNoncompliance' => 'Missed deadlines',
+            //     'clientNoncomplianceFile' => 'missed_deadlines_report.pdf',
+            //     'created_at' => now(),
+            //     'updated_at' => now()
+            // ],
         ]);
     }
 }
