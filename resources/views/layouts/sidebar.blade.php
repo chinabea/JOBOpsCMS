@@ -587,31 +587,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            <!-- @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3) -->
                 <small>NICMU Unit Head,</small><br> 
                 {{ Auth::user()->name }} 
-            <!-- @elseif(Auth::user()->role == 4)
-                <small>MIS Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
-                <small>Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
-                <small>Student,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
-                <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif -->
-
           </a>
         </div>
       </div>
@@ -619,20 +596,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    <!-- @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4)  -->
                         <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    <!-- @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif -->
+                
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -651,21 +616,18 @@
                                 <p>Request Ticket</p>
                             </a>
                         </li>
-                        @if(Auth::user()->role == 1)
-                        <li class="nav-item">
-                            <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon text-info"></i>
-                                <p>All Tickets</p>
-                            </a>
-                        </li>
-                        @else
                         <li class="nav-item">
                             <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
                                 <p>My Tickets</p>
                             </a>
                         </li>
-                        @endif
+                        <li class="nav-item">
+                            <a href="{{ route('tickets.assigned') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.assigned' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book mr-2"></i>
+                                <p>Assigned Tickets</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
