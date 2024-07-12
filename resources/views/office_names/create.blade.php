@@ -13,7 +13,7 @@
                     <div class="d-flex justify-content-end">
                         <!-- Button to add a new office name -->
                         <a href="{{ route('office-names.create') }}" class="btn btn-info mr-2">
-                            <i class="fas fa-plus"></i> Office Name
+                            <i class="fas fa-plus"></i> Add Office
                         </a>
                         <!-- Button to reload the page -->
                         <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
