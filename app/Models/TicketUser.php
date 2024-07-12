@@ -19,6 +19,12 @@ class TicketUser extends Model
                         'escalationReasonDue_to_clientNoncompliance',
                         'clientNoncomplianceFile',
                      ];
-    
+
+    // Method to check if the authenticated user is assigned to the ticket
+    public function isAssignedToAuthUser()
+    {
+        return $this->user_id === Auth::id();
+    }
+
                     
 }
