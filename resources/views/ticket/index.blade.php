@@ -52,14 +52,22 @@
                                     @foreach($tickets as $ticket)
                                     @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $ticket->id }}</td>
                                         <td>{{ $ticket->user->name }}</td>
                                         <td>
                                         @if($ticket->assignedUsers->contains('pivot.escalationReason_for_workloadLimitReached', true))
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false"> 
                                                 Assign User 
                                             </button>
+                                            @include('ticket.modal.assign-ticket')
 
+                                            
+                        <!-- <div id="reviewer-form" class="mt-4" style="display: none;">
+                            <button type="button" class="btn btn-primary my-2" data-toggle="modal"
+                                data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">
+                                Select Reviewer</button>
+                        </div> -->
+<!-- 
                                             <div class="modal fade" id="assignUserModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel{{ $ticket->id }}" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -105,7 +113,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         @elseif($userIds->isNotEmpty() && !$ticket->escalationReason_for_workloadLimitReached)
                                             <div class="dropdown">
                                                 <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -113,25 +121,11 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
                                                     @foreach ($ticket->users as $assigned_user)
-                                                        @if($ticket->ictram && in_array($assigned_user->role, [2, 7]))
                                                             <a class="dropdown-item">
                                                                 <strong>{{ $assigned_user->name }}</strong><br>
                                                                 <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
                                                                 <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                                             </a>
-                                                        @elseif($ticket->nicmu && in_array($assigned_user->role, [3, 8]))
-                                                            <a class="dropdown-item">
-                                                                <strong>{{ $assigned_user->name }}</strong><br>
-                                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
-                                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
-                                                            </a>
-                                                        @elseif($ticket->mis && in_array($assigned_user->role, [4, 9]))
-                                                            <a class="dropdown-item">
-                                                                <strong>{{ $assigned_user->name }}</strong><br>
-                                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
-                                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
-                                                            </a>
-                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -254,10 +248,9 @@
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        @include('ticket.edit')
+                                                        <a href="{{ route('edit.ticket', $ticket->id) }}" class="btn btn-warning btn-sm">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
                                                         <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
