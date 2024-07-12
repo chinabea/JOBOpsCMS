@@ -40,7 +40,6 @@ Route::prefix('director')->middleware(['auth', 'cache', 'approved', 'directors']
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('users.approve');
     Route::get('/users/disapprove/{id}', [UserController::class, 'disapprove'])->name('users.disapprove');
     Route::get('/users', [UserController::class, 'index'])->name('users');
-    Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 });
@@ -93,8 +92,8 @@ Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name(
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-
 Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/edit-user/{id}', [UserController::class, 'update'])->name('user.update');
 
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
 Route::get('/mark-notification-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('mark-notification-as-read');
