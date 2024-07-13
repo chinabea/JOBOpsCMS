@@ -41,13 +41,15 @@
                                         <th>Job Type</th>
                                         <th>Service for</th>
                                         <th>Issues or Concern</th>
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                         <th>Priority Level</th>
+                                        @endif
                                         <th>Status</th>
-                                        <th>Age</th>
-                                        <th>Created At</th>
                                         @if(auth()->user()->role == 1)
+                                        <th>Age</th>
                                         <th>Action(s)</th>
                                         @endif
+                                        <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -159,8 +161,8 @@
                                             <td>{{ $ticket->mis->asName->name }}</td> 
                                             <td>{{ $ticket->mis->requestTypeName->requestType_name }}</td>
                                         @endif
-                                        <td> 
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                        <td> 
                                             <script>
                                             document.addEventListener('DOMContentLoaded', function() {
                                                 document.getElementById('priority_levelSelect-{{ $ticket->id }}').addEventListener('change', function() {
@@ -240,7 +242,6 @@
                                                 <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </td>
-                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @else
                                         <td class="align-middle">
                                             <small class="badge badge-warning">
@@ -269,6 +270,7 @@
                                             </div>
                                         </td>
                                         @endif
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                     </tr>
                                     @endif
                                     @endforeach
