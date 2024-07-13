@@ -54,13 +54,6 @@
                                 <p>All Tickets</p>
                             </a>
                         </li>
-                        @else
-                        <li class="nav-item">
-                            <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon text-info"></i>
-                                <p>My Tickets</p>
-                            </a>
-                        </li>
                         @endif
                     </ul>
                 </li>
@@ -1137,12 +1130,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                            <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
-                        <i class="fas fa-folder-open nav-icon"></i>
-                        <p>Activity Logs</p>
-                    </a>
-                </li>
+                <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
                             <a href="{{ route('faqs') }}" class="nav-link {{ Route::currentRouteName() == 'faqs' ? 'active' : '' }}">
                         <i class="fas fa-question-circle nav-icon"></i>
