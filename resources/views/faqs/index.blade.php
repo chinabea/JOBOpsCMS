@@ -30,12 +30,14 @@
                                                     <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#showFaqModal" data-faq-id="{{ $faq->id }}">Read more</a>
                                                     @include('faqs.show')
                                                     
+                                                    @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))     
                                                     <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editFaqModal{{ $faq->id }}">
                                                         Edit
                                                     </button>
                                                     @include('faqs.edit')
                                                     
                                                     <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.faq', $faq->id) }}')"> Delete </button>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -51,6 +53,7 @@
     </section>
 </div>
 
+@if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))                                    
 <!-- Floating button -->
 <div class="float-button">
     <button  type="button"  class="btn btn-primary rounded-circle custom-btn btn-shadow" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#createFaqModal">
@@ -58,6 +61,7 @@
     </button>
 </div>
 @include('faqs.create')
+@endif
 
 @endsection
 
