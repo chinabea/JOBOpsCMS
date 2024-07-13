@@ -258,7 +258,8 @@
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                        
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
