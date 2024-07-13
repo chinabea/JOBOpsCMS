@@ -59,14 +59,13 @@ Route::prefix('mict-staff')->middleware(['auth', 'cache', 'approved', 'mict-staf
 
 Route::prefix('staff')->middleware(['auth', 'cache', 'approved','staffs'])->group(function () {
     
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('staff.dashboard');
+    Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('staff.dashboard');
 
 });
 
 Route::prefix('student')->middleware(['auth', 'cache', 'approved','student'])->group(function () {
     
     Route::get('/dashboard/tickets', [TicketController::class, 'index'])->name('student.dashboard');
-    // Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
 
 });
 Route::get('/testing', function () {
