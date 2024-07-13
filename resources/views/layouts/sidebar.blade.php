@@ -1,4 +1,4 @@
-
+<!-- #DIRECTOR  -->
 @if(Auth::user()->role == 1) 
 <!-- Director -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -359,9 +359,9 @@
                 </li>
             </div>
         </aside>
-        
+
+<!-- #ICTRAM Head -->    
 @elseif(Auth::user()->role == 2) 
-<!-- ICTRAM Head -->
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -390,20 +390,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
+                    
                         <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -566,9 +554,9 @@
         </aside>
 
 
-
+<!-- #NICMU Head -->
 @elseif(Auth::user()->role == 3)
-<!-- NICMU Head -->
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -758,8 +746,9 @@
             </div>
         </aside>
 
+        
+<!-- #MIS Head -->
 @elseif(Auth::user()->role == 4)
-<!-- MIS Head -->
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -779,31 +768,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3)
-                <small>NICMU Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 4)
                 <small>MIS Unit Head,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
-                <small>Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
-                <small>Student,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
-                <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif
-
           </a>
         </div>
       </div>
@@ -811,20 +777,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
                         <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -970,8 +923,9 @@
             </div>
         </aside>
 
+<!-- #Staff -->
 @elseif(Auth::user()->role == 5)
-<!-- Staff -->
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -990,52 +944,15 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3)
-                <small>NICMU Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 4)
-                <small>MIS Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
                 <small>Staff,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
-                <small>Student,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
-                <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif
-
-          </a>
         </div>
       </div>
       <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
                         <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -1197,8 +1114,21 @@
             </div>
         </aside>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- #Student -->
 @elseif(Auth::user()->role == 6)
-<!-- Student -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -1217,31 +1147,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3)
-                <small>NICMU Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 4)
-                <small>MIS Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
-                <small>Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
                 <small>Student,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
-                <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif
-
           </a>
         </div>
       </div>
@@ -1249,20 +1156,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
                         <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
-                        <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -1289,12 +1183,12 @@
                             </a>
                         </li>
                         @else
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{ route('tickets') }}" class="nav-link {{ Route::currentRouteName() == 'tickets' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
                                 <p>My Tickets</p>
                             </a>
-                        </li>
+                        </li> -->
                         @endif
                     </ul>
                 </li>
@@ -1315,6 +1209,12 @@
                             <a href="{{ route('status.in-progress') }}" class="nav-link {{ Route::currentRouteName() == 'status.in-progress' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon text-info"></i>
                                 <p>In Progress</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('status.purchaseParts') }}" class="nav-link {{ Route::currentRouteName() == 'status.purchaseParts' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon text-info"></i>
+                                <p>Purchase Parts</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -1396,12 +1296,12 @@
                 @endif
                 
                 <li class="nav-header">OTHERS</li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                             <a href="{{ route('tickets.report') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.report' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>Reports</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                             <a href="{{ route('activity-log') }}" class="nav-link {{ Route::currentRouteName() == 'activity-log' ? 'active' : '' }}">
                         <i class="fas fa-folder-open nav-icon"></i>
@@ -1424,8 +1324,41 @@
             </div>
         </aside>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- #ICTRAM Staff -->
 @elseif(Auth::user()->role == 7)
-<!-- ICTRAM Staff -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -1444,31 +1377,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3)
-                <small>NICMU Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 4)
-                <small>MIS Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
-                <small>Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
-                <small>Student,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
                 <small>MICT Staff,</small><br> 
                 {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif
-
           </a>
         </div>
       </div>
@@ -1476,20 +1386,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
                         <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -1603,8 +1500,9 @@
                 </li>
             </div>
         </aside>
+
+<!-- #NICMU Staff -->
 @elseif(Auth::user()->role == 8)
-<!-- NICMU Staff -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -1623,31 +1521,8 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">
-            @if(Auth::user()->role == 1)
-                <small>Director,</small><br> 
+                <small>NICMU Staff,</small><br> 
                 {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 2) 
-                <small>ICTRAM Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 3)
-                <small>NICMU Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 4)
-                <small>MIS Unit Head,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 5)
-                <small>Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 6)
-                <small>Student,</small><br> 
-                {{ Auth::user()->name }} 
-            @elseif(Auth::user()->role == 7)
-                <small>MICT Staff,</small><br> 
-                {{ Auth::user()->name }} 
-            @else
-                {{ Auth::user()->name }} 
-            @endif
-
           </a>
         </div>
       </div>
@@ -1655,20 +1530,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                   
-                    @if(Auth::user()->role == 1)
-                        <a href="{{ route('director.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'director.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 2 || Auth::user()->role == 3 || Auth::user()->role == 4) 
-                        <a href="{{ route('unit-head.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'unit-head.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 5)
-                        <a href="{{ route('staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'staff.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 6)
-                        <a href="{{ route('student.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'student.dashboard' ? 'active' : '' }}">
-                    @elseif(Auth::user()->role == 7)
                         <a href="{{ route('mict-staff.dashboard') }}" class="nav-link {{ Route::currentRouteName() == 'mict-staff.dashboard' ? 'active' : '' }}">
-                    @else
-                        {{ Auth::user()->name }} 
-                    @endif
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -1782,8 +1644,9 @@
                 </li>
             </div>
         </aside>
+
+<!-- #MIS Staff -->
 @elseif(Auth::user()->role == 9)
-<!-- MIS Staff -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link sidebar-dark-primary">
@@ -1927,6 +1790,10 @@
             </div>
         </aside>
             @else
+
+
+
+
 @endif
 
 
