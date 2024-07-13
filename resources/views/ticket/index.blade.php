@@ -43,9 +43,11 @@
                                         <th>Issues or Concern</th>
                                         <th>Priority Level</th>
                                         <th>Status</th>
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                         <th>Age</th>
-                                        <th>Created At</th>
                                         <th>Action(s)</th>
+                                        @endif
+                                        <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -240,6 +242,8 @@
                                         </td>
                                         @endif
                                         <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
+                                        
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                         <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
@@ -259,6 +263,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endif
                                     @endif
                                     @endforeach
                                 </tbody>
