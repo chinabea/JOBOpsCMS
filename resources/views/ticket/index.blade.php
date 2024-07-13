@@ -41,9 +41,11 @@
                                         <th>Job Type</th>
                                         <th>Service for</th>
                                         <th>Issues or Concern</th>
-                                        <th>Priority Level</th>
-                                        <th>Status</th>
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                        <th>Priority Level</th>
+                                        @endif
+                                        <th>Status</th>
+                                        @if(auth()->user()->role == 1)
                                         <th>Age</th>
                                         <th>Action(s)</th>
                                         @endif
@@ -54,22 +56,14 @@
                                     @foreach($tickets as $ticket)
                                     @if(auth()->user()->role == 1 || auth()->user()->id == $ticket->user_id || (auth()->user()->role == 2 && $ticket->assigned_to == auth()->id()))
                                     <tr>
-                                        <td>{{ $ticket->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
                                         <td>
                                         @if($ticket->assignedUsers->contains('pivot.escalationReason_for_workloadLimitReached', true))
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#assignUserModal{{ $ticket->id }}" data-backdrop="static" data-keyboard="false"> 
                                                 Assign User 
                                             </button>
-                                            @include('ticket.modal.assign-ticket')
 
-                                            
-                        <!-- <div id="reviewer-form" class="mt-4" style="display: none;">
-                            <button type="button" class="btn btn-primary my-2" data-toggle="modal"
-                                data-target="#ReviewerModal" data-backdrop="static" data-keyboard="false">
-                                Select Reviewer</button>
-                        </div> -->
-<!-- 
                                             <div class="modal fade" id="assignUserModal{{ $ticket->id }}" tabindex="-1" role="dialog" aria-labelledby="assignUserModalLabel{{ $ticket->id }}" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -115,7 +109,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                         @elseif($userIds->isNotEmpty() && !$ticket->escalationReason_for_workloadLimitReached)
                                             <div class="dropdown">
                                                 <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ $ticket->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
@@ -123,11 +117,25 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $ticket->id }}">
                                                     @foreach ($ticket->users as $assigned_user)
+                                                        @if($ticket->ictram && in_array($assigned_user->role, [2, 7]))
                                                             <a class="dropdown-item">
                                                                 <strong>{{ $assigned_user->name }}</strong><br>
                                                                 <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
                                                                 <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
                                                             </a>
+                                                        @elseif($ticket->nicmu && in_array($assigned_user->role, [3, 8]))
+                                                            <a class="dropdown-item">
+                                                                <strong>{{ $assigned_user->name }}</strong><br>
+                                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
+                                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                                                            </a>
+                                                        @elseif($ticket->mis && in_array($assigned_user->role, [4, 9]))
+                                                            <a class="dropdown-item">
+                                                                <strong>{{ $assigned_user->name }}</strong><br>
+                                                                <small>Expertise: {{ implode(', ', $assigned_user->expertise ?? []) }}</small><br>
+                                                                <small>Assigned to Tickets: {{ $assigned_user->tickets->count() }}</small>
+                                                            </a>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -137,7 +145,7 @@
                                         <td>{{ $ticket->officeName->office_name ?? 'N/A' }}</td>
                                         @if($ticket->ictram)
                                             <td>ICTRAM</td>
-                                            <td>{{ $ticket->ictram->jobType->jobType_name }}</td>
+                                            <td>{{ $ticket->ictram->jobType->jobType_name }} </td>
                                             <td>{{ $ticket->ictram->equipment->equipment_name }}</td>
                                             <td>{{ $ticket->ictram->problem->problem_description }}</td>
                                         @endif
@@ -153,8 +161,8 @@
                                             <td>{{ $ticket->mis->asName->name }}</td> 
                                             <td>{{ $ticket->mis->requestTypeName->requestType_name }}</td>
                                         @endif
-                                        <td> 
                                         @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                        <td> 
                                             <script>
                                             document.addEventListener('DOMContentLoaded', function() {
                                                 document.getElementById('priority_levelSelect-{{ $ticket->id }}').addEventListener('change', function() {
@@ -184,7 +192,7 @@
                                             <span class="badge badge-secondary">Low</span>
                                             @endif
                                         @endif
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2))
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
@@ -241,20 +249,19 @@
                                             </small>
                                         </td>
                                         @endif
-                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
-                                        
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                        @if(auth()->user()->role == 1)
                                         <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <a href="{{ route('edit.ticket', $ticket->id) }}" class="btn btn-warning btn-sm">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        @include('ticket.edit')
                                                         <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
@@ -262,8 +269,9 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @endif
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                     </tr>
-                                    @endif
                                     @endif
                                     @endforeach
                                 </tbody>
@@ -275,4 +283,5 @@
         </div>
     </section>
 </div>
+
 @endsection
