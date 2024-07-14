@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
@@ -30,8 +33,8 @@ use App\Http\Controllers\TicketUserController;
 use App\Http\Controllers\BuildingNumberController;
 use App\Http\Controllers\OfficeNameController;
 use App\Http\Controllers\ManageController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PerUnitTicketStatusController;
+use App\Http\Controllers\RequestedTicketController;
 
 
 Route::prefix('director')->middleware(['auth', 'cache', 'approved', 'directors'])->group(function () {
@@ -268,6 +271,29 @@ Route::resource('building-numbers', BuildingNumberController::class);
 Route::resource('office-names', OfficeNameController::class);
 Route::get('/manage', [ManageController::class, 'manage'])->name('manage');
 
+Route::get('/ictram-open-tickets', [PerUnitTicketStatusController::class, 'ictramOpenTicketStatus'])->name('ictramOpenTicketStatus');
+Route::get('/ictram-inprogress-tickets', [PerUnitTicketStatusController::class, 'ictramInProgressTicketStatus'])->name('ictramInProgressTicketStatus');
+Route::get('/ictram-purchasing-part-tickets', [PerUnitTicketStatusController::class, 'ictramPurchasingPartsTicketStatus'])->name('ictramPurchasingPartsTicketStatus');
+Route::get('/ictram-closed-tickets', [PerUnitTicketStatusController::class, 'ictramClosedTicketStatus'])->name('ictramClosedTicketStatus');
+Route::get('/ictram-completed-tickets', [PerUnitTicketStatusController::class, 'ictramCompletedTicketStatus'])->name('ictramCompletedTicketStatus');
+
+Route::get('/nicmu-open-tickets', [PerUnitTicketStatusController::class, 'nicmuOpenTicketStatus'])->name('nicmuOpenTicketStatus');
+Route::get('/nicmu-inprogress-tickets', [PerUnitTicketStatusController::class, 'nicmuInProgressTicketStatus'])->name('nicmuInProgressTicketStatus');
+Route::get('/nicmu-closed-tickets', [PerUnitTicketStatusController::class, 'nicmuClosedTicketStatus'])->name('nicmuClosedTicketStatus');
+Route::get('/nicmu-completed-tickets', [PerUnitTicketStatusController::class, 'nicmuCompletedTicketStatus'])->name('nicmuCompletedTicketStatus');
+
+Route::get('/mis-open-tickets', [PerUnitTicketStatusController::class, 'misOpenTicketStatus'])->name('misOpenTicketStatus');
+Route::get('/mis-inprogress-tickets', [PerUnitTicketStatusController::class, 'misInProgressTicketStatus'])->name('misInProgressTicketStatus');
+Route::get('/mis-closed-tickets', [PerUnitTicketStatusController::class, 'misClosedTicketStatus'])->name('misClosedTicketStatus');
+Route::get('/mis-completed-tickets', [PerUnitTicketStatusController::class, 'misCompletedTicketStatus'])->name('misCompletedTicketStatus');
+
+Route::get('/my-requested-tickets', [RequestedTicketController::class, 'myRequestedTickets'])->name('myRequestedTickets');
+Route::get('/assigned-open-tickets', [StatusController::class, 'assignedOpenTicketStatus'])->name('assignedOpenTicketStatus');
+Route::get('/assigned-in-progress-tickets', [StatusController::class, 'assignedInProgressTicketStatus'])->name('assignedInProgressTicketStatus');
+Route::get('/assigned-purchase-parts-tickets', [StatusController::class, 'assignedPurchasePartsTicketStatus'])->name('assignedPurchasePartsTicketStatus');
+Route::get('/assigned-closed-tickets', [StatusController::class, 'assignedClosedTicketStatus'])->name('assignedClosedTicketStatus');
+Route::get('/assigned-completed-tickets', [StatusController::class, 'assignedCompletedTicketStatus'])->name('assignedCompletedTicketStatus');
+Route::get('/show/ticket-details/{id}', [TicketController::class, 'showTicketActivityLogs'])->name('showTicketActivityLogs');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
