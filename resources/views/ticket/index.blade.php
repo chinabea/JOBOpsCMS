@@ -1,4 +1,4 @@
-@extends('layouts.template')
+<!-- @extends('layouts.template')
 
 @section('content')
 <div class="content-wrapper">
@@ -285,4 +285,4 @@
     </section>
 </div>
 
-@endsection
+@endsection -->
