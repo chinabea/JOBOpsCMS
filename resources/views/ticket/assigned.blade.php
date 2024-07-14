@@ -12,7 +12,7 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('create.ticket') }}" class="btn btn-info mr-2">
                             <i class="fas fa-plus"></i> Request Ticket
-                        </a>
+                        </a>    
                         <button class="btn bg-light text-dark border mr-2" onclick="location.reload();">
                             <i class="fas fa-sync-alt"></i>
                         </button>
@@ -43,9 +43,9 @@
                                         <th>Issues or Concern</th>
                                         <th>Priority Level</th>
                                         <th>Status</th>
+                                        <th>Age</th>
                                         <th>Created At</th>
                                         <th>Action(s)</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,7 +157,6 @@
                                             <td>{{ $ticket->mis->requestTypeName->requestType_name }}</td>
                                         @endif
                                         <td> 
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
                                             <script>
                                             document.addEventListener('DOMContentLoaded', function() {
                                                 document.getElementById('priority_levelSelect-{{ $ticket->id }}').addEventListener('change', function() {
@@ -178,16 +177,13 @@
                                                 </select>
                                             </form>
                                         </td>
-                                        @else
-                                            @if ($ticket->priority_level === 'High')
+                                            <!-- @if ($ticket->priority_level === 'High')
                                             <span class="badge badge-danger">High</span>
                                             @elseif ($ticket->priority_level === 'Mid')
                                             <span class="badge badge-warning">Mid</span>
                                             @elseif ($ticket->priority_level === 'Low')
                                             <span class="badge badge-secondary">Low</span>
-                                            @endif
-                                        @endif
-                                        @if(auth()->user()->role == 1 || (auth()->user()->role == 2) || (auth()->user()->role == 3) || (auth()->user()->role == 4))
+                                            @endif -->
                                         <td>
                                             <form action="{{ route('tickets.updateStatus', $ticket->id) }}" method="POST" id="statusForm-{{ $ticket->id }}">
                                                 @csrf
@@ -202,37 +198,60 @@
                                                     <option value="Completed" @if ($ticket->status == 'Completed') selected @endif>Completed</option>
                                                 </select>
                                                 <input type="hidden" name="reason" id="reasonInput-{{ $ticket->id }}" value="">
+                                                <input type="hidden" name="purchase_parts" id="purchase_partsInput-{{ $ticket->id }}" value="">
                                             </form>
+                                            @if ($ticket->status == 'Purchase Parts')
+                                            <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->purchase_parts }}">
+                                            <i class="fas fa-dollar-sign nav-icon"></i>
+                                            </button>
+                                            @endif
                                             @if ($ticket->status == 'In Progress')
                                             <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="{{ $ticket->reason }}">
                                                 <i class="fas fa-comment"></i>
                                             </button>
                                             @endif
                                         </td>
-                                        @else
-                                        <td class="align-middle">
-                                            <small class="badge badge-warning">
-                                                {{ $ticket->status }}
-                                            </small>
+                                        <td>
+                                            @php
+                                                $totalSeconds = 3 * 24 * 60 * 60; // Total duration in seconds (example: 3 days)
+                                                $elapsedSeconds = $ticket->created_at->diffInSeconds(now());
+                                                $progressPercentage = ($elapsedSeconds / $totalSeconds) * 100;
+
+                                                $ageInDays = $ticket->created_at->diffInDays(now());
+                                                if ($ageInDays == 0) {
+                                                    $progressClass = 'bg-info';
+                                                } elseif ($ageInDays == 1) {
+                                                    $progressClass = 'bg-warning';
+                                                } elseif ($ageInDays >= 2) {
+                                                    $progressClass = 'bg-danger';
+                                                } else {
+                                                    $progressClass = 'bg-success'; // Default if not in the first 3 days
+                                                }
+                                            @endphp
+
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated {{ $progressClass }}" role="progressbar" style="width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </td>
-                                        @endif
+                                        <!-- <td class="align-middle">
+                                            <small class="badge badge-warning">
+                                                <i class="far fa-clock"></i> {{ $ticket->status }}
+                                            </small>
+                                        </td> -->
                                         <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         <td>
-                                            
-                                        <div class="item form-group">
+                                            <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
+                                                        
                                                         <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
-                                                        <button class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('destroy.ticket', $ticket->id) }}')">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -248,28 +267,5 @@
         </div>
     </section>
 </div>
-<script>
-    document.querySelectorAll('select[id^="statusSelect-"]').forEach(function(selectElement) {
-        selectElement.addEventListener('change', function() {
-            const ticketId = this.id.split('-')[1];
-            const form = document.getElementById(`statusForm-${ticketId}`);
-            const selectedStatus = this.value;
-            const currentStatus = this.getAttribute('data-current-status');
-
-            if (selectedStatus === 'In Progress' && currentStatus !== 'In Progress') {
-                const reason = prompt("Why is this ticket being marked as 'In Progress'?");
-                if (reason !== null && reason.trim() !== "") {
-                    document.getElementById(`reasonInput-${ticketId}`).value = reason;
-                    form.submit();
-                } else {
-                    alert("You must provide a reason to mark this ticket as 'In Progress'.");
-                    this.value = currentStatus; // Reset to the current status
-                }
-            } else {
-                form.submit();
-            }
-        });
-    });
-</script>
 
 @endsection
