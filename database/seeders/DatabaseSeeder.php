@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             UnitTableSeeder::class,
             BuildingNumbersSeeder::class,
             OfficeNamesSeeder::class,
-            // TicketsTableSeeder::class,
+            TicketsTableSeeder::class,
             // TicketUserSeeder::class,
         ]);
         
