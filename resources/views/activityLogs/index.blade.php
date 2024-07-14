@@ -47,33 +47,31 @@
                                           <td>{{ $log->user->name }}</td>
 
                                           <td>{{ class_basename($log->model_type) }}</td>
-<td>{{ $log->action }}</td>
-<td>{{ $log->description }}</td>
-<td>
-    @if ($log->action === 'Deleted')
-        {{ $log->subject->request ?? 'Deleted Item' }}
-    @elseif ($log->action === 'Created' || $log->action === 'Updated' || $log->action === 'Approved' || $log->action === 'Disapproved')
-        @if ($log->model_type === 'App\Models\FAQs')
-            {{-- If the log is related to FAQs, display this custom view --}}
-            <a href="{{ route('faq.show', $log->model_id) }}">{{ $log->subject->question ?? 'Question Not Found' }}</a>
-        @elseif ($log->model_type === 'App\Models\Ticket')
-            {{-- If the log is related to Tickets, display another custom view --}}
-            <a href="{{ route('ticket.show', $log->model_id) }}">{{ $log->subject->request ?? 'Request Not Found' }}</a>
-        @elseif ($log->model_type === 'App\Models\User')
-            {{-- If the log is related to Users, display another custom view --}}
-            <a href="{{ route('user.edit', $log->model_id) }}">{{ $log->subject->name ?? 'Name Not Found' }}</a>
-        @else
-            {{-- Default case if none of the above --}}
-            <a href="#">{{ $log->subject->request ?? 'Unknown Type' }}</a>
-        @endif
-    @else
-        <a href="{{ route('ticket.show', $log->model_id) }}">
-            {{ $log->subject->request ?? 'No Request Found' }}
-        </a>
-    @endif
-</td>
-
-                                         
+                                        <td>{{ $log->action }}</td>
+                                        <td>{{ $log->description }}</td>
+                                        <td>
+                                            @if ($log->action === 'Deleted')
+                                                {{ $log->subject->request ?? 'Deleted Item' }}
+                                            @elseif ($log->action === 'Created' || $log->action === 'Updated' || $log->action === 'Approved' || $log->action === 'Disapproved')
+                                                @if ($log->model_type === 'App\Models\FAQs')
+                                                    {{-- If the log is related to FAQs, display this custom view --}}
+                                                    <a href="{{ route('faq.show', $log->model_id) }}">{{ $log->subject->question ?? 'Question Not Found' }}</a>
+                                                @elseif ($log->model_type === 'App\Models\Ticket')
+                                                    {{-- If the log is related to Tickets, display another custom view --}}
+                                                    <a href="{{ route('showTicketActivityLogs', $log->model_id) }}">{{ $log->subject->request ?? 'Clicked for Details' }}</a>
+                                                @elseif ($log->model_type === 'App\Models\User')
+                                                    {{-- If the log is related to Users, display another custom view --}}
+                                                    <a href="{{ route('user.edit', $log->model_id) }}">{{ $log->subject->name ?? 'Name Not Found' }}</a>
+                                                @else
+                                                    {{-- Default case if none of the above --}}
+                                                    <a href="#">{{ $log->subject->request ?? 'Unknown Type' }}</a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('showTicketActivityLogs', $log->model_id) }}">
+                                                    {{ $log->subject->request ?? 'Clicked for Details' }}
+                                                </a>
+                                            @endif
+                                        </td>
                                         </tr>
                                         @endforeach
                                   </tbody>
