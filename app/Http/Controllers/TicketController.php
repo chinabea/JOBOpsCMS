@@ -33,6 +33,21 @@ use Storage;
 
 class TicketController extends Controller
 {
+    
+    public function showTicketActivityLogs($id)
+    {
+        try {
+            // Include the 'user' relationship to fetch the user who requested the ticket
+            $ticket = Ticket::with(['assignedUsers', 'user'])->findOrFail($id);
+            
+            // Pass the ticket and userIds to the view
+            return view('activityLogs.show', compact('ticket'));
+        } catch (Exception $e) {
+            // Handle the exception, log it, or display an error message to the user
+            return back()->with('error', 'An error occurred while fetching the ticket: ' . $e->getMessage());
+        }
+    } 
+
     public function index()
     {
         try {
@@ -57,7 +72,28 @@ class TicketController extends Controller
                 $ticket->age = Carbon::parse($ticket->created_at)->diffInDays(Carbon::now());
             });
 
-            return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
+            // Get the authenticated user
+            $user = auth()->user();
+    
+            // Check the user's role and return the appropriate view
+            if ($user->role == 1) {
+                // Return view for role 1
+                return view('ticket.users-ticket.directorIndex', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
+            } elseif ($user->role == 2 || $user->role == 7) {
+                // Return view for role 2
+                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'ictram', 'buildingNumbers', 'officeNames'));
+            } elseif ($user->role == 3 || $user->role == 8) {
+                // Return view for role 2
+                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'nicmu', 'buildingNumbers', 'officeNames'));
+            } elseif ($user->role == 4 || $user->role == 9) {
+                // Return view for role 2
+                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'mis', 'buildingNumbers', 'officeNames'));
+            } elseif ($user->role == 5 || $user->role == 6) {
+                // Return view for role 2
+                return view('ticket.users-ticket.staffAndStudentIndex', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
+            } 
+
+            // return view('ticket.index', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
@@ -236,7 +272,7 @@ class TicketController extends Controller
         ActivityLogger::log('Created', $ticket, 'Ticket created');
     
         // Redirect back or to a success page
-        return redirect()->route('tickets')->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
+        return redirect()->back()->with('success', 'Ticket created successfully and assigned to the user with the least tickets.');
     }
     
     // public function store(Request $request)
