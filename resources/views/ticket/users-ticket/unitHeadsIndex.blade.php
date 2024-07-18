@@ -50,6 +50,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tickets as $ticket)
+                                    <!-- add conditionn for nicmu -->
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ticket->user->name }}</td>
