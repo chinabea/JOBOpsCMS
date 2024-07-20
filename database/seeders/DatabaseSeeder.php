@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UsersTableSeeder::class,
-            // NicmuJobTypesTableSeeder::class,
+            NicmuJobTypesTableSeeder::class,
             // NicmuEquipmentsTableSeeder::class,
             // NicmuProblemsTableSeeder::class,
             // MisRequestTypesTableSeeder::class,
