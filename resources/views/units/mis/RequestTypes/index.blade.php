@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">MISes Request Types</h1>
+            <h1 class="m-0">MIS Request Types</h1>
           </div>
         </div>
       </div>
