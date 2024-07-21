@@ -254,11 +254,11 @@
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
