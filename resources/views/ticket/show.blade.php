@@ -48,14 +48,14 @@
                                     <p class="form-control-static">{{ $ticket->ictram->problem->problem_description ?? ($ticket->nicmu->problem->problem_description ?? ($ticket->mis->requestTypeName->requestType_name ?? 'N/A')) }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="assigned_to">Assigned To</label>
+                                    <!-- <label for="assigned_to">Assigned To</label> -->
                                     @foreach($ticket->assignedUsers as $user)
                                         @php
                                             $escalatedByUser = App\Models\User::find($user->pivot->escalatedBy_for_workloadLimitReached);
                                         @endphp
                                         <div class="user-info">
                                             <div class="form-group">
-                                                <label>Name</label>
+                                                <label for="assigned_to">Assigned To/Name</label>
                                                 <p class="form-control-static">{{ $user->name }}</p>
                                             </div>
                                             <div class="form-group">
