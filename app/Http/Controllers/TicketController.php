@@ -81,13 +81,13 @@ class TicketController extends Controller
                 return view('ticket.users-ticket.directorIndex', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
             } elseif ($user->role == 2 || $user->role == 7) {
                 // Return view for role 2
-                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'ictram', 'buildingNumbers', 'officeNames'));
+                return view('ticket.users-ticket.ictramHeadIndex', compact('tickets', 'userIds', 'ictram', 'buildingNumbers', 'officeNames'));
             } elseif ($user->role == 3 || $user->role == 8) {
                 // Return view for role 2
-                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'nicmu', 'buildingNumbers', 'officeNames'));
+                return view('ticket.users-ticket.nicmuHeadIndex', compact('tickets', 'userIds', 'nicmu', 'buildingNumbers', 'officeNames'));
             } elseif ($user->role == 4 || $user->role == 9) {
                 // Return view for role 2
-                return view('ticket.users-ticket.unitHeadsIndex', compact('tickets', 'userIds', 'mis', 'buildingNumbers', 'officeNames'));
+                return view('ticket.users-ticket.misHeadIndex', compact('tickets', 'userIds', 'mis', 'buildingNumbers', 'officeNames'));
             } elseif ($user->role == 5 || $user->role == 6) {
                 // Return view for role 2
                 return view('ticket.users-ticket.staffAndStudentIndex', compact('tickets', 'userIds', 'ictram', 'nicmu', 'mis', 'buildingNumbers', 'officeNames'));
