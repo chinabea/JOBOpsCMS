@@ -47,9 +47,9 @@
                                         <th>Status</th>
                                         @if(auth()->user()->role == 1)
                                         <th>Age</th>
+                                        <th>Created At</th>
                                         <th>Action(s)</th>
                                         @endif
-                                        <th>Created At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -249,16 +249,17 @@
                                             </small>
                                         </td>
                                         @endif
+                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                         @if(auth()->user()->role == 1)
                                         <td>
                                             <div class="item form-group">
                                                 <div class="col-md-6 col-sm-6">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-eye"></i>
                                                         </button>
                                                         @include('ticket.show')
-                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal">
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editTicketModal-{{ $ticket->id }}">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                         @include('ticket.edit')
@@ -270,7 +271,6 @@
                                             </div>
                                         </td>
                                         @endif
-                                        <td>{{ $ticket->created_at ? $ticket->created_at->format('F j, Y g:i A') : 'N/A' }}</td>
                                     </tr>
                                     @endif
                                     @endforeach
