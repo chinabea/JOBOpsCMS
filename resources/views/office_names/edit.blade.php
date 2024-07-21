@@ -32,12 +32,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="mb-4">Add New Office</h2>
-                            <form action="{{ route('office-names.store') }}" method="POST">
+                            <h2 class="mb-4">Edit Office</h2>
+                            <form action="{{ route('office-names.update', $officeName->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label for="office_name">Office:</label>
-                                    <input type="text" class="form-control" name="office_name" id="office_name" value="{{ old('office_name') }}" required>
+                                    <input type="text" class="form-control" name="office_name" id="office_name" value="{{ $officeName->office_name }}" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Submit</button>
