@@ -62,7 +62,7 @@
                             <div class="card card-widget widget-user shadow">
                             <div class="widget-user-header bg-warning">
                                 <h3 class="widget-user-username"></h3>
-                                <h4 class="widget-user-desc">Network Internet and Communicationations Management   </h4>
+                                <h4 class="widget-user-desc">Management Information System Unit</h4>
                             </div>
                             <a href="{{ route('nicmus.index') }}">
                                 <div class="widget-user-image">
@@ -74,7 +74,7 @@
                                     <div class="col-sm-4 border-right">
                                         <div class="description-block">
                                         <h5 class="description-header">{{ $countMisRequests }}</h5>
-                                            <a href="{{ route('nicmus.JobTypes') }}" style="text-decoration: none; color: inherit;">
+                                            <a href="{{ route('mises.RequestTypes') }}" style="text-decoration: none; color: inherit;">
                                                 <span class="description-text">REQUEST TYPE</span>
                                             </a>
                                         </div>
@@ -102,7 +102,7 @@
                         <div class="col-md-4">
                             <div class="card card-widget widget-user shadow">
                             <div class="widget-user-header bg-danger">
-                                <h4 class="widget-user-desc">Management Information System Unit</h4>
+                                <h4 class="widget-user-desc">Network Internet and Communicationations Management</h4>
                             </div>
                             <a href="{{ route('mises.index') }}">
                                 <div class="widget-user-image">
@@ -114,7 +114,7 @@
                                     <div class="col-sm-4 border-right">
                                         <div class="description-block">
                                             <h5 class="description-header">{{ $countNicmuJobTypes }}</h5>
-                                            <a href="{{ route('mises.RequestTypes') }}" style="text-decoration: none; color: inherit;">
+                                            <a href="{{ route('nicmus.JobTypes') }}" style="text-decoration: none; color: inherit;">
                                                 <span class="description-text">JOB TYPES</span>
                                             </a>
                                         </div>
