@@ -896,9 +896,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
+                            <a href="{{ route('ictram-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'ictram-tickets' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-university mr-2"></i>
-                                <p> NICMU Tickets </p>
+                                <p> ICTRAM Tickets </p>
                             </a>
                         </li>
                     </ul>
@@ -1039,9 +1039,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('mis-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'mis-tickets' ? 'active' : '' }}">
+                            <a href="{{ route('nicmu-tickets') }}" class="nav-link {{ Route::currentRouteName() == 'nicmu-tickets' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-university mr-2"></i>
-                                <p> MIS Tickets </p>
+                                <p> NICMU Tickets </p>
                             </a>
                         </li>
                     </ul>
@@ -1216,13 +1216,13 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
                     <a href="https://m.me/332081713319212?ref=homepage" class="nav-link">
                         <i class="far fa-circle nav-icon text-info"></i>
                         <p>Messages 2</p>
                     </a>
                 </li>
-                <li class="nav-header">OTHERS</li>
                 <li class="nav-item">
                             <a href="{{ route('tickets.report') }}" class="nav-link {{ Route::currentRouteName() == 'tickets.report' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-chart-pie"></i>
