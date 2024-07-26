@@ -150,7 +150,6 @@
                                 <h3 class="card-title">Reached the Limit of Workload?:</h3>
                             </div>
                             <div class="card-body text-left">
-                                @if ($ticket->assigned_user_id == auth()->id() || auth()->user()->role == 1)
                                     <form action="{{ route('tickets.unassign', $ticket->id) }}" method="POST">
                                         @csrf
                                         <div class="form-group">
@@ -161,7 +160,6 @@
                                             <button type="submit" class="btn btn-danger">Unassign</button>
                                         </div>
                                     </form>
-                                @endif
                             </div>
                         </div>
 
