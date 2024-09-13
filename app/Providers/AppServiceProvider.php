@@ -29,11 +29,6 @@ class AppServiceProvider extends ServiceProvider
             $profilePictureUrl = session('profilePictureUrl');
             $view->with('profilePictureUrl', $profilePictureUrl);
         });
-
-        // Check for the .authorized file
-        if (!file_exists(base_path('config/.secret_authorized_filee'))) {
-            abort(403, 'Resource not Available.');
-        }
-        
+    
     }
 }
